@@ -8,7 +8,7 @@
     "test": "jest --watch",
     "lint": "npx eslint .",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
-    "pub": "git add . && git commit -m \"Updates\" && git push origin master"
+    "pub": "git add . && git commit -m \"Updates\" && git push origin main"
   },
   "repository": {
     "type": "git",
