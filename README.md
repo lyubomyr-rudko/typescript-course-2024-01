@@ -2,7 +2,7 @@
 
 ## Install
 
-First, create a form from  the repo via git:
+First, create a fork from the repo via git:
   
 ```bash
 $ git clone {your-repo-name}/typescript-course-2024-01.git
