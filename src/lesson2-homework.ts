@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 // Create a function which uses tuple type to calculate the distance between two points in 2D space
 function excercise4() {
   // TODO: declare two variables of type tuple, each with two numbers
@@ -22,7 +24,7 @@ function excercise5() {
   // TODO: declare two variables of type TPoint
   // TODO: assign values to the variables (1,1) and (4,5)
   // TODO: create a function which calculates the distance between two points in 2D space
-  type TPoint = { /* replace  with your code */ x: "" };
+  type TPoint = { /* replace  with your code */ x: '' };
   function distance(p1: TPoint, p2: TPoint): number {
     const x1 = 0; // TODO: replace with the first element of p1
     const y1 = 0; // TODO: replace with the second element of p1

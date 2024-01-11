@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // 1. Heloo World task
 // TODO: creaate excercise1 folder
 // TODO: check node version
@@ -10,6 +11,7 @@
 function excercise1() {
   let greeting: string;
   greeting = 'Hello World';
+  greeting += '!!!';
   console.log(greeting);
 }
 excercise1();
