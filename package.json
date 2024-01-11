@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx tsc --watch",
-    "test": "jest --watch",
+    "test:watch": "jest --watch",
+    "test": "jest",
     "lint": "npx eslint .",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "pub": "git add . && git commit -m \"Updates\" && git push origin main"
