@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // test change
 
 // 1. Heloo World task
@@ -12,6 +13,7 @@
 function excercise1() {
   let greeting: string;
   greeting = 'Hello World';
+  greeting += '!!!';
   console.log(greeting);
 }
 excercise1();

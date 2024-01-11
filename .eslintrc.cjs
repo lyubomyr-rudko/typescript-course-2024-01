@@ -15,6 +15,7 @@ module.exports = {
     node: true,
     'jest/globals': true,
   },
+  ignorePatterns: ['*.js'],
   rules: {
     'prettier/prettier': 2,
   },

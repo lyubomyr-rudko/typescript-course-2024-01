@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // Array, tupples
 let a: number[] = [];
 a = [1, 2, 3];
@@ -14,8 +16,8 @@ let point: TPoint = [1, 2];
 point = [2, 3];
 let point3D: [number, number, number] = [1, 2, 3];
 
-let record: [string, string] = ["Hello", "Привіт"];
-record = ["Hello", "Привіт"];
+let record: [string, string] = ['Hello', 'Привіт'];
+record = ['Hello', 'Привіт'];
 
 // point = point3D;
 
@@ -28,7 +30,7 @@ let point3: TPoint2D = { x: 3, y: 2 };
 // const declarations
 const PI = 3.14;
 // PI = 3.15;
-const person = { name: "John", age: 23 };
+const person = { name: 'John', age: 23 };
 person.age = 24;
 
 const arr = [1, 2, 3];
@@ -68,7 +70,7 @@ printPoint(point2D);
 printPoint({ x: 1, y: 2 });
 printPoint(point3D2);
 
-let user1 = { name: "John", age: 23 };
+let user1 = { name: 'John', age: 23 };
 let user;
 
 // Classes
@@ -89,7 +91,7 @@ class User {
   }
 }
 
-let user2 = new User("John", 23);
+let user2 = new User('John', 23);
 user2.sayHello();
 
 class Point {
@@ -109,7 +111,7 @@ class Point {
   }
 
   distance() {
-    this.logAction("distance");
+    this.logAction('distance');
 
     return Math.sqrt(this.x ** 2 + this.y ** 2);
   }
@@ -129,7 +131,7 @@ class Point3D extends Point {
   }
 
   distance() {
-    this.logAction("distance 3D");
+    this.logAction('distance 3D');
 
     return Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2);
   }
