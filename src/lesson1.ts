@@ -1,85 +1,81 @@
 /* eslint-disable */
+// TODO: send js basics youtube video
+// TODO: send github basics youtube video
+function lesson1() {
+  function example1() {
+    // primitive types
+    let name = '10';
+    let a = Number(name);
 
-// Lesson plan:
-// - Getting to know each other
-// - Course flow, Project setup, GIT, PRs
-// - Course Project ideas:
-//   - Wourkout tracker
-//   - Chat application
-//   - Task manager
-//   - Interview app
-//   - Expense tracker
-// - TypeScript intro, benefits of static typing
-// - Differences from JavaScript
-// - Development Environment setup
-// - Running First TypeScript Program
-// - Debugging TypeScript Applications
-// - Primitive types
-// - Object types
-// - Array
-// - Tuples
-// - Type Alias
+    // name = 10;
+    console.log('Helo ' + name);
 
-// install node.js
-// install VSCode
-// check if all installed - check node version
-// open terminal
-// % node -v
-// % node --version
-// check npm version
-// % npm -v
-// check npx version
-// % npx -v
-// version is not important, but it should be installed
+    let age: number = 30;
 
-// create a folder for the project
-// % mkdir ts-learning
-// % cd ts-learning
-// init npm project
-// % npm init -y
-// install typescript - install typescript compiler tsc
-// % npm i typescript
-// create tsconfig.json
-// % npx tsc --init --rootdir src --outdir dist
-// % npx tsc --watch
+    console.log('You are ' + age + ' years old');
 
-// install nvm - node version manager
-
-let greetingText: string = 'Hello World';
-console.log(greetingText);
-
-function example1() {
-  let isDone: boolean = false;
-  let age: number = 23;
-  let firstName: string = 'John';
-  let nothing: null = null;
-  let notDefined: undefined = undefined;
-  // let largeNUmber: bigint = 100n;
-  let id: symbol = Symbol('id');
-  let id2: symbol = Symbol('id');
-}
-
-function example2() {
-  // Array, Date, RegExp, Map and Set
-  let a = [];
-  let pricesList: number[] = [1, 2, 3];
-  let pricesList2: Array<number> = [1, 2, 3];
-  let todayDate: Date = new Date();
-  let regExp: RegExp = /ab+c/;
-  let set: Set<number> = new Set([1, 2, 3, 3, 2, 1]);
-
-  class Queue {
-    private data: any[] = [];
-
-    push(item: any) {
-      this.data.push(item);
+    let isAdult: boolean = true;
+    if (isAdult) {
+      console.log('You are adult');
+    } else {
+      console.log('You are not adult');
     }
-    pop() {
-      this.data.shift();
-    }
+
+    let nothing: null = null;
+    let notAThing: undefined = undefined;
+
+    let test: string;
+    test = 'test test';
+
+    console.log(test);
+
+    let id1: symbol = Symbol('id');
+    let id2: symbol = Symbol('id');
+
+    console.log(id1 === id2); // false
+
+    let x = 10;
+    let name2 = x.toString(2);
+
+    // let bigInt: bigint = 1234567890123456789012345678901234567890n;
   }
 
-  const queue: Queue = new Queue();
-}
+  example1();
 
-example2();
+  function example2() {
+    // complex types
+    let userAge: number[] = [1, 2, 3];
+    userAge.push(4);
+    // userAge.push('5'); //  error
+    let userAge2: Array<string> = ['John', 'Bob', 'Alice'];
+    let d: Date = new Date();
+    let r: RegExp = /test/g;
+  }
+  example2();
+
+  // - Course Project ideas:
+  //   - Wourkout tracker
+  // - mussle groups (chest, back, legs, arms, shoulders)
+  // - excrcise (bench press, deadlift, squat, pull up, push up, dips, shoulder press, bicep curl, tricep extension)
+  // - workout (date, mussle group, excrcise , weight, reps, sets)
+  //   - Chat application
+  // - user (name, email, password, avatar)
+  // - friends (user, user)
+  // - messages (user, user, message, date)
+  // - groups (user, user, user, user)
+  //   - Task manager
+  // - user (name, email, password, avatar)
+  // - task (user, title, description, date)
+  // - projects (user, title, description, date)
+  //   - Interview app
+  // - technology (title, description)
+  // - areas (title, description)
+  // - subjects (title, description)
+  // - questions (technology, area, title, description)
+  //   - Expense tracker
+  // - user (name, email, password, avatar)
+  // - aeas (user, title, description)
+  // - categories (user, title, description)
+  // - expense (user, title, description, date, amount)
+}
+lesson1();

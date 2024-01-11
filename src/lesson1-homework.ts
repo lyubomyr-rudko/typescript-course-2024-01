@@ -35,19 +35,7 @@ function excercise3() {
   // TODO: assign n and m some values - n = 1, m = 10
   // TODO: create a for loop which adds numbers from n to m to result array
   // TODO: support case where m > n (reverse the order)
+  // TODO: print result array to console
 }
 excercise3();
 // TODO: compile and run the code
-
-// Additional tasks -
-// TODO: create a function which takes any string and returns the string reversed
-function excerciseA() {}
-
-// TODO: create a function which takes an array of numbers and returns the sum of all numbers
-function excerciseB() {}
-
-// TODO: create a function which takes an array of numbers and returns the average of all numbers
-function excerciseC() {}
-
-// TODO: create a function which takes an array of strings and returns the longest string
-function excerciseD() {}
