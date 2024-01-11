@@ -109,3 +109,16 @@ function excercise9() {
 }
 // TODO: compile and run the code
 excercise9();
+
+// Additional tasks -
+// TODO: create a function which takes any string and returns the string reversed
+function excerciseA() {}
+
+// TODO: create a function which takes an array of numbers and returns the sum of all numbers
+function excerciseB() {}
+
+// TODO: create a function which takes an array of numbers and returns the average of all numbers
+function excerciseC() {}
+
+// TODO: create a function which takes an array of strings and returns the longest string
+function excerciseD() {}
