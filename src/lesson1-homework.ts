@@ -22,20 +22,47 @@ excercise1();
 function excercise2() {
   // declare two varaibles - one of string, one of type number
   // assign string var value 'Hello'
+  var greeting1: string = 'Hello';
   // assign number var value 3
+  var quantity: number = 3;
   // create a while loop which prints string variable to console 3 times
+  let i = 0;
+  while (i < quantity) {
+    console.log(greeting1);
+    i++;
+  }
   // try to assign number variable to string variable - observe the error
+  var test: number = 'test';
 }
 excercise2();
 
 // 3. code that generates array of numbers - from n to m
 function excercise3() {
   // TODO: declare varaibles n and m of type number
+  var n: number;
+  var m: number;
   // TODO: declare varaible result of type array of numbers
+  var result: number[] = [];
+  var result2: number[] = [];
   // TODO: assign n and m some values - n = 1, m = 10
+  n = 1;
+  m = 10;
   // TODO: create a for loop which adds numbers from n to m to result array
+  for (n = 1; n <= m; n++) {
+    result.push(n);
+  }
   // TODO: support case where m > n (reverse the order)
+  // Можна циклом сделать в обратной последовательности
+  // n = 1;
+  // m = 10;
+  // for (m = 10; m >= n; m--) {
+  //   result2.push(m);
+  // }
+  // Или Просто развернуть существующий массив
+  result2 = result.reverse();
   // TODO: print result array to console
+  console.log(result);
+  console.log(result2);
 }
 excercise3();
 // TODO: compile and run the code
