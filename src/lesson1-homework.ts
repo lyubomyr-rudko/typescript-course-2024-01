@@ -44,12 +44,16 @@ function excercise3() {
   // TODO: declare varaible result of type array of numbers
   const result: number[] = [];
   // TODO: create a for loop which adds numbers from n to m to result array
-  for (let i: number = n; i <= m; i++) {
-    result.push(i);
-  }
   // TODO: support case where m > n (reverse the order)
-  if (m > n) {
-    result.reverse();
+
+  if (n <= m) {
+    for (let i: number = n; i <= m; i++) {
+      result.push(i);
+    }
+  } else {
+    for (let i: number = n; i >= m; i--) {
+      result.push(i);
+    }
   }
   // TODO: print result array to console
   console.log(result);
