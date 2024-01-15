@@ -24,18 +24,75 @@ function excercise2() {
   // assign string var value 'Hello'
   // assign number var value 3
   // create a while loop which prints string variable to console 3 times
+
+  let text: string;
+  let counter: number;
+  text = 'Hello TS in 2024!';
+  counter = 3;
+
+  while (counter > 0) {
+    console.log(text);
+    counter--;
+  }
+
   // try to assign number variable to string variable - observe the error
+  // text = counter;  // err
 }
 excercise2();
 
 // 3. code that generates array of numbers - from n to m
 function excercise3() {
   // TODO: declare varaibles n and m of type number
+  let n, m: number;
   // TODO: declare varaible result of type array of numbers
+  let result: number[] = [];
   // TODO: assign n and m some values - n = 1, m = 10
+  n = 10;
+  m = 1;
   // TODO: create a for loop which adds numbers from n to m to result array
-  // TODO: support case where m > n (reverse the order)
+  if (m > n) {
+    for (n; n < m; n++) {
+      result.push(n);
+    }
+    // TODO: support case where m > n (reverse the order)
+  } else if (m !== n) {
+    for (n; n > m; n--) {
+      result.push(n);
+    }
+  } else {
+    console.log('ERROR: ', 'variable value should have different values');
+  }
   // TODO: print result array to console
+  console.log(result);
 }
 excercise3();
 // TODO: compile and run the code
+/*
+V1
+  Hello World!!!
+  Hello TS in 2024!
+  Hello TS in 2024!
+  Hello TS in 2024!
+  [
+  1, 2, 3, 4, 5,
+  6, 7, 8, 9
+  ]
+V2
+  Hello World!!!
+  Hello TS in 2024!
+  Hello TS in 2024!
+  Hello TS in 2024!
+  [
+    10, 9, 8, 7, 6,
+    5, 4, 3, 2
+  ]
+V3
+  Hello World!!!
+  Hello TS in 2024!
+  Hello TS in 2024!
+  Hello TS in 2024!
+  ERROR:  variable value should have different values
+  []
+
+
+*/
