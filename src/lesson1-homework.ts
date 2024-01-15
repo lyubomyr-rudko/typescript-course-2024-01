@@ -34,7 +34,7 @@ function excercise3() {
   // TODO: declare varaible result of type array of numbers
   // TODO: assign n and m some values - n = 1, m = 10
   // TODO: create a for loop which adds numbers from n to m to result array
-  // TODO: support case where m > n (reverse the order)
+  // TODO: support case where n > m (reverse the order)
   // TODO: print result array to console
 }
 excercise3();

@@ -70,7 +70,7 @@ function excercise7() {
 // TODO: compile and run the code
 excercise7();
 
-// declare a function which takes a user and prits greeting to console
+// declare a function which takes a user and prints greeting to console
 function excercise8() {
   // TODO: create a type for user, with name property
   // TODO: create a function with name printGreeting, which takes a user and prits greeting to console
@@ -111,7 +111,16 @@ function excercise9() {
 // TODO: compile and run the code
 excercise9();
 
-// Additional tasks -
+// TODO: for excercise4 and excercise5 - copy and export those functions and create a test file for them, follwo this steps
+// 1. create file lesson2-homework.test.ts use src/index.test.ts as an example
+// 2. import functions from lesson2-homework.js
+// 3. create a test for each function for this cases
+//   - distance between (1,1) and (4,5) should be 5
+//   - distance between (0,0) and (0,0) should be 0
+//   - distance between (1,1) and (1,2) should be 1
+// 4. run the tests with `npm run test`
+
+// Additional tasks - optional
 // TODO: create a function which takes any string and returns the string reversed
 function excerciseA() {}
 
@@ -123,12 +132,3 @@ function excerciseC() {}
 
 // TODO: create a function which takes an array of strings and returns the longest string
 function excerciseD() {}
-
-// TODO: for excercise4 and excercise5 - copy and export those functions and create a test file for them, follwo this steps
-// 1. create file lesson2-homework.test.js use src/index.test.ts as an example
-// 2. import functions from lesson2-homework.js
-// 3. create a test for each function for this cases
-//   - distance between (1,1) and (4,5) should be 5
-//   - distance between (0,0) and (0,0) should be 0
-//   - distance between (1,1) and (1,1) should be 0
-// 4. run the tests with `npm run test`
