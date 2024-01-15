@@ -1,183 +1,133 @@
 /* eslint-disable */
-function lesson2preparation() {
-  // Primitive types
-  let name: string = 'John';
-  let age: number = 30;
-  let isAdult: boolean = true;
 
-  // Array
-  let a: number[] = [];
-
-  // let a = []; // any[]
-  a = [1, 2, 3];
-
-  // functions
-  function sumTwoNumbers(a: number, b: number): number {
-    return a + b;
-  }
-
-  function getOddNumbers(arr: number[]): number[] {
-    const result: number[] = [];
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] % 2 !== 0) result.push(arr[i]);
-    }
-    return result;
-  }
+function lesson2() {
+  // Primitive types recap
+  // number, string, boolean, null, undefined, symbol, bigint
+  // let key: symbol = Symbol('key');
+  // let o = {
+  //   [key]: 'value',
+  // };
+  // Array recap
+  let scores: number[] = [];
 
   // tuple - fixed length array
-  let point: [number, number] = [1, 2];
-  point = [2, 3];
-  // point = [2, 3, 4]; // error
   let point3D: [number, number, number] = [1, 2, 3];
-
-  let record: [string, string] = ['Hello', 'Привіт'];
-  record = ['Hello', 'Привіт'];
-
-  // point = point3D; // error
-
-  // type alias introduction
-  type TPoint = [number, number]; // type alias - name the intent of the type
-  let pointA: TPoint = [1, 2];
-
-  type TNumber = number;
-  let a2: TNumber = 1;
-  type TNumberArray = number[];
-  let arr2: TNumberArray = [1, 2, 3];
-  type TNumberArray2 = Array<number>;
-  type one = 1;
-  let one: one = 1;
+  // point3D = [1, 2, 3, 4]; // error
+  let products: [string, number][];
+  products = [
+    ['apple', 1],
+    ['banana', 2],
+  ];
+  type Product = [string, number];
 
   // Object type, type alias
-  type TPoint2D = { x: number; y: number };
+  type Point2D = {
+    x: number;
+    y: number;
+    // name: string;
+    // age: number;
+  };
+  type ListOfPoints = Point2D[];
 
-  let point2: TPoint2D = { x: 1, y: 2 };
-  let point3: TPoint2D = { x: 3, y: 2 };
+  const points: ListOfPoints = [{ x: 1, y: 2 }];
+  // const point2: { x: number; y: number } = { x: 1, y: 2 };
+  const point: Point2D = { x: 1, y: 2 };
+  const point2: Point2D = { x: 1, y: 2 };
 
-  // const declarations
+  type PI = 3.14;
+  // boolean -> true, false
+  // undefined -> undefined
+  // null -> null
+  let pi: PI = 3.14;
+
+  // Const declarations
   const PI = 3.14;
   // PI = 3.15;
   const person = { name: 'John', age: 23 };
   person.age = 24;
-
-  const arr = [1, 2, 3];
-  arr.push(4);
+  // person = { name: 'John', age: 24 }; // error
 
   // Functions
-  function sum(a: number, b: number): number {
-    return a + b;
-  }
-  function sayHello(name: string): void {
-    console.log(`Hello ${name}`);
-  }
-  function sumAll(...numbers: number[]): number {
-    let result = 0;
-    for (let i = 0; i < numbers.length; i++) {
-      result += numbers[i];
-    }
-    return result;
+  function sumTwoNumbers(a: number, b: number): string {
+    return (a + b).toString();
   }
 
-  type TSum = (a: number, b: number) => number;
+  function sumAllNumbers(...numbers: number[]): number {
+    return numbers.reduce((acc, n) => acc + n, 0);
+  }
 
-  let sum2: TSum = (a, b) => a + b;
+  // const sumFn = (a: number, b: number): number => {
+  //   return a + b;
+  // }
+
+  type SumFn = (a: number, b: number) => string;
+
+  const myFn = (a: number, b: number) => (a + b).toString();
+
+  const sumFn: SumFn = myFn;
 
   // Structural typing, duck typing, type compatibility
-  type TPoint3D = { x: number; y: number; z: number };
-  let point3D2: TPoint3D = { x: 1, y: 2, z: 3 };
-  // type TPoint2D = { x: number; y: number };
-  let point2D: TPoint2D = { x: 1, y: 2 };
+  type TProduct = { name: string };
+  let t1: TProduct = { name: 'Table' };
 
-  point2D = point3D2;
+  type TUser = { name: string };
+  let u1: TUser = { name: 'John' };
+
+  t1 = u1;
+
+  type TPoint3D = { x: number; y: number; z: number };
+  type TPoint2D = { x: number; y: number };
+
+  let p3D: TPoint3D = { x: 1, y: 2, z: 3 };
+  let p2D: TPoint2D = { x: 1, y: 2 };
+
+  p2D = p3D;
 
   function printPoint(point: TPoint2D) {
     console.log(`Point: ${point.x.toFixed(2)}, ${point.y.toFixed(2)}`);
   }
-  printPoint(point2D);
+  printPoint(p2D);
+  printPoint(p3D);
   printPoint({ x: 1, y: 2 });
-  printPoint(point3D2);
-
-  let user1 = { name: 'John', age: 23 };
-  let user;
+  // printPoint({ x: 1, y: 2, z: 3 }); // error
 
   // Classes
-
-  class User {
-    name: string;
-    age: number;
-
-    constructor(name: string, age: number) {
-      this.name = name; // this - instance of the class
-      this.age = age;
-
-      return this;
-    }
-
-    sayHello() {
-      console.log(`Hello, my name is ${this.name}`);
-    }
-  }
-
-  let user2 = new User('John', 23);
-  user2.sayHello();
-
   class Point {
-    protected x: number;
-    protected y: number;
+    public x: number;
+    public y: number;
 
     constructor(x: number, y: number) {
-      this.x = x; // this - instance of the class
+      this.x = x;
       this.y = y;
     }
 
-    // constructor(protected x: number, protected y: number) {
-    // }
-
-    protected logAction(str: string) {
-      console.log(str, this);
-    }
-
-    distance() {
-      this.logAction('distance');
-
-      return Math.sqrt(this.x ** 2 + this.y ** 2);
-    }
-
-    move(distance: number) {
-      this.x += distance;
-      this.y += distance;
+    print() {
+      console.log(`Point: ${this.x.toFixed(2)}, ${this.y.toFixed(2)}`);
     }
   }
 
   class Point3D extends Point {
-    z: number;
+    protected z: number;
 
     constructor(x: number, y: number, z: number) {
       super(x, y);
       this.z = z;
     }
 
-    distance() {
-      this.logAction('distance 3D');
-
-      return Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2);
-    }
-
-    move(distance: number) {
-      super.move(distance);
-      this.z += distance;
+    print() {
+      console.log(
+        `Point: ${this.x.toFixed(2)}, ${this.y.toFixed(2)}, ${this.z.toFixed(
+          2,
+        )}`,
+      );
     }
   }
 
-  let point3D3 = new Point3D(1, 2, 3);
-  point3D3.move(10);
-  // point3D3.x = 100;
+  const p1: Point = new Point(1, 2);
 
-  // function distance(x: number, y: number): number;
-  // function distance(x: number, y: number, z: number):number {
-  //     if (z) {
-  //         return Math.sqrt(x ** 2 + y ** 2 + z ** 2);
-  //     }
-  //     return Math.sqrt(x ** 2 + y ** 2);
-  // }
+  // const p2:Point = { x: 1, y: 2, print: () => {} };
+
+  // Unit testing introduction
+  // test
 }
-lesson2preparation();
+lesson2();
