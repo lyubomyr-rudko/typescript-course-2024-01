@@ -1,3 +1,4 @@
+// TODO: remove this comment and the next line, make sure the code compiles
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 // Create a function which uses tuple type to calculate the distance between two points in 2D space
@@ -122,3 +123,12 @@ function excerciseC() {}
 
 // TODO: create a function which takes an array of strings and returns the longest string
 function excerciseD() {}
+
+// TODO: for excercise4 and excercise5 - copy and export those functions and create a test file for them, follwo this steps
+// 1. create file lesson2-homework.test.js use src/index.test.ts as an example
+// 2. import functions from lesson2-homework.js
+// 3. create a test for each function for this cases
+//   - distance between (1,1) and (4,5) should be 5
+//   - distance between (0,0) and (0,0) should be 0
+//   - distance between (1,1) and (1,1) should be 0
+// 4. run the tests with `npm run test`
