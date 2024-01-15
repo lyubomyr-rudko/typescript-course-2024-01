@@ -25,13 +25,13 @@ function excercise2() {
   // assign number var value 3
   // create a while loop which prints string variable to console 3 times
 
-  let text: string;
-  let counter: number;
-  text = 'Hello TS in 2024!';
+  let message: string = '';
+  let counter: number = 0;
+  message = 'Hello TS in 2024!';
   counter = 3;
 
   while (counter > 0) {
-    console.log(text);
+    console.log(message);
     counter--;
   }
 
@@ -43,12 +43,13 @@ excercise2();
 // 3. code that generates array of numbers - from n to m
 function excercise3() {
   // TODO: declare varaibles n and m of type number
-  let n, m: number;
+  let n: number = 0;
+  let m: number = 0;
   // TODO: declare varaible result of type array of numbers
-  let result: number[] = [];
+  const result: number[] = [];
   // TODO: assign n and m some values - n = 1, m = 10
-  n = 10;
-  m = 1;
+  n = 1;
+  m = 10;
   // TODO: create a for loop which adds numbers from n to m to result array
   if (m > n) {
     for (n; n < m; n++) {
