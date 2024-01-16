@@ -4,7 +4,7 @@
 
 First, create a fork of this repo to your own repository.
 Then clone from the repo via git:
-  
+
 ```bash
 $ git clone {your-repo-name}/typescript-course-2024-01.git
 ```
@@ -26,4 +26,3 @@ $ npm run dev
 ```bash
 $ npm run test
 ```
-

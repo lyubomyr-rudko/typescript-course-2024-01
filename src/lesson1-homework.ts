@@ -15,21 +15,20 @@
 //   console.log(greeting);
 // }
 function excercise2() {
-
-// declare two varaibles - one of string, one of type number
-  let str: string = `Hello World!`;
-  let num: number = 10;
+  // declare two varaibles - one of string, one of type number
+  const str: string = `Hello World!`;
+  const num: number = 10;
   console.log(str, num);
 
-// assign string var value 'Hello'
-  let a: string = `Hello`;
+  // assign string var value 'Hello'
+  const a: string = `Hello`;
   console.log(a);
 
-// assign number var value 3
-  let b: number = 3;
+  // assign number var value 3
+  const b: number = 3;
   console.log(b);
 
-// create a while loop which prints string variable to console 3 times
+  // create a while loop which prints string variable to console 3 times
   let counter: number = 0;
   const myString: string = `Hello TypeScript!`;
   while (counter < 3) {
@@ -37,9 +36,8 @@ function excercise2() {
     counter++;
   }
 
-// try to assign number variable to string variable - observe the error
-  let errMessage: string = 7;
-  console.error("Error: " + errMessage);
+  // try to assign number variable to string variable - observe the error
+  // const errMessage: string = 7;
 }
 
 excercise2();
@@ -47,16 +45,13 @@ excercise2();
 // 3. code that generates array of numbers - from n to m
 function excercise3() {
   // TODO: declare varaibles n and m of type number
-  let n: number;
-  let m: number;
+  const n: number = 1;
+  const m: number = 10;
 
   // TODO: declare variable result of type array of numbers
-  let result: number[] = [];
+  const result: number[] = [];
 
   // TODO: assign n and m some values - n = 1, m = 10
-  n = 1;
-  m = 10;
-
   // TODO: create a for loop which adds numbers from n to m to result array
   for (let i = n; i <= m; i++) {
     result.push(i);
@@ -64,7 +59,7 @@ function excercise3() {
   console.log(result);
 
   // TODO: support case where m > n (reverse the order)
-  let reversedResult: number[] = [];
+  const reversedResult: number[] = [];
   for (let i = m; i >= n; i--) {
     reversedResult.push(i);
   }
