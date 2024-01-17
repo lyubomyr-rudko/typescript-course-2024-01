@@ -33,6 +33,7 @@ function excercise4() {
 }
 excercise4();
 
+// excercise5
 // Create a function which uses type alias to calculate the distance between two points in 2D space - points are objects with x and y properties
 function excercise5() {
   // TODO: declare a type alias for a point in 2D space (TPoint) - object with x and y properties
