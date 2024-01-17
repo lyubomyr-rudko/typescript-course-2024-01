@@ -18,8 +18,8 @@
 // }
 // TODO: compile and run the code
 
-type TPoint = [number, number];
 function excercise4() {
+  type TPoint = [number, number];
   const point1: TPoint = [1, 2];
   const point2: TPoint = [4, 5];
   type DistanceFunction = (p1: TPoint, p2: TPoint) => number;
@@ -29,31 +29,49 @@ function excercise4() {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y1 - y2, 2));
   };
   const result = calculateDistance(point1, point2);
-  console.log(`Distance between ${point1} and ${point2}: ${result}`);
+  console.log(`Distance between (${point1}) and (${point2}): ${result}`);
 }
 excercise4();
 
-// excercise5
+// + excercise5
 // Create a function which uses type alias to calculate the distance between two points in 2D space - points are objects with x and y properties
-function excercise5() {
-  // TODO: declare a type alias for a point in 2D space (TPoint) - object with x and y properties
-  // TODO: declare two variables of type TPoint
-  // TODO: assign values to the variables (1,1) and (4,5)
-  // TODO: create a function which calculates the distance between two points in 2D space
-  type TPoint = { /* replace  with your code */ x: '' };
-  function distance(p1: TPoint, p2: TPoint): number {
-    const x1 = 0; // TODO: replace with the first element of p1
-    const y1 = 0; // TODO: replace with the second element of p1
-    const x2 = 0; // TODO: replace with the first element of p2
-    const y2 = 0; // TODO: replace with the second element of p2
-    // TODO: use distructuring to get x and y from p1 and p2
-    // TODO: calculate the distance
-    return 0;
-  }
-  // TODO: call the function and print the result to console
+// function excercise5() {
+//   // TODO: declare a type alias for a point in 2D space (TPoint) - object with x and y properties
+//   // TODO: declare two variables of type TPoint
+//   // TODO: assign values to the variables (1,1) and (4,5)
+//   // TODO: create a function which calculates the distance between two points in 2D space
+//   type TPoint = { /* replace  with your code */ x: '' };
+//   function distance(p1: TPoint, p2: TPoint): number {
+//     const x1 = 0; // TODO: replace with the first element of p1
+//     const y1 = 0; // TODO: replace with the second element of p1
+//     const x2 = 0; // TODO: replace with the first element of p2
+//     const y2 = 0; // TODO: replace with the second element of p2
+//     // TODO: use distructuring to get x and y from p1 and p2
+//     // TODO: calculate the distance
+//     return 0;
+//   }
+//   // TODO: call the function and print the result to console
+// }
+// // TODO: compile and run the code
+// excercise5();
+
+function exercise5() {
+  type TPoint = { x: number; y: number };
+  const point1: TPoint = { x: 1, y: 1 };
+  const point2: TPoint = { x: 4, y: 5 };
+
+  type DistanceFunction = (p1: TPoint, p2: TPoint) => number;
+  const distance: DistanceFunction = (p1, p2) => {
+    const { x: x1, y: y1 } = p1;
+    const { x: x2, y: y2 } = p2;
+    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  };
+  const result = distance(point1, point2);
+  console.log(
+    `Distance between (${point1.x},${point1.y}) and (${point2.x},${point2.y}): ${result}`,
+  );
 }
-// TODO: compile and run the code
-excercise5();
+exercise5();
 
 // Create functions that use const declarations
 function excercise6() {
