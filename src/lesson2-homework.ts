@@ -1,22 +1,36 @@
 // TODO: remove this comment and the next line, make sure the code compiles
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+// + excercise4
 // Create a function which uses tuple type to calculate the distance between two points in 2D space
-function excercise4() {
-  // TODO: declare two variables of type tuple, each with two numbers
-  // TODO: assign values to the variables (1,1) and (4,5)
-  // TODO: create a function which calculates the distance between two points in 2D space
-  function distance(p1: [number, number], p2: [number, number]): number {
-    const x1 = 0; // TODO: replace with the first element of p1
-    const y1 = 0; // TODO: replace with the second element of p1
-    const x2 = 0; // TODO: replace with the first element of p2
-    const y2 = 0; // TODO: replace with the second element of p2
-    // TODO: calculate the distance
-    return 0;
-  }
-  // TODO: call the function and print the result to console
-}
+// TODO: declare two variables of type tuple, each with two numbers
+// TODO: assign values to the variables (1,1) and (4,5)
+// TODO: create a function which calculates the distance between two points in 2D space
+// function distance(p1: [number, number], p2: [number, number]): number {
+//   const x1 = 0; // TODO: replace with the first element of p1
+//   const y1 = 0; // TODO: replace with the second element of p1
+//   const x2 = 0; // TODO: replace with the first element of p2
+//   const y2 = 0; // TODO: replace with the second element of p2
+//   // TODO: calculate the distance
+//   return 0;
+// }
+// TODO: call the function and print the result to console
+// }
 // TODO: compile and run the code
+
+type TPoint = [number, number];
+function excercise4() {
+  const point1: TPoint = [1, 2];
+  const point2: TPoint = [4, 5];
+  type DistanceFunction = (p1: TPoint, p2: TPoint) => number;
+  const calculateDistance: DistanceFunction = (p1, p2) => {
+    const [x1, y1] = p1;
+    const [x2, y2] = p2;
+    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y1 - y2, 2));
+  };
+  const result = calculateDistance(point1, point2);
+  console.log(`Distance between ${point1} and ${point2}: ${result}`);
+}
 excercise4();
 
 // Create a function which uses type alias to calculate the distance between two points in 2D space - points are objects with x and y properties
