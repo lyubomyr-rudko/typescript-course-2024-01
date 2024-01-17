@@ -15,7 +15,7 @@
 // TODO: call the function and print the result to console
 // TODO: compile and run the code
 
-export function exercise4() {
+function exercise4() {
   type TPoint = [number, number];
   const point1: TPoint = [1, 2];
   const point2: TPoint = [4, 5];
@@ -28,6 +28,7 @@ export function exercise4() {
   const result = calculateDistance(point1, point2);
   console.log(`Distance between (${point1}) and (${point2}): ${result}`);
 }
+
 exercise4();
 
 // + exercise5
@@ -47,7 +48,7 @@ exercise4();
 // TODO: call the function and print the result to console
 // TODO: compile and run the code
 
-export function exercise5() {
+function exercise5() {
   type TPoint = { x: number; y: number };
   const point1: TPoint = { x: 1, y: 1 };
   const point2: TPoint = { x: 4, y: 5 };
@@ -63,6 +64,7 @@ export function exercise5() {
     `Distance between (${point1.x},${point1.y}) and (${point2.x},${point2.y}): ${result}`,
   );
 }
+
 exercise5();
 
 // + exercise6
@@ -204,6 +206,7 @@ function exercise9() {
     ) {
       this.year = year;
     }
+
     getInfo(): string {
       return `Title: ${this.title}, Year: ${this.year}`;
     }
@@ -249,6 +252,7 @@ function exercise9() {
   console.log(magazine.getInfo());
   console.log('Age of the magazine:', magazine.getAge());
 }
+
 exercise9();
 
 // + TODO: for exercise4 and exercise5 - copy and export those functions and create a test file for them, follwo this steps
