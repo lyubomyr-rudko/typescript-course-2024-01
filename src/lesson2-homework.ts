@@ -95,22 +95,37 @@ function excercise6() {
 }
 excercise6();
 
+// + excercise7
 // Create a function that takes as a first parameter an array of numbers
 // a second parameter - a function that takes a number and returns a number.
 // and returns a new array with the results of function called on each element of the array (function passed as a first parameter)
-function excercise7() {
-  // TODO: add type annotations
-  // function map(arr, fn) {
-  // TODO: add logic here
-  // TODO: use regular for loop
-  // return [];
-  // }
-  // TODO: create an array of numbers
-  // TODO: create a function which doubles a number
-  // TODO: call map function (created earlier) with the array and the function
-  // TODO: print the result to console
-}
+// TODO: add type annotations
+// TODO: add logic here
+// TODO: use regular for loop
+// TODO: create an array of numbers
+// TODO: create a function which doubles a number
+// TODO: call map function (created earlier) with the array and the function
+// TODO: print the result to console
 // TODO: compile and run the code
+function excercise7() {
+  function map(arr: number[], fn: (num: number) => number): number[] {
+    const result: number[] = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      result.push(fn(arr[i]));
+    }
+    return result;
+  }
+  const numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
+  const double = (num: number): number => {
+    return num * 2;
+  };
+
+  const doubleNumbers = map(numbers, double);
+
+  console.log(`Original array:`, numbers);
+  console.log(`Double array`, doubleNumbers);
+}
 excercise7();
 
 // declare a function which takes a user and prints greeting to console

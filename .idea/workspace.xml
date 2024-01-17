@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76624942-54a5-4894-98f3-31d623471165" name="Changes" comment="excercise5_done">
+    <list default="true" id="76624942-54a5-4894-98f3-31d623471165" name="Changes" comment="excercise6_done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lesson2-homework.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lesson2-homework.ts" afterDir="false" />
     </list>
@@ -62,7 +62,7 @@
       <updated>1705394479935</updated>
       <workItem from="1705394483022" duration="614000" />
       <workItem from="1705395157428" duration="682000" />
-      <workItem from="1705395860923" duration="11415000" />
+      <workItem from="1705395860923" duration="13199000" />
     </task>
     <task id="LOCAL-00001" summary="fixed_variable_declarations_in_hw_1">
       <option name="closed" value="true" />
@@ -120,7 +120,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705486188082</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="excercise6_done">
+      <option name="closed" value="true" />
+      <created>1705487858231</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1705487858231</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +151,7 @@
     <MESSAGE value="start_hw_2" />
     <MESSAGE value="excercise4_done" />
     <MESSAGE value="excercise5_done" />
-    <option name="LAST_COMMIT_MESSAGE" value="excercise5_done" />
+    <MESSAGE value="excercise6_done" />
+    <option name="LAST_COMMIT_MESSAGE" value="excercise6_done" />
   </component>
 </project>
