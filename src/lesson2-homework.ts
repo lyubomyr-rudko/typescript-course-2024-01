@@ -28,6 +28,7 @@ function excercise4() {
   const result = calculateDistance(point1, point2);
   console.log(`Distance between (${point1}) and (${point2}): ${result}`);
 }
+
 excercise4();
 
 // + excercise5
@@ -63,6 +64,7 @@ function exercise5() {
     `Distance between (${point1.x},${point1.y}) and (${point2.x},${point2.y}): ${result}`,
   );
 }
+
 exercise5();
 
 // + excercise6
@@ -75,7 +77,7 @@ exercise5();
 // TODO: declare a function which takes a person object as a parameter and increments age by 1
 // TODO: call the function and print the person object to console
 
-function excercise6() {
+function excercise6(): void {
   const PI: number = 3.14;
   const calcCircleArea = (radius: number): number => {
     return PI * radius * radius;
@@ -93,6 +95,7 @@ function excercise6() {
   incrementAge(person);
   console.log(person);
 }
+
 excercise6();
 
 // + excercise7
@@ -116,6 +119,7 @@ function excercise7() {
     }
     return result;
   }
+
   const numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
   const double = (num: number): number => {
     return num * 2;
@@ -126,48 +130,128 @@ function excercise7() {
   console.log(`Original array:`, numbers);
   console.log(`Double array`, doubleNumbers);
 }
+
 excercise7();
 
+// + excercise8
 // declare a function which takes a user and prints greeting to console
-function excercise8() {
-  // TODO: create a type for user, with name property
-  // TODO: create a function with name printGreeting, which takes a user and prits greeting to console
-  // TODO: create a type for product, with name property and price property
-  // TODO: create a product object, asign it some object literal
-  // TODO: call the function with product as a parameter
-  // TODO: call the function with object literal as a parameter
-  // TODO: try adding extra property to the object literal - observe the error
-  // TODO: fix the error with type assertion
-}
+// TODO: create a type for user, with name property
+// TODO: create a function with name printGreeting, which takes a user and prits greeting to console
+// TODO: create a type for product, with name property and price property
+// TODO: create a product object, asign it some object literal
+// TODO: call the function with product as a parameter
+// TODO: call the function with object literal as a parameter
+// TODO: try adding extra property to the object literal - observe the error
+// TODO: fix the error with type assertion
 // TODO: compile and run the code
-excercise8();
 
-// declare a `Book` class with a constructor and a method
-function excercise9() {
-  // TODO: declare a `Book` class with a constructor and a method `getInfo` which returns the book info as a string
-  // TODO: constructor should take three parameters - title and year of publication
-  // TODO: method `getInfo` should return the book title and year as a string
-  // TODO: create a book object and call the method `getInfo`, print the result to console
-  // TODO: assign a new value to the year property
-  // TODO: call the method `getInfo` again
-  // TODO: add a new method `getAge` which returns the age of the book (current year - year of publication)
-  // TODO: call the method `getAge` and print the result to console
-  // TODO: add a new method `revise` which takes a new year as a parameter and updates the year property, add validation to the method - year can not be in the future, year can not be less than prev year
-  // TODO: call the method `revise` and pass a new year as a parameter
-  // TODO: add private modifier to the year property
-  // TODO: try to access the year property from outside of the class - observe the error
-  // TODO: change protected modifier to the year property, remove private modifier
-  // TODO: create a subclass `Magazine` which extends `Book` class
-  // TODO: add a new properties `month` and `day` to the `Magazine` class (no need to validate month and day)
-  // TODO: add constructor override to the Magazine class which takes four parameters - title, year, month and day
-  // TODO: use super keyword to call the `Book` class constructor with title and year parameters
-  // TODO: add a method override `getInfo` to the `Magazine` class which prints the magazine info to console
-  // TODO: use super keyword to call the `getInfo` method of the `Book` class
-  // TODO: create a magazine object and call the method `getInfo`, print the result to console
-  // TODO: call the inherited method `getAge` of the magazine object and print the result to console
+function exercise8() {
+  type User = {
+    name: string;
+  };
+
+  function printGreetings(user: User): void {
+    console.log(`Hello, ${user.name}!`);
+  }
+
+  type Product = {
+    name: string;
+    price: number;
+  };
+  const laptop: Product = {
+    name: `Laptop`,
+    price: 999.99,
+  };
+
+  printGreetings(laptop);
+  printGreetings({ name: `John` });
+  // printGreetings({ name: "John", age: 25 }); // Error: Object literal may only specify known properties
+  printGreetings({ name: `John`, age: 25 } as User);
 }
+
+exercise8();
+
+// + exercise9
+// declare a `Book` class with a constructor and a method
+// TODO: declare a `Book` class with a constructor and a method `getInfo` which returns the book info as a string
+// TODO: constructor should take three parameters - title and year of publication
+// TODO: method `getInfo` should return the book title and year as a string
+// TODO: create a book object and call the method `getInfo`, print the result to console
+// TODO: assign a new value to the year property
+// TODO: call the method `getInfo` again
+// TODO: add a new method `getAge` which returns the age of the book (current year - year of publication)
+// TODO: call the method `getAge` and print the result to console
+// TODO: add a new method `revise` which takes a new year as a parameter and updates the year property, add validation to the method - year can not be in the future, year can not be less than prev year
+// TODO: call the method `revise` and pass a new year as a parameter
+// TODO: add private modifier to the year property
+// TODO: try to access the year property from outside of the class - observe the error
+// TODO: change protected modifier to the year property, remove private modifier
+// TODO: create a subclass `Magazine` which extends `Book` class
+// TODO: add a new properties `month` and `day` to the `Magazine` class (no need to validate month and day)
+// TODO: add constructor override to the Magazine class which takes four parameters - title, year, month and day
+// TODO: use super keyword to call the `Book` class constructor with title and year parameters
+// TODO: add a method override `getInfo` to the `Magazine` class which prints the magazine info to console
+// TODO: use super keyword to call the `getInfo` method of the `Book` class
+// TODO: create a magazine object and call the method `getInfo`, print the result to console
+// TODO: call the inherited method `getAge` of the magazine object and print the result to console
 // TODO: compile and run the code
-excercise9();
+
+function exercise9() {
+  class Book {
+    private year: number;
+
+    constructor(
+      private title: string,
+      year: number,
+    ) {
+      this.year = year;
+    }
+    getInfo(): string {
+      return `Title: ${this.title}, Year: ${this.year}`;
+    }
+
+    getAge(): number {
+      const currentYear = new Date().getFullYear();
+      return currentYear - this.year;
+    }
+
+    revise(newYear: number): void {
+      if (newYear > this.year && newYear <= new Date().getFullYear()) {
+        this.year = newYear;
+      } else {
+        console.error(`Invalid year for revision`);
+      }
+    }
+  }
+
+  class Magazine extends Book {
+    constructor(
+      title: string,
+      year: number,
+      private month: number,
+      private day: number,
+    ) {
+      super(title, year);
+    }
+
+    getInfo(): string {
+      const bookInfo = super.getInfo();
+      return `${bookInfo}, Month: ${this.month}, Day: ${this.day}`;
+    }
+  }
+
+  const book = new Book('The Great Gatsby', 1925);
+  console.log(book.getInfo());
+  console.log('Age of the book:', book.getAge());
+
+  book.revise(1930);
+  console.log('Revised book info:', book.getInfo());
+
+  const magazine = new Magazine('National Geographic', 2022, 1, 15);
+  console.log(magazine.getInfo());
+  console.log('Age of the magazine:', magazine.getAge());
+}
+exercise9();
 
 // TODO: for excercise4 and excercise5 - copy and export those functions and create a test file for them, follwo this steps
 // 1. create file lesson2-homework.test.ts use src/index.test.ts as an example
