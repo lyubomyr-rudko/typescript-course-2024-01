@@ -3,7 +3,6 @@
 
 // Create a function which uses tuple type to calculate the distance between two points in 2D space
 function excercise4() {
-
   // TODO: declare two variables of type tuple, each with two numbers
   let point1: [number, number];
   let point2: [number, number];
@@ -17,12 +16,12 @@ function excercise4() {
     const x2 = p2[0]; // TODO: replace with the first element of p2
     const y2 = p2[1]; // TODO: replace with the second element of p2
     // TODO: calculate the distance
-    let distance = Math.sqrt((x1-x2)**2 + (y1-y2)**2)
+    const distance = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
     return distance;
   }
   // TODO: call the function and print the result to console
-  let result = distance(point1, point2);
-  console.log(result)
+  const result = distance(point1, point2);
+  console.log(result);
 }
 // TODO: compile and run the code
 excercise4();
@@ -39,28 +38,26 @@ function excercise5() {
   type TPoint = {
     x: number;
     y: number;
-  }
+  };
   // TODO: declare two variables of type TPoint
   // TODO: assign values to the variables (1,1) and (4,5)
-  let point: TPoint = { x:1, y:1 };
-  let point3: TPoint = { x:4, y:5 };
+  const point: TPoint = { x: 1, y: 1 };
+  const point3: TPoint = { x: 4, y: 5 };
   // TODO: create a function which calculates the distance between two points in 2D space
-  
   function distance(p1: TPoint, p2: TPoint): number {
     // const x1 = p1.x; // TODO: replace with the first element of p1
     // const y1 = p1.y; // TODO: replace with the second element of p1
     // const x2 = p2.x; // TODO: replace with the first element of p2
     // const y2 = p2.y; // TODO: replace with the second element of p2
     // TODO: use distructuring to get x and y from p1 and p2
-    const{ x:x1, y:y1 } = p1;
-    const { x:x2, y:y2 } = p2;
-
+    const{ x: x1, y: y1 } = p1;
+    const { x: x2, y: y2 } = p2;
     // TODO: calculate the distance
-    let distance = Math.sqrt((x1-x2)**2 + (y1-y2)**2)
+    let distance = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) **2)
     return distance;
   }
   // TODO: call the function and print the result to console
-  let result = distance(point, point);
+  const result = distance(point, point);
   console.log(result)
 }
 // TODO: compile and run the code
@@ -71,29 +68,28 @@ function excercise6() {
   // TODO: declare a const PI and assign value 3.14
   const PI = 3.14;
   // TODO: declare a function which calculates a circle area, takes radius as a parameter
-  function calculateArea(radius:number):number{
-    return PI*radius*radius;
-  }
+  function calculateArea(radius: number): number{
+    return PI * radius * radius;
+  };
   // TODO: call the function and print the result to console
   const circleRadious = calculateArea(2);
   console.log(circleRadious)
   // TODO: check the type of PI variable
-  console.log("Type of PI:", typeof PI);
+  console.log('Type of PI:', typeof PI);
   // TODO: declare a const variable that is an object with two properties - name and age
   const person = {
-    name: "John",
+    name: 'John',
     age: 30,
   };
   // TODO: declare a function which takes a person object as a parameter and increments age by 1
-  function incrementAge(person:{ name: string; age: number }):void{
+  function incrementAge(person: { name: string; age: number }) :void{
     person.age++
-  }
+  };
   // TODO: call the function and print the person object to console
   incrementAge(person);
-  console.log('increment age',person)
+  console.log('increment age', person);
 }
 excercise6();
-
 // Create a function that takes as a first parameter an array of numbers
 // a second parameter - a function that takes a number and returns a number.
 // and returns a new array with the results of function called on each element of the array (function passed as a first parameter)
@@ -106,14 +102,14 @@ function excercise7() {
   for (let i = 0; i < arr.length; i++) {
     result.push(fn(arr[i]));
   }
-  return result;
-  }
+    return result;
+}
   // TODO: create an array of numbers
   const arr: number[] = [1, 2, 3, 4, 5, 6]
   // TODO: create a function which doubles a number
-  function doubleNumber(num:number):number{
+  function doubleNumber(num: number): number{
     return num * 2;
-  }
+  };
   
   // TODO: call map function (created earlier) with the array and the function
   const doubleArr = map(arr, doubleNumber);
@@ -131,7 +127,7 @@ function excercise8() {
     age: number;
   }
   // TODO: create a function with name printGreeting, which takes a user and prits greeting to console
-  function printGreeting(user:User):void{
+  function printGreeting(user: User): void {
     console.log(`Hello, ${user.name}!`);
   }
   // TODO: create a type for product, with name property and price property
@@ -139,14 +135,12 @@ function excercise8() {
     name:string;
     price: number;
   }
-
   function printProductGreeting(product: Product): void {
     console.log(`This is a product: ${product.name}`);
-  }
-
+  };
   // TODO: create a product object, asign it some object literal
   const sampleProduct: Product = {
-    name: "Apple",
+    name: 'Apple',
     price: 19.99,
   };
   // TODO: call the function with product as a parameter
@@ -157,12 +151,11 @@ function excercise8() {
   // TODO: try adding extra property to the object literal - observe the error
   // printGreeting({ name: "John", age: 25, extraProperty: "Extra" });
   // TODO: fix the error with type assertion
-  const john: User = { name: "John", age: 25 };
+  const john: User = { name: 'John', age: 25 };
   printGreeting(john);
 }
 // TODO: compile and run the code
 excercise8();
-
 // declare a `Book` class with a constructor and a method
 function excercise9() {
   // TODO: declare a `Book` class with a constructor and a method `getInfo` which returns the book info as a string
@@ -173,29 +166,34 @@ function excercise9() {
     constructor(title: string, year: number) {
       this.title = title;
       this.year = year;
-    }
+    };
 
-    getInfo():string{
+    getInfo(): string {
       return `Title: ${this.title}, Year: ${this.year}`;
-    }
+    };
 
     getAge(): number {
       const currentYear = new Date().getFullYear();
       return currentYear - this.year;
-    }
+    };
 
     revise(newYear: number): void {
       if (newYear <= this.year || newYear > new Date().getFullYear()) {
-        console.error("Invalid year for revision");
+        console.error('Invalid year for revision');
       } else {
         this.year = newYear;
-        console.log("Year revised to", newYear);
+        console.log('Year revised to', newYear);
       }
     }
   }
 
   class Magazine extends Book {
-    constructor(title: string, year: number, public month: number, public day: number) {
+    constructor(
+      title: string, 
+      year: number, 
+      public month: number, 
+      public day: number
+    ) {
       super(title, year);
     }
 
@@ -205,18 +203,18 @@ function excercise9() {
     }
   }
 
-  const book = new Book("The Great Gatsby", 1925);
-  console.log("Book Info:", book.getInfo());
+  const book = new Book('The Great Gatsby', 1925);
+  console.log('Book Info:', book.getInfo());
 
   book.revise(1930)
-  console.log("Revise Info:", book.getInfo());
+  console.log('Revise Info:', book.getInfo());
     
-  console.log("Book Age:", book.getAge());
+  console.log('Book Age:', book.getAge());
 
-  const magazine = new Magazine("National Geographic", 2022, 1, 15);
-  console.log("Magazine Info:", magazine.getInfo());
+  const magazine = new Magazine('National Geographic', 2022, 1, 15);
+  console.log('Magazine Info:', magazine.getInfo());
 
-  console.log("Magazine Age:", magazine.getAge());
+  console.log('Magazine Age:', magazine.getAge());
 }
   // TODO: constructor should take three parameters - title and year of publication
   // TODO: method `getInfo` should return the book title and year as a string
