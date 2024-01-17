@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76624942-54a5-4894-98f3-31d623471165" name="Changes" comment="excercise8_done">
+    <list default="true" id="76624942-54a5-4894-98f3-31d623471165" name="Changes" comment="tests_start">
+      <change afterPath="$PROJECT_DIR$/src/lesson2-homework.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lesson2-homework.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lesson2-homework.ts" afterDir="false" />
     </list>
@@ -12,6 +13,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -62,7 +70,7 @@
       <updated>1705394479935</updated>
       <workItem from="1705394483022" duration="614000" />
       <workItem from="1705395157428" duration="682000" />
-      <workItem from="1705395860923" duration="17633000" />
+      <workItem from="1705395860923" duration="21079000" />
     </task>
     <task id="LOCAL-00001" summary="fixed_variable_declarations_in_hw_1">
       <option name="closed" value="true" />
@@ -136,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705495501185</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="excercise9_done">
+      <option name="closed" value="true" />
+      <created>1705500156327</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1705500156327</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +178,8 @@
     <MESSAGE value="excercise6_done" />
     <MESSAGE value="excercise7_done" />
     <MESSAGE value="excercise8_done" />
-    <option name="LAST_COMMIT_MESSAGE" value="excercise8_done" />
+    <MESSAGE value="excercise9_done" />
+    <MESSAGE value="tests_start" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests_start" />
   </component>
 </project>

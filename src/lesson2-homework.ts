@@ -1,7 +1,7 @@
 // TODO: remove this comment and the next line, make sure the code compiles
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-// + excercise4
+// + exercise4
 // Create a function which uses tuple type to calculate the distance between two points in 2D space
 // TODO: declare two variables of type tuple, each with two numbers
 // TODO: assign values to the variables (1,1) and (4,5)
@@ -15,7 +15,7 @@
 // TODO: call the function and print the result to console
 // TODO: compile and run the code
 
-function excercise4() {
+export function exercise4() {
   type TPoint = [number, number];
   const point1: TPoint = [1, 2];
   const point2: TPoint = [4, 5];
@@ -28,10 +28,9 @@ function excercise4() {
   const result = calculateDistance(point1, point2);
   console.log(`Distance between (${point1}) and (${point2}): ${result}`);
 }
+exercise4();
 
-excercise4();
-
-// + excercise5
+// + exercise5
 // Create a function which uses type alias to calculate the distance between two points in 2D space - points are objects with x and y properties
 // TODO: declare a type alias for a point in 2D space (TPoint) - object with x and y properties
 // TODO: declare two variables of type TPoint
@@ -48,7 +47,7 @@ excercise4();
 // TODO: call the function and print the result to console
 // TODO: compile and run the code
 
-function exercise5() {
+export function exercise5() {
   type TPoint = { x: number; y: number };
   const point1: TPoint = { x: 1, y: 1 };
   const point2: TPoint = { x: 4, y: 5 };
@@ -64,10 +63,9 @@ function exercise5() {
     `Distance between (${point1.x},${point1.y}) and (${point2.x},${point2.y}): ${result}`,
   );
 }
-
 exercise5();
 
-// + excercise6
+// + exercise6
 // Create functions that use const declarations
 // TODO: declare a const PI and assign value 3.14
 // TODO: declare a function which calculates a circle area, takes radius as a parameter
@@ -77,7 +75,7 @@ exercise5();
 // TODO: declare a function which takes a person object as a parameter and increments age by 1
 // TODO: call the function and print the person object to console
 
-function excercise6(): void {
+function exercise6(): void {
   const PI: number = 3.14;
   const calcCircleArea = (radius: number): number => {
     return PI * radius * radius;
@@ -96,9 +94,9 @@ function excercise6(): void {
   console.log(person);
 }
 
-excercise6();
+exercise6();
 
-// + excercise7
+// + exercise7
 // Create a function that takes as a first parameter an array of numbers
 // a second parameter - a function that takes a number and returns a number.
 // and returns a new array with the results of function called on each element of the array (function passed as a first parameter)
@@ -110,7 +108,7 @@ excercise6();
 // TODO: call map function (created earlier) with the array and the function
 // TODO: print the result to console
 // TODO: compile and run the code
-function excercise7() {
+function exercise7() {
   function map(arr: number[], fn: (num: number) => number): number[] {
     const result: number[] = [];
 
@@ -131,9 +129,9 @@ function excercise7() {
   console.log(`Double array`, doubleNumbers);
 }
 
-excercise7();
+exercise7();
 
-// + excercise8
+// + exercise8
 // declare a function which takes a user and prints greeting to console
 // TODO: create a type for user, with name property
 // TODO: create a function with name printGreeting, which takes a user and prits greeting to console
@@ -253,7 +251,7 @@ function exercise9() {
 }
 exercise9();
 
-// TODO: for excercise4 and excercise5 - copy and export those functions and create a test file for them, follwo this steps
+// + TODO: for exercise4 and exercise5 - copy and export those functions and create a test file for them, follwo this steps
 // 1. create file lesson2-homework.test.ts use src/index.test.ts as an example
 // 2. import functions from lesson2-homework.js
 // 3. create a test for each function for this cases
@@ -264,13 +262,13 @@ exercise9();
 
 // Additional tasks - optional
 // TODO: create a function which takes any string and returns the string reversed
-function excerciseA() {}
+function exerciseA() {}
 
 // TODO: create a function which takes an array of numbers and returns the sum of all numbers
-function excerciseB() {}
+function exerciseB() {}
 
 // TODO: create a function which takes an array of numbers and returns the average of all numbers
-function excerciseC() {}
+function exerciseC() {}
 
 // TODO: create a function which takes an array of strings and returns the longest string
-function excerciseD() {}
+function exerciseD() {}
