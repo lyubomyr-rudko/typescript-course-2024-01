@@ -56,7 +56,7 @@ function excercise3() {
   m = 10;
 
   // TODO: create a for loop which adds numbers from n to m to result array
-<<<<<<< HEAD
+
   for(let i = n; i <= m; i++){
     result.push(i)
   }
@@ -73,9 +73,9 @@ function excercise3() {
     }
   }
   console.log(result)
-=======
+
   // TODO: support case where n > m (reverse the order)
->>>>>>> upstream/main
+
   // TODO: print result array to console
 }
 excercise3();

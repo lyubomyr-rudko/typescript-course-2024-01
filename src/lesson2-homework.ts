@@ -69,12 +69,28 @@ excercise5();
 // Create functions that use const declarations
 function excercise6() {
   // TODO: declare a const PI and assign value 3.14
+  const PI = 3.14;
   // TODO: declare a function which calculates a circle area, takes radius as a parameter
+  function calculateArea(radius:number):number{
+    return PI*radius*radius;
+  }
   // TODO: call the function and print the result to console
+  const circleRadious = calculateArea(2);
+  console.log(circleRadious)
   // TODO: check the type of PI variable
+  console.log("Type of PI:", typeof PI);
   // TODO: declare a const variable that is an object with two properties - name and age
+  const person = {
+    name: "John",
+    age: 30,
+  };
   // TODO: declare a function which takes a person object as a parameter and increments age by 1
+  function incrementAge(person:{ name: string; age: number }):void{
+    person.age++
+  }
   // TODO: call the function and print the person object to console
+  incrementAge(person);
+  console.log('increment age',person)
 }
 excercise6();
 
@@ -83,15 +99,26 @@ excercise6();
 // and returns a new array with the results of function called on each element of the array (function passed as a first parameter)
 function excercise7() {
   // TODO: add type annotations
-  // function map(arr, fn) {
+  function map(arr: number[], fn: (num: number) => number): number[] {
   // TODO: add logic here
+  const result: number[] = [];
   // TODO: use regular for loop
-  // return [];
-  // }
+  for (let i = 0; i < arr.length; i++) {
+    result.push(fn(arr[i]));
+  }
+  return result;
+  }
   // TODO: create an array of numbers
+  const arr: number[] = [1, 2, 3, 4, 5, 6]
   // TODO: create a function which doubles a number
+  function doubleNumber(num:number):number{
+    return num * 2;
+  }
+  
   // TODO: call map function (created earlier) with the array and the function
+  const doubleArr = map(arr, doubleNumber);
   // TODO: print the result to console
+  console.log(doubleArr);
 }
 // TODO: compile and run the code
 excercise7();
