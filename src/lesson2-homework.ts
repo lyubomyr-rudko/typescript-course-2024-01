@@ -126,13 +126,39 @@ excercise7();
 // declare a function which takes a user and prints greeting to console
 function excercise8() {
   // TODO: create a type for user, with name property
+  type User = {
+    name: string;
+    age: number;
+  }
   // TODO: create a function with name printGreeting, which takes a user and prits greeting to console
+  function printGreeting(user:User):void{
+    console.log(`Hello, ${user.name}!`);
+  }
   // TODO: create a type for product, with name property and price property
+  type Product = {
+    name:string;
+    price: number;
+  }
+
+  function printProductGreeting(product: Product): void {
+    console.log(`This is a product: ${product.name}`);
+  }
+
   // TODO: create a product object, asign it some object literal
+  const sampleProduct: Product = {
+    name: "Apple",
+    price: 19.99,
+  };
   // TODO: call the function with product as a parameter
+  printProductGreeting(sampleProduct);
+
   // TODO: call the function with object literal as a parameter
+  // printGreeting({ name: "John" });
   // TODO: try adding extra property to the object literal - observe the error
+  // printGreeting({ name: "John", age: 25, extraProperty: "Extra" });
   // TODO: fix the error with type assertion
+  const john: User = { name: "John", age: 25 };
+  printGreeting(john);
 }
 // TODO: compile and run the code
 excercise8();
@@ -140,6 +166,58 @@ excercise8();
 // declare a `Book` class with a constructor and a method
 function excercise9() {
   // TODO: declare a `Book` class with a constructor and a method `getInfo` which returns the book info as a string
+  class Book{
+    public title: string;
+    public year: number;
+    
+    constructor(title: string, year: number) {
+      this.title = title;
+      this.year = year;
+    }
+
+    getInfo():string{
+      return `Title: ${this.title}, Year: ${this.year}`;
+    }
+
+    getAge(): number {
+      const currentYear = new Date().getFullYear();
+      return currentYear - this.year;
+    }
+
+    revise(newYear: number): void {
+      if (newYear <= this.year || newYear > new Date().getFullYear()) {
+        console.error("Invalid year for revision");
+      } else {
+        this.year = newYear;
+        console.log("Year revised to", newYear);
+      }
+    }
+  }
+
+  class Magazine extends Book {
+    constructor(title: string, year: number, public month: number, public day: number) {
+      super(title, year);
+    }
+
+    getInfo(): string {
+      const bookInfo = super.getInfo();
+      return `${bookInfo}, Month: ${this.month}, Day: ${this.day}`;
+    }
+  }
+
+  const book = new Book("The Great Gatsby", 1925);
+  console.log("Book Info:", book.getInfo());
+
+  book.revise(1930)
+  console.log("Revise Info:", book.getInfo());
+    
+  console.log("Book Age:", book.getAge());
+
+  const magazine = new Magazine("National Geographic", 2022, 1, 15);
+  console.log("Magazine Info:", magazine.getInfo());
+
+  console.log("Magazine Age:", magazine.getAge());
+}
   // TODO: constructor should take three parameters - title and year of publication
   // TODO: method `getInfo` should return the book title and year as a string
   // TODO: create a book object and call the method `getInfo`, print the result to console
@@ -160,7 +238,6 @@ function excercise9() {
   // TODO: use super keyword to call the `getInfo` method of the `Book` class
   // TODO: create a magazine object and call the method `getInfo`, print the result to console
   // TODO: call the inherited method `getAge` of the magazine object and print the result to console
-}
 // TODO: compile and run the code
 excercise9();
 
