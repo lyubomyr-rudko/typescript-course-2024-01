@@ -22,9 +22,9 @@ excercise1();
 function excercise2() {
   // declare two varaibles - one of string, one of type number
   // assign string var value 'Hello'
-  var greeting1: string = 'Hello';
+  const greeting1: string = 'Hello';
   // assign number var value 3
-  var quantity: number = 3;
+  const quantity: number = 3;
   // create a while loop which prints string variable to console 3 times
   let i = 0;
   while (i < quantity) {
@@ -32,20 +32,21 @@ function excercise2() {
     i++;
   }
   // try to assign number variable to string variable - observe the error
-  var test: number = 'test';
+  // const test: number = 'test';
 }
 excercise2();
 
 // 3. code that generates array of numbers - from n to m
 function excercise3() {
   // TODO: declare varaibles n and m of type number
-  var n: number;
-  var m: number;
+  let n: number;
+  let m: number;
   // TODO: declare varaible result of type array of numbers
-  var result: number[] = [];
-  var result2: number[] = [];
+  const result: number[] = [];
+  let result2: number[] = [];
   // TODO: assign n and m some values - n = 1, m = 10
   n = 1;
+  // eslint-disable-next-line prefer-const
   m = 10;
   // TODO: create a for loop which adds numbers from n to m to result array
   for (n = 1; n <= m; n++) {

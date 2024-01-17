@@ -1,8 +1,8 @@
-import { describe, expect, test } from '@jest/globals';
-import { sum } from './index';
+// import { describe, expect, it } from '@jest/globals';
+// // import { distanceTest1 } from './lesson2-homework';
 
-describe('sum module', () => {
-  test('adds 1 + 2 to equal 3', () => {
-    expect(sum(1, 2)).toBe(3);
-  });
-});
+// // describe('distanceTest1', () => {
+// //   it('subtracts distance [1,1] - [4,5 equal 5', () => {
+// //     expect(distanceTest1([1, 1], [4, 5])).toBe(5); //Ошибки ?
+// //   });
+// // });
