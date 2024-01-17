@@ -11,11 +11,8 @@
 //   const y1 = 0; // TODO: replace with the second element of p1
 //   const x2 = 0; // TODO: replace with the first element of p2
 //   const y2 = 0; // TODO: replace with the second element of p2
-//   // TODO: calculate the distance
-//   return 0;
-// }
+// TODO: calculate the distance
 // TODO: call the function and print the result to console
-// }
 // TODO: compile and run the code
 
 function excercise4() {
@@ -35,25 +32,20 @@ excercise4();
 
 // + excercise5
 // Create a function which uses type alias to calculate the distance between two points in 2D space - points are objects with x and y properties
-// function excercise5() {
-//   // TODO: declare a type alias for a point in 2D space (TPoint) - object with x and y properties
-//   // TODO: declare two variables of type TPoint
-//   // TODO: assign values to the variables (1,1) and (4,5)
-//   // TODO: create a function which calculates the distance between two points in 2D space
+// TODO: declare a type alias for a point in 2D space (TPoint) - object with x and y properties
+// TODO: declare two variables of type TPoint
+// TODO: assign values to the variables (1,1) and (4,5)
+// TODO: create a function which calculates the distance between two points in 2D space
 //   type TPoint = { /* replace  with your code */ x: '' };
 //   function distance(p1: TPoint, p2: TPoint): number {
 //     const x1 = 0; // TODO: replace with the first element of p1
 //     const y1 = 0; // TODO: replace with the second element of p1
 //     const x2 = 0; // TODO: replace with the first element of p2
 //     const y2 = 0; // TODO: replace with the second element of p2
-//     // TODO: use distructuring to get x and y from p1 and p2
-//     // TODO: calculate the distance
-//     return 0;
-//   }
-//   // TODO: call the function and print the result to console
-// }
-// // TODO: compile and run the code
-// excercise5();
+// TODO: use distructuring to get x and y from p1 and p2
+// TODO: calculate the distance
+// TODO: call the function and print the result to console
+// TODO: compile and run the code
 
 function exercise5() {
   type TPoint = { x: number; y: number };
@@ -73,15 +65,33 @@ function exercise5() {
 }
 exercise5();
 
+// + excercise6
 // Create functions that use const declarations
+// TODO: declare a const PI and assign value 3.14
+// TODO: declare a function which calculates a circle area, takes radius as a parameter
+// TODO: call the function and print the result to console
+// TODO: check the type of PI variable
+// TODO: declare a const variable that is an object with two properties - name and age
+// TODO: declare a function which takes a person object as a parameter and increments age by 1
+// TODO: call the function and print the person object to console
+
 function excercise6() {
-  // TODO: declare a const PI and assign value 3.14
-  // TODO: declare a function which calculates a circle area, takes radius as a parameter
-  // TODO: call the function and print the result to console
-  // TODO: check the type of PI variable
-  // TODO: declare a const variable that is an object with two properties - name and age
-  // TODO: declare a function which takes a person object as a parameter and increments age by 1
-  // TODO: call the function and print the person object to console
+  const PI: number = 3.14;
+  const calcCircleArea = (radius: number): number => {
+    return PI * radius * radius;
+  };
+  const radius = 8;
+  const area = calcCircleArea(radius);
+  console.log(`Circle area radius ${radius}: ${area}`);
+
+  console.log(typeof PI);
+
+  const person: { name: string; age: number } = { name: `John`, age: 25 };
+  const incrementAge = (p: { name: string; age: number }) => {
+    p.age += 1;
+  };
+  incrementAge(person);
+  console.log(person);
 }
 excercise6();
 
