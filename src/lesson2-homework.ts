@@ -160,7 +160,8 @@ function excercise9() {
 
     // TODO: add a new method `getAge` which returns the age of the book (current year - year of publication)
     getAge(): number {
-      return this.year;
+      const today: number = new Date().getFullYear();
+      return today - this.year;
     }
 
     // TODO: add a new method `revise` which takes a new year as a parameter and updates the year property, add validation to the method - year can not be in the future, year can not be less than prev year
@@ -184,7 +185,7 @@ function excercise9() {
   console.log(book.getInfo()); //Twilight 2006 if book.year = 2006
 
   // TODO: call the method `getAge` and print the result to console
-  console.log(book.getAge()); //2005
+  console.log(book.getAge()); //19
 
   // TODO: call the method `revise` and pass a new year as a parameter
   book.revise(2021);
@@ -222,7 +223,7 @@ function excercise9() {
   console.log(magazine.getInfo()); // New moon 2007 april 17
 
   // TODO: call the inherited method `getAge` of the magazine object and print the result to console
-  console.log(magazine.getAge()); //2007
+  console.log(magazine.getAge()); //17
 }
 // TODO: compile and run the code
 excercise9();
