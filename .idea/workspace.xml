@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76624942-54a5-4894-98f3-31d623471165" name="Changes" comment="tests_start">
+    <list default="true" id="76624942-54a5-4894-98f3-31d623471165" name="Changes" comment="done_without_tests">
+      <change afterPath="$PROJECT_DIR$/src/homework2-test.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/lesson2-homework.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lesson2-homework.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lesson2-homework.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +52,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "lesson2-homework",
-    "last_opened_file_path": "D:/Hillel TS/Test/TS-Kazakov_hw",
+    "last_opened_file_path": "D:/Hillel TS/Kazakov-typescript-course-2024-01/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -60,6 +62,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Hillel TS\Kazakov-typescript-course-2024-01\src" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -70,7 +77,7 @@
       <updated>1705394479935</updated>
       <workItem from="1705394483022" duration="614000" />
       <workItem from="1705395157428" duration="682000" />
-      <workItem from="1705395860923" duration="21079000" />
+      <workItem from="1705395860923" duration="31299000" />
     </task>
     <task id="LOCAL-00001" summary="fixed_variable_declarations_in_hw_1">
       <option name="closed" value="true" />
@@ -152,7 +159,23 @@
       <option name="project" value="LOCAL" />
       <updated>1705500156327</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="done_without_tests">
+      <option name="closed" value="true" />
+      <created>1705503610038</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1705503610038</updated>
+    </task>
+    <task id="LOCAL-00012" summary="done_without_tests">
+      <option name="closed" value="true" />
+      <created>1705503771295</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1705503771295</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +203,7 @@
     <MESSAGE value="excercise8_done" />
     <MESSAGE value="excercise9_done" />
     <MESSAGE value="tests_start" />
-    <option name="LAST_COMMIT_MESSAGE" value="tests_start" />
+    <MESSAGE value="done_without_tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="done_without_tests" />
   </component>
 </project>
