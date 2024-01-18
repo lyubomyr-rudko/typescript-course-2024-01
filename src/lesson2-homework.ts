@@ -31,7 +31,7 @@ function excercise4() {
     const y2 = p2[1]; // + TODO: replace with the second element of p2
     // TODO: calculate the distance
     const deltaX = p2[0] - p1[0];
-    const deltaY = p2[1] - p2[1];
+    const deltaY = p2[1] - p1[1];
     return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
   }
   // + TODO: call the function and print the result to console
@@ -355,7 +355,8 @@ export function distance5(p1: TPoint2, p2: TPoint2): number {
 
   return Math.sqrt(deltaX ** 2 + deltaY ** 2);
 }
-
+const point1: [number, number] = [1, 1];
+const point2: [number, number] = [4, 5];
 export function distance4(p1: [number, number], p2: [number, number]): number {
   const x1 = p1[0]; // + TODO: replace with the first element of p1
   const y1 = p1[1]; // + TODO: replace with the second element of p1
@@ -363,6 +364,6 @@ export function distance4(p1: [number, number], p2: [number, number]): number {
   const y2 = p2[1]; // + TODO: replace with the second element of p2
   // TODO: calculate the distance
   const deltaX = p2[0] - p1[0];
-  const deltaY = p2[1] - p2[1];
-  return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+  const deltaY = p2[1] - p1[1];
+  return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
 }
