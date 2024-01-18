@@ -1,5 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 import { sum, max } from './index';
+import { distance } from './lesson2-homework';
 
 describe('sum', () => {
   it('should be defined', () => {
@@ -26,5 +27,11 @@ describe('max', () => {
 
   it('returns 0 for 0, 0, 0, 0', () => {
     expect(max(0, 0, 0, 0)).toBe(0);
+  });
+});
+
+describe('distance', () => {
+  it('should be defined', () => {
+    expect(distance).toBeDefined();
   });
 });

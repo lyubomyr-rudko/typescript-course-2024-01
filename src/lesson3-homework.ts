@@ -38,22 +38,28 @@ function excercise11() {
 excercise11();
 
 // TODO: create a function which takes a string and returns a string with all vowels removed
+// Example: 'exception' -> 'xcptn', 'javascript' -> 'jvscrpt'
 export function removeAllVovels() {}
 
 // TODO: create a function which takes an array of strings and returns the array of strings with all vowels removed
+// Example: ['abstraction', 'javascript', 'react'] -> ['bstrctn', 'jvscrpt', 'rct']
 export function removeVowelsFromArray() {}
 
 // TODO: create a function that checks if a string is a palindrome
-export // polindrome is a word that is the same when read backwards
-function isPalindromeString() {}
+// polindrome is a word that is the same when read backwards
+// Example: 'abcba' is a palindrome, 'abc' is not a palindrome
+export function isPalindromeString() {}
 
 // TODO: create a function which takes any number of strings and returns array of strings that are polindromes
+// Example: ('abc', 'def', 'aba') -> ['aba']
 export function getPolindropesOnly() {}
 
 // TODO: create a function which takes an array of strings and returns the reversed array of reversed strings
+// Example: ['abc', 'def'] -> ['fed', 'cba']
 export function reverseArrayOfStrings() {}
 
-// TODO: create a function that takes n param, and generates a list of n random kyivstar phone numbers (097XXXXXXX)
+// TODO: create a function that takes n param, and generates a list of n random kyivstar phone numbers
+// Example: (097XXXXXXX)
 export function generatePhoneNumbers() {}
 
 // TODO: write unit-tests for the six functions above
