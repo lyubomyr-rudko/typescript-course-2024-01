@@ -1,3 +1,4 @@
+// TODO: remove this comment and the next line, make sure the code compiles
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 // Create a function which uses tuple type to calculate the distance between two points in 2D space
@@ -312,6 +313,8 @@ export function distance2(p1: TPoint, p2: TPoint): number {
 }
 
 // Additional tasks -
+
+// Additional tasks - optional
 // TODO: create a function which takes any string and returns the string reversed
 function excerciseA() {}
 

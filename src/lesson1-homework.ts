@@ -69,6 +69,7 @@ function excercise3() {
     }
   }
 
+  // TODO: support case where n > m (reverse the order)
   // TODO: print result array to console
   console.log(result);
 }

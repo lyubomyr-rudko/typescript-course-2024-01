@@ -1,5 +1,8 @@
 # Wellcome to typescript 2024 course, group 1
 
+# IMPORTANT - READ THIS FIRST
+You need to add your homework PR link to the LMS system. 
+
 ## Install
 
 First, create a fork of this repo to your own repository.
