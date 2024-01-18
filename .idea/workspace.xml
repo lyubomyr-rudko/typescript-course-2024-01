@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76624942-54a5-4894-98f3-31d623471165" name="Changes" comment="create_new_file_for_tests: homework2-test.ts">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/homework2-test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/homework2-test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lesson2-homework.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lesson2-homework.test.ts" afterDir="false" />
-    </list>
+    <list default="true" id="76624942-54a5-4894-98f3-31d623471165" name="Changes" comment="additional task for homework2 done!" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,7 +71,7 @@
       <updated>1705394479935</updated>
       <workItem from="1705394483022" duration="614000" />
       <workItem from="1705395157428" duration="682000" />
-      <workItem from="1705395860923" duration="35038000" />
+      <workItem from="1705395860923" duration="35428000" />
     </task>
     <task id="LOCAL-00001" summary="fixed_variable_declarations_in_hw_1">
       <option name="closed" value="true" />
@@ -181,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705571886996</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="additional task for homework2 done!">
+      <option name="closed" value="true" />
+      <created>1705581017737</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1705581017737</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +215,7 @@
     <MESSAGE value="tests_start" />
     <MESSAGE value="done_without_tests" />
     <MESSAGE value="create_new_file_for_tests: homework2-test.ts" />
-    <option name="LAST_COMMIT_MESSAGE" value="create_new_file_for_tests: homework2-test.ts" />
+    <MESSAGE value="additional task for homework2 done!" />
+    <option name="LAST_COMMIT_MESSAGE" value="additional task for homework2 done!" />
   </component>
 </project>
