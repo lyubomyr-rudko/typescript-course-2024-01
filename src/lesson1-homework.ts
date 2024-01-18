@@ -21,18 +21,16 @@ excercise1();
 // 2. loop which prints string to console n times
 function excercise2() {
   // declare two varaibles - one of string, one of type number
-  let stringValue: string
-  let numberValue: number
+  const stringValue: string = 'Hello';
+  const numberValue: number = 3;
   // assign string var value 'Hello'
   // assign number var value 3
-   stringValue = 'Hello';
-   numberValue = 3;
   // create a while loop which prints string variable to console 3 times
-  
-  let count:number = 0;
-  while(count < numberValue) {
-    console.log(stringValue)
-    count++
+
+  let count: number = 0;
+  while (count < numberValue) {
+    console.log(stringValue);
+    count++;
   }
   // try to assign number variable to string variable - observe the error
 
@@ -43,13 +41,11 @@ excercise2();
 // 3. code that generates array of numbers - from n to m
 function excercise3() {
   // TODO: declare varaibles n and m of type number
-  let n:number
-  let m:number
+  const n: number = 1;
+  const m: number = 10;
   // TODO: declare varaible result of type array of numbers
-  let result:Array<number> = []
+  const result: Array<number> = [];
   // TODO: assign n and m some values - n = 1, m = 10
-  n = 1
-  m = 10
   // TODO: create a for loop which adds numbers from n to m to result array
   for (let i = n; i <= m; i++) {
     result.push(i);
