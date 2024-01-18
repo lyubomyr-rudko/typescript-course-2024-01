@@ -2,17 +2,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 // create a generic function which takes an array of items of type T and returns the random item from the array
-function excercise12() {
+function excercise13() {
   // TODO: create a function that takes an array of numbers and returns a random number from the array
   // TODO: create a function that takes an array of strings and returns a random string from the array
   // TODO: create a function that takes an array of objects and returns a random object from the array
   // TODO: observe the same structure of the functions above, and create a generic function which takes an array of items of type T and returns the random item from the array
 }
 // TODO: compile and run the code
-excercise12();
+excercise13();
 
 // add type assertion to the code
-function excercise13() {
+function excercise14() {
   // NOTE: do not change this function
   function fetchUserAge(): unknown {
     const responseText = '{"name": "John", "age": 18}';
@@ -23,11 +23,11 @@ function excercise13() {
   // console.log(userAge + 1);
 }
 // TODO: compile and run the code
-excercise13();
+excercise14();
 
 // use type casting to fix the mistake in the code
 // run the code before and after adding type casting to see the difference
-function excercise14() {
+function excercise15() {
   function fetchUserAge() {
     const responseText = '{"name": "John", "age": "16"}';
 
@@ -43,28 +43,6 @@ function excercise14() {
   } else {
     console.log('You are not old enough to drive');
   }
-}
-// TODO: compile and run the code
-excercise14();
-
-// add type safety to the code which uses any
-function excercise15() {
-  // TODO: declare a type for user object, which has a name property of type string
-
-  // TODO: fix the fetchUsers function to return an array of users, not any type
-  function fetchUsers() {
-    // TODO: add type safety to the data variable, annotate it with the type of users
-    const data: unknown = JSON.parse(
-      '{"users": [{"name": "John"}, {"name": "Jane"}]}',
-    );
-
-    // TODO: add check for the data type to contain list of users
-    return data;
-  }
-  // TODO: fix typings of the users variable (currently it is of type any)
-  const users = fetchUsers();
-  // TODO: add type safety to the code to print the names of the users to console
-  // users.forEach((user) => console.log(user.name));
 }
 // TODO: compile and run the code
 excercise15();

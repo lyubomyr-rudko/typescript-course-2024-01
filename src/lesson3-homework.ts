@@ -37,6 +37,28 @@ function excercise11() {
 // TODO: compile and run the code
 excercise11();
 
+// add type safety to the code which uses any
+function excercise12() {
+  // TODO: declare a type for user object, which has a name property of type string
+
+  // TODO: fix the fetchUsers function to return an array of users, not any type
+  function fetchUsers() {
+    // TODO: add type safety to the data variable, annotate it with the type of users
+    const data: unknown = JSON.parse(
+      '{"users": [{"name": "John"}, {"name": "Jane"}]}',
+    );
+
+    // TODO: add check for the data type to contain list of users
+    return data;
+  }
+  // TODO: fix typings of the users variable (currently it is of type any)
+  const users = fetchUsers();
+  // TODO: add type safety to the code to print the names of the users to console
+  // users.forEach((user) => console.log(user.name));
+}
+// TODO: compile and run the code
+excercise12();
+
 // TODO: create a function which takes a string and returns a string with all vowels removed
 // Example: 'exception' -> 'xcptn', 'javascript' -> 'jvscrpt'
 export function removeAllVovels() {}
