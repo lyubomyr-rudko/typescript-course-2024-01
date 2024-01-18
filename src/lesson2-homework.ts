@@ -284,4 +284,22 @@ console.log('Longest String:', longestString);
 //   - distance between (1,1) and (1,2) should be 1
 // 4. run the tests with `npm run test`
 
-export { excercise4, excercise5 };
+function distanceTest(p1: [number, number], p2: [number, number]): number {
+  const x1 = p1[0];
+  const y1 = p1[1];
+  const x2 = p2[0];
+  const y2 = p2[1];
+  const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+  return distance;
+}
+
+type TPoint = { x: number; y: number };
+
+function distance2Test(p1: TPoint, p2: TPoint): number {
+  const { x: x1, y: y1 } = p1;
+  const { x: x2, y: y2 } = p2;
+  const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  return distance;
+}
+
+export { distanceTest, distance2Test };
