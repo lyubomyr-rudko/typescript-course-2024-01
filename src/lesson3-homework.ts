@@ -48,15 +48,41 @@ excercise10();
 // create a generic Stack class (Stack is a FILO data structure, push and pop methods are used to add and remove items from the top of the stack)
 function excercise11() {
   // TODO: create a generic Stack class
-  // TODO: add a private data property of type array of T
-  // TODO: add a push method which takes an item of type T as a parameter and adds it to the top of the stack
-  // TODO: add a pop method which removes and returns the item from the top of the stack
+  class Stack<T> {
+    // TODO: add a private data property of type array of T
+    private data: T[] = [];
+
+    constructor(...items: T[]) {
+      this.data.push(...items);
+    }
+    // TODO: add a push method which takes an item of type T as a parameter and adds it to the top of the stack
+    push(item: T) {
+      this.data.push(item);
+    }
+    // TODO: add a pop method which removes and returns the item from the top of the stack
+    pop(): T | undefined {
+      return this.data.pop();
+    }
+  }
+
   // TODO: create an instance of the Stack class with number type
+  const stack = new Stack<number>();
   // TODO: push two numbers to the stack
+  stack.push(1);
+  stack.push(6);
+
   // TODO: pop an item from the stack and print it to console, calling toFixed method on it
+  console.log(stack.pop()?.toFixed());
+
   // TODO: create an instance of the Stack class with string type
+  const stringStack = new Stack<string>();
+
   // TODO: push two strings to the stack
+  stringStack.push('Elli');
+  stringStack.push('Lola');
+
   // TODO: pop an item from the stack and print it to console, calling toUpperCase method on it
+  console.log(stringStack.pop()?.toUpperCase());
 }
 // TODO: compile and run the code
 excercise11();
@@ -103,6 +129,7 @@ excercise12();
 // TODO: create a function which takes a string and returns a string with all vowels removed
 // Example: 'exception' -> 'xcptn', 'javascript' -> 'jvscrpt'
 export function removeAllVowels(str: string): string {
+  //test+
   const vowels: string[] = ['a', 'e', 'i', 'o', 'u', 'y'];
   let res: string = '';
   for (let i: number = 0; i <= str.length - 1; i++) {
@@ -117,6 +144,7 @@ console.log(removeAllVowels('javascript'));
 // TODO: create a function which takes an array of strings and returns the array of strings with all vowels removed
 // Example: ['abstraction', 'javascript', 'react'] -> ['bstrctn', 'jvscrpt', 'rct']
 export function removeVowelsFromArray(arr: string[]): string[] {
+  //test+
   const res: string[] = [];
   for (let i: number = 0; i <= arr.length - 1; i++) {
     res.push(removeAllVowels(arr[i]));
@@ -131,6 +159,7 @@ console.log(removeVowelsFromArray(['abstraction', 'javascript', 'react']));
 // polindrome is a word that is the same when read backwards
 // Example: 'abcba' is a palindrome, 'abc' is not a palindrome
 export function isPalindromeString(str: string): boolean {
+  //test+
   let reversed: string = '';
   for (let i: number = str.length - 1; i >= 0; i--) {
     reversed += str[i];
@@ -143,6 +172,7 @@ console.log(isPalindromeString('abc'));
 // TODO: create a function which takes any number of strings and returns array of strings that are polindromes
 // Example: ('abc', 'def', 'aba') -> ['aba']
 export function getPolindropesOnly(...arr: string[]): string[] {
+  //+test
   const res: string[] = [];
   for (let i: number = 0; i <= arr.length - 1; i++) {
     if (isPalindromeString(arr[i])) {
@@ -157,12 +187,36 @@ console.log(getPolindropesOnly('abc', 'defed', 'aba'));
 // TODO: create a function which takes an array of strings and returns the reversed array of reversed strings
 // Example: ['abc', 'def'] -> ['fed', 'cba']
 export function reverseArrayOfStrings(arr: string[]): string[] {
-  return arr.map((el) => el.split('').reverse().join('')).reverse();
+  //+test
+  function reverseString(str: string): string {
+    let reversed: string = '';
+    for (let i: number = str.length - 1; i >= 0; i--) {
+      reversed += str[i];
+    }
+    return reversed;
+  }
+  const reversed: string[] = [];
+  for (let i: number = arr.length - 1; i >= 0; i--) {
+    reversed.push(arr[i]);
+  }
+  const res: string[] = [];
+
+  for (let i: number = 0; i <= reversed.length - 1; i++) {
+    res.push(reverseString(reversed[i]));
+  }
+  return res;
+  //   return arr.map((el) => el.split('').reverse().join('')).reverse();
 }
-console.log(reverseArrayOfStrings(['abc', 'def']));
+console.log(reverseArrayOfStrings(['abc', 'def', 'lol', '15']));
 
 // TODO: create a function that takes n param, and generates a list of n random kyivstar phone numbers
 // Example: (097XXXXXXX)
-// export function generatePhoneNumbers() {}
-
+export function generatePhoneNumbers(n: number): string[] {
+  const res: string[] = [];
+  for (let i: number = 1; i <= n; i++) {
+    res.push(`(097${Math.random().toString().slice(2, 9)})`);
+  }
+  return res;
+}
+console.log(generatePhoneNumbers(5));
 // TODO: write unit-tests for the six functions above
