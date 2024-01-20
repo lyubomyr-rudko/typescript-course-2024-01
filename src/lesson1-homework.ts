@@ -51,16 +51,6 @@ function excercise3() {
 
   // TODO: create a for loop which adds numbers from n to m to result array
   // TODO: support case where m > n (reverse the order)
-  if (n <= m) {
-    for (let i = n; i <= m; i++) {
-      result.push(i);
-    }
-  } else {
-    for (let i = n; i >= m; i--) {
-      result.push(i);
-    }
-  }
-
   // TODO: print result array to console
   console.log(result);
 }
