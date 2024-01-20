@@ -79,7 +79,6 @@ function excercise8() {
   // TODO: call the function with product as a parameter
   // TODO: call the function with object literal as a parameter
   // TODO: try adding extra property to the object literal - observe the error
-  // TODO: fix the error with type assertion
 }
 // TODO: compile and run the code
 excercise8();
@@ -103,8 +102,9 @@ function excercise9() {
   // TODO: add a new properties `month` and `day` to the `Magazine` class (no need to validate month and day)
   // TODO: add constructor override to the Magazine class which takes four parameters - title, year, month and day
   // TODO: use super keyword to call the `Book` class constructor with title and year parameters
-  // TODO: add a method override `getInfo` to the `Magazine` class which prints the magazine info to console
+  // TODO: add a method override `getInfo` to the `Magazine` class
   // TODO: use super keyword to call the `getInfo` method of the `Book` class
+  // TODO: return the result of the `getInfo` method of the `Book` class and add month and day to the result
   // TODO: create a magazine object and call the method `getInfo`, print the result to console
   // TODO: call the inherited method `getAge` of the magazine object and print the result to console
 }
@@ -113,7 +113,7 @@ excercise9();
 
 // TODO: for excercise4 and excercise5 - copy and export those functions and create a test file for them, follwo this steps
 // 1. create file lesson2-homework.test.ts use src/index.test.ts as an example
-// 2. import functions from lesson2-homework.js
+// 2. import functions from lesson2-homework
 // 3. create a test for each function for this cases
 //   - distance between (1,1) and (4,5) should be 5
 //   - distance between (0,0) and (0,0) should be 0
@@ -132,3 +132,14 @@ function excerciseC() {}
 
 // TODO: create a function which takes an array of strings and returns the longest string
 function excerciseD() {}
+
+function distance(p1: [number, number], p2: [number, number]): number {
+  const x1 = 0; // TODO: replace with the first element of p1
+  const y1 = 0; // TODO: replace with the second element of p1
+  const x2 = 0; // TODO: replace with the first element of p2
+  const y2 = 0; // TODO: replace with the second element of p2
+  // TODO: calculate the distance
+  return 0;
+}
+
+export { distance };
