@@ -101,9 +101,15 @@ function lesson2() {
       this.y = y;
     }
 
-    print() {
-      console.log(`Point: ${this.x.toFixed(2)}, ${this.y.toFixed(2)}`);
+    getData(): string {
+      return `Point: ${this.x.toFixed(2)}, ${this.y.toFixed(2)}`;
     }
+  }
+
+  interface IPoint {
+    x: number;
+    y: number;
+    getData(): string;
   }
 
   class Point3D extends Point {
@@ -114,13 +120,16 @@ function lesson2() {
       this.z = z;
     }
 
-    print() {
-      console.log(
-        `Point: ${this.x.toFixed(2)}, ${this.y.toFixed(2)}, ${this.z.toFixed(
-          2,
-        )}`,
-      );
+    getData(): string {
+      const parentData = super.getData();
+      return `${parentData}, ${this.z.toFixed(2)}`;
     }
+  }
+
+  interface IPoint3D extends IPoint {
+    x: number;
+    y: number;
+    getData(): string;
   }
 
   const p1: Point = new Point(1, 2);
