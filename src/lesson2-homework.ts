@@ -218,6 +218,37 @@ excercise9();
 //   - distance between (1,1) and (1,2) should be 1
 // 4. run the tests with `npm run test`
 
+export function distance1(p1: [number, number], p2: [number, number]): number {
+  const x1 = p1[0];
+  const y1 = p1[1];
+  const x2 = p2[0];
+  const y2 = p2[1];
+  const distance = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+  return distance;
+}
+
+export function excercise4t(input: string): string {
+  return input.split('').reverse().join('');
+}
+
+// ex5
+type TPoint = {
+  x: number;
+  y: number;
+};
+const point: TPoint = { x: 1, y: 1 };
+const point3: TPoint = { x: 4, y: 5 };
+export function distance2(p1: TPoint, p2: TPoint): number {
+  const { x: x1, y: y1 } = p1;
+  const { x: x2, y: y2 } = p2;
+
+  return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+}
+
+export function excercise5t(input: string): string {
+  return input.split('').reverse().join('');
+}
+
 // Additional tasks - optional
 // TODO: create a function which takes any string and returns the string reversed
 function excerciseA() {}
