@@ -1,21 +1,5 @@
 /* eslint-disable */
-function lesson3preparation() {
-  // Compiler options
-  class Book {
-    #title: string;
-    #year: number;
-
-    constructor(title: any, year: any) {
-      this.#title = title;
-      this.#year = year;
-    }
-    getInfo() {
-      return `${this.#title} - ${this.#year}`;
-    }
-    getAge() {
-      return new Date().getFullYear() - this.#year;
-    }
-  }
+function lesson4preparation() {
   // Generics classes and functions
   class QueueOfStrings {
     private data: string[] = [];
