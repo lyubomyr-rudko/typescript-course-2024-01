@@ -2,18 +2,18 @@
 function lesson3preparation() {
   // Compiler options
   class Book {
-    #title: string;
-    #year: number;
+    title: string;
+    year: number;
 
     constructor(title: any, year: any) {
-      this.#title = title;
-      this.#year = year;
+      this.title = title;
+      this.year = year;
     }
     getInfo() {
-      return `${this.#title} - ${this.#year}`;
+      return `${this.title} - ${this.year}`;
     }
     getAge() {
-      return new Date().getFullYear() - this.#year;
+      return new Date().getFullYear() - this.year;
     }
   }
   // Generics classes and functions
