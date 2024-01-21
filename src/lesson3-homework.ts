@@ -69,7 +69,6 @@ function excercise11() {
 }
 // TODO: compile and run the code
 excercise11();
-
 // add type safety to the code which uses any
 // TODO: declare a type for user object, which has a name property of type string
 type User = {
@@ -96,7 +95,6 @@ function excercise12() {
 }
 // TODO: compile and run the code
 excercise12();
-
 // TODO: create a function which takes a string and returns a string with all vowels removed
 // Example: 'exception' -> 'xcptn', 'javascript' -> 'jvscrpt'
 export function removeAllVowels(input: string): string {
@@ -115,19 +113,16 @@ export function isPalindromeString(input: string): boolean {
   const reversed = input.split('').reverse().join('');
   return input === reversed;
 }
-
 // TODO: create a function which takes any number of strings and returns array of strings that are polindromes
 // Example: ('abc', 'def', 'aba') -> ['aba']
 export function getPolindromesOnly(...strings: string[]): string[] {
   return strings.filter(isPalindromeString);
 }
-
 // TODO: create a function which takes an array of strings and returns the reversed array of reversed strings
 // Example: ['abc', 'def'] -> ['fed', 'cba']
 export function reverseArrayOfStrings(strings: string[]): string[] {
   return strings.map(str => str.split('').reverse().join(''));
 }
-
 // TODO: create a function that takes n param, and generates a list of n random kyivstar phone numbers
 // Example: (097XXXXXXX)
 export function generatePhoneNumbers(n: number): string[] {
