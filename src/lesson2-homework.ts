@@ -114,23 +114,6 @@ function exercise7() {
   function map(arr: number[], fn: (num: number) => number): number[] {
     const result: number[] = [];
 
-    for (let i = 0; i < arr.length; i++) {
-      result.push(fn(arr[i]));
-    }
-    return result;
-  }
-
-  const numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
-  const double = (num: number): number => {
-    return num * 2;
-  };
-
-  const doubleNumbers = map(numbers, double);
-
-  console.log(`Original array:`, numbers);
-  console.log(`Double array`, doubleNumbers);
-}
-
 exercise7();
 
 // + exercise8
@@ -145,28 +128,7 @@ exercise7();
 // TODO: fix the error with type assertion
 // TODO: compile and run the code
 
-function exercise8() {
-  type User = {
-    name: string;
-  };
 
-  function printGreetings(user: User): void {
-    console.log(`Hello, ${user.name}!`);
-  }
-
-  type Product = {
-    name: string;
-    price: number;
-  };
-  const laptop: Product = {
-    name: `Laptop`,
-    price: 999.99,
-  };
-
-  printGreetings(laptop);
-  printGreetings({ name: `John` });
-  // printGreetings({ name: "John", age: 25 }); // Error: Object literal may only specify known properties
-  printGreetings({ name: `John`, age: 25 } as User);
 }
 
 exercise8();
@@ -257,7 +219,7 @@ exercise9();
 
 // + TODO: for exercise4 and exercise5 - copy and export those functions and create a test file for them, follwo this steps
 // 1. create file lesson2-homework.test.ts use src/index.test.ts as an example
-// 2. import functions from lesson2-homework.js
+// 2. import functions from lesson2-homework
 // 3. create a test for each function for this cases
 //   - distance between (1,1) and (4,5) should be 5
 //   - distance between (0,0) and (0,0) should be 0
@@ -305,13 +267,4 @@ exercise9();
 
 // Additional tasks - optional
 // TODO: create a function which takes any string and returns the string reversed
-// function exerciseA() {}
-//
-// // TODO: create a function which takes an array of numbers and returns the sum of all numbers
-// function exerciseB() {}
-//
-// // TODO: create a function which takes an array of numbers and returns the average of all numbers
-// function exerciseC() {}
-//
-// // TODO: create a function which takes an array of strings and returns the longest string
-// function exerciseD() {}
+
