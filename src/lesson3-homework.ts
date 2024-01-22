@@ -131,7 +131,6 @@ function exercise12() {
 }
 exercise12();
 
-//
 // TODO: create a function which takes a string and returns a string with all vowels removed
 // Example: 'exception' -> 'xcptn', 'javascript' -> 'jvscrpt'
 export function removeAllVovels(input: string): string {
