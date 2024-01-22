@@ -1,5 +1,4 @@
 // TODO: remove this comment and the next line, make sure the code compiles
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 // try different target compiler options
 // + excercise10
