@@ -156,4 +156,4 @@ function lesson4preparation() {
   // Npm package publishing
   // async/await
 }
-lesson3preparation();
+lesson4preparation();
