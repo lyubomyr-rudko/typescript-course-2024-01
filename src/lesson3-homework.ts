@@ -137,12 +137,22 @@ exercise12();
 export function removeAllVovels(input: string): string {
   return input.replace(/[aeiouAEIOU]/g, '');
 }
+const input1 = 'exception';
+const result1 = removeAllVovels(input1);
+console.log(result1);
+
+const input2 = 'javascript';
+const result2 = removeAllVovels(input2);
+console.log(result2);
 
 // TODO: create a function which takes an array of strings and returns the array of strings with all vowels removed
 // Example: ['abstraction', 'javascript', 'react'] -> ['bstrctn', 'jvscrpt', 'rct']
 export function removeVowelsFromArray(arr: string[]): string[] {
   return arr.map((str) => removeAllVovels(str));
 }
+const inputArray = ['abstraction', 'javascript', 'react'];
+const resultArray = removeVowelsFromArray(inputArray);
+console.log(resultArray);
 
 // TODO: create a function that checks if a string is a palindrome
 // polindrome is a word that is the same when read backwards
@@ -153,17 +163,31 @@ export function isPalindromeString(input: string): boolean {
   return sanitizedInput === reversedInput;
 }
 
+const input3 = 'abcba';
+const result3 = isPalindromeString(input3);
+console.log(result3);
+
+const input4 = 'abc';
+const result4 = isPalindromeString(input4);
+console.log(result4);
+
 // TODO: create a function which takes any number of strings and returns array of strings that are polindromes
 // Example: ('abc', 'def', 'aba') -> ['aba']
 export function getPolindropesOnly(...args: string[]): string[] {
   return args.filter((str) => isPalindromeString(str));
 }
 
+const palindromes = getPolindropesOnly('abc', 'def', 'aba');
+console.log(palindromes);
+
 // TODO: create a function which takes an array of strings and returns the reversed array of reversed strings
 // Example: ['abc', 'def'] -> ['fed', 'cba']
 export function reverseArrayOfStrings(arr: string[]): string[] {
   return arr.map((str) => str.split('').reverse().join(''));
 }
+const inputArray1 = ['abc', 'def'];
+const reversedArray = reverseArrayOfStrings(inputArray1);
+console.log(reversedArray);
 
 // TODO: create a function that takes n param, and generates a list of n random kyivstar phone numbers
 // Example: (097XXXXXXX)
@@ -179,4 +203,8 @@ export function generatePhoneNumbers(n: number): string[] {
   }
   return phoneNumbers;
 }
+
+const generatedPhoneNumbers = generatePhoneNumbers(3);
+console.log(generatedPhoneNumbers);
+
 // TODO: write unit-tests for the six functions above
