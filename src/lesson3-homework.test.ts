@@ -40,11 +40,11 @@ describe('isPalindromeString', () => {
   it('isPalindromeString', () => {
     expect(isPalindromeString).toBeDefined();
   });
-  it('isPalindromeString', () => {
+  it('isPalindromeString1', () => {
     expect(isPalindromeString('tenizzinet')).toBe(true);
   });
 
-  it('isPalindromeString', () => {
+  it('isPalindromeString2', () => {
     expect(isPalindromeString('teniznet')).toBe(false);
   });
 });
@@ -53,7 +53,7 @@ describe('getPolindropesOnly', () => {
   it('getPolindropesOnly', () => {
     expect(getPolindropesOnly).toBeDefined();
   });
-  it('getPolindropesOnly', () => {
+  it('getPolindropesOnly1', () => {
     expect(getPolindropesOnly('tenizzinet', 'abba', 'asdsa', 'qwe')).toEqual([
       'tenizzinet',
       'abba',
@@ -61,7 +61,7 @@ describe('getPolindropesOnly', () => {
     ]);
   });
 
-  it('getPolindropesOnly', () => {
+  it('getPolindropesOnly2', () => {
     expect(getPolindropesOnly('123321', 'asd')).toEqual(['123321']);
   });
 });
@@ -70,7 +70,7 @@ describe('reverseArrayOfStrings', () => {
   it('reverseArrayOfStrings', () => {
     expect(reverseArrayOfStrings).toBeDefined();
   });
-  it('reverseArrayOfStrings', () => {
+  it('reverseArrayOfStrings1', () => {
     expect(reverseArrayOfStrings(['first', 'second', 'next', 'last'])).toEqual([
       'last',
       'next',
@@ -78,7 +78,7 @@ describe('reverseArrayOfStrings', () => {
       'first',
     ]);
   });
-  it('reverseArrayOfStrings', () => {
+  it('reverseArrayOfStrings2', () => {
     expect(reverseArrayOfStrings(['1', '2', '3'])).toEqual(['3', '2', '1']);
   });
 });
@@ -88,7 +88,7 @@ describe('generatePhoneNumbers', () => {
     expect(generatePhoneNumbers).toBeDefined();
   });
 
-  let count: number = 10;
+  const count: number = 10;
   let phoneNumbers: string[] = [];
 
   beforeAll(() => {

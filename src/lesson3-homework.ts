@@ -6,6 +6,7 @@ const logError = 'color: red';
 /**
  *  ERR in browser -  ReferenceError: exports is not defined
  *  BUT work under node - node ./lib/lesson3-homework.js
+can use @typescript-eslint/no-explicit-any
  */
 
 // try different target compiler options
@@ -117,10 +118,14 @@ function excercise12() {
   type TUser = {
     name: string;
   };
+
+  type TUsersFetch = {
+    users: TUser[];
+  };
   // TODO: fix the fetchUsers function to return an array of users, not any type
   function fetchUsers(): TUser[] {
     // TODO: add type safety to the data variable, annotate it with the type of users
-    const data: any = JSON.parse(
+    const data: TUsersFetch = JSON.parse(
       '{"users": [{"name": "John"}, {"name": "Jane"}]}',
     );
     const errReturn: TUser = { name: 'Error name type' };
@@ -128,7 +133,7 @@ function excercise12() {
     if (Array.isArray(data.users)) {
       const errField: number[] = [];
 
-      data.users.forEach((data: any, i: number) => {
+      data.users.forEach((data: TUser, i: number) => {
         if (typeof data.name !== 'string') {
           console.log(`%cError data type name in index: ${i}`, logError);
           errField.push(i);
@@ -191,7 +196,7 @@ console.log(
 // polindrome is a word that is the same when read backwards
 // Example: 'abcba' is a palindrome, 'abc' is not a palindrome
 export function isPalindromeString(input: string): boolean {
-  let halfLength: number = Math.trunc(input.length / 2);
+  const halfLength: number = Math.trunc(input.length / 2);
 
   for (let i = 0; i < halfLength; i++) {
     if (input[i] !== input[input.length - i - 1]) return false;
@@ -226,7 +231,7 @@ export function getPolindropesOnly(...input: string[]): string[] {
   const polindrome: string[] = input.filter((data) => testPalindrome(data));
 
   function testPalindrome(input: string): boolean {
-    let halfLength: number = Math.trunc(input.length / 2);
+    const halfLength: number = Math.trunc(input.length / 2);
 
     for (let i = 0; i < halfLength; i++) {
       if (input[i] !== input[input.length - i - 1]) return false;
@@ -248,7 +253,7 @@ console.log(
 export function reverseArrayOfStrings(input: string[]): string[] {
   // return input.reverse(); // most simply
   // most handle work
-  let reversed: string[] = [];
+  const reversed: string[] = [];
   input.forEach((data) => reversed.unshift(data));
   return reversed;
 }
@@ -265,13 +270,13 @@ export function generatePhoneNumbers(count: number): string[] {
   // List of Kyivstar prefixes
   const prefixes = ['097', '098', '096'];
 
-  function generatePhoneNumber(prefix: string, exist: string[]): string | any {
+  function generatePhoneNumber(prefix: string, exist: string[]): string {
     let number: string = prefix;
     for (let i = 0; i < 7; i++) {
       number += Math.floor(Math.random() * 10).toString();
     }
     if (!exist.includes(number)) return number;
-    else generatePhoneNumber(prefix, exist);
+    else return generatePhoneNumber(prefix, exist);
   }
 
   const phoneNumbers: string[] = [];
