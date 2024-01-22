@@ -11,6 +11,7 @@ excercise13A();
 
 // TODO: create a generic function that takes an array of items, and number of items, and generates a chunked array
 // TODO: for example, if the input array is [1, 2, 3, 4, 5] and the number of items is 2, the output should be [[1, 2], [3, 4], [5]]
+// [1, 2, 3, 4, 5, 6, 7, 8, 9], 3 => [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 function excercise13B() {}
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of arrays to it, and different number of items
@@ -88,7 +89,7 @@ function exercise17() {
   // TODO: create ./index.ts file with the following code
   // export const add = (a: number, b: number) => a + b;
   // TODO: run npm run build to compile the code > npm run build
-  // TODO: add your changes and push
+  // TODO: add your changes and push to git repository
   // TODO: run publish command > npm publish --access=public
   // TODO: check your package on npmjs.com
   // TODO: update your package version > npm version patch

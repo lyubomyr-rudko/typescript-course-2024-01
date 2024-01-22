@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import { sum, max } from './index';
+import { sum, max, getRandomNumber } from './index';
 import { distance } from './lesson2-homework';
 
 describe('sum', () => {
@@ -33,5 +33,33 @@ describe('max', () => {
 describe('distance', () => {
   it('should be defined', () => {
     expect(distance).toBeDefined();
+  });
+});
+
+describe('getRandomNumber', () => {
+  beforeAll(() => {
+    const mock = jest
+      .fn()
+      .mockReturnValueOnce(0.5)
+      .mockReturnValueOnce(0.2)
+      .mockReturnValueOnce(0.8);
+
+    // for (let i = 0; i < 10; i++) {
+    //   mock.mockReturnValueOnce(0.5);
+    //   mock.mockReturnValueOnce(0.2);
+    //   mock.mockReturnValueOnce(0.8);
+    // }
+
+    Math.random = mock;
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
+  it('should return random number', () => {
+    expect(getRandomNumber()).toBe(5);
+    expect(getRandomNumber()).toBe(2);
+    expect(getRandomNumber()).toBe(8);
   });
 });
