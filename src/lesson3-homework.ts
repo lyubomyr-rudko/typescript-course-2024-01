@@ -145,6 +145,7 @@ console.log(result2);
 
 // TODO: create a function which takes an array of strings and returns the array of strings with all vowels removed
 // Example: ['abstraction', 'javascript', 'react'] -> ['bstrctn', 'jvscrpt', 'rct']
+
 export function removeVowelsFromArray(arr: string[]): string[] {
   return arr.map((str) => removeAllVovels(str));
 }
