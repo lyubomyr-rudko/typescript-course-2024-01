@@ -1,13 +1,62 @@
 // create a generic function which takes an array of items of type T and returns the random item from the array
 function excercise13A() {
   // TODO: create a function that takes an array of numbers and returns a random number from the array
+  function randomFromArrayNumbers(input: number[]): number {
+    const random: number = Math.floor(Math.random() * input.length);
+    return input[random];
+  }
+  console.log(
+    'Random number from array [12,3,5,54,6,45,7]:\n',
+    randomFromArrayNumbers([12, 3, 5, 54, 6, 45, 7]),
+  );
+
   // TODO: create a function that takes an array of strings and returns a random string from the array
+  function randomFromArrayStrings(input: string[]): string {
+    const random: number = Math.floor(Math.random() * input.length);
+    return input[random];
+  }
+  console.log(
+    'Random string from array["qwerty", "asd", "Alice"]:\n',
+    randomFromArrayStrings(['qwerty', 'asd', 'Alice']),
+  );
+
   // TODO: create a function that takes an array of objects and returns a random object from the array
+  function randomObjectFromArray(input: object[]): object {
+    const random: number = Math.floor(Math.random() * input.length);
+    return input[random];
+  }
+  console.log(
+    'Random number from array [{name: "Stan"}, {name: "Alex"}, {name: "Helga"}]:\n',
+    randomObjectFromArray([
+      { name: 'Stan' },
+      { name: 'Alex' },
+      { name: 'Helga' },
+    ]),
+  );
   // TODO: observe the same structure of the functions above, and create a generic function which takes an array of items of type T and returns the random item from the array
+  function randomDataFromArray<T>(input: T[]): T {
+    const random: number = Math.floor(Math.random() * input.length);
+    return input[random];
+  }
+  console.log(
+    'Random number from array custun type data [{name: "Stan"}, "Alex", 123]:\n',
+    randomObjectFromArray([
+      { name: 'Stan' },
+      { name: 'Alex' },
+      { name: 'Helga' },
+    ]),
+  );
+
+  return {
+    randomFromArrayNumbers,
+    randomFromArrayStrings,
+    randomObjectFromArray,
+    randomDataFromArray,
+  };
 }
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of arrays to it
-excercise13A();
+export const moduleTest1 = excercise13A();
 
 // TODO: create a generic function that takes an array of items, and number of items, and generates a chunked array
 // TODO: for example, if the input array is [1, 2, 3, 4, 5] and the number of items is 2, the output should be [[1, 2], [3, 4], [5]]
