@@ -1,4 +1,6 @@
+import { add } from '@artem-kelioghlo/test-npm-package';
 // create a generic function which takes an array of items of type T and returns the random item from the array
+
 function excercise13A() {
   // TODO: create a function that takes an array of numbers and returns a random number from the array
   function getRandomNumberFromArray(numbers: number[]): number | undefined {
@@ -199,6 +201,7 @@ function exercise17() {
   // TODO: open/create another js project, install your package > npm install @yourusername/test-npm-package
   // TODO: add import statement to the code > import { add } from '@yourusername/test-npm-package';
   // TODO: use add function call in the code > console.log(add(1, 2));
+  console.log(add(1, 2));
   // TODO: compile and run the code
   // https://www.youtube.com/watch?v=J4b_T-qH3BY - how to publish npm package, in case you are stuck
 }
