@@ -1,19 +1,112 @@
 // create a generic function which takes an array of items of type T and returns the random item from the array
 function excercise13A() {
   // TODO: create a function that takes an array of numbers and returns a random number from the array
+  function getRandomNumberFromArray(numbers: number[]): number | undefined {
+    if (numbers.length === 0) {
+      return undefined;
+    }
+    return numbers[Math.floor(Math.random() * numbers.length)];
+  }
+  console.log(getRandomNumberFromArray([1, 2, 3, 4, 5]));
   // TODO: create a function that takes an array of strings and returns a random string from the array
+  function getRandomStringFromArray(strings: string[]): string | undefined {
+    if (strings.length === 0) {
+      return undefined;
+    }
+    return strings[Math.floor(Math.random() * strings.length)];
+  }
+  console.log(getRandomStringFromArray(['1', '2', '3', '4', '5']));
   // TODO: create a function that takes an array of objects and returns a random object from the array
+  type TUser = {
+    name: string;
+    age: number;
+  };
+  function getRandomObjectFromArray(objects: TUser[]): TUser | undefined {
+    if (objects.length === 0) {
+      return undefined;
+    }
+    return objects[Math.floor(Math.random() * objects.length)];
+  }
+  console.log(
+    getRandomObjectFromArray([
+      { name: 'artem', age: 26 },
+      { name: 'nick', age: 27 },
+    ]),
+  );
+
   // TODO: observe the same structure of the functions above, and create a generic function which takes an array of items of type T and returns the random item from the array
+  function getRandomItemFromArray<T>(items: T[]): T | undefined {
+    if (items.length === 0) {
+      return undefined;
+    }
+    return items[Math.floor(Math.random() * items.length)];
+  }
+  console.log(getRandomItemFromArray([1, 2, 3, 4, 5]));
 }
-// TODO: compile and run the code
+
+export function getRandomNumberFromArray(
+  numbers: number[],
+): number | undefined {
+  if (numbers.length === 0) {
+    return undefined;
+  }
+  return numbers[Math.floor(Math.random() * numbers.length)];
+}
+
+export function getRandomStringFromArray(
+  strings: string[],
+): string | undefined {
+  if (strings.length === 0) {
+    return undefined;
+  }
+  return strings[Math.floor(Math.random() * strings.length)];
+}
+
+type TUser = {
+  name: string;
+  age: number;
+};
+
+export function getRandomObjectFromArray(objects: TUser[]): TUser | undefined {
+  if (objects.length === 0) {
+    return undefined;
+  }
+  return objects[Math.floor(Math.random() * objects.length)];
+}
+
+export function getRandomItemFromArray<T>(items: T[]): T | undefined {
+  if (items.length === 0) {
+    return undefined;
+  }
+  return items[Math.floor(Math.random() * items.length)];
+}
 // TODO: write unit-tests for the function above, passing different types of arrays to it
 excercise13A();
 
 // TODO: create a generic function that takes an array of items, and number of items, and generates a chunked array
 // TODO: for example, if the input array is [1, 2, 3, 4, 5] and the number of items is 2, the output should be [[1, 2], [3, 4], [5]]
 // [1, 2, 3, 4, 5, 6, 7, 8, 9], 3 => [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-function excercise13B() {}
+function excercise13B() {
+  function chunkArray(items: number[], n: number): number[][] {
+    const result: number[][] = [];
+
+    for (let i = 0; i < items.length; i += n) {
+      result.push(items.slice(i, i + n));
+    }
+    return result;
+  }
+  console.log(chunkArray([1, 2, 3, 4, 5], 2));
+}
+
 // TODO: compile and run the code
+export function chunkArray(items: number[], n: number): number[][] {
+  const result: number[][] = [];
+
+  for (let i = 0; i < items.length; i += n) {
+    result.push(items.slice(i, i + n));
+  }
+  return result;
+}
 // TODO: write unit-tests for the function above, passing different types of arrays to it, and different number of items
 excercise13B();
 
@@ -26,7 +119,7 @@ function excercise14() {
   }
   const userAge = fetchUserAge();
   // TODO: uncomment the following code and add type assertion to fix the error
-  // console.log(userAge + 1);
+  console.log((userAge as number) + 1);
   console.log(userAge); // TODO remove this line
 }
 // TODO: compile and run the code
@@ -43,7 +136,7 @@ function excercise15() {
   const userAge = fetchUserAge();
   // TODO: run the code below and observe the result, explain why it is happening,
   // TODO: add type casting to the function above, convert the age to number, fix the errors
-  if (userAge === 16) {
+  if (Number(userAge) === 16) {
     console.log('Time to get your driver license');
   } else if (userAge > 16) {
     console.log('You are old enough to drive');
@@ -57,6 +150,14 @@ excercise15();
 // use type declarations to fix the comments in the code
 function excercise16() {
   // TODO: add code which uses process.env.NODE_ENV variable,
+  const mode = process.env.NODE_ENV;
+  if (mode === 'development') {
+    console.log('Работа в режиме разработки');
+  } else if (mode === 'production') {
+    console.log('Работа в режиме производства');
+  } else {
+    console.log('Работа в неизвестной среде');
+  }
   // TODO: try to compile and see the error
   // TODO: add type declaration for process.env.NODE_ENV variable in global.d.ts file
   // TODO: try to compile and see the error fixed
