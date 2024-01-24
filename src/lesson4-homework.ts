@@ -27,7 +27,10 @@ function excercise13A() {
   //   }
 
   // TODO: observe the same structure of the functions above, and create a generic function which takes an array of items of type T and returns the random item from the array
-  function getRandom<T>(arr: T[]): T {
+  function getRandom<T>(arr: T[]): T | undefined {
+    if (!arr.length) {
+      return;
+    }
     const i: number = Math.floor(Math.random() * arr.length);
     return arr[i];
   }
@@ -44,11 +47,18 @@ function excercise13A() {
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of arrays to it
 excercise13A();
+export function getRandom<T>(arr: T[]): T | undefined {
+  if (!arr.length) {
+    return;
+  }
+  const i: number = Math.floor(Math.random() * arr.length);
+  return arr[i];
+}
 
 // TODO: create a generic function that takes an array of items, and number of items, and generates a chunked array
 // TODO: for example, if the input array is [1, 2, 3, 4, 5] and the number of items is 2, the output should be [[1, 2], [3, 4], [5]]
 // [1, 2, 3, 4, 5, 6, 7, 8, 9], 3 => [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-export function excercise13B<T>(arr: T[], n: number): T[][] {
+export function chunkedArr<T>(arr: T[], n: number): T[][] {
   const res: T[][] = [];
   let smallArr: T[] = [];
   for (let i: number = 0; i <= arr?.length - 1; i++) {
@@ -63,7 +73,7 @@ export function excercise13B<T>(arr: T[], n: number): T[][] {
 
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of arrays to it, and different number of items
-console.log(excercise13B([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4));
+console.log(chunkedArr([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4));
 
 // use type assertions to fix the error in the code
 function excercise14() {
@@ -173,8 +183,3 @@ function excercise18() {
   //https://github.com/elzbthbrst/amazon-agency i have one made by tutorial
 }
 excercise18();
-
-export function getRandom<T>(arr: T[]): T {
-  const i: number = Math.floor(Math.random() * arr.length);
-  return arr[i];
-}
