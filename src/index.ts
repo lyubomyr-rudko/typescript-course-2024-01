@@ -14,4 +14,8 @@ const max = (...nums: number[]): number => {
   return result;
 };
 
+export function getRandomNumber() {
+  return Math.floor(Math.random() * 10);
+}
+
 export { max };

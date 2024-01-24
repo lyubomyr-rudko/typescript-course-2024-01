@@ -153,13 +153,6 @@ function lesson3() {
   }
   console.log(x2);
   //   q3.push('1'); // error
-
-  // generic functions
-  // type assertions
-  // type casting
-  // modules
-  // type declarations
-  // creating react with typescript
 }
 
 export default lesson3;
