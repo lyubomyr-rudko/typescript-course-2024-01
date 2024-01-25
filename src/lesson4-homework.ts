@@ -1,21 +1,63 @@
 // create a generic function which takes an array of items of type T and returns the random item from the array
 function excercise13A() {
   // TODO: create a function that takes an array of numbers and returns a random number from the array
+  function randomNumberFromArray(arr: number[]): number {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
   // TODO: create a function that takes an array of strings and returns a random string from the array
+  function randomStringFromArray(arr: string[]): string {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
   // TODO: create a function that takes an array of objects and returns a random object from the array
+  function randomObjectFromArray(arr: any) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
   // TODO: observe the same structure of the functions above, and create a generic function which takes an array of items of type T and returns the random item from the array
+  function randomItemFromArray<T>(arr: Array<T>) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+  console.log(randomItemFromArray([5, 8, 6]));
+  console.log(randomItemFromArray(['hi', 'hello']));
+  console.log(randomItemFromArray([{ day: 1 }, { day: 2 }]));
+  console.log(randomItemFromArray([5, 'hi', { name: 'Yulia' }]));
 }
 // TODO: compile and run the code
-// TODO: write unit-tests for the function above, passing different types of arrays to it
+
 excercise13A();
+// TODO: write unit-tests for the function above, passing different types of arrays to it
+export function randomItemFromArray<T>(arr: Array<T>) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+console.log(randomItemFromArray([5, 8, 6]));
+console.log(randomItemFromArray(['hi', 'hello']));
+console.log(randomItemFromArray([{ day: 1 }, { day: 2 }]));
+console.log(randomItemFromArray([5, 'hi', { name: 'Yulia' }]));
 
 // TODO: create a generic function that takes an array of items, and number of items, and generates a chunked array
 // TODO: for example, if the input array is [1, 2, 3, 4, 5] and the number of items is 2, the output should be [[1, 2], [3, 4], [5]]
 // [1, 2, 3, 4, 5, 6, 7, 8, 9], 3 => [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-function excercise13B() {}
+function excercise13B() {
+  function chunk<T>(array: Array<T>, size: number) {
+    const chunkedArray = [];
+    for (let i = 0; i < array.length; i += size) {
+      chunkedArray.push(array.slice(i, i + size));
+    }
+    return chunkedArray;
+  }
+  console.log(chunk([1, 2, 3, 4, 5, 6, 7, 8, 9], 3));
+}
 // TODO: compile and run the code
-// TODO: write unit-tests for the function above, passing different types of arrays to it, and different number of items
+
 excercise13B();
+// TODO: write unit-tests for the function above, passing different types of arrays to it, and different number of items
+export function chunk<T>(array: Array<T>, size: number) {
+  const chunkedArray = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunkedArray.push(array.slice(i, i + size));
+  }
+  return chunkedArray;
+}
+console.log(chunk([1, 2, 3, 4, 5, 6, 7, 8, 9], 8));
 
 // use type assertions to fix the error in the code
 function excercise14() {
@@ -26,8 +68,8 @@ function excercise14() {
   }
   const userAge = fetchUserAge();
   // TODO: uncomment the following code and add type assertion to fix the error
-  // console.log(userAge + 1);
-  console.log(userAge); // TODO remove this line
+  console.log((userAge as number) + 1);
+  // console.log(userAge); // TODO remove this line
 }
 // TODO: compile and run the code
 excercise14();
@@ -37,10 +79,9 @@ excercise14();
 function excercise15() {
   function fetchUserAge() {
     const responseText = '{"name": "John", "age": "16"}';
-
     return JSON.parse(responseText).age;
   }
-  const userAge = fetchUserAge();
+  const userAge: number = +fetchUserAge();
   // TODO: run the code below and observe the result, explain why it is happening,
   // TODO: add type casting to the function above, convert the age to number, fix the errors
   if (userAge === 16) {
@@ -57,6 +98,8 @@ excercise15();
 // use type declarations to fix the comments in the code
 function excercise16() {
   // TODO: add code which uses process.env.NODE_ENV variable,
+  const env = process.env.NODE_ENV;
+  console.log(env);
   // TODO: try to compile and see the error
   // TODO: add type declaration for process.env.NODE_ENV variable in global.d.ts file
   // TODO: try to compile and see the error fixed

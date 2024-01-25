@@ -1,3 +1,5 @@
+const { error } = require('console');
+
 /* eslint-env node */
 module.exports = {
   extends: [
@@ -17,6 +19,6 @@ module.exports = {
   },
   ignorePatterns: ['*.js'],
   rules: {
-    'prettier/prettier': 2,
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
   },
 };
