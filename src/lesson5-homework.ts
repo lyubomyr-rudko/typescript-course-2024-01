@@ -209,6 +209,19 @@ function exerciseA() {
 // TODO: write unit-tests for this code. Mock setTimeout function
 exerciseA();
 
+// TODO: write a function that for a given number n generates an array of numbers or strings
+// TODO: make sure you specify the return type of the function
+// TODO: if the number is divisible by 3, the array should contain 'Fizz' instead of the number
+// TODO: if the number is divisible by 5, the array should contain 'Buzz' instead of the number
+// TODO: if the number is divisible by 3 and 5, the array should contain 'FizzBuzz' instead of the number
+// Example: fizzBuzz(5) => [1, 2, 'Fizz', 4, 'Buzz']
+// Example: fizzBuzz(15) => [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']
+// TODO: write unit-tests for this function
+function excerciseB(n: number) {
+  return n; // fix/update the code here
+}
+excerciseB(5);
+
 // create react app with typescript
 function excerciseZ() {
   // TODO: push to github and share the link below
