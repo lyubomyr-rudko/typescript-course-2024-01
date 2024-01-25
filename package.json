@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "npx tsc --watch",
     "test:watch": "jest --watch",
@@ -27,6 +28,7 @@
     "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.11",
     "@types/lodash": "^4.14.202",
+    "@types/node": "^20.11.6",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
     "eslint": "^8.56.0",
@@ -40,6 +42,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@dihand79/test-npm-package": "^0.0.4",
     "@lyubomyr.rudko/demo": "^1.0.1",
     "lodash": "^4.17.21"
   }
