@@ -4,14 +4,17 @@ function excercise13A() {
   function randomNumberFromArray(arr: number[]): number {
     return arr[Math.floor(Math.random() * arr.length)];
   }
+  console.log(randomNumberFromArray([9, 4, 8, 5]));
   // TODO: create a function that takes an array of strings and returns a random string from the array
   function randomStringFromArray(arr: string[]): string {
     return arr[Math.floor(Math.random() * arr.length)];
   }
+  console.log(randomStringFromArray(['one', 'two', 'three']));
   // TODO: create a function that takes an array of objects and returns a random object from the array
-  function randomObjectFromArray(arr: any) {
+  function randomObjectFromArray(arr: { name: string }[]) {
     return arr[Math.floor(Math.random() * arr.length)];
   }
+  console.log(randomObjectFromArray([{ name: 'Yulia' }, { name: 'Oleg' }]));
   // TODO: observe the same structure of the functions above, and create a generic function which takes an array of items of type T and returns the random item from the array
   function randomItemFromArray<T>(arr: Array<T>) {
     return arr[Math.floor(Math.random() * arr.length)];
