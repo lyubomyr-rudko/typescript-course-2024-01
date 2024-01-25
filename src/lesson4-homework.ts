@@ -66,7 +66,7 @@ export const excercise13ATest = excercise13A();
 
 function excercise13B() {
   function genChanks<T>(arr: T[], subArraySize: number): T[][] {
-    let resChanks: T[][] = [];
+    const resChanks: T[][] = [];
     let subArray: T[] = [];
     arr.forEach((el, i) => {
       if (arr.length === 0) {
