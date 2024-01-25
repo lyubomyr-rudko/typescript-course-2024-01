@@ -29,13 +29,15 @@ export function excercise13A() {
   }
 
   // TODO: observe the same structure of the functions above, and create a generic function which takes an array of items of type T and returns the random item from the array
-  function getRandomItem<T>(arr: T[]): T {
+  function getRandomItem<T>(arr: T[]): T | undefined {
     const index: number = Math.floor(Math.random() * arr.length);
 
     return arr[index];
   }
 
   const resultItem1 = getRandomItem<number>([1, 2, 3, 4, 5]);
+  console.log(resultItem1);
+
   const resultItem2 = getRandomItem<string>(['1', '2', '3', '4', '5']);
 
   const resultItem3 = getRandomItem<TObj>([
@@ -55,7 +57,7 @@ excercise13A();
 // TODO: create a generic function that takes an array of items, and number of items, and generates a chunked array
 // TODO: for example, if the input array is [1, 2, 3, 4, 5] and the number of items is 2, the output should be [[1, 2], [3, 4], [5]]
 // [1, 2, 3, 4, 5, 6, 7, 8, 9], 3 => [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-function excercise13B() {
+export function excercise13B() {
   function chunkArray<T>(arr: T[], n: number): T[][] {
     const result: T[][] = [];
 
@@ -65,6 +67,10 @@ function excercise13B() {
 
     return result;
   }
+
+  return {
+    chunkArray,
+  };
 
   const res1 = chunkArray<number>([1, 2, 3, 4, 5, 6, 7, 8, 9], 3);
 }
