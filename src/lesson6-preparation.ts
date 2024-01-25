@@ -9,6 +9,7 @@
 // Interface Declaration Merging
 // implements keyword
 // Interfaces vs Type Aliases
+// React with Typescript - component props
 
 // Q/A
 
@@ -489,5 +490,6 @@ function interfacesVsTypeAliases() {
   // interface Point { y: number; }
   // const point: Point = { x: 1, y: 2 };
 }
-
 interfacesVsTypeAliases();
+
+// React with Typescript - component props
