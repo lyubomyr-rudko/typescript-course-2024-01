@@ -1,0 +1,3 @@
+// declare const mode: string | undefined = process.env.NODE_ENV;
+//установил npm i @types/node
+// declare module 'types/node';
