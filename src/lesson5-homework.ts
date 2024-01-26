@@ -272,6 +272,7 @@ generateArrOfNumAndStr(5);
 // create react app with typescript
 function excerciseZ() {
   // TODO: push to github and share the link below
+  //   https://github.com/elzbthbrst/vite-react-ts__hillel
 }
 excerciseZ();
 
