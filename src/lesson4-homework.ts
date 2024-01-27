@@ -1,21 +1,55 @@
+import { chunk } from 'lodash';
+import validator from 'validator';
+
 // create a generic function which takes an array of items of type T and returns the random item from the array
-function excercise13A() {
-  // TODO: create a function that takes an array of numbers and returns a random number from the array
-  // TODO: create a function that takes an array of strings and returns a random string from the array
-  // TODO: create a function that takes an array of objects and returns a random object from the array
-  // TODO: observe the same structure of the functions above, and create a generic function which takes an array of items of type T and returns the random item from the array
+
+// TODO: create a function that takes an array of numbers and returns a random number from the array
+// TODO: create a function that takes an array of strings and returns a random string from the array
+// TODO: create a function that takes an array of objects and returns a random object from the array
+// TODO: observe the same structure of the functions above, and create a generic function which takes an array of items of type T and returns the random item from the array
+export function excercise13A<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
+// console.log(excercise13A([2, 54, 67, 3, 12, 32, 0, -4. 18]));
+// console.log(
+//   excercise13A(['Testing', 'Developing', 'Moving', 'Learning', 'Resting']),
+// );
+// console.log(
+//   excercise13A([
+//     { name: 'John', age: 43 },
+//     { name: 'Smit', age: 18 },
+//     { name: 'Valery', age: 26 },
+//     { name: 'Boris', age: 56 },
+//   ]),
+// );
+
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of arrays to it
-excercise13A();
+// excercise13A();
 
 // TODO: create a generic function that takes an array of items, and number of items, and generates a chunked array
 // TODO: for example, if the input array is [1, 2, 3, 4, 5] and the number of items is 2, the output should be [[1, 2], [3, 4], [5]]
 // [1, 2, 3, 4, 5, 6, 7, 8, 9], 3 => [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-function excercise13B() {}
+export function excercise13B<T>(arr: T[], count: number): T[][] {
+  return chunk(arr, count);
+}
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of arrays to it, and different number of items
-excercise13B();
+// console.log(excercise13B([1, 2, 3, 4, 5, 6, 7, 8, 9], 3));
+// console.log(
+//   excercise13B(['Testing', 'Developing', 'Moving', 'Learning', 'Resting'], 2),
+// );
+// console.log(
+//   excercise13B(
+//     [
+//       { name: 'John', age: 43 },
+//       { name: 'Smit', age: 18 },
+//       { name: 'Valery', age: 26 },
+//       { name: 'Boris', age: 56 },
+//     ],
+//     1,
+//   ),
+// );
 
 // use type assertions to fix the error in the code
 function excercise14() {
@@ -26,8 +60,8 @@ function excercise14() {
   }
   const userAge = fetchUserAge();
   // TODO: uncomment the following code and add type assertion to fix the error
-  // console.log(userAge + 1);
-  console.log(userAge); // TODO remove this line
+  console.log((userAge as number) + 1);
+  // console.log(userAge); // TODO remove this line
 }
 // TODO: compile and run the code
 excercise14();
@@ -35,12 +69,12 @@ excercise14();
 // use type casting to fix the mistake in the code
 // run the code before and after adding type casting to see the difference
 function excercise15() {
-  function fetchUserAge() {
+  function fetchUserAge(): unknown {
     const responseText = '{"name": "John", "age": "16"}';
 
     return JSON.parse(responseText).age;
   }
-  const userAge = fetchUserAge();
+  const userAge = Number(fetchUserAge());
   // TODO: run the code below and observe the result, explain why it is happening,
   // TODO: add type casting to the function above, convert the age to number, fix the errors
   if (userAge === 16) {
@@ -60,9 +94,11 @@ function excercise16() {
   // TODO: try to compile and see the error
   // TODO: add type declaration for process.env.NODE_ENV variable in global.d.ts file
   // TODO: try to compile and see the error fixed
-  // TODO: rename global.d.ts to global.d.ts.disabled file, copile and see the error again
+  // TODO: rename global.d.ts to global.d.ts.disabled file, compile and see the error again
   // TODO: install type declarations from error message -  @types/node
   // NOTE: Remember - most of the times type declaration packages should always have the same name as the package name on npm, but prefixed with @types/
+
+  console.log(validator.isEmail('walerik2848@gmail.com'));
 }
 // TODO: compile and run the code
 excercise16();

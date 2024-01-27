@@ -41,6 +41,8 @@
   },
   "dependencies": {
     "@lyubomyr.rudko/demo": "^1.0.1",
-    "lodash": "^4.17.21"
+    "axios": "^1.6.6",
+    "lodash": "^4.17.21",
+    "validator": "^13.11.0"
   }
 }
