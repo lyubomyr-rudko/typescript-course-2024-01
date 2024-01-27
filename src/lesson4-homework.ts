@@ -171,9 +171,3 @@ function exercise17() {
   // https://www.youtube.com/watch?v=J4b_T-qH3BY - how to publish npm package, in case you are stuck
 }
 exercise17();
-
-// create react app with typescript
-function excercise18() {
-  //
-}
-excercise18();
