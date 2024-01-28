@@ -47,9 +47,9 @@ function exercise19() {
     name: string;
     width: number;
     height: number;
-    color: string;
-    os: string;
-    space: number;
+    color?: string;
+    os?: string;
+    space?: number;
   };
 
   const widget: TWidget = {
@@ -64,28 +64,31 @@ function exercise19() {
 
   // TODO: uncomment the code below and update the type definition to fix compile time error
 
-  // const widgetWithSize: TWidget = {
-  //   name: 'widget',
-  //   width: 10,
-  //   height: 20,
-  //   color: 'red',
-  //   space: 100,
-  // }
+  const widgetWithSize: TWidget = {
+    name: 'widget',
+    width: 10,
+    height: 20,
+    color: 'red',
+    space: 100,
+  };
 
-  // const desktopWidget:TWidget = {
-  //   name: 'widget',
-  //   width: 10,
-  //   height: 20,
-  //   os: 'windows',
-  //   space: 100,
-  // }
+  const desktopWidget: TWidget = {
+    name: 'widget',
+    width: 10,
+    height: 20,
+    os: 'windows',
+    space: 100,
+  };
 
   // TODO: print the result to console
+  console.log(widgetWithSize);
+  console.log(desktopWidget);
 }
+
 // TODO: compile and run the code
 exercise19();
 
-// use uniton types to replace unknown type for compile time type checking
+// use union types to replace unknown type for compile time type checking
 function exercise20() {
   function padLeft(value: string, n: unknown) {
     // TODO: if n is a number, pad the string with spaces (append `n` spaces to the left of the `value` string)
