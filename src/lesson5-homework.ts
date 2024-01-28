@@ -107,35 +107,61 @@ function exercise20() {
   // @ts-expect-error
   console.log(padLeft('hello', true));
 }
+
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of values to it (need to export the function first)
 exercise20();
 
 // use literal types for type checking
-function exercise21() {
-  // TODO: define rock, paper, scissors literal type and assign it to TMove type
-  // TODO: add type check to the function below
-  function rockPaperSizorsVins(me: unknown, other: unknown) {
-    // TODO: add checks for rock, paper, scissors
-    // TODO: return false if me is rock and other is paper
-    // TODO: return false if me is paper and other is scissors
-    // TODO: return false if me is scissors and other is rock
+// function exercise21() {
+//   // TODO: define rock, paper, scissors literal type and assign it to TMove type
+//   // TODO: add type check to the function below
+//   function rockPaperSizorsVins(me: unknown, other: unknown) {
+//     // TODO: add checks for rock, paper, scissors
+//     // TODO: return false if me is rock and other is paper
+//     // TODO: return false if me is paper and other is scissors
+//     // TODO: return false if me is scissors and other is rock
+//
+//     console.log(me, other); // TODO: remove this line
+//
+//     return true;
+//   }
+//
+//   console.log(rockPaperSizorsVins('rock', 'paper')); // false
+//   console.log(rockPaperSizorsVins('paper', 'scissors')); // false
+//   console.log(rockPaperSizorsVins('scissors', 'rock')); // false
+//   console.log(rockPaperSizorsVins('rock', 'scissors')); // true
+//   // TODO: make sure that the following calls are not allowed
+//   console.log(rockPaperSizorsVins('papapaper', 'scissors')); // true - no type check
+// }
+//
+// // TODO: compile and run the code
+// // TODO: write unit-tests for the function above, passing different types of values to it (need to export the function first)
+// exercise21();
 
-    console.log(me, other); // TODO: remove this line
+// use literal types for type checking
+function exercise21() {
+  type TMove = 'rock' | 'paper' | 'scissors';
+
+  function rockPaperSizorsVins(me: TMove, other: TMove) {
+    if (me === 'rock' && other === 'paper') {
+      return false;
+    } else if (me === 'paper' && other === 'scissors') {
+      return false;
+    } else if (me === 'scissors' && other === 'rock') {
+      return false;
+    }
 
     return true;
   }
 
-  console.log(rockPaperSizorsVins('rock', 'paper')); // false
-  console.log(rockPaperSizorsVins('paper', 'scissors')); // false
-  console.log(rockPaperSizorsVins('scissors', 'rock')); // false
-  console.log(rockPaperSizorsVins('rock', 'scissors')); // true
-  // TODO: make sure that the following calls are not allowed
-  console.log(rockPaperSizorsVins('papapaper', 'scissors')); // true - no type check
+  console.log(rockPaperSizorsVins('rock', 'paper'));
+  console.log(rockPaperSizorsVins('paper', 'scissors'));
+  console.log(rockPaperSizorsVins('scissors', 'rock'));
+  console.log(rockPaperSizorsVins('rock', 'scissors'));
+  // console.log(rockPaperSizorsVins('papapaper', 'scissors'));
 }
 
-// TODO: compile and run the code
-// TODO: write unit-tests for the function above, passing different types of values to it (need to export the function first)
 exercise21();
 
 // use intersection types to avoid code duplication
