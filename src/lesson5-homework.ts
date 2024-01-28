@@ -294,8 +294,8 @@ export function excerciseB(n: number): TStringNumber[] {
 console.log(excerciseB(5));
 
 // create react app with typescript
-function excerciseZ(): string {
+function excerciseZ(): void {
   // TODO: push to github and share the link below
-  return 'link';
+  console.log('https://github.com/valerii-shkliar/react-app');
 }
 excerciseZ();
