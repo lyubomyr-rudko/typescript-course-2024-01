@@ -40,7 +40,9 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@danil.fomchik/test-npm-package": "^1.0.1",
     "@lyubomyr.rudko/demo": "^1.0.1",
+    "axios": "^1.6.5",
     "lodash": "^4.17.21"
   }
 }
