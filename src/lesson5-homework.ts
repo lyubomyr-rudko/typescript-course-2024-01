@@ -90,16 +90,22 @@ exercise19();
 
 // use union types to replace unknown type for compile time type checking
 function exercise20() {
-  function padLeft(value: string, n: unknown) {
+  function padLeft(value: string, n: number | string) {
     // TODO: if n is a number, pad the string with spaces (append `n` spaces to the left of the `value` string)
     // TODO: if n is a string, pad the string with the given string (append `n` to the left of the `value` string)
-
-    return (n as string) + value; // TODO: return the padded string
+    if (typeof n === 'number') {
+      return ' '.repeat(n) + value;
+    } else {
+      return n + value;
+    }
   }
 
-  console.log(padLeft('hello', 4)); // '    hello'
-  console.log(padLeft('hello', 'abc')); // 'abchello'
-  console.log(padLeft('hello', true)); // TODO: add compile time error
+  console.log(padLeft('hello', 4));
+  console.log(padLeft('hello', 'abc'));
+  // TODO: add compile time error
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  console.log(padLeft('hello', true));
 }
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of values to it (need to export the function first)
@@ -119,6 +125,7 @@ function exercise21() {
 
     return true;
   }
+
   console.log(rockPaperSizorsVins('rock', 'paper')); // false
   console.log(rockPaperSizorsVins('paper', 'scissors')); // false
   console.log(rockPaperSizorsVins('scissors', 'rock')); // false
@@ -126,6 +133,7 @@ function exercise21() {
   // TODO: make sure that the following calls are not allowed
   console.log(rockPaperSizorsVins('papapaper', 'scissors')); // true - no type check
 }
+
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of values to it (need to export the function first)
 exercise21();
@@ -218,6 +226,7 @@ function exercise22() {
   );
   // TODO: print the result to console
 }
+
 // TODO: compile and run the code
 exercise22();
 
@@ -236,8 +245,10 @@ function exerciseA() {
       }, 1000);
     }, 1000);
   }
+
   printMessagesWithTimeout();
 }
+
 // TODO: compile and run the code
 // TODO: write unit-tests for this code. Mock setTimeout function
 exerciseA();
@@ -253,10 +264,12 @@ exerciseA();
 function excerciseB(n: number) {
   return n; // fix/update the code here
 }
+
 excerciseB(5);
 
 // create react app with typescript
 function excerciseZ() {
   // TODO: push to github and share the link below
 }
+
 excerciseZ();
