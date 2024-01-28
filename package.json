@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@lyubomyr.rudko/demo": "^1.0.1",
+    "express": "^4.18.2",
     "lodash": "^4.17.21"
   }
 }

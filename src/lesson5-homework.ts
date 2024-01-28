@@ -1,14 +1,43 @@
 // add readonly modifier to prevent props reassignment
 
 function exercise18() {
-  // TODO: define class Student with properties name, age, studentId
-  // TODO: add constructor to initialize the properties
-  // TODO: add method printStudent to print the student info to console
+  class Student {
+    // TODO: define class Student with properties name, age, studentId
+    constructor(
+      public readonly name: string,
+      public readonly age: number,
+      public readonly studentId: string,
+    ) {
+      // TODO: add constructor to initialize the properties
+      this.name = name;
+      this.age = age;
+      this.studentId = studentId;
+    }
+
+    // TODO: add method printStudent to print the student info to console
+    printStudent(): void {
+      console.log(
+        `Name: ${this.name}, Age: ${this.age}, Student ID: ${this.studentId}`,
+      );
+    }
+  }
+
   // TODO: create an instance of the class Student
+  const student = new Student('John Doe', 20, '7777777');
+
   // TODO: print the student info to console
+  student.printStudent();
+
   // TODO: try to change the studentId property
+  // compilation error: student.studentId = "6666666";
+
   // TODO: change the studentId property to readonly, make sure that changing the property is not allowed
+  // Attempting to change the studentId property will result in a compilation error
+  // because the property is marked as readonly.
+
+  console.log(`Student ID: ${student.studentId}`);
 }
+
 // TODO: compile and run the code
 exercise18();
 
