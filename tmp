@@ -1,0 +1,60 @@
+/***
+ *
+ *   to do test
+ *
+ */
+//  TODO FINISH
+// describe('exerciseATest', () => {
+//   const printMessagesWithTimeout = exerciseATest;
+
+//
+// beforeAll(() => {
+// jest.useFakeTimers();
+// jest.spyOn(global, 'setTimeout');
+// setTimeout = jest
+//     .fn()
+//     .mockRejectedValueOnce('11')
+//     .mockRejectedValueOnce('12')
+//     .mockRejectedValueOnce('13');
+// });
+
+// afterAll(() => {
+// jest.useRealTimers();
+// jest.resetAllMocks();
+// });
+
+//
+// it('printMessagesWithTimeout is load', () => {
+//   expect(printMessagesWithTimeout).toBeDefined();
+// });
+
+//
+// test('printMessagesWithTimeout in 3time log', () => {
+//   jest.useFakeTimers();
+//   jest.spyOn(global, 'setTimeout');
+
+// setTimeout = jest
+//   .fn()
+//   .mockRejectedValueOnce('11')
+//   .mockRejectedValueOnce('12')
+//   .mockRejectedValueOnce('13');
+
+// jest.runAllTimers();
+// expect(() => setTimeout).toHaveBeenCalledTimes(3);
+// expect(setTimeout).toHaveBeenLastCalledWith(expect(setTimeout), 1000);
+
+// jest.useRealTimers();
+
+// printMessagesWithTimeout();
+// expect(setTimeout).toHaveBeenCalledTimes(1);
+// expect(printMessagesWithTimeout()).toHaveBeenLastCalledWith('1');
+// });
+
+// const cb = jest.fn();
+// jest.runOnlyPendingTimers();
+// it('printMessagesWithTimeout return 11,12,13 each 1sec', () => {
+//   expect(setTimeout).toHaveBeenCalledTimes(1)
+//   expect(printMessagesWithTimeout()).toBe('12');
+//   expect(printMessagesWithTimeout()).toBe('13');
+// });
+// });
