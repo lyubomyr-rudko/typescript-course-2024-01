@@ -164,34 +164,114 @@ function exercise21() {
 
 exercise21();
 
-// use intersection types to avoid code duplication
-function exercise22() {
-  // TODO: improve the types definitions to remove code duplication (for example to avoid declaring name property multiple times). Use intersection types
+// // use intersection types to avoid code duplication
+// function exercise22() {
+//   // TODO: improve the types definitions to remove code duplication (for example to avoid declaring name property multiple times). Use intersection types
+//
+//   type TWidget = {
+//     name: string;
+//   };
+//
+//   type TWidgetWithSize = {
+//     name: string;
+//     width: number;
+//     height: number;
+//     color: string;
+//   };
+//
+//   type TDesktopWidget = {
+//     name: string;
+//     width: number;
+//     height: number;
+//     color: string;
+//     os: string;
+//   };
+//
+//   type TMobileWidget = {
+//     name: string;
+//     width: number;
+//     height: number;
+//     color: string;
+//     space: number;
+//   };
+//
+//   const widget: TWidget = {
+//     name: 'widget',
+//   };
+//   const widgetWithSize: TWidgetWithSize = {
+//     name: 'widget',
+//     width: 10,
+//     height: 20,
+//     color: 'red',
+//   };
+//   const desktopWidget: TDesktopWidget = {
+//     name: 'widget',
+//     width: 10,
+//     height: 20,
+//     color: 'red',
+//     os: 'windows',
+//   };
+//   const mobileWidget: TMobileWidget = {
+//     name: 'widget',
+//     width: 10,
+//     height: 20,
+//     color: 'red',
+//     space: 100,
+//   };
+//   console.log(widget.name);
+//   console.log(
+//     widgetWithSize.name +
+//       ' ' +
+//       widgetWithSize.width +
+//       ' ' +
+//       widgetWithSize.height +
+//       ' ' +
+//       widgetWithSize.color,
+//   );
+//   console.log(
+//     desktopWidget.name +
+//       ' ' +
+//       desktopWidget.width +
+//       ' ' +
+//       desktopWidget.height +
+//       ' ' +
+//       desktopWidget.color +
+//       ' ' +
+//       desktopWidget.os,
+//   );
+//   console.log(
+//     mobileWidget.name +
+//       ' ' +
+//       mobileWidget.width +
+//       ' ' +
+//       mobileWidget.height +
+//       ' ' +
+//       mobileWidget.color +
+//       ' ' +
+//       mobileWidget.space,
+//   );
+//   // TODO: print the result to console
+// }
+//
+// // TODO: compile and run the code
+// exercise22();
 
+function exercise22() {
   type TWidget = {
     name: string;
   };
 
-  type TWidgetWithSize = {
-    name: string;
+  type TWidgetWithSize = TWidget & {
     width: number;
     height: number;
     color: string;
   };
 
-  type TDesktopWidget = {
-    name: string;
-    width: number;
-    height: number;
-    color: string;
+  type TDesktopWidget = TWidgetWithSize & {
     os: string;
   };
 
-  type TMobileWidget = {
-    name: string;
-    width: number;
-    height: number;
-    color: string;
+  type TMobileWidget = TWidgetWithSize & {
     space: number;
   };
 
@@ -218,42 +298,19 @@ function exercise22() {
     color: 'red',
     space: 100,
   };
+
   console.log(widget.name);
   console.log(
-    widgetWithSize.name +
-      ' ' +
-      widgetWithSize.width +
-      ' ' +
-      widgetWithSize.height +
-      ' ' +
-      widgetWithSize.color,
+    `${widgetWithSize.name} ${widgetWithSize.width} ${widgetWithSize.height} ${widgetWithSize.color}`,
   );
   console.log(
-    desktopWidget.name +
-      ' ' +
-      desktopWidget.width +
-      ' ' +
-      desktopWidget.height +
-      ' ' +
-      desktopWidget.color +
-      ' ' +
-      desktopWidget.os,
+    `${desktopWidget.name} ${desktopWidget.width} ${desktopWidget.height} ${desktopWidget.color} ${desktopWidget.os}`,
   );
   console.log(
-    mobileWidget.name +
-      ' ' +
-      mobileWidget.width +
-      ' ' +
-      mobileWidget.height +
-      ' ' +
-      mobileWidget.color +
-      ' ' +
-      mobileWidget.space,
+    `${mobileWidget.name} ${mobileWidget.width} ${mobileWidget.height} ${mobileWidget.color} ${mobileWidget.space}`,
   );
-  // TODO: print the result to console
 }
 
-// TODO: compile and run the code
 exercise22();
 
 // rewrite the code using async await
