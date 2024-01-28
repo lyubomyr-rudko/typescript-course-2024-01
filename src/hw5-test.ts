@@ -30,3 +30,18 @@ console.log(rockPaperSizorsVins('rock', 'paper'));
 console.log(rockPaperSizorsVins('paper', 'scissors'));
 console.log(rockPaperSizorsVins('scissors', 'rock'));
 console.log(rockPaperSizorsVins('rock', 'scissors'));
+
+export async function printMessagesWithTimeout(): Promise<void> {
+  async function delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  await delay(1000);
+  console.log('1');
+
+  await delay(1000);
+  console.log('2');
+
+  await delay(1000);
+  console.log('3');
+}

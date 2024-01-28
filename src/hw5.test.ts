@@ -1,5 +1,10 @@
 import { describe, expect, it } from '@jest/globals';
-import { padLeft, rockPaperSizorsVins } from './hw5-test';
+
+import {
+  padLeft,
+  rockPaperSizorsVins,
+  printMessagesWithTimeout,
+} from './hw5-test';
 
 describe('padLeft function', () => {
   it('should pad the string with spaces if n is a number', () => {
@@ -9,11 +14,6 @@ describe('padLeft function', () => {
   it('should pad the string with the given string if n is a string', () => {
     expect(padLeft('hello', 'abc')).toBe('abchello');
   });
-
-  // it('should throw a compile time error if n is neither a number nor a string', () => {
-  //   // @ts-expect-error: Testing error case with incorrect type
-  //   expect(() => padLeft('hello', true)).toThrowErrorMatchingSnapshot();
-  // });
 });
 
 describe('rockPaperSizorsVins function', () => {
@@ -44,5 +44,32 @@ describe('rockPaperSizorsVins function', () => {
 
   it('should return true when me and other are the same (scissors)', () => {
     expect(rockPaperSizorsVins('scissors', 'scissors')).toBe(true);
+  });
+});
+
+describe('printMessagesWithTimeout', () => {
+  it('should print messages with correct delay', async () => {
+    jest.setTimeout(5000);
+
+    const consoleSpy = jest.spyOn(console, 'log');
+    const setTimeoutSpy = jest.spyOn(global, 'setTimeout');
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setTimeoutSpy.mockImplementation((callback) => {
+      callback();
+      return 1;
+    });
+
+    await printMessagesWithTimeout();
+
+    expect(setTimeoutSpy).toHaveBeenCalledTimes(3);
+    expect(consoleSpy).toHaveBeenCalledWith('1');
+    expect(consoleSpy).toHaveBeenCalledWith('2');
+    expect(consoleSpy).toHaveBeenCalledWith('3');
+
+    consoleSpy.mockRestore();
+    setTimeoutSpy.mockRestore();
   });
 });
