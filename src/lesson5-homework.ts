@@ -263,7 +263,7 @@ function exerciseA() {
     console.log(await fetchData('2'));
     console.log(await fetchData('3'));
   }
-  printMessagesWithTimeout();
+  // printMessagesWithTimeout(); // off for test BUT if use = +2 time call console.log (per 5sec period)
 
   return printMessagesWithTimeout;
 }

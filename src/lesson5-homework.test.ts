@@ -4,7 +4,7 @@ import {
   exercise20Test,
   exercise21Test,
   TMove,
-  // exerciseATest,
+  exerciseATest,
   excerciseB,
 } from './lesson5-homework';
 
@@ -57,6 +57,45 @@ describe('exercise21Test', () => {
       'Invalid input: Arguments must be of type TMove',
     );
   });
+});
+
+//
+describe('exerciseATest', () => {
+  const printMessagesWithTimeout = exerciseATest;
+
+  it('printMessagesWithTimeout is load', () => {
+    expect(printMessagesWithTimeout).toBeDefined();
+  });
+
+  test('should print 3 console.log messages', async () => {
+    const logSpy = jest.spyOn(console, 'log'); // .mockImplementation(() => {})
+    await printMessagesWithTimeout();
+    expect(logSpy).toHaveBeenCalledTimes(3);
+    logSpy.mockRestore();
+  });
+
+  test('should print correct data in console.log', async () => {
+    const logSpy = jest.spyOn(console, 'log'); // .mockImplementation(() => {})
+    await printMessagesWithTimeout();
+    // Assert the data printed in console.log
+    expect(logSpy.mock.calls[0][0]).toBe('1');
+    expect(logSpy.mock.calls[1][0]).toBe('2');
+    expect(logSpy.mock.calls[2][0]).toBe('3');
+
+    logSpy.mockRestore();
+  });
+
+  test('should use mock setTimeout', async () => {
+    const setTimeoutMock = jest
+      .fn()
+      .mockReturnValueOnce('11')
+      .mockReturnValueOnce('12')
+      .mockReturnValueOnce('13');
+
+    expect(setTimeoutMock()).toBe('11');
+    expect(setTimeoutMock()).toBe('12');
+    expect(setTimeoutMock()).toBe('13');
+  }, 5000);
 });
 
 //
