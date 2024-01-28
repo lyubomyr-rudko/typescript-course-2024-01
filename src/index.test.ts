@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { sum, max, getRandomNumber } from './index';
 import { distance } from './lesson2-homework';
+import { padLeft, rockPaperSizorsVins } from './lesson5-homework';
 
 describe('sum', () => {
   it('should be defined', () => {
@@ -61,5 +62,28 @@ describe('getRandomNumber', () => {
     expect(getRandomNumber()).toBe(5);
     expect(getRandomNumber()).toBe(2);
     expect(getRandomNumber()).toBe(8);
+  });
+});
+describe('padLeft', () => {
+  it('should be defined', () => {
+    expect(padLeft).toBeDefined();
+  });
+  it('should return value', () => {
+    expect(padLeft('hello', 'abc')).toBe('abchello');
+  });
+  it('shuld return value', () => {
+    expect(padLeft('hello', 4)).toBe('    hello');
+  });
+});
+
+describe('rockPaper', () => {
+  it('should be defined', () => {
+    expect(rockPaperSizorsVins).toBeDefined();
+  });
+  it('return Boolean return false', () => {
+    expect(rockPaperSizorsVins('rock', 'paper')).toBeFalsy();
+  });
+  it('return Boolean return true', () => {
+    expect(rockPaperSizorsVins('rock', 'scissors')).toBeTruthy();
   });
 });
