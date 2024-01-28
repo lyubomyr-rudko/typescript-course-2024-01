@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals';
+// import { describe, expect, it } from '@jest/globals';
 import { sum, max, getRandomNumber } from './index';
 import { distance } from './lesson2-homework';
 
