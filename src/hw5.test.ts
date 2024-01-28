@@ -4,6 +4,7 @@ import {
   padLeft,
   rockPaperSizorsVins,
   printMessagesWithTimeout,
+  excerciseB,
 } from './hw5-test';
 
 describe('padLeft function', () => {
@@ -71,5 +72,64 @@ describe('printMessagesWithTimeout', () => {
 
     consoleSpy.mockRestore();
     setTimeoutSpy.mockRestore();
+  });
+});
+
+describe('excerciseB', () => {
+  it('should generate the correct array for n = 5', () => {
+    const result = excerciseB(5);
+    expect(result).toEqual([1, 2, 'Fizz', 4, 'Buzz']);
+  });
+
+  it('should generate the correct array for n = 15', () => {
+    const result = excerciseB(15);
+    expect(result).toEqual([
+      1,
+      2,
+      'Fizz',
+      4,
+      'Buzz',
+      'Fizz',
+      7,
+      8,
+      'Fizz',
+      'Buzz',
+      11,
+      'Fizz',
+      13,
+      14,
+      'FizzBuzz',
+    ]);
+  });
+
+  it('should generate an empty array for n = 0', () => {
+    const result = excerciseB(0);
+    expect(result).toEqual([]);
+  });
+
+  it('should generate the correct array for n = 20', () => {
+    const result = excerciseB(20);
+    expect(result).toEqual([
+      1,
+      2,
+      'Fizz',
+      4,
+      'Buzz',
+      'Fizz',
+      7,
+      8,
+      'Fizz',
+      'Buzz',
+      11,
+      'Fizz',
+      13,
+      14,
+      'FizzBuzz',
+      16,
+      17,
+      'Fizz',
+      19,
+      'Buzz',
+    ]);
   });
 });

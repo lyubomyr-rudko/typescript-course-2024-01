@@ -340,6 +340,7 @@ function exerciseA() {
   function delay(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+
   async function printMessagesWithTimeout() {
     await delay(1000);
     console.log('1');
@@ -353,6 +354,7 @@ function exerciseA() {
 
   printMessagesWithTimeout();
 }
+
 exerciseA();
 
 // TODO: write a function that for a given number n generates an array of numbers or strings
@@ -363,15 +365,33 @@ exerciseA();
 // Example: fizzBuzz(5) => [1, 2, 'Fizz', 4, 'Buzz']
 // Example: fizzBuzz(15) => [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']
 // TODO: write unit-tests for this function
-function excerciseB(n: number) {
-  return n; // fix/update the code here
+// function excerciseB(n: number) {
+//   return n; // fix/update the code here
+// }
+//
+excerciseB(5);
+function excerciseB(n: number): Array<number | string> {
+  const result: Array<number | string> = [];
+  for (let i = 1; i <= n; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      result.push('FizzBuzz');
+    } else if (i % 3 === 0) {
+      result.push('Fizz');
+    } else if (i % 5 === 0) {
+      result.push('Buzz');
+    } else {
+      result.push(i);
+    }
+  }
+  console.log('Result:', result);
+  return result;
 }
-
 excerciseB(5);
 
 // create react app with typescript
 function excerciseZ() {
   // TODO: push to github and share the link below
+  // https://github.com/MadMachineGun/ts-react-app.git
 }
 
 excerciseZ();
