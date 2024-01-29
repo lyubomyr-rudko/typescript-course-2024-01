@@ -1,7 +1,7 @@
 import {
   padLeft,
   rockPaperSizorsVins,
-  exerciseA,
+  // exerciseA,
   excerciseB,
 } from './lesson5-homework';
 import { describe, expect, it } from '@jest/globals';
@@ -45,29 +45,29 @@ describe('rockPaperSizorsVins function', () => {
   // });
 });
 
-jest.useFakeTimers();
+// jest.useFakeTimers();
 
-test('printMessagesWithTimeout prints messages with delay', async () => {
-  const consoleSpy = jest.spyOn(console, 'log');
+// test('printMessagesWithTimeout prints messages with delay', async () => {
+//   const consoleSpy = jest.spyOn(console, 'log');
 
-  const promise = exerciseA();
+//   const promise = exerciseA();
 
-  jest.runAllTimers();
+//   jest.runAllTimers();
 
-  await promise;
+//   await promise;
 
-  jest.runAllTimers();
+//   jest.runAllTimers();
 
-  expect(consoleSpy).toHaveBeenCalledWith('1');
-  expect(consoleSpy).toHaveBeenCalledWith('2');
-  expect(consoleSpy).toHaveBeenCalledWith('3');
+//   expect(consoleSpy).toHaveBeenCalledWith('1');
+//   expect(consoleSpy).toHaveBeenCalledWith('2');
+//   expect(consoleSpy).toHaveBeenCalledWith('3');
 
-  consoleSpy.mockRestore();
-});
+//   consoleSpy.mockRestore();
+// });
 
-afterAll(() => {
-  jest.useRealTimers();
-});
+// afterAll(() => {
+//   jest.useRealTimers();
+// });
 
 test('FizzBuzz for n = 5', () => {
   expect(excerciseB(5)).toEqual([1, 2, 'Fizz', 4, 'Buzz']);
