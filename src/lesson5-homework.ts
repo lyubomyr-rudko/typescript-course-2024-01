@@ -313,5 +313,6 @@ excerciseB(5);
 // create react app with typescript
 function excerciseZ() {
   // TODO: push to github and share the link below
+  // https://github.com/yuliia-hrabko/react-app-ts
 }
 excerciseZ();
