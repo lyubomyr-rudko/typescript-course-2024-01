@@ -248,7 +248,7 @@ function exercise22() {
 exercise22();
 
 // rewrite the code using async await
-function exerciseA() {
+export function exerciseA() {
   function later(delay: number) {
     return new Promise((res) => {
       setTimeout(res, delay);
@@ -300,5 +300,6 @@ excerciseB(5);
 // create react app with typescript
 function excerciseZ() {
   // TODO: push to github and share the link below
+  //https://github.com/Artem-Kelioglo/react-ts/tree/main/my-app-ts
 }
 excerciseZ();
