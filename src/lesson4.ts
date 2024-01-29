@@ -1,7 +1,7 @@
 import chunk from 'lodash/chunk';
 // import { sum } from '@lyubomyr.rudko/demo';
 
-console.log(sum(1, 2, 3, 4, 5));
+// console.log(sum(1, 2, 3, 4, 5));
 
 // generic functions
 function onGenericFunctions() {
