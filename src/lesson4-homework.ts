@@ -1,5 +1,6 @@
 import { chunk } from 'lodash';
 import validator from 'validator';
+import { add } from '@valerii_shkliar/test-npm-package';
 
 // create a generic function which takes an array of items of type T and returns the random item from the array
 
@@ -10,18 +11,7 @@ import validator from 'validator';
 export function excercise13A<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
-// console.log(excercise13A([2, 54, 67, 3, 12, 32, 0, -4. 18]));
-// console.log(
-//   excercise13A(['Testing', 'Developing', 'Moving', 'Learning', 'Resting']),
-// );
-// console.log(
-//   excercise13A([
-//     { name: 'John', age: 43 },
-//     { name: 'Smit', age: 18 },
-//     { name: 'Valery', age: 26 },
-//     { name: 'Boris', age: 56 },
-//   ]),
-// );
+console.log(excercise13A([2, 54, 67, 3, 12, 32, 0, -4, 18]));
 
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of arrays to it
@@ -35,21 +25,7 @@ export function excercise13B<T>(arr: T[], count: number): T[][] {
 }
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of arrays to it, and different number of items
-// console.log(excercise13B([1, 2, 3, 4, 5, 6, 7, 8, 9], 3));
-// console.log(
-//   excercise13B(['Testing', 'Developing', 'Moving', 'Learning', 'Resting'], 2),
-// );
-// console.log(
-//   excercise13B(
-//     [
-//       { name: 'John', age: 43 },
-//       { name: 'Smit', age: 18 },
-//       { name: 'Valery', age: 26 },
-//       { name: 'Boris', age: 56 },
-//     ],
-//     1,
-//   ),
-// );
+console.log(excercise13B([1, 2, 3, 4, 5, 6, 7, 8, 9], 3));
 
 // use type assertions to fix the error in the code
 function excercise14() {
@@ -105,36 +81,37 @@ excercise16();
 
 // create an npm package of your own
 function exercise17() {
-  // TODO: register on npmjs.com
-  // TODO: check email and confirm npm account email
-  // TODO: create a git repository for your package, name it test-npm-package
-  // TODO: clone the repository to your local machine
-  // TODO: run npm login to login to npm > npm login
-  // TODO: run npm init -y to create package.json file > npm init -y
-  // TODO: install typescript > npm install -g typescript -D
-  // TODO: create tsconfig.json file > npx tsc --init --rootDir src --outDir lib --declaration --sourceMapn --declarationMap
-  // TODO: update package.json file with the following values
+  // +TODO: register on npmjs.com
+  // +TODO: check email and confirm npm account email
+  // +TODO: create a git repository for your package, name it test-npm-package
+  // +TODO: clone the repository to your local machine
+  // +TODO: run npm login to login to npm > npm login
+  // +TODO: run npm init -y to create package.json file > npm init -y
+  // +TODO: install typescript > npm install -g typescript -D
+  // +TODO: create tsconfig.json file > npx tsc --init --rootDir src --outDir lib --declaration --sourceMap --declarationMap
+  // +TODO: update package.json file with the following values
   // "main": "lib",
   // "types": "lib",
   // "scripts": {
   //   "build": "tsc",
   //   "start": "tsc -w",
   // },
-  // TODO: update package name to @yourusername/test-npm-package
-  // TODO: make sure yourusername is the same as your npmjs.com username
-  // TODO: create ./index.ts file with the following code
-  // export const add = (a: number, b: number) => a + b;
-  // TODO: run npm run build to compile the code > npm run build
-  // TODO: add your changes and push to git repository
-  // TODO: run publish command > npm publish --access=public
-  // TODO: check your package on npmjs.com
-  // TODO: update your package version > npm version patch
-  // TODO: run publish command > npm publish --access=public
-  // TODO: check your package on npmjs.com and see the updated version
-  // TODO: open/create another js project, install your package > npm install @yourusername/test-npm-package
-  // TODO: add import statement to the code > import { add } from '@yourusername/test-npm-package';
-  // TODO: use add function call in the code > console.log(add(1, 2));
-  // TODO: compile and run the code
-  // https://www.youtube.com/watch?v=J4b_T-qH3BY - how to publish npm package, in case you are stuck
+  // +TODO: update package name to @yourusername/test-npm-package
+  // +TODO: make sure yourusername is the same as your npmjs.com username
+  // +TODO: create ./index.ts file with the following code
+  // +export const add = (a: number, b: number) => a + b;
+  // +TODO: run npm run build to compile the code > npm run build
+  // +TODO: add your changes and push to git repository
+  // +TODO: run publish command > npm publish --access=public
+  // +TODO: check your package on npmjs.com
+  // +TODO: update your package version > npm version patch
+  // +TODO: run publish command > npm publish --access=public
+  // +TODO: check your package on npmjs.com and see the updated version
+  // +TODO: open/create another js project, install your package > npm install @yourusername/test-npm-package
+  // +TODO: add import statement to the code > import { add } from '@yourusername/test-npm-package';
+  // +TODO: use add function call in the code > console.log(add(1, 2));
+  // +TODO: compile and run the code
+  // +https://www.youtube.com/watch?v=J4b_T-qH3BY - how to publish npm package, in case you are stuck
+  console.log(add(1, 2));
 }
 exercise17();
