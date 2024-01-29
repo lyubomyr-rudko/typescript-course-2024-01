@@ -1,10 +1,12 @@
 // ********* Lesson 5 *********
 
+// Q/A
 // Readonly modifier
 // Optional modifier
 // Union Types
 // Literal Types
 // Intersection types
+// React with Typescript - proj setup
 
 // Readonly modifier
 function readonlyModifier() {
@@ -23,6 +25,8 @@ function readonlyModifier() {
   // but you can change the properties of the object
   person.age = 19; // no error
 
+  // typescript allows to make the object properties readonly by using readonly modifier
+
   type Person2 = {
     readonly name: string;
     readonly age: number;
@@ -33,6 +37,52 @@ function readonlyModifier() {
     age: 18,
   };
   console.log(person2);
+
+  // person2.name = 'John2'; // error
+
+  // readonly modifier is compile time only, it does not affect the runtime javascript support
+
+  // it is not recursive, it only applies to the top level properties
+  // sort of as if yu could add a const modifier to the properties
+
+  // readonly modifier can be used with interfaces
+  interface IPoint {
+    readonly x: number;
+    readonly y: number;
+  }
+  const pointA: IPoint = {
+    x: 1,
+    y: 2,
+  };
+  console.log(pointA);
+  // pointA.x = 2; // error
+
+  // readonly modifier can be used with classes
+  class Point {
+    readonly x: number;
+    readonly y: number;
+    private readonly z: number; // readonly modifier can be used with access modifiers
+
+    constructor(x: number, y: number, z: number) {
+      this.x = x;
+      this.y = y;
+      this.z = z;
+    }
+  }
+
+  const point = new Point(1, 2, 3);
+  console.log(point);
+  //   point.x = 2; // error
+
+  // readonly modifier can be used with arrays
+  const arr: readonly number[] = [1, 2, 3];
+  console.log(arr);
+  //   arr.push(4); // error
+
+  // readonly modifier can be used with tuples
+  const tuple: readonly [number, string] = [1, '2'];
+  console.log(tuple);
+  // tuple[0] = 2; // error
 }
 readonlyModifier();
 
@@ -49,7 +99,11 @@ function optionalModifier() {
     name: 'John',
     age: 18,
     email: '',
-    phone: undefined, // optional modifier allows to omit the property when creating the object
+    // optional modifier allows to omit the property when creating the object
+
+    // all optional members will be a union of the type and undefined
+
+    // phone: undefined, // no need to specify undefined, it is optional by default
   };
   console.log(person);
 
@@ -67,6 +121,9 @@ optionalModifier();
 
 // Union Types
 function unionTypes() {
+  // union types allow to specify multiple types for a variable
+  // this is useful when you want to allow flexibility of a function - being able to accept multiple types of arguments
+
   function formatCommandLine(command: unknown) {
     if (typeof command === 'string') {
       return command.trim();
@@ -150,7 +207,7 @@ unionTypes();
 
 // Literal Types
 function literalTypes() {
-  // typescript allows to use any string as a type literal
+  // typescript allows to use any literal value as a "type literal"
   // type literals are used to restrict the values of the variable
   // example
 
@@ -300,3 +357,9 @@ function intersectionTypes() {
   });
 }
 intersectionTypes();
+
+// React with Typescript - proj setup
+// create react app: https://create-react-app.dev/docs/adding-typescript/
+// $ npx create-react-app my-app --template typescript
+// vite: https://vitejs.dev/guide/#scaffolding-your-first-vite-project
+// $ npm create vite@latest

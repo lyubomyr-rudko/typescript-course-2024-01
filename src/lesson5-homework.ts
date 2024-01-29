@@ -57,18 +57,16 @@ exercise19();
 
 // use uniton types to replace unknown type for compile time type checking
 function exercise20() {
-  function formatCommandLine(command: unknown) {
-    if (typeof command === 'string') {
-      return command.trim();
-    } else if (Array.isArray(command)) {
-      return command.map((arg) => arg.trim()).join(' ');
-    }
-    throw new Error('command must be string or string[]');
+  function padLeft(value: string, n: unknown) {
+    // TODO: if n is a number, pad the string with spaces (append `n` spaces to the left of the `value` string)
+    // TODO: if n is a string, pad the string with the given string (append `n` to the left of the `value` string)
+
+    return (n as string) + value; // TODO: return the padded string
   }
 
-  console.log(formatCommandLine('  git status  ')); // git status
-  console.log(formatCommandLine(['git ', ' status '])); // git status
-  console.log(formatCommandLine(false)); // run time error - should be compile time error instead
+  console.log(padLeft('hello', 4)); // '    hello'
+  console.log(padLeft('hello', 'abc')); // 'abchello'
+  console.log(padLeft('hello', true)); // TODO: add compile time error
 }
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of values to it (need to export the function first)
@@ -79,15 +77,13 @@ function exercise21() {
   // TODO: define rock, paper, scissors literal type and assign it to TMove type
   // TODO: add type check to the function below
   function rockPaperSizorsVins(me: unknown, other: unknown) {
-    if (me === 'rock' && other === 'paper') {
-      return false;
-    }
-    if (me === 'paper' && other === 'scissors') {
-      return false;
-    }
-    if (me === 'scissors' && other === 'rock') {
-      return false;
-    }
+    // TODO: add checks for rock, paper, scissors
+    // TODO: return false if me is rock and other is paper
+    // TODO: return false if me is paper and other is scissors
+    // TODO: return false if me is scissors and other is rock
+
+    console.log(me, other); // TODO: remove this line
+
     return true;
   }
   console.log(rockPaperSizorsVins('rock', 'paper')); // false
@@ -212,6 +208,19 @@ function exerciseA() {
 // TODO: compile and run the code
 // TODO: write unit-tests for this code. Mock setTimeout function
 exerciseA();
+
+// TODO: write a function that for a given number n generates an array of numbers or strings
+// TODO: make sure you specify the return type of the function
+// TODO: if the number is divisible by 3, the array should contain 'Fizz' instead of the number
+// TODO: if the number is divisible by 5, the array should contain 'Buzz' instead of the number
+// TODO: if the number is divisible by 3 and 5, the array should contain 'FizzBuzz' instead of the number
+// Example: fizzBuzz(5) => [1, 2, 'Fizz', 4, 'Buzz']
+// Example: fizzBuzz(15) => [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']
+// TODO: write unit-tests for this function
+function excerciseB(n: number) {
+  return n; // fix/update the code here
+}
+excerciseB(5);
 
 // create react app with typescript
 function excerciseZ() {
