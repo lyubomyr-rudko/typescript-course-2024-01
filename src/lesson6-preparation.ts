@@ -1,4 +1,6 @@
 // ********* Lesson 6 *********
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Q/A
 // Type Narrowing
@@ -210,6 +212,7 @@ function nonnullAssertionOperator() {
 
   let point2: TPoint;
   function initPoint2() {
+    // point = { x: 0, y: 0 };
     return { x: 0, y: 0 };
   }
   point2 = initPoint2();
@@ -219,7 +222,7 @@ function nonnullAssertionOperator() {
   // example 2
   type TPerson = {
     name: string;
-    email?: string | null | undefined;
+    email?: string | null;
   };
 
   function sendEmail(email: string) {
@@ -493,3 +496,79 @@ function interfacesVsTypeAliases() {
 interfacesVsTypeAliases();
 
 // React with Typescript - component props
+
+function reactComponentProps() {
+  class Message {
+    constructor(public text: string) {}
+  }
+  class MyComponent extends React.Component {
+    render() {
+      // ... do things with the props
+      return React.createElement('div', null, 'hello');
+    }
+
+    static propTypes = {
+      optionalArray: PropTypes.array,
+      optionalBool: PropTypes.bool,
+      optionalFunc: PropTypes.func,
+      optionalNumber: PropTypes.number,
+      optionalObject: PropTypes.object,
+      optionalString: PropTypes.string,
+      optionalSymbol: PropTypes.symbol,
+
+      // Anything that can be rendered: numbers, strings, elements or an array
+      // (or fragment) containing these types.
+      // see https://reactjs.org/docs/rendering-elements.html for more info
+      optionalNode: PropTypes.node,
+
+      // A React element (ie. <MyComponent />).
+      optionalElement: PropTypes.element,
+
+      // A React element type (eg. MyComponent).
+      // a function, string, or "element-like" object (eg. React.Fragment, Suspense, etc.)
+      // see https://github.com/facebook/react/blob/HEAD/packages/shared/isValidElementType.js
+      optionalElementType: PropTypes.elementType,
+
+      // You can also declare that a prop is an instance of a class. This uses
+      // JS's instanceof operator.
+      optionalMessage: PropTypes.instanceOf(Message),
+
+      // You can ensure that your prop is limited to specific values by treating
+      // it as an enum.
+      optionalEnum: PropTypes.oneOf(['News', 'Photos']),
+
+      // An object that could be one of many types
+      optionalUnion: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.instanceOf(Message),
+      ]),
+
+      // An array of a certain type
+      optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
+
+      // You can chain any of the above with `isRequired` to make sure a warning
+      // is shown if the prop isn't provided.
+
+      // An object taking on a particular shape
+      optionalObjectWithShape: PropTypes.shape({
+        optionalProperty: PropTypes.string,
+        requiredProperty: PropTypes.number.isRequired,
+      }),
+
+      requiredFunc: PropTypes.func.isRequired,
+
+      // A value of any data type
+      requiredAny: PropTypes.any.isRequired,
+    };
+  }
+
+  const component = new MyComponent({});
+  console.log(component);
+}
+reactComponentProps();
+
+// jest dependency mocks
+
+const test = 'test';
+export default test;
