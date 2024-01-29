@@ -1,7 +1,7 @@
 import {
   padLeft,
   rockPaperSizorsVins,
-  printMessageWithAsync,
+  exerciseA,
   excerciseB,
 } from './lesson5-homework';
 
@@ -108,8 +108,24 @@ describe('excerciseB', () => {
   });
 });
 
-describe('printMessageWithAsync', () => {
+describe('exerciseA', () => {
   it('should be defined', () => {
-    expect(printMessageWithAsync).toBeDefined();
+    expect(exerciseA).toBeDefined();
+  });
+  it('should print in console 3 times from 1 to 3', async () => {
+    jest.useFakeTimers();
+    jest.spyOn(global, 'setTimeout');
+    const consoleLogMock = jest.spyOn(console, 'log');
+
+    await exerciseA();
+
+    jest.runAllTimers();
+    setTimeout(() => {
+      expect(consoleLogMock).toHaveBeenCalledWith('1');
+      expect(consoleLogMock).toHaveBeenCalledWith('2');
+      expect(consoleLogMock).toHaveBeenCalledWith('3');
+
+      consoleLogMock.mockRestore();
+    }, 0);
   });
 });

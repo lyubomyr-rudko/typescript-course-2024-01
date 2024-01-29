@@ -221,7 +221,7 @@ function exercise22() {
 exercise22();
 
 // rewrite the code using async await
-function exerciseA() {
+export function exerciseA() {
   // function printMessagesWithTimeout() {
   //   setTimeout(() => {
   //     console.log('1');
@@ -236,28 +236,29 @@ function exerciseA() {
   //   }, 1000);
   // }
   // printMessagesWithTimeout();
+  function timerPromise(delay: number) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('success');
+      }, delay);
+    });
+  }
+  async function printMessageWithAsync() {
+    await timerPromise(1000);
+    console.log('1');
+
+    await timerPromise(1000);
+    console.log('2');
+
+    await timerPromise(1000);
+    console.log('3');
+  }
   printMessageWithAsync();
 }
-function timerPromise(): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 1000);
-  });
-}
-export async function printMessageWithAsync() {
-  await timerPromise();
-  console.log('1');
 
-  await timerPromise();
-  console.log('2');
-
-  await timerPromise();
-  console.log('3');
-}
 // TODO: compile and run the code
 // TODO: write unit-tests for this code. Mock setTimeout function
-exerciseA();
+// exerciseA();
 
 // TODO: write a function that for a given number n generates an array of numbers or strings
 // TODO: make sure you specify the return type of the function
