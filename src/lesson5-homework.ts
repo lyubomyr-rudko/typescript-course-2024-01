@@ -236,18 +236,24 @@ export function exerciseA() {
     });
   }
 
-  async function printMessagesWithTimeout(count: number) {
+  async function printMessagesWithTimeout(count: number): Promise<void> {
     for (let i = 0; i < count; i++) {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          console.log(`${i + 1}`);
-          resolve(true);
-        }, 1000);
-      });
-      // console.log(`${i + 1}`);
+      await delay(1000);
+      console.log(`${i + 1}`);
     }
   }
-  // printMessagesWithTimeout(3);
+
+  // async function printMessagesWithTimeout(count: number): Promise<void> {
+  //   for (let i = 0; i < count; i++) {
+  //     await new Promise((resolve) => {
+  //       setTimeout(() => {
+  //         console.log(`${i + 1}`);
+  //         resolve(true);
+  //       }, 1000);
+  //     });
+  //   }
+  // }
+  printMessagesWithTimeout(3);
 
   return { printMessagesWithTimeout };
 }
