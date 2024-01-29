@@ -15,9 +15,9 @@ describe('padLeft', () => {
     expect(padLeft('hello', 4)).toBe('    hello');
   });
 
-  // it('if n is a string, pad the string with the given string ', () => {
-  //   expect(padLeft('hello', 'abc')).toBe('abchello');
-  // });
+  it('if n is a string, pad the string with the given string', () => {
+    expect(padLeft('hello', 'abc')).toBe('abchello');
+  });
 });
 
 describe('rockPaperSizorsVins', () => {
