@@ -49,28 +49,44 @@ describe('rockPaperSizorsVins', () => {
   });
 });
 
+// describe('printMessagesWithTimeout', () => {
+//   jest.useFakeTimers();
+
+//   it('should print to console "1", "2", "3"', async () => {
+//     jest.spyOn(global, 'setTimeout');
+//     const consoleLogSpy = jest.spyOn(console, 'log');
+
+//     printMessagesWithTimeout(3);
+
+//     expect(consoleLogSpy).not.toHaveBeenCalledWith('1');
+
+//     jest.advanceTimersByTime(1000);
+
+//     expect(consoleLogSpy).toHaveBeenCalledWith('1');
+
+//     jest.runAllTimers();
+
+//     setTimeout(() => {
+//       expect(consoleLogSpy).toHaveBeenCalledWith('2');
+//       expect(consoleLogSpy).toHaveBeenCalledWith('3');
+//       consoleLogSpy.mockRestore();
+//     }, 0);
+//   });
+// });
 describe('printMessagesWithTimeout', () => {
   jest.useFakeTimers();
-  jest.spyOn(global, 'setTimeout');
-
-  // afterAll(() => {
-  //   jest.runAllTimers();
-  // });
 
   it('should print to console "1", "2", "3"', async () => {
+    jest.spyOn(global, 'setTimeout');
     const consoleLogSpy = jest.spyOn(console, 'log');
 
     printMessagesWithTimeout(3);
 
     jest.runAllTimers();
 
-    expect(setTimeout).toHaveBeenCalledTimes(1);
-
-    // setTimeout(() => {
-    //   expect(consoleLogSpy).toHaveBeenCalledWith('1');
-    //   expect(consoleLogSpy).toHaveBeenCalledWith('2');
-    //   expect(consoleLogSpy).toHaveBeenCalledWith('3');
-    // }, 0);
+    expect(printMessagesWithTimeout(3)).resolves.toEqual('1');
+    expect(printMessagesWithTimeout(3)).resolves.toEqual('2');
+    expect(printMessagesWithTimeout(3)).resolves.toEqual('3');
   });
 });
 

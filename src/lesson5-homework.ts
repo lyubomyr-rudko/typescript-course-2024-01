@@ -230,22 +230,24 @@ exercise22();
 
 // rewrite the code using async await
 export function exerciseA() {
-  // function delay(delay: number): Promise<void> {
-  //   return new Promise((resolve) => {
-  //     setTimeout(resolve, delay);
-  //   });
-  // }
+  function delay(delay: number): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(resolve, delay);
+    });
+  }
 
   async function printMessagesWithTimeout(count: number) {
     for (let i = 0; i < count; i++) {
       await new Promise((resolve) => {
-        setTimeout(resolve, 1000);
+        setTimeout(() => {
+          console.log(`${i + 1}`);
+          resolve(true);
+        }, 1000);
       });
-      console.log(`${i + 1}`);
+      // console.log(`${i + 1}`);
     }
   }
-
-  printMessagesWithTimeout(3);
+  // printMessagesWithTimeout(3);
 
   return { printMessagesWithTimeout };
 }
