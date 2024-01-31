@@ -9,36 +9,67 @@ function exercise27() {
   // TODO: define THuman type with properties name, age, driverLicenseId
   type THuman = {
     name: string;
+    age?: number;
+    driverLicenseId?: string;
   };
+  class Human {
+    constructor(
+      public name: string,
+      public age?: number,
+      public driverLicenseId?: string,
+    ) {}
+  }
   // TODO: define TAnimal type with properties name, age, species
   type TAnimal = {
     name: string;
+    age?: number;
+    species?: string;
   };
+  class Animal {
+    constructor(
+      public name: string,
+      public age?: number,
+      public species?: string,
+    ) {}
+  }
   // TODO: define TPassanger type as union of THuman and TAnimal
-  // type TPassanger = {};
+  type TPassanger = THuman | TAnimal | Human | Animal;
 
   // annotate the function to accept TPassanger type
-  function printPassangerInfo(passanger: unknown) {
+  function printPassangerInfo(passanger: TPassanger) {
     // TODO: use type narrowing to print the passanger info
-    // console.log((passanger as any).name);
-    // console.log((passanger as any).age);
-    // TODO: print driverLicenseId if passanger is human
-    // console.log((passanger as any).driverLicenseId);
-    // TODO: print species if passanger is animal
-    // console.log((passanger as any).species);
+    console.log(`\n====== Passanger Info ======`);
+    console.log((passanger as TPassanger).name);
+    console.log((passanger as TPassanger).age);
+    if ('driverLicenseId' in passanger || passanger instanceof Human) {
+      // TODO: print driverLicenseId if passanger is human
+      console.log((passanger as THuman).driverLicenseId);
+    }
+    if ('species' in passanger || passanger instanceof Animal) {
+      // TODO: print species if passanger is animal
+      console.log((passanger as TAnimal).species);
+    }
     console.log(passanger);
   }
   // TODO: add missing properties to human and animal objects
   const human: THuman = {
     name: 'John',
+    age: 45,
+    driverLicenseId: 'abc123',
   };
+  const human1 = new Human('Stan', 45, 'def456');
   const animal: TAnimal = {
     name: 'Rex',
+    age: 4,
+    species: 'French Bulldog',
   };
+  const animal1 = new Animal('TRex', 3, 'Papuga');
+  // TODO: Implement function printPassangerInfo using instanceof operator to narrow the type of the passanger
   printPassangerInfo(human);
   printPassangerInfo(animal);
-  // TODO: Implement function printPassangerInfo using instanceof operator to narrow the type of the passanger
   // TODO: Add implementation of the printPassangerInfo using property check to narrow the type of the passanger
+  printPassangerInfo(human1);
+  printPassangerInfo(animal1);
 }
 // TODO: compile and run the code
 exercise27();
@@ -47,12 +78,15 @@ exercise27();
 function exercise28() {
   // TODO: add type property to TBlogMessage, TBlogImage, TBlogComment with literal type of 'message', 'image', 'comment'
   type TBlogMessage = {
+    type: 'message';
     text: string;
   };
   type TBlogImage = {
+    type: 'image';
     url: string;
   };
   type TBlogComment = {
+    type: 'comment';
     text: string;
     messageId: string;
   };
@@ -73,9 +107,9 @@ function exercise28() {
   }
 
   // TODO: add missing type property to the objects
-  printBlogPost({ text: 'abc' });
-  printBlogPost({ url: 'abc' });
-  printBlogPost({ text: 'abc', messageId: '123' });
+  printBlogPost({ type: 'message', text: 'abc' });
+  printBlogPost({ type: 'image', url: '/abc' });
+  printBlogPost({ type: 'comment', text: 'abc', messageId: '123' });
 }
 // TODO: compile and run the code
 exercise28();
