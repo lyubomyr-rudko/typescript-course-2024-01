@@ -3,9 +3,29 @@ function exercise18() {
   // TODO: define class Student with properties name, age, studentId
   // TODO: add constructor to initialize the properties
   // TODO: add method printStudent to print the student info to console
+  class Student {
+    name: string;
+    age: number;
+    readonly studentId: number;
+    constructor(name: string, age: number, studentId: number) {
+      this.name = name;
+      this.age = age;
+      this.studentId = studentId;
+    }
+    printStudent() {
+      console.log(
+        `Student info: name${this.name}, age: ${this.age}, studentId:${this.studentId}`,
+      );
+    }
+  }
   // TODO: create an instance of the class Student
+  const Vasyl = new Student('Vasyl', 22, 33023);
   // TODO: print the student info to console
+  Vasyl.printStudent();
   // TODO: try to change the studentId property
+  // Vasyl.studentId = 322; error because readonly
+  // Vasyl.printStudent();
+
   // TODO: change the studentId property to readonly, make sure that changing the property is not allowed
 }
 // TODO: compile and run the code
@@ -17,8 +37,8 @@ function exercise19() {
     name: string;
     width: number;
     height: number;
-    color: string;
-    os: string;
+    color?: string;
+    os?: string;
     space: number;
   };
 
@@ -34,56 +54,67 @@ function exercise19() {
 
   // TODO: uncomment the code below and update the type definition to fix compile time error
 
-  // const widgetWithSize: TWidget = {
-  //   name: 'widget',
-  //   width: 10,
-  //   height: 20,
-  //   color: 'red',
-  //   space: 100,
-  // }
+  const widgetWithSize: TWidget = {
+    name: 'widget',
+    width: 10,
+    height: 20,
+    color: 'red',
+    space: 100,
+  };
 
-  // const desktopWidget:TWidget = {
-  //   name: 'widget',
-  //   width: 10,
-  //   height: 20,
-  //   os: 'windows',
-  //   space: 100,
-  // }
+  const desktopWidget: TWidget = {
+    name: 'widget',
+    width: 10,
+    height: 20,
+    os: 'windows',
+    space: 100,
+  };
 
   // TODO: print the result to console
+  console.log(widgetWithSize);
+  console.log(desktopWidget);
 }
 // TODO: compile and run the code
 exercise19();
 
 // use uniton types to replace unknown type for compile time type checking
 function exercise20() {
-  function padLeft(value: string, n: unknown) {
+  type TTypeOfdata = number | string;
+  function padLeft(value: string, n: TTypeOfdata) {
     // TODO: if n is a number, pad the string with spaces (append `n` spaces to the left of the `value` string)
     // TODO: if n is a string, pad the string with the given string (append `n` to the left of the `value` string)
+    if (typeof n === 'number') {
+      return value.padStart(value.length + n);
+    }
 
     return (n as string) + value; // TODO: return the padded string
   }
 
   console.log(padLeft('hello', 4)); // '    hello'
   console.log(padLeft('hello', 'abc')); // 'abchello'
-  console.log(padLeft('hello', true)); // TODO: add compile time error
+  // console.log(padLeft('hello', true)); // TODO: add compile time error
 }
 // TODO: compile and run the code
-// TODO: write unit-tests for the function above, passing different types of values to it (need to export the function first)
+// TODO: write unit-tests for the function above, passing different types of values to it (need to export the function first)s
 exercise20();
 
 // use literal types for type checking
 function exercise21() {
   // TODO: define rock, paper, scissors literal type and assign it to TMove type
+  type TMove = 'rock' | 'paper' | 'scissors';
   // TODO: add type check to the function below
-  function rockPaperSizorsVins(me: unknown, other: unknown) {
+  function rockPaperSizorsVins(me: TMove, other: TMove) {
     // TODO: add checks for rock, paper, scissors
     // TODO: return false if me is rock and other is paper
     // TODO: return false if me is paper and other is scissors
     // TODO: return false if me is scissors and other is rock
-
-    console.log(me, other); // TODO: remove this line
-
+    if (me === 'rock' && other === 'paper') {
+      return false;
+    } else if (me === 'paper' && other === 'scissors') {
+      return false;
+    } else if (me === 'scissors' && other === 'rock') {
+      return false;
+    }
     return true;
   }
   console.log(rockPaperSizorsVins('rock', 'paper')); // false
@@ -91,7 +122,7 @@ function exercise21() {
   console.log(rockPaperSizorsVins('scissors', 'rock')); // false
   console.log(rockPaperSizorsVins('rock', 'scissors')); // true
   // TODO: make sure that the following calls are not allowed
-  console.log(rockPaperSizorsVins('papapaper', 'scissors')); // true - no type check
+  // console.log(rockPaperSizorsVins('papapaper', 'scissors')); // true - no type check
 }
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of values to it (need to export the function first)
@@ -106,27 +137,18 @@ function exercise22() {
   };
 
   type TWidgetWithSize = {
-    name: string;
     width: number;
     height: number;
     color: string;
-  };
+  } & TWidget;
 
   type TDesktopWidget = {
-    name: string;
-    width: number;
-    height: number;
-    color: string;
     os: string;
-  };
+  } & TWidgetWithSize;
 
   type TMobileWidget = {
-    name: string;
-    width: number;
-    height: number;
-    color: string;
     space: number;
-  };
+  } & TWidgetWithSize;
 
   const widget: TWidget = {
     name: 'widget',
@@ -190,21 +212,33 @@ exercise22();
 
 // rewrite the code using async await
 function exerciseA() {
-  function printMessagesWithTimeout() {
-    setTimeout(() => {
-      console.log('1');
-
-      setTimeout(() => {
-        console.log('2');
-
-        setTimeout(() => {
-          console.log('3');
-        }, 1000);
-      }, 1000);
-    }, 1000);
-  }
-  printMessagesWithTimeout();
+  //   function printMessagesWithTimeout() {
+  //     setTimeout(() => {
+  //       console.log('1');
+  //       setTimeout(() => {
+  //         console.log('2');
+  //         setTimeout(() => {
+  //           console.log('3');
+  //         }, 1000);
+  //       }, 1000);
+  //     }, 1000);
+  //   }
+  //   printMessagesWithTimeout();
 }
+// function laterPromise(delay: number) {
+//   return new Promise((resolve) => {
+//     setTimeout(resolve, delay);
+//   });
+// }
+// export async function printResultAsync() {
+//   await laterPromise(1000);
+//   console.log(1);
+//   await laterPromise(1000);
+//   console.log(2);
+//   await laterPromise(1000);
+//   console.log(3);
+// }
+// printResultAsync();
 // TODO: compile and run the code
 // TODO: write unit-tests for this code. Use jest fake timers to mock setTimeout
 exerciseA();
@@ -217,13 +251,54 @@ exerciseA();
 // Example: fizzBuzz(5) => [1, 2, 'Fizz', 4, 'Buzz']
 // Example: fizzBuzz(15) => [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']
 // TODO: write unit-tests for this function
-function excerciseB(n: number) {
-  return n; // fix/update the code here
+type TArrData = number[] & string[];
+function excerciseB(n: number): TArrData | undefined {
+  const arr: TArrData = [];
+  for (let i = 1; i <= n; i++) {
+    if (i % 3 == 0 && i % 5 == 0) {
+      arr.push('FizzBuzz');
+      continue;
+    }
+    if (i % 5 == 0) {
+      arr.push('Buzz');
+      continue;
+    }
+    if (i % 3 == 0) {
+      arr.push('Fizz');
+    } else {
+      arr.push(i);
+    }
+  }
+  return arr;
 }
-excerciseB(5);
+console.log(excerciseB(15));
 
 // create react app with typescript
 function excerciseZ() {
-  // TODO: push to github and share the link below
+  console.log(
+    'https://github.com/ArtemPustoutov/ArtemPustoutov-FrontEnd-Pro-1.07.2023/tree/reactAppWithTS/ts-app-react/src',
+  );
+  // https://github.com/ArtemPustoutov/ArtemPustoutov-FrontEnd-Pro-1.07.2023/tree/reactAppWithTS/ts-app-react/src
 }
 excerciseZ();
+
+//export for test
+type TTypeOfdata = number | string;
+export function padLeft(value: string, n: TTypeOfdata) {
+  if (typeof n === 'number') {
+    return value.padStart(value.length + n);
+  }
+
+  return (n as string) + value; // TODO: return the padded string
+}
+type TMove = 'rock' | 'paper' | 'scissors';
+export function rockPaperSizorsVins(me: TMove, other: TMove) {
+  if (me === 'rock' && other === 'paper') {
+    return false;
+  } else if (me === 'paper' && other === 'scissors') {
+    return false;
+  } else if (me === 'scissors' && other === 'rock') {
+    return false;
+  }
+  return true;
+}
