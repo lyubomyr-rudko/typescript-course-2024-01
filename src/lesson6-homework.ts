@@ -3,44 +3,87 @@ import PropTypes from 'prop-types';
 
 const test = 'test'; // this is mock export
 export default test;
-// hw-6
+
 // use type narrowing to print the passanger info
+// function exercise27() {
+//   // TODO: define THuman type with properties name, age, driverLicenseId
+//   type THuman = {
+//     name: string;
+//   };
+//   // TODO: define TAnimal type with properties name, age, species
+//   type TAnimal = {
+//     name: string;
+//   };
+//   // TODO: define TPassanger type as union of THuman and TAnimal
+//   // type TPassanger = {};
+//
+//   // annotate the function to accept TPassanger type
+//   function printPassangerInfo(passanger: unknown) {
+//     // TODO: use type narrowing to print the passanger info
+//     // console.log((passanger as any).name);
+//     // console.log((passanger as any).age);
+//     // TODO: print driverLicenseId if passanger is human
+//     // console.log((passanger as any).driverLicenseId);
+//     // TODO: print species if passanger is animal
+//     // console.log((passanger as any).species);
+//     console.log(passanger);
+//   }
+//   // TODO: add missing properties to human and animal objects
+//   const human: THuman = {
+//     name: 'John',
+//   };
+//   const animal: TAnimal = {
+//     name: 'Rex',
+//   };
+//   printPassangerInfo(human);
+//   printPassangerInfo(animal);
+//   // TODO: Implement function printPassangerInfo using instanceof operator to narrow the type of the passanger
+//   // TODO: Add implementation of the printPassangerInfo using property check to narrow the type of the passanger
+// }
+// // TODO: compile and run the code
+// exercise27();
+
 function exercise27() {
-  // TODO: define THuman type with properties name, age, driverLicenseId
   type THuman = {
     name: string;
+    age: number;
+    driverLicenseId: string;
   };
-  // TODO: define TAnimal type with properties name, age, species
+
   type TAnimal = {
     name: string;
+    age: number;
+    species: string;
   };
-  // TODO: define TPassanger type as union of THuman and TAnimal
-  // type TPassanger = {};
+  type TPassenger = THuman | TAnimal;
 
-  // annotate the function to accept TPassanger type
-  function printPassangerInfo(passanger: unknown) {
-    // TODO: use type narrowing to print the passanger info
-    // console.log((passanger as any).name);
-    // console.log((passanger as any).age);
-    // TODO: print driverLicenseId if passanger is human
-    // console.log((passanger as any).driverLicenseId);
-    // TODO: print species if passanger is animal
-    // console.log((passanger as any).species);
-    console.log(passanger);
+  function printPassengerInfo(passenger: TPassenger) {
+    console.log(passenger.name);
+    console.log(passenger.age);
+
+    if ('driverLicenseId' in passenger) {
+      console.log(passenger.driverLicenseId);
+    }
+
+    if ('species' in passenger) {
+      console.log(passenger.species);
+    }
   }
-  // TODO: add missing properties to human and animal objects
   const human: THuman = {
     name: 'John',
+    age: 25,
+    driverLicenseId: 'DL123',
   };
   const animal: TAnimal = {
     name: 'Rex',
+    age: 3,
+    species: 'Dog',
   };
-  printPassangerInfo(human);
-  printPassangerInfo(animal);
-  // TODO: Implement function printPassangerInfo using instanceof operator to narrow the type of the passanger
-  // TODO: Add implementation of the printPassangerInfo using property check to narrow the type of the passanger
+
+  printPassengerInfo(human);
+  printPassengerInfo(animal);
 }
-// TODO: compile and run the code
+
 exercise27();
 
 // use discriminated union to narrow the type of the object
@@ -77,6 +120,7 @@ function exercise28() {
   printBlogPost({ url: 'abc' });
   printBlogPost({ text: 'abc', messageId: '123' });
 }
+
 // TODO: compile and run the code
 exercise28();
 
@@ -89,6 +133,7 @@ function excerciseA() {
   interface IMyComponentProps {
     optionalBool?: boolean;
   }
+
   class MyComponent extends React.Component<IMyComponentProps> {
     render() {
       return React.createElement('div', null, 'hello');
@@ -134,6 +179,7 @@ function excerciseA() {
   const component = new MyComponent({ optionalBool: true });
   console.log(component);
 }
+
 excerciseA();
 
 async function excerciseB() {
@@ -147,6 +193,7 @@ async function excerciseB() {
 
     return users;
   }
+
   // All next tasks will be using a list of users
   const users = await fetchUsers();
 
@@ -160,6 +207,7 @@ async function excerciseB() {
     console.log(users);
     return [];
   }
+
   console.log(getUserNames(users));
 
   // TODO: define a function that returns array of company names
@@ -173,4 +221,5 @@ async function excerciseB() {
   // TODO: move all the functions above out of this function and export them
   // TODO: write unit tests for the 4 functions above
 }
+
 excerciseB();
