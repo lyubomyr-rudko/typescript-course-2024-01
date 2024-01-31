@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const test = 'test'; // this is mock export
 export default test;
-
+// hw-6
 // use type narrowing to print the passanger info
 function exercise27() {
   // TODO: define THuman type with properties name, age, driverLicenseId
