@@ -206,7 +206,7 @@ function exerciseA() {
   printMessagesWithTimeout();
 }
 // TODO: compile and run the code
-// TODO: write unit-tests for this code. Mock setTimeout function
+// TODO: write unit-tests for this code. Use jest fake timers to mock setTimeout
 exerciseA();
 
 // TODO: write a function that for a given number n generates an array of numbers or strings
