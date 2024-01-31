@@ -49,7 +49,6 @@ function exercise27() {
     age: number;
     driverLicenseId: string;
   };
-
   type TAnimal = {
     name: string;
     age: number;
@@ -69,6 +68,7 @@ function exercise27() {
       console.log(passenger.species);
     }
   }
+
   const human: THuman = {
     name: 'John',
     age: 25,
@@ -87,41 +87,80 @@ function exercise27() {
 exercise27();
 
 // use discriminated union to narrow the type of the object
+// function exercise28() {
+//   // TODO: add type property to TBlogMessage, TBlogImage, TBlogComment with literal type of 'message', 'image', 'comment'
+//   type TBlogMessage = {
+//     text: string;
+//   };
+//   type TBlogImage = {
+//     url: string;
+//   };
+//   type TBlogComment = {
+//     text: string;
+//     messageId: string;
+//   };
+//
+//   type TBlogPost = TBlogMessage | TBlogImage | TBlogComment;
+//
+//   function printBlogPost(post: TBlogPost) {
+//     // TODO: use discriminated union instead of prop check to narrow the type of the object
+//     if ('messageId' in post) {
+//       console.log('comment: ', post.text);
+//     }
+//     if ('url' in post) {
+//       console.log('image: ', post.url);
+//     }
+//     if ('text' in post) {
+//       console.log('message: ', post.text);
+//     }
+//   }
+//
+//   // TODO: add missing type property to the objects
+//   printBlogPost({ text: 'abc' });
+//   printBlogPost({ url: 'abc' });
+//   printBlogPost({ text: 'abc', messageId: '123' });
+// }
+//
+// // TODO: compile and run the code
+// exercise28();
+
 function exercise28() {
-  // TODO: add type property to TBlogMessage, TBlogImage, TBlogComment with literal type of 'message', 'image', 'comment'
   type TBlogMessage = {
+    type: 'message';
     text: string;
   };
   type TBlogImage = {
+    type: 'image';
     url: string;
   };
   type TBlogComment = {
+    type: 'comment';
     text: string;
     messageId: string;
   };
 
   type TBlogPost = TBlogMessage | TBlogImage | TBlogComment;
-
   function printBlogPost(post: TBlogPost) {
-    // TODO: use discriminated union instead of prop check to narrow the type of the object
-    if ('messageId' in post) {
-      console.log('comment: ', post.text);
-    }
-    if ('url' in post) {
-      console.log('image: ', post.url);
-    }
-    if ('text' in post) {
-      console.log('message: ', post.text);
+    switch (post.type) {
+      case 'comment':
+        console.log('comment: ', post.text);
+        break;
+      case 'image':
+        console.log('image: ', post.url);
+        break;
+      case 'message':
+        console.log('message: ', post.text);
+        break;
+      default:
+        break;
     }
   }
 
-  // TODO: add missing type property to the objects
-  printBlogPost({ text: 'abc' });
-  printBlogPost({ url: 'abc' });
-  printBlogPost({ text: 'abc', messageId: '123' });
+  printBlogPost({ type: 'message', text: 'abc' });
+  printBlogPost({ type: 'image', url: 'abc' });
+  printBlogPost({ type: 'comment', text: 'abc', messageId: '123' });
 }
 
-// TODO: compile and run the code
 exercise28();
 
 // use interface to define props type for react component
