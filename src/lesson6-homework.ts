@@ -177,164 +177,157 @@ function excerciseA() {
 excerciseA();
 
 async function excerciseB() {
-  // TODO: define IUser interface with properties id, name, email, website
-  interface IUser {
-    id: string;
-    name: string;
-    email: string;
-    website: string;
-  }
-
-  // TODO: implement function to fetch list of users from https://jsonplaceholder.typicode.com/users
+  // TODO: move all the functions above out of this function and export them
+  // TODO: write unit tests for the 4 functions above
   async function fetchUsers() {
     const res = await fetch('https://jsonplaceholder.typicode.com/users');
     // TODO: apply type to the result of this fetch function
     if (!res.ok) throw new Error('Failed to fetch user data');
 
-    const users: IUser[] = await res.json();
+    const users: IUser | IUser[] = await res.json();
     return users;
   }
   // All next tasks will be using a list of users
-  const users = await fetchUsers();
-  // const users = fetch1; // fetch2  fetch3 for get result
+  return await fetchUsers();
+}
 
-  // TODO: extend interface IUser with property address of type IAddress
-  type TAddress = {
-    street?: string;
-    city?: string;
-    zipcode?: number;
-    geo: string;
-  };
-  interface IAddress extends IUser {
-    address: TAddress;
-  }
+// TODO: define IUser interface with properties id, name, email, website
+export interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  website: string;
+}
 
-  // TODO: define IAddress interface with properties street, suite, city, zipcode, geo
-  interface IAddress {
-    street?: string;
-    city?: string;
-    zipcode?: number;
-    geo?: string;
-  }
+// TODO: implement function to fetch list of users from https://jsonplaceholder.typicode.com/users
 
-  // TODO: extend interface IUser with property company of type ICompany and define ICompany interface with properties name, catchPhrase, bs
-  // type TCompany = {
-  //   name?: string;
-  //   catchPhrase?: string;
-  //   bs?: string;
-  // };
-  interface ICompany extends IUser {
-    // company: TCompany;
-    company: {
-      name?: string;
-      catchPhrase?: string;
-      bs?: string;
-    };
-  }
+// const users = fetch1; // fetch2  fetch3 for get result
 
-  // TODO: define function that returns array of user names in format { firstName: string, lastName: string}
-  // TODO: use interface type for the function parameter
-  type TUserSplitted = {
-    firstName: string;
-    lastName: string;
-  };
-  function getUserNames(users: IUser | IUser[]): TUserSplitted[] {
-    const testIsArray = Array.isArray(users);
-    const splitFullname = (fullname: string): TUserSplitted => {
-      const splitted = fullname.split(' ');
-      // const pattern = /^(?:\S+\.\s+)?(\S+)\s+(\S+)$/;
-      // const splitted = fullname.match(pattern) || '';
-      return {
-        firstName: splitted[0], // splitted[0],
-        lastName: splitted[1], // splitted[1],
-      };
-    };
+// TODO: extend interface IUser with property address of type IAddress
+type TAddress = {
+  street?: string;
+  city?: string;
+  zipcode?: number;
+  geo: string;
+};
+interface IAddress extends IUser {
+  address: TAddress;
+}
 
-    if (testIsArray) {
-      console.log(users.map((user) => splitFullname(user.name)));
-    }
+// TODO: define IAddress interface with properties street, suite, city, zipcode, geo
+interface IAddress {
+  street?: string;
+  city?: string;
+  zipcode?: number;
+  geo?: string;
+}
 
-    //
-    return testIsArray
-      ? users.map((user) => splitFullname(user.name))
-      : [splitFullname(users.name)];
-  }
-  console.log('>>> USERNAMES: \n', getUserNames(users));
-
-  // TODO: define a function that returns array of company names
-  function getCompanyNames(input: ICompany | ICompany[]): string[] {
-    const testIsArray = Array.isArray(input);
-    return testIsArray ? input.map((el) => el.company.name || '') : [''];
-  }
-  console.log(
-    '>>> COMPANIES: \n',
-    getCompanyNames(users as unknown as ICompany),
-  );
-
-  // TODO: define a function that returns a company name that has the longest catchPhrase
-  function getLongestCatchPhaseCompany(input: ICompany | ICompany[]): string {
-    const testIsArray = Array.isArray(input);
-    let max = 0;
-    let maxIndex = 0;
-    if (!testIsArray) return input.company.name || '';
-    input.forEach((el: ICompany, i: number) => {
-      const testType: boolean = typeof el.company.catchPhrase === 'undefined';
-      const length = testType ? 0 : el.company.catchPhrase?.length; // bad work
-      const safetyInt = parseInt(length + '');
-      if (safetyInt > max) {
-        max = safetyInt;
-        maxIndex = i;
-      }
-    });
-    return input[maxIndex].company.name || '';
-  }
-  console.log(
-    '>>> LONGEST CatchPhazeCompany:\n',
-    getLongestCatchPhaseCompany(users as unknown as ICompany),
-  );
-
-  // TODO: define a function that returns a list of users that have website ending with .org
-  function getOrgWebsites(input: ICompany | ICompany[]): string[] {
-    const testIsArray = Array.isArray(input);
-    const pattern = /\.org$/;
-    // const isORG = (email:string):boolean => email.includes('.org')
-    if (!testIsArray) {
-      const isOrg = pattern.test(input.website);
-      return isOrg ? [input.website] : [];
-    } else {
-      return input
-        .filter((el) => pattern.test(el.website))
-        .map((user) => user.name);
-    }
-  }
-  console.log(
-    '>>> USERS with website ending *.org: \n',
-    getOrgWebsites(users as unknown as ICompany),
-  );
-
-  // TODO: define a funciton that returns a list of cities where users live, sorted by city name
-  function getCityes(input: IAddress | IAddress[]): string[] {
-    const testIsArray = Array.isArray(input);
-    const cities = testIsArray
-      ? input.map((el) => el.address.city || '')
-      : [input.address.city || ''];
-    return cities.sort((a, b) =>
-      a.toLowerCase().localeCompare(b.toLowerCase()),
-    );
-  }
-  console.log('>>> CITIES: \n', getCityes(users as unknown as IAddress));
-
-  // TODO: move all the functions above out of this function and export them
-  // TODO: write unit tests for the 4 functions above
-
-  return {
-    getCompanyNames,
-    getLongestCatchPhaseCompany,
-    getOrgWebsites,
-    getCityes,
+// TODO: extend interface IUser with property company of type ICompany and define ICompany interface with properties name, catchPhrase, bs
+// type TCompany = {
+//   name?: string;
+//   catchPhrase?: string;
+//   bs?: string;
+// };
+export interface ICompany extends IUser {
+  // company: TCompany;
+  company: {
+    name?: string;
+    catchPhrase?: string;
+    bs?: string;
   };
 }
-export const excerciseBTest = excerciseB();
+
+// TODO: define function that returns array of user names in format { firstName: string, lastName: string}
+// TODO: use interface type for the function parameter
+type TUserSplitted = {
+  firstName: string;
+  lastName: string;
+};
+export function getUserNames(users: IUser | IUser[]): TUserSplitted[] {
+  const testIsArray = Array.isArray(users);
+  const splitFullname = (fullname: string): TUserSplitted => {
+    const splitted = fullname.split(' ');
+    // const pattern = /^(?:\S+\.\s+)?(\S+)\s+(\S+)$/;
+    // const splitted = fullname.match(pattern) || '';
+    return {
+      firstName: splitted[0], // splitted[0],
+      lastName: splitted[1], // splitted[1],
+    };
+  };
+
+  return testIsArray
+    ? users.map((user) => splitFullname(user.name))
+    : [splitFullname(users.name)];
+}
+
+// TODO: define a function that returns array of company names
+function getCompanyNames(input: ICompany | ICompany[]): string[] {
+  const testIsArray = Array.isArray(input);
+  return testIsArray ? input.map((el) => el.company.name || '') : [''];
+}
+
+// TODO: define a function that returns a company name that has the longest catchPhrase
+export function getLongestCatchPhaseCompany(
+  input: ICompany | ICompany[],
+): string {
+  const testIsArray = Array.isArray(input);
+  let max = 0;
+  let maxIndex = 0;
+  if (!testIsArray) return input.company.name || '';
+  input.forEach((el: ICompany, i: number) => {
+    const testType: boolean = typeof el.company.catchPhrase === 'undefined';
+    const length = testType ? 0 : el.company.catchPhrase?.length; // bad work
+    const safetyInt = parseInt(length + '');
+    if (safetyInt > max) {
+      max = safetyInt;
+      maxIndex = i;
+    }
+  });
+  return input[maxIndex].company.name || '';
+}
+
+// TODO: define a function that returns a list of users that have website ending with .org
+export function getOrgWebsites(input: ICompany | ICompany[]): string[] {
+  const testIsArray = Array.isArray(input);
+  const pattern = /\.org$/;
+  // const isORG = (email:string):boolean => email.includes('.org')
+  if (!testIsArray) {
+    const isOrg = pattern.test(input.website);
+    return isOrg ? [input.website] : [];
+  } else {
+    return input
+      .filter((el) => pattern.test(el.website))
+      .map((user) => user.name);
+  }
+}
+
+// TODO: define a funciton that returns a list of cities where users live, sorted by city name
+export function getCityes(input: IAddress | IAddress[]): string[] {
+  const testIsArray = Array.isArray(input);
+  const cities = testIsArray
+    ? input.map((el) => el.address.city || '')
+    : [input.address.city || ''];
+  return cities.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+}
+
+async function runFetchLogs() {
+  const data = await excerciseB();
+  console.log('>>> USERNAMES: \n', getUserNames(data));
+  console.log(
+    '>>> COMPANIES: \n',
+    getCompanyNames(data as unknown as ICompany),
+  );
+  console.log(
+    '>>> LONGEST CatchPhazeCompany:\n',
+    getLongestCatchPhaseCompany(data as unknown as ICompany),
+  );
+  console.log(
+    '>>> USERS with website ending *.org: \n',
+    getOrgWebsites(data as unknown as ICompany),
+  );
+  console.log('>>> CITIES: \n', getCityes(data as unknown as IAddress));
+}
+runFetchLogs();
 
 //  Generate Mocks for tests
 // function mockFetchDataGenerate() {

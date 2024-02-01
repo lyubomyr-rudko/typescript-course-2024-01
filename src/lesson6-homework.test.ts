@@ -1,39 +1,36 @@
-import excerciseBTest from './lesson6-homework';
-// import fetch1 from './lesson6-mock-1';
+import {
+  getUserNames,
+  // getLongestCatchPhaseCompany,
+  // getOrgWebsites,
+  // getCityes,
+  // IUser,
+  // ICompany,
+} from './lesson6-homework';
+import fetch1 from './lesson6-mock-1';
 // import fetch2 from './lesson6-mock-2';
 // import fetch3 from './lesson6-mock-3';
-console.log('TYPE: ', typeof excerciseBTest, excerciseBTest);
 
-describe('excerciseBTest', () => {
-  console.log('TYPE: ', typeof excerciseBTest, excerciseBTest);
-  // const {
-  //   getCompanyNames,
-  //   getLongestCatchPhaseCompany,
-  //   getOrgWebsites,
-  //   getCityes,
-  // } = excerciseBTest;
+console.log('fetch1: ', typeof fetch1);
 
-  // let mock: unknown;
-  beforeAll(() => {
-    // mock = jest.fn().mockReturnValueOnce(fetch1);
-    // .mockReturnValueOnce(fetch2)
-    // .mockReturnValueOnce(fetch3)
-  });
+describe('excerciseB fetch data:', () => {
+  // beforeAll(() => {
+  // const mock: unknown = jest.fn().mockReturnValue(fetch1);
+  // .mockReturnValueOnce(fetch2)
+  // .mockReturnValueOnce(fetch3)
+  // });
 
   afterAll(() => {
     jest.resetAllMocks();
   });
 
-  it('excerciseBTest is load', () => {
-    expect(excerciseBTest).toBeDefined();
+  //==============================================
+  it('getCompanyNames is load', () => {
+    expect(getUserNames).toBeDefined();
   });
 
-  // //==============================================
-  // it('getCompanyNames is load', () => {
-  //   expect(getCompanyNames).toBeDefined();
-  // });
-
   // it('getCompanyNames for fetch1', () => {
+  //   console.log('MOCK: ', mock);
+
   //   const res1 = [
   //     'Huels and Sons',
   //     'Kuhic - Predovic',
@@ -51,7 +48,7 @@ describe('excerciseBTest', () => {
   //     'Jacobson LLC',
   //     'Volkman, Fisher and Schimmel',
   //   ];
-  //   expect(getCompanyNames(mock)).toEqual(res1);
+  //   expect(getUserNames(mock as IUser)).toEqual(res1);
   // });
 
   // //==============================================
