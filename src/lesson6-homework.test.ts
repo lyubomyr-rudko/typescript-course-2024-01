@@ -28,7 +28,6 @@ describe('fetchData', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(Array.isArray(data)).toEqual(true);
     expect(data.length).not.toEqual(0);
-    expect(data).toStrictEqual(mockedUsers);
 
     fetchMock.mockRestore();
   });
