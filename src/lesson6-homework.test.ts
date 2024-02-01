@@ -12,13 +12,13 @@ import {
 
 describe('fetchData', () => {
   it('fetches successfully data from an API', async () => {
-    const fetchMock = jest
-      .spyOn(global, 'fetch')
-      .mockImplementation(
-        jest.fn(() =>
-          Promise.resolve({ json: () => Promise.resolve(mockedUsers) }),
-        ) as jest.Mock,
-      );
+    const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(
+      jest.fn(() =>
+        Promise.resolve({
+          json: () => Promise.resolve(mockedUsers),
+        }),
+      ) as jest.Mock,
+    );
 
     const data = await fetchUsers();
 
@@ -28,6 +28,9 @@ describe('fetchData', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(Array.isArray(data)).toEqual(true);
     expect(data.length).not.toEqual(0);
+    expect(data).toStrictEqual(mockedUsers);
+
+    fetchMock.mockRestore();
   });
 });
 

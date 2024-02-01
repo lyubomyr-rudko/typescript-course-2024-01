@@ -245,7 +245,8 @@ async function excerciseB() {
       return { firstName, lastName };
     });
   }
-  // console.log('names ->', getUserNames(users));
+
+  const usersNames = getUserNames(users);
 
   // TODO: define a function that returns array of company names
   function getUserCompanies(users: IUser[]): string[] {
@@ -254,7 +255,7 @@ async function excerciseB() {
     });
   }
 
-  // console.log('companies ->', getUserCompanies(users));
+  const usersCompanies = getUserCompanies(users);
 
   // TODO: define a function that returns a company name that has the longest catchPhrase
   function getLongestCompany(users: IUser[]): string {
@@ -268,7 +269,7 @@ async function excerciseB() {
     return result.company.name;
   }
 
-  // console.log('longest catchPhrase ->', getLongestCompany(users));
+  const longestCompany = getLongestCompany(users);
 
   // TODO: define a function that returns a list of users that have website ending with .org
   function getUsersWithOrgDomen(users: IUser[]): IUser[] {
@@ -279,7 +280,7 @@ async function excerciseB() {
     return result;
   }
 
-  // console.log('.org ->', getUsersWithOrgDomen(users));
+  const usersWithOrgDomen = getUsersWithOrgDomen(users);
 
   // TODO: define a funciton that returns a list of cities where users live, sorted by city name
   function getUserCities(users: IUser[]): string[] {
@@ -292,7 +293,7 @@ async function excerciseB() {
     return cities.sort((x, y) => (x > y ? 1 : -1));
   }
 
-  // console.log('list of cities ->', getUserCities(users));
+  const usersCities = getUserCities(users);
 
   // TODO: move all the functions above out of this function and export them
   // TODO: write unit tests for the 4 functions above
