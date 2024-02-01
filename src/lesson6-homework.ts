@@ -50,8 +50,8 @@ function exercise27() {
     age: 3,
     species: 'dog',
   };
-  // printPassangerInfo(human);
-  // printPassangerInfo(animal);
+  printPassangerInfo(human);
+  printPassangerInfo(animal);
   // TODO: Implement function printPassangerInfo using instanceof operator to narrow the type of the passanger
   // TODO: Add implementation of the printPassangerInfo using property check to narrow the type of the passanger
 }
@@ -91,9 +91,9 @@ function exercise28() {
   }
 
   // TODO: add missing type property to the objects
-  // printBlogPost({ kind: 'message', text: 'abc message' });
-  // printBlogPost({ kind: 'image', url: 'abc image' });
-  // printBlogPost({ kind: 'comment', text: 'abc comment', messageId: '123' });
+  printBlogPost({ kind: 'message', text: 'abc message' });
+  printBlogPost({ kind: 'image', url: 'abc image' });
+  printBlogPost({ kind: 'comment', text: 'abc comment', messageId: '123' });
 }
 // TODO: compile and run the code
 exercise28();
@@ -128,7 +128,7 @@ function excerciseA() {
     optionalArrayOf?: number[];
     optionalObjectWithShape?: TOptionalObjectWithShape;
     requiredFunc: () => void;
-    requiredAny: any;
+    requiredAny: unknown;
   }
   class MyComponent extends React.Component<IMyComponentProps> {
     render() {
@@ -180,7 +180,7 @@ function excerciseA() {
     requiredAny: 'any',
   });
 
-  // console.log(component);
+  console.log(component);
 }
 excerciseA();
 
@@ -240,7 +240,7 @@ async function excerciseB() {
 
   function getUserNames(users: IUser[]): IUserName[] {
     return users.map((user) => {
-      let [firstName, lastName] = user.name.split(' ');
+      const [firstName, lastName] = user.name.split(' ');
 
       return { firstName, lastName };
     });
