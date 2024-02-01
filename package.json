@@ -42,7 +42,6 @@
   },
   "dependencies": {
     "@lyubomyr.rudko/demo": "^1.0.1",
-    "lodash": "^4.17.21"
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
     "react": "^18.2.0"
