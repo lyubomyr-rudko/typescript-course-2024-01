@@ -376,9 +376,9 @@ async function exerciseB() {
   function getCompanyWithLongestCatchPhrase(
     users: IUser[],
   ): string | undefined {
-    const company = users.reduce((prev, current) => {
-      return current.company?.catchPhrase.length >
-        (prev?.catchPhrase.length || 0)
+    const company = users.reduce<ICompany | undefined>((prev, current) => {
+      const catchPhraseLength = current.company?.catchPhrase?.length ?? 0;
+      return catchPhraseLength > (prev?.catchPhrase?.length || 0)
         ? current.company
         : prev;
     }, undefined);
