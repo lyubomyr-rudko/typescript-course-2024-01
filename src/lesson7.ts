@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// ********* Lesson 7 *********
-
 // Q/A
 
 // Definite Assignment Assertions
@@ -39,21 +37,33 @@ function definiteAssignmentAssertions() {
 
   // definitive assignment assertion can be used with class properties
   class Point {
-    x: number;
-    y: number;
+    x!: number;
+    y!: number;
 
     constructor(x: number, y: number) {
-      this.x = x;
-      this.y = y;
+      //   this.x = x;
+      //   this.y = y;
 
-      //   this.move(x, y);
+      this.move(x, y);
     }
 
     move(x: number, y: number) {
+      // validation
+      if (x < 0 || y < 0) {
+        throw new Error('x and y cannot be less than 0');
+      }
+
+      if (!this.x || !this.y) {
+        this.x = 0;
+        this.y = 0;
+      }
+
       this.x += x;
       this.y += y;
     }
   }
+  const p1 = new Point(10, 20);
+  console.log(p1.x);
 
   class Point2 {
     x!: number;
@@ -82,9 +92,13 @@ function definiteAssignmentAssertions() {
   // the above class is an exaple where definitive assignment assertion is obused and should be avoided
 }
 definiteAssignmentAssertions();
-
 // Never type
 function neverType() {
+  const x: number | string | never = 123;
+
+  if (typeof x === 'string') {
+    console.log(x);
+  }
   // never type is used to indicate that a function never returns
   // example
   const throwError = function (message: string) {
@@ -96,6 +110,9 @@ function neverType() {
   const singForewer = function () {
     // eslint-disable-next-line no-constant-condition
     while (true) {
+      //   if (Math.random() < 0.5) {
+      //     return 'never gonna give you up';
+      //   }
       console.log('never gonna give you up');
     }
   };
@@ -129,16 +146,14 @@ function neverType() {
         return s.width * s.height;
       }
       // if include to the union type Circle, then the following code will trigger compile time error
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const shouldNeverOccur: never = s;
-
-      return shouldNeverOccur;
     }
     console.log(area({ kind: 'square', size: 10 }));
   }
   example2();
 }
 neverType();
-
 // User-Defined Type Guards
 function userDefinedTypeGuards() {
   type TSquare = {
@@ -185,9 +200,7 @@ function functionOverloading() {
 
   function reverseV2(str: string): string;
   function reverseV2(arr: string[]): string[];
-  function reverseV2(
-    stringOrStringArray: string | string[],
-  ): string | string[] {
+  function reverseV2(stringOrStringArray: string | string[]) {
     if (typeof stringOrStringArray === 'string') {
       return stringOrStringArray.split('').reverse().join('');
     } else {
@@ -223,11 +236,7 @@ function functionOverloading() {
 
   function makeDate2(timestamp: number): Date;
   function makeDate2(year: number, month: number, day: number): Date;
-  function makeDate2(
-    timestampOrYear: number,
-    month?: number,
-    day?: number,
-  ): Date {
+  function makeDate2(timestampOrYear: number, month?: number, day?: number) {
     if (month !== undefined && day !== undefined) {
       return new Date(timestampOrYear, month, day);
     } else {
@@ -235,7 +244,7 @@ function functionOverloading() {
     }
   }
   // Typescript will cause an error if the function is called with the wrong number of arguments
-  //   const d4 = makeDate2(2020, 11);
+  // const d4 = makeDate2(2020, 11);
   const d5 = makeDate2(2020, 11, 11);
   const d6 = makeDate2(12345678);
   console.log(d5);
@@ -250,6 +259,9 @@ functionOverloading();
 function callSignatures() {
   //   type TLogCallback = (message: string, userId?: string) => void;
   type TAddCallback = (x: number, y: number) => number;
+  //   interface IAddCallback {
+  //     (x: number, y: number): number;
+  //   }
 
   interface IComponentProps {
     handleAdd: TAddCallback;
@@ -261,6 +273,30 @@ function callSignatures() {
     handleAdd: (x, y) => x + y,
   };
   console.log(props.handleAdd(1, 2));
+
+  interface IMakeDate {
+    (timestamp: number): Date;
+    (year: number, month: number, day: number): Date;
+
+    // (year: number, month?: number, day?: number): Date; // optional
+  }
+
+  const makeDate3: IMakeDate = (
+    timestampOrYear: number,
+    month?: number,
+    day?: number,
+  ) => {
+    if (month !== undefined && day !== undefined) {
+      return new Date(timestampOrYear, month, day);
+    } else {
+      return new Date(timestampOrYear);
+    }
+  };
+
+  const d7 = makeDate3(2020, 11, 11);
+  const d8 = makeDate3(12345678);
+  console.log(d7);
+  console.log(d8);
 
   type TLogCallbackV2 = {
     // overloaded function signature
@@ -305,6 +341,13 @@ function callSignatures() {
     new (name: string): TUser;
   };
 
+  const Ctor: TUserConstructorV2 = class User {
+    constructor(public name: string) {}
+  };
+
+  const c = new Ctor('John');
+  console.log(c.name);
+
   interface IUserConstructor {
     new (name: string): TUser;
     // multiple constructor signatures
@@ -321,7 +364,11 @@ callSignatures();
 
 // Absstract Classes
 function abstractClasses() {
-  abstract class Logger {
+  interface ILogger {
+    log(message: string): void;
+  }
+
+  abstract class Logger implements ILogger {
     // includes abstract index signature
     abstract log(message: string): void;
 
@@ -347,20 +394,30 @@ function abstractClasses() {
   class FileLogger extends Logger {
     log(message: string): void {
       // write to file
+      console.log('writing to file', message);
     }
   }
 
   class DbLogger extends Logger {
     log(message: string): void {
       // write to db
+      console.log('writing to db', message);
     }
   }
 
   // can not create an instance of an abstract class
   // const logger = new Logger();
+
+  abstract class Api<TModel> {
+    abstract getAll(): TModel[];
+    abstract get(id: string): TModel;
+    abstract create(model: TModel): TModel;
+    abstract update(id: string, model: TModel): TModel;
+    abstract delete(id: string): void;
+    abstract patch(id: string, model: Partial<TModel>): TModel;
+  }
 }
 abstractClasses();
-
 // Index Signatures
 function indexSignatures() {
   // index signature is used to define a type for a dictionary
@@ -423,6 +480,7 @@ function indexSignatures() {
   // dictionary with length property - use intersection type instead
   interface IDictionary {
     [key: string]: string;
+    // lenght?: number; // error
   }
   type IDictionaryWithLength = IDictionary & {
     length?: number;
@@ -448,15 +506,47 @@ function indexSignatures() {
       dateOfBirth: new Date(1980, 1, 1),
     },
   };
-  // people2['joe'].dateOfBirth.toISOString();
+  //   people2['joe'].dateOfBirth.toISOString();
   people2['joe']?.dateOfBirth.toISOString();
   people2['mike']?.dateOfBirth.toISOString();
   // validates the property names correctly
   // people2['fox'] = {neme: 'Fox', dateOfBirth: new Date(1990, 1, 1)};
+
+  // Map example
+  const people3 = new Map<string, TPerson>();
+  people3.set('joe', {
+    name: 'Joe',
+    dateOfBirth: new Date(1980, 1, 1),
+  });
+  people3.set('ann', {
+    name: 'Ann',
+    dateOfBirth: new Date(1985, 1, 1),
+  });
+
+  for (const [key, value] of people3) {
+    console.log(key, value);
+  }
 }
 indexSignatures();
 
-// React with Typescript - class components, functional components, hooks, jest dependency mocks
+// Interface type 2
+function interfaceType2() {
+  class Control {
+    state: string;
 
-const test = 'test';
-export default test;
+    constructor(state: string) {
+      this.state = state;
+    }
+  }
+
+  interface SelectableControl extends Control {
+    select(): void;
+  }
+
+  class Button implements SelectableControl {
+    state: string = '10';
+    select() {}
+  }
+}
+
+// React with Typescript - class components, functional components, hooks, jest dependency mocks
