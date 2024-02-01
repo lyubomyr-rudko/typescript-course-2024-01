@@ -9,37 +9,56 @@ function exercise27() {
   // TODO: define THuman type with properties name, age, driverLicenseId
   type THuman = {
     name: string;
+    age: number;
+    driverLicenseId: string;
   };
   // TODO: define TAnimal type with properties name, age, species
   type TAnimal = {
     name: string;
+    age: number;
+    species: string;
   };
   // TODO: define TPassanger type as union of THuman and TAnimal
   // type TPassanger = {};
+  type TPassanger = THuman | TAnimal;
 
   // annotate the function to accept TPassanger type
-  function printPassangerInfo(passanger: unknown) {
+  function printPassangerInfo(passanger: TPassanger) {
     // TODO: use type narrowing to print the passanger info
+
     // console.log((passanger as any).name);
+    console.log(passanger.name);
     // console.log((passanger as any).age);
+    console.log(passanger.age);
     // TODO: print driverLicenseId if passanger is human
     // console.log((passanger as any).driverLicenseId);
+    if ('driverLicenseId' in passanger) {
+      console.log(passanger.driverLicenseId);
+    }
     // TODO: print species if passanger is animal
     // console.log((passanger as any).species);
-    console.log(passanger);
+    if ('species' in passanger) {
+      console.log(passanger.species);
+    }
   }
+
   // TODO: add missing properties to human and animal objects
   const human: THuman = {
     name: 'John',
+    age: 30,
+    driverLicenseId: 'DL12345',
   };
   const animal: TAnimal = {
     name: 'Rex',
+    age: 5,
+    species: 'Dog',
   };
   printPassangerInfo(human);
   printPassangerInfo(animal);
-  // TODO: Implement function printPassangerInfo using instanceof operator to narrow the type of the passanger
-  // TODO: Add implementation of the printPassangerInfo using property check to narrow the type of the passanger
 }
+// TODO: Implement function printPassangerInfo using instanceof operator to narrow the type of the passanger
+// TODO: Add implementation of the printPassangerInfo using property check to narrow the type of the passanger
+//}
 // TODO: compile and run the code
 exercise27();
 
@@ -47,12 +66,15 @@ exercise27();
 function exercise28() {
   // TODO: add type property to TBlogMessage, TBlogImage, TBlogComment with literal type of 'message', 'image', 'comment'
   type TBlogMessage = {
+    kind: 'message';
     text: string;
   };
   type TBlogImage = {
+    kind: 'image';
     url: string;
   };
   type TBlogComment = {
+    kind: 'comment';
     text: string;
     messageId: string;
   };
@@ -61,21 +83,35 @@ function exercise28() {
 
   function printBlogPost(post: TBlogPost) {
     // TODO: use discriminated union instead of prop check to narrow the type of the object
-    if ('messageId' in post) {
-      console.log('comment: ', post.text);
+
+    if (post.kind === 'message') {
+      console.log('message: ', post.text);
     }
-    if ('url' in post) {
+    if (post.kind === 'image') {
       console.log('image: ', post.url);
     }
-    if ('text' in post) {
-      console.log('message: ', post.text);
+    if (post.kind === 'comment') {
+      console.log('comment: ', post.text);
     }
   }
 
   // TODO: add missing type property to the objects
-  printBlogPost({ text: 'abc' });
-  printBlogPost({ url: 'abc' });
-  printBlogPost({ text: 'abc', messageId: '123' });
+  const message: TBlogMessage = {
+    kind: 'message',
+    text: 'abc',
+  };
+  const image: TBlogImage = {
+    kind: 'image',
+    url: 'abc',
+  };
+  const comment: TBlogComment = {
+    kind: 'comment',
+    text: 'abc',
+    messageId: '123',
+  };
+  printBlogPost(message);
+  printBlogPost(image);
+  printBlogPost(comment);
 }
 // TODO: compile and run the code
 exercise28();
@@ -85,15 +121,27 @@ function excerciseA() {
   class Message {
     constructor(public text: string) {}
   }
-
   interface IMyComponentProps {
     optionalBool?: boolean;
+    optionalArray?: any[];
+    optionalFunc?: () => void;
+    optionalNumber?: number;
+    optionalObject?: object;
+    optionalString?: string;
+    optionalSymbol?: symbol;
+    optionalMessage?: Message;
+    optionalEnum?: 'News' | 'Photos';
+    optionalUnion?: string | number | Message;
+    optionalArrayOf?: number[];
+    optionalObjectWithShape?: {
+      optionalProperty?: string;
+      requiredProperty: number;
+    };
+    requiredFunc: () => void;
+    requiredAny: any;
   }
-  class MyComponent extends React.Component<IMyComponentProps> {
-    render() {
-      return React.createElement('div', null, 'hello');
-    }
 
+  class MyComponent extends React.Component<IMyComponentProps> {
     static propTypes = {
       optionalArray: PropTypes.array,
       optionalBool: PropTypes.bool,
@@ -102,75 +150,128 @@ function excerciseA() {
       optionalObject: PropTypes.object,
       optionalString: PropTypes.string,
       optionalSymbol: PropTypes.symbol,
-
       optionalMessage: PropTypes.instanceOf(Message),
-
-      // prop is limited to specific values
       optionalEnum: PropTypes.oneOf(['News', 'Photos']),
-
-      // object that could be one of many types
       optionalUnion: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
         PropTypes.instanceOf(Message),
       ]),
-
-      // array of a certain type
       optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
-
-      // object taking on a particular shape
       optionalObjectWithShape: PropTypes.shape({
         optionalProperty: PropTypes.string,
         requiredProperty: PropTypes.number.isRequired,
       }),
-
       requiredFunc: PropTypes.func.isRequired,
-
-      // A value of any data type
       requiredAny: PropTypes.any.isRequired,
     };
+
+    render() {
+      return React.createElement('div', null, 'hello');
+    }
   }
 
-  const component = new MyComponent({ optionalBool: true });
+  const component = new MyComponent({
+    requiredFunc: () => {},
+    requiredAny: 'test',
+  });
   console.log(component);
 }
 excerciseA();
 
-async function excerciseB() {
-  // TODO: define IUser interface with properties id, name, email, website
-
-  // TODO: implement function to fetch list of users from https://jsonplaceholder.typicode.com/users
-  async function fetchUsers() {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
-    // TODO: apply type to the result of this fetch function
-    const users = await res.json();
-
-    return users;
-  }
-  // All next tasks will be using a list of users
-  const users = await fetchUsers();
-
-  // TODO: extend interface IUser with property address of type IAddress
-  // TODO: define IAddress interface with properties street, suite, city, zipcode, geo
-  // TODO: extend interface IUser with property company of type ICompany and define ICompany interface with properties name, catchPhrase, bs
-
-  // TODO: define function that returns array of user names in format { firstName: string, lastName: string}
-  // TODO: use interface type for the function parameter
-  function getUserNames(users: unknown) {
-    console.log(users);
-    return [];
-  }
-  console.log(getUserNames(users));
-
-  // TODO: define a function that returns array of company names
-
-  // TODO: define a function that returns a company name that has the longest catchPhrase
-
-  // TODO: define a function that returns a list of users that have website ending with .org
-
-  // TODO: define a funciton that returns a list of cities where users live, sorted by city name
-
-  // TODO: move all the functions above out of this function and export them
-  // TODO: write unit tests for the 4 functions above
+// async function excerciseB() {
+// TODO: define IUser interface with properties id, name, email, website
+interface IGeo {
+  lat: string;
+  lng: string;
 }
-excerciseB();
+
+interface IAddress {
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
+  geo: IGeo;
+}
+
+interface ICompany {
+  name: string;
+  catchPhrase: string;
+  bs: string;
+}
+
+interface IUser {
+  id: number;
+  name: string;
+  email: string;
+  website: string;
+  address: IAddress;
+  company: ICompany;
+}
+
+export async function fetchUsers(): Promise<IUser[]> {
+  const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  const users: IUser[] = await res.json();
+  return users;
+}
+
+export function getUserNames(
+  users: IUser[],
+): { firstName: string; lastName: string }[] {
+  return users.map((user) => {
+    const [firstName, lastName] = user.name.split(' ');
+    return { firstName, lastName };
+  });
+}
+
+export function getCompanyNames(users: IUser[]): string[] {
+  return users.map((user) => user.company.name);
+}
+
+export function getCompanyWithLongestCatchPhrase(users: IUser[]): string {
+  let longestCatchPhraseCompany = '';
+  let longestCatchPhraseLength = 0;
+
+  users.forEach((user) => {
+    const catchPhraseLength = user.company.catchPhrase.length;
+    if (catchPhraseLength > longestCatchPhraseLength) {
+      longestCatchPhraseLength = catchPhraseLength;
+      longestCatchPhraseCompany = user.company.name;
+    }
+  });
+
+  return longestCatchPhraseCompany;
+}
+
+export function getUsersWithOrgWebsite(users: IUser[]): IUser[] {
+  return users.filter((user) => user.website.endsWith('.org'));
+}
+
+export function getCitiesSorted(users: IUser[]): string[] {
+  const cities = users.map((user) => user.address.city);
+  return cities.sort();
+}
+
+async function main() {
+  const users = await fetchUsers();
+  console.log(getUserNames(users));
+  console.log(getCompanyNames(users));
+  console.log(getCompanyWithLongestCatchPhrase(users));
+  console.log(getUsersWithOrgWebsite(users));
+  console.log(getCitiesSorted(users));
+}
+
+main();
+
+// TODO: define a function that returns array of company names
+
+// TODO: define a function that returns a company name that has the longest catchPhrase
+
+// TODO: define a function that returns a list of users that have website ending with .org
+
+// TODO: define a funciton that returns a list of cities where users live, sorted by city name
+
+// TODO: move all the functions above out of this function and export them
+// TODO: write unit tests for the 4 functions above
+// }
+// excerciseB();
