@@ -1,5 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// const fs = require('fs');
+// import { faker } from '@faker-js/faker';
+// import fetch1 from './lesson6-mock-1';
+// import fetch2 from './lesson6-mock-2';
+// import fetch3 from './lesson6-mock-3';
 
 const test = 'test'; // this is mock export
 export default test;
@@ -115,6 +120,7 @@ function exercise28() {
 exercise28();
 
 // use interface to define props type for react component
+// WAIT NEXT LESSON FOR  RUN
 function excerciseA() {
   class Message {
     constructor(public text: string) {}
@@ -172,39 +178,249 @@ excerciseA();
 
 async function excerciseB() {
   // TODO: define IUser interface with properties id, name, email, website
+  interface IUser {
+    id: string;
+    name: string;
+    email: string;
+    website: string;
+  }
 
   // TODO: implement function to fetch list of users from https://jsonplaceholder.typicode.com/users
   async function fetchUsers() {
     const res = await fetch('https://jsonplaceholder.typicode.com/users');
     // TODO: apply type to the result of this fetch function
-    const users = await res.json();
+    if (!res.ok) throw new Error('Failed to fetch user data');
 
+    const users: IUser[] = await res.json();
     return users;
   }
   // All next tasks will be using a list of users
   const users = await fetchUsers();
+  // const users = fetch1; // fetch2  fetch3 for get result
 
   // TODO: extend interface IUser with property address of type IAddress
+  type TAddress = {
+    street?: string;
+    city?: string;
+    zipcode?: number;
+    geo: string;
+  };
+  interface IAddress extends IUser {
+    address: TAddress;
+  }
+
   // TODO: define IAddress interface with properties street, suite, city, zipcode, geo
+  interface IAddress {
+    street?: string;
+    city?: string;
+    zipcode?: number;
+    geo?: string;
+  }
+
   // TODO: extend interface IUser with property company of type ICompany and define ICompany interface with properties name, catchPhrase, bs
+  // type TCompany = {
+  //   name?: string;
+  //   catchPhrase?: string;
+  //   bs?: string;
+  // };
+  interface ICompany extends IUser {
+    // company: TCompany;
+    company: {
+      name?: string;
+      catchPhrase?: string;
+      bs?: string;
+    };
+  }
 
   // TODO: define function that returns array of user names in format { firstName: string, lastName: string}
   // TODO: use interface type for the function parameter
-  function getUserNames(users: unknown) {
-    console.log(users);
-    return [];
+  type TUserSplitted = {
+    firstName: string;
+    lastName: string;
+  };
+  function getUserNames(users: IUser | IUser[]): TUserSplitted[] {
+    const testIsArray = Array.isArray(users);
+    const splitFullname = (fullname: string): TUserSplitted => {
+      const splitted = fullname.split(' ');
+      // const pattern = /^(?:\S+\.\s+)?(\S+)\s+(\S+)$/;
+      // const splitted = fullname.match(pattern) || '';
+      return {
+        firstName: splitted[0], // splitted[0],
+        lastName: splitted[1], // splitted[1],
+      };
+    };
+
+    if (testIsArray) {
+      console.log(users.map((user) => splitFullname(user.name)));
+    }
+
+    //
+    return testIsArray
+      ? users.map((user) => splitFullname(user.name))
+      : [splitFullname(users.name)];
   }
-  console.log(getUserNames(users));
+  console.log('>>> USERNAMES: \n', getUserNames(users));
 
   // TODO: define a function that returns array of company names
+  function getCompanyNames(input: ICompany | ICompany[]): string[] {
+    const testIsArray = Array.isArray(input);
+    return testIsArray ? input.map((el) => el.company.name || '') : [''];
+  }
+  console.log(
+    '>>> COMPANIES: \n',
+    getCompanyNames(users as unknown as ICompany),
+  );
 
   // TODO: define a function that returns a company name that has the longest catchPhrase
+  function getLongestCatchPhaseCompany(input: ICompany | ICompany[]): string {
+    const testIsArray = Array.isArray(input);
+    let max = 0;
+    let maxIndex = 0;
+    if (!testIsArray) return input.company.name || '';
+    input.forEach((el: ICompany, i: number) => {
+      const testType: boolean = typeof el.company.catchPhrase === 'undefined';
+      const length = testType ? 0 : el.company.catchPhrase?.length; // bad work
+      const safetyInt = parseInt(length + '');
+      if (safetyInt > max) {
+        max = safetyInt;
+        maxIndex = i;
+      }
+    });
+    return input[maxIndex].company.name || '';
+  }
+  console.log(
+    '>>> LONGEST CatchPhazeCompany:\n',
+    getLongestCatchPhaseCompany(users as unknown as ICompany),
+  );
 
   // TODO: define a function that returns a list of users that have website ending with .org
+  function getOrgWebsites(input: ICompany | ICompany[]): string[] {
+    const testIsArray = Array.isArray(input);
+    const pattern = /\.org$/;
+    // const isORG = (email:string):boolean => email.includes('.org')
+    if (!testIsArray) {
+      const isOrg = pattern.test(input.website);
+      return isOrg ? [input.website] : [];
+    } else {
+      return input
+        .filter((el) => pattern.test(el.website))
+        .map((user) => user.name);
+    }
+  }
+  console.log(
+    '>>> USERS with website ending *.org: \n',
+    getOrgWebsites(users as unknown as ICompany),
+  );
 
   // TODO: define a funciton that returns a list of cities where users live, sorted by city name
+  function getCityes(input: IAddress | IAddress[]): string[] {
+    const testIsArray = Array.isArray(input);
+    const cities = testIsArray
+      ? input.map((el) => el.address.city || '')
+      : [input.address.city || ''];
+    return cities.sort((a, b) =>
+      a.toLowerCase().localeCompare(b.toLowerCase()),
+    );
+  }
+  console.log('>>> CITIES: \n', getCityes(users as unknown as IAddress));
 
   // TODO: move all the functions above out of this function and export them
   // TODO: write unit tests for the 4 functions above
+
+  return {
+    getCompanyNames,
+    getLongestCatchPhaseCompany,
+    getOrgWebsites,
+    getCityes,
+  };
 }
-excerciseB();
+export const excerciseBTest = excerciseB();
+
+//  Generate Mocks for tests
+// function mockFetchDataGenerate() {
+//   const rand = Math.round(Math.random() * 10) + 10;
+//   console.log('RAND: ', rand);
+
+//   const generateRandomUserWebsite = () => {
+//     const username = faker.internet.userName();
+//     const domain = faker.internet.domainName();
+//     const tld = faker.internet.domainSuffix();
+
+//     return `http://${username}.${domain}.${tld}`;
+//   };
+
+//   let data = [];
+//   for (let i = 0; i < rand; i++) {
+//     const fakeData = {
+//       id: faker.string.uuid(),
+//       name: faker.person.fullName(),
+//       email: faker.internet.email(),
+//       username: faker.internet.userName(),
+
+//       address: {
+//         street: faker.location.street(),
+//         suite: faker.location.buildingNumber(),
+//         city: faker.location.city(),
+//         zipcode: faker.location.zipCode(),
+//         geo: faker.location.nearbyGPSCoordinate() || {
+//           latitude: faker.location.latitude(),
+//           longitude: faker.location.longitude(),
+//         },
+//       },
+//       phone: faker.phone.number(),
+//       website: generateRandomUserWebsite(),
+//       company: {
+//         name: faker.company.name(),
+//         catchPhrase: faker.company.catchPhrase(),
+//         bs: faker.company.buzzPhrase(),
+//       },
+//     };
+//     console.log('____', fakeData);
+//     data.push(fakeData);
+//   }
+//   // const data = Array(rand).map((el) => {
+//   //   const fakeData = {
+//   //     id: faker.string.uuid(),
+//   //     name: faker.person.fullName(),
+//   //     email: faker.internet.email(),
+//   //     username: faker.internet.userName(),
+
+//   //     address: {
+//   //       street: faker.location.street(),
+//   //       suite: faker.location.buildingNumber(),
+//   //       city: faker.location.city(),
+//   //       zipcode: faker.location.zipCode(),
+//   //       geo: faker.location.nearbyGPSCoordinate() || {
+//   //         latitude: faker.location.latitude(),
+//   //         longitude: faker.location.longitude(),
+//   //       },
+//   //     },
+//   //     phone: faker.phone.number(),
+//   //     website: generateRandomUserWebsite(),
+//   //     company: {
+//   //       name: faker.company.name(),
+//   //       catchPhrase: faker.company.catchPhrase(),
+//   //       bs: faker.company.buzzPhrase(),
+//   //     },
+//   //   };
+//   //   console.log('____', fakeData);
+
+//   //   return fakeData;
+//   // });
+//   console.log(data.length, 'DATA: ', data);
+
+//   return data;
+// }
+
+// fs.writeFileSync(
+//   './src/lesson6-mock-1.json',
+//   JSON.stringify(mockFetchDataGenerate(), null, 2),
+// );
+// fs.writeFileSync(
+//   './src/lesson6-mock-2.json',
+//   JSON.stringify(mockFetchDataGenerate(), null, 2),
+// );
+// fs.writeFileSync(
+//   './src/lesson6-mock-3.json',
+//   JSON.stringify(mockFetchDataGenerate(), null, 2),
+// );
