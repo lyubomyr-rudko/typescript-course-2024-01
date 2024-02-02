@@ -28,17 +28,15 @@ function excercise2() {
 
   str = 'Hello';
   num = 3;
-  
+
   // create a while loop which prints string variable to console 3 times
   let count: number = 0;
-  while(count < num ){
+  while (count < num) {
     console.log(str);
-    count++
+    count++;
   }
- 
+
   // try to assign number variable to string variable - observe the error
-
-
 }
 excercise2();
 
@@ -49,29 +47,29 @@ function excercise3() {
   let m: number;
 
   // TODO: declare varaible result of type array of numbers
-  let result: Array<number> = []
+  const result: Array<number> = [];
 
   // TODO: assign n and m some values - n = 1, m = 10
   n = 1;
   m = 10;
 
   // TODO: create a for loop which adds numbers from n to m to result array
-  for(let i = n; i <= m; i++){
-    result.push(i)
+  for (let i = n; i <= m; i++) {
+    result.push(i);
   }
-  console.log(result)
+  console.log(result);
 
   // TODO: support case where m > n (reverse the order)
-  if(n <= m){
-    for(let i = n; i <= m; i++){
-      result.push(i)
+  if (n <= m) {
+    for (let i = n; i <= m; i++) {
+      result.push(i);
     }
-  }else{
-    for(let i = n; i <= m; i--){
-      result.push(i)
+  } else {
+    for (let i = n; i <= m; i--) {
+      result.push(i);
     }
   }
-  console.log(result)
+  console.log(result);
   // TODO: support case where n > m (reverse the order)
   // TODO: print result array to console
 }

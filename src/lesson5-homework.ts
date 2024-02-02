@@ -3,27 +3,25 @@
 export function exercise18() {
   // TODO: define class Student with properties name, age, studentId
   // TODO: add constructor to initialize the properties
-  class Student{
+  class Student {
     name: string;
     age: number;
     readonly studentId: number;
-    
-    constructor(
-      name: string, 
-      age: number, 
-      studentId: number
-      ) {
+
+    constructor(name: string, age: number, studentId: number) {
       this.name = name;
       this.age = age;
       this.studentId = studentId;
     }
     // TODO: add method printStudent to print the student info to console
     printStudent(): void {
-      console.log(`Name: ${this.name}, Age: ${this.age}, Student ID: ${this.studentId}`);
-    };
-  };
+      console.log(
+        `Name: ${this.name}, Age: ${this.age}, Student ID: ${this.studentId}`,
+      );
+    }
+  }
   // TODO: create an instance of the class Student
-  const student1: Student = new Student("Anna Du", 22, 12345);
+  const student1: Student = new Student('Anna Du', 22, 12345);
   // TODO: print the student info to console
   student1.printStudent();
   // TODO: try to change the studentId property
@@ -62,15 +60,15 @@ function exercise19() {
     height: 20,
     color: 'red',
     space: 100,
-  }
+  };
 
-  const desktopWidget:TWidget = {
+  const desktopWidget: TWidget = {
     name: 'widget',
     width: 10,
     height: 20,
     os: 'windows',
     space: 100,
-  }
+  };
   // TODO: print the result to console
   console.log(widgetWithSize);
   console.log(desktopWidget);
@@ -80,13 +78,13 @@ exercise19();
 
 // use uniton types to replace unknown type for compile time type checking
 function exercise20() {
-  function padLeft(value: string, n: string | number ) {
+  function padLeft(value: string, n: string | number) {
     // TODO: if n is a number, pad the string with spaces (append `n` spaces to the left of the `value` string)
     // TODO: if n is a string, pad the string with the given string (append `n` to the left of the `value` string)
     if (typeof n === 'number') {
       return ' '.repeat(n) + value;
-    } else if ( typeof n === 'string') {
-      return (n as string) + value; 
+    } else if (typeof n === 'string') {
+      return (n as string) + value;
     } else {
       throw new Error('Invalid type for padding.');
     }
@@ -105,10 +103,7 @@ exercise20();
 // use literal types for type checking
 export function exercise21() {
   // TODO: define rock, paper, scissors literal type and assign it to TMove type
-  type TMove = 
-  |'rock' 
-  |'paper' 
-  |'scissors';
+  type TMove = 'rock' | 'paper' | 'scissors';
   // TODO: add type check to the function below
   function rockPaperSizorsVins(me: TMove, other: TMove) {
     // TODO: add checks for rock, paper, scissors
@@ -130,7 +125,7 @@ export function exercise21() {
   console.log(rockPaperSizorsVins('rock', 'scissors')); // true
   // TODO: make sure that the following calls are not allowed
   // console.log(rockPaperSizorsVins('papapaper', 'scissors')); // true - no type check
-  return { rockPaperSizorsVins }
+  return { rockPaperSizorsVins };
 }
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of values to it (need to export the function first)
@@ -142,7 +137,7 @@ function exercise22() {
   type TWidget = {
     name: string;
   };
-  
+
   type TWidgetWithSize = TWidget & {
     width: number;
     height: number;
@@ -219,22 +214,22 @@ exercise22();
 
 // rewrite the code using async await
 // function exerciseA() {
-  // function printMessagesWithTimeout() {
-  //   setTimeout(() => {
-  //     console.log('1');
+// function printMessagesWithTimeout() {
+//   setTimeout(() => {
+//     console.log('1');
 
-  //     setTimeout(() => {
-  //       console.log('2');
+//     setTimeout(() => {
+//       console.log('2');
 
-  //       setTimeout(() => {
-  //         console.log('3');
-  //       }, 1000);
-  //     }, 1000);
-  //   }, 1000);
+//       setTimeout(() => {
+//         console.log('3');
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
 export function exerciseA(delay: number) {
   return new Promise((resolve) => {
     setTimeout(resolve, delay);
-  }); 
+  });
 }
 async function printMessagesWithTimeout() {
   await new Promise((resolve) => setTimeout(resolve, 1000));

@@ -5,22 +5,22 @@ function excercise10() {
     width: number;
     height: number;
     // TODO: add a constructor which takes width and height as parameters
-    constructor ( width: number, height: number ) {
+    constructor(width: number, height: number) {
       this.width = width;
       this.height = height;
-    };
+    }
     // TODO: add a method `getArea` which returns the area of the rectangle
     getArea() {
-      return (this.width * this.height)
-    };
+      return this.width * this.height;
+    }
     // TODO: add a method `getPerimeter` which returns the perimeter of the rectangle
-    getPerimeter(){
-      return (this.width * this.height) * 2;
-    };
+    getPerimeter() {
+      return this.width * this.height * 2;
+    }
   }
   // TODO: create an instance of the Rectangle class, with width 10 and height 20
   const myRectangle = new Rectangle(10, 20);
-  // TODO: call the method `getArea` and print the result to console  
+  // TODO: call the method `getArea` and print the result to console
   console.log(myRectangle.getArea());
   // TODO: call the method `getPerimeter` and print the result to console
   console.log(myRectangle.getPerimeter());
@@ -38,16 +38,16 @@ excercise10();
 // create a generic Stack class (Stack is a FILO data structure, push and pop methods are used to add and remove items from the top of the stack)
 function excercise11() {
   // TODO: create a generic Stack class
-  class Stack<T>{
+  class Stack<T> {
     // TODO: add a private data property of type array of T
     private data: T[] = [];
     // TODO: add a push method which takes an item of type T as a parameter and adds it to the top of the stack
-    push(item:T){
-      this.data.push(item)
+    push(item: T) {
+      this.data.push(item);
     }
     // TODO: add a pop method which removes and returns the item from the top of the stack
-    pop():T | undefined {
-      return this.data.pop()
+    pop(): T | undefined {
+      return this.data.pop();
     }
   }
   // TODO: create an instance of the Stack class with number type
@@ -79,7 +79,7 @@ function excercise12() {
   // TODO: fix the fetchUsers function to return an array of users, not any type
   function fetchUsers(): User[] {
     // TODO: add type safety to the data variable, annotate it with the type of users
-    const data: { users: User[] }= JSON.parse(
+    const data: { users: User[] } = JSON.parse(
       '{"users": [{"name": "John"}, {"name": "Jane"}]}',
     );
     // TODO: add check for the data type to contain list of users
@@ -125,7 +125,7 @@ export function getPolindromesOnly(...strings: string[]): string[] {
 // TODO: create a function which takes an array of strings and returns the reversed array of reversed strings
 // Example: ['abc', 'def'] -> ['fed', 'cba']
 export function reverseArrayOfStrings(strings: string[]): string[] {
-  return strings.map(str => str.split('').reverse().join(''));
+  return strings.map((str) => str.split('').reverse().join(''));
 }
 
 // TODO: create a function that takes n param, and generates a list of n random kyivstar phone numbers
@@ -133,7 +133,9 @@ export function reverseArrayOfStrings(strings: string[]): string[] {
 export function generatePhoneNumbers(n: number): string[] {
   const phoneNumbers = [];
   for (let i = 0; i < n; i++) {
-    const randomNumber = Math.floor(Math.random() * 10000000).toString().padStart(7, '0');
+    const randomNumber = Math.floor(Math.random() * 10000000)
+      .toString()
+      .padStart(7, '0');
     const phoneNumber = `097${randomNumber}`;
     phoneNumbers.push(phoneNumber);
   }

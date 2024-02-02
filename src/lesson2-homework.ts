@@ -3,7 +3,6 @@
 
 // Create a function which uses tuple type to calculate the distance between two points in 2D space
 function excercise4() {
-
   // TODO: declare two variables of type tuple, each with two numbers
   let point1: [number, number];
   let point2: [number, number];
@@ -17,12 +16,12 @@ function excercise4() {
     const x2 = p2[0]; // TODO: replace with the first element of p2
     const y2 = p2[1]; // TODO: replace with the second element of p2
     // TODO: calculate the distance
-    let distance = Math.sqrt((x1-x2)**2 + (y1-y2)**2)
+    const distance = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
     return distance;
   }
   // TODO: call the function and print the result to console
-  let result = distance(point1, point2);
-  console.log(result)
+  const result = distance(point1, point2);
+  console.log(result);
 }
 // TODO: compile and run the code
 excercise4();
