@@ -221,7 +221,6 @@ exercise28();
 // }
 //
 // excerciseA();
-
 function exerciseA() {
   class Message {
     constructor(public text: string) {}
@@ -229,19 +228,42 @@ function exerciseA() {
 
   interface IMyComponentProps {
     optionalBool?: boolean;
+    optionalArray?: string[];
+    optionalFunc?: () => void;
+    optionalNumber?: number;
+    optionalObject?: { key: string };
+    optionalString?: string;
+    optionalSymbol?: symbol;
+
+    optionalMessage?: Message;
+
+    optionalEnum?: 'News' | 'Photos';
+
+    optionalUnion?: string | number | Message;
+
+    optionalArrayOf?: number[];
+
+    optionalObjectWithShape?: {
+      optionalProperty?: string;
+      requiredProperty: number;
+    };
+
+    requiredFunc: () => void;
+
+    requiredAny: unknown;
   }
 
   class MyComponent extends React.Component<IMyComponentProps> {
-    render() {
+    render(): React.ReactElement {
       return React.createElement('div', null, 'hello');
     }
 
     static propTypes = {
-      optionalArray: PropTypes.array,
       optionalBool: PropTypes.bool,
+      optionalArray: PropTypes.arrayOf(PropTypes.string),
       optionalFunc: PropTypes.func,
       optionalNumber: PropTypes.number,
-      optionalObject: PropTypes.object,
+      optionalObject: PropTypes.shape({ key: PropTypes.string }),
       optionalString: PropTypes.string,
       optionalSymbol: PropTypes.symbol,
 
@@ -268,7 +290,37 @@ function exerciseA() {
     };
   }
 
-  const component = new MyComponent({ optionalBool: true });
+  const component = new MyComponent({
+    optionalBool: true,
+    optionalArray: ['item1', 'item2'],
+    optionalFunc: () => {
+      console.log('Hello from optionalFunc');
+    },
+    optionalNumber: 42,
+    optionalObject: { key: 'value' },
+    optionalString: 'Hello, PropTypes!',
+    optionalSymbol: Symbol('optional'),
+
+    optionalMessage: new Message('Hello from Message'),
+
+    optionalEnum: 'News',
+
+    optionalUnion: 'Hello union',
+
+    optionalArrayOf: [1, 2, 3],
+
+    optionalObjectWithShape: {
+      optionalProperty: 'optional',
+      requiredProperty: 123,
+    },
+
+    requiredFunc: () => {
+      console.log('Hello from requiredFunc');
+    },
+
+    requiredAny: 'Any value',
+  });
+
   console.log(component);
 }
 
