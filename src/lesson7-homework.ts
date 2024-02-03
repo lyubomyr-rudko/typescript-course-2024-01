@@ -26,7 +26,7 @@ function exercise29() {
   printThingDescription({ name: 'widget' });
   printThingDescription({ os: 'android' });
 }
-// exercise29();
+exercise29();
 
 // Create an overloaded function definitions
 function exercise30() {
@@ -56,7 +56,7 @@ function exercise30() {
 
   console.log(a, b);
 }
-// exercise30();
+exercise30();
 
 // Create call signatures
 function exercise31() {
@@ -117,7 +117,7 @@ function exercise31() {
       console.log(firstName, lastName, email);
     }
   };
-  handleSaveUserSubmitv2('Harry', 'Potter');
+  handleSaveUserSubmitv3('Harry', 'Potter');
 
   function createForm(onSubmit: TSaveUserCallback) {
     const firstName = 'John';
@@ -198,7 +198,7 @@ function exercise32() {
   myDog.eat();
   myDog.makeSound('woof');
 }
-// exercise32();
+exercise32();
 
 // Create a type for a dictionary with string keys and number values
 export function exercise33() {
@@ -225,7 +225,7 @@ export function exercise33() {
     const dictionary: TDictionary = {};
 
     for (let i = 0; i < str.length; i++) {
-      let counter: number = 1;
+      const counter: number = 1;
 
       if (str[i] in dictionary) {
         dictionary[str[i]] += counter;
@@ -246,7 +246,7 @@ export function exercise33() {
 
   return { getMostFrequentCharacter };
 }
-// exercise33();
+exercise33();
 // TODO: exporrt getMostFrequentCharacter function, and add a test for it in lesson7-homework.test.ts
 
 // Use index signature and caching
@@ -316,7 +316,7 @@ function exercise34() {
   ).sort((a, b) => b[1] - a[1])[0];
   console.log(highestAverageGrade);
 }
-// exercise34();
+exercise34();
 
 const test = 'test';
 export default test;
