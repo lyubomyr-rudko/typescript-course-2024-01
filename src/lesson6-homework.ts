@@ -269,7 +269,8 @@ async function excerciseB() {
     });
     return getUserFirstLastName;
   }
-  console.log(getUserNames(users));
+  // console.log(getUserNames(users));
+  getUserNames(users);
 
   // TODO: define a function that returns array of company names
   function getCompanyNames(users: IUser[]) {
@@ -277,7 +278,8 @@ async function excerciseB() {
 
     return getCompanyName;
   }
-  console.log(getCompanyNames(users));
+  // console.log(getCompanyNames(users));
+  getCompanyNames(users);
 
   // TODO: define a function that returns a company name that has the longest catchPhrase
   function getLongerCatchPhrase(users: IUser[]) {
@@ -286,7 +288,8 @@ async function excerciseB() {
 
     return getLongetPhrase[0];
   }
-  console.log(getLongerCatchPhrase(users));
+  // console.log(getLongerCatchPhrase(users));
+  getLongerCatchPhrase(users);
 
   // TODO: define a function that returns a list of users that have website ending with .org
   function getWebsiteEndinOrg(users: IUser[]) {
@@ -296,14 +299,257 @@ async function excerciseB() {
     return getWebsiteEndingWithOrg;
   }
 
-  console.log(getWebsiteEndinOrg(users));
+  // console.log(getWebsiteEndinOrg(users));
+  getWebsiteEndinOrg(users);
 
   // TODO: define a funciton that returns a list of cities where users live, sorted by city name
   function getListCities(users: IUser[]) {
     return users.map(({ address }) => address.city).sort();
   }
-  console.log(getListCities(users));
+  // console.log(getListCities(users));
+  getListCities(users);
+
   // TODO: move all the functions above out of this function and export them
   // TODO: write unit tests for the 4 functions above
 }
 excerciseB();
+
+interface IUser {
+  id: number;
+  name: string;
+  email: string;
+  website: string;
+}
+
+interface IUser {
+  address: IAddress;
+}
+
+interface IAddress {
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
+  geo: object[];
+}
+
+interface IUser {
+  company: ICompany;
+}
+
+interface ICompany {
+  name: string;
+  catchPhrase: string;
+  bs: string;
+}
+
+export const usersArr: IUser[] = [
+  {
+    id: 1,
+    name: 'Leanne Graham',
+    email: 'Sincere@april.biz',
+    address: {
+      street: 'Kulas Light',
+      suite: 'Apt. 556',
+      city: 'Gwenborough',
+      zipcode: '92998-3874',
+      geo: [Object],
+    },
+    website: 'hildegard.org',
+    company: {
+      name: 'Romaguera-Crona',
+      catchPhrase: 'Multi-layered client-server neural-net',
+      bs: 'harness real-time e-markets',
+    },
+  },
+  {
+    id: 2,
+    name: 'Ervin Howell',
+    email: 'Shanna@melissa.tv',
+    address: {
+      street: 'Victor Plains',
+      suite: 'Suite 879',
+      city: 'Wisokyburgh',
+      zipcode: '90566-7771',
+      geo: [Object],
+    },
+    website: 'anastasia.net',
+    company: {
+      name: 'Deckow-Crist',
+      catchPhrase: 'Proactive didactic contingency',
+      bs: 'synergize scalable supply-chains',
+    },
+  },
+  {
+    id: 3,
+    name: 'Clementine Bauch',
+    email: 'Nathan@yesenia.net',
+    address: {
+      street: 'Douglas Extension',
+      suite: 'Suite 847',
+      city: 'McKenziehaven',
+      zipcode: '59590-4157',
+      geo: [Object],
+    },
+    website: 'ramiro.info',
+    company: {
+      name: 'Romaguera-Jacobson',
+      catchPhrase: 'Face to face bifurcated interface',
+      bs: 'e-enable strategic applications',
+    },
+  },
+  {
+    id: 4,
+    name: 'Patricia Lebsack',
+    email: 'Julianne.OConner@kory.org',
+    address: {
+      street: 'Hoeger Mall',
+      suite: 'Apt. 692',
+      city: 'South Elvis',
+      zipcode: '53919-4257',
+      geo: [Object],
+    },
+    website: 'kale.biz',
+    company: {
+      name: 'Robel-Corkery',
+      catchPhrase: 'Multi-tiered zero tolerance productivity',
+      bs: 'transition cutting-edge web services',
+    },
+  },
+  {
+    id: 5,
+    name: 'Chelsey Dietrich',
+    email: 'Lucio_Hettinger@annie.ca',
+    address: {
+      street: 'Skiles Walks',
+      suite: 'Suite 351',
+      city: 'Roscoeview',
+      zipcode: '33263',
+      geo: [Object],
+    },
+    website: 'demarco.info',
+    company: {
+      name: 'Keebler LLC',
+      catchPhrase: 'User-centric fault-tolerant solution',
+      bs: 'revolutionize end-to-end systems',
+    },
+  },
+  {
+    id: 6,
+    name: 'Mrs. Dennis Schulist',
+    email: 'Karley_Dach@jasper.info',
+    address: {
+      street: 'Norberto Crossing',
+      suite: 'Apt. 950',
+      city: 'South Christy',
+      zipcode: '23505-1337',
+      geo: [Object],
+    },
+    website: 'ola.org',
+    company: {
+      name: 'Considine-Lockman',
+      catchPhrase: 'Synchronised bottom-line interface',
+      bs: 'e-enable innovative applications',
+    },
+  },
+  {
+    id: 7,
+    name: 'Kurtis Weissnat',
+    email: 'Telly.Hoeger@billy.biz',
+    address: {
+      street: 'Rex Trail',
+      suite: 'Suite 280',
+      city: 'Howemouth',
+      zipcode: '58804-1099',
+      geo: [Object],
+    },
+    website: 'elvis.io',
+    company: {
+      name: 'Johns Group',
+      catchPhrase: 'Configurable multimedia task-force',
+      bs: 'generate enterprise e-tailers',
+    },
+  },
+  {
+    id: 8,
+    name: 'Nicholas Runolfsdottir V',
+    email: 'Sherwood@rosamond.me',
+    address: {
+      street: 'Ellsworth Summit',
+      suite: 'Suite 729',
+      city: 'Aliyaview',
+      zipcode: '45169',
+      geo: [Object],
+    },
+    website: 'jacynthe.com',
+    company: {
+      name: 'Abernathy Group',
+      catchPhrase: 'Implemented secondary concept',
+      bs: 'e-enable extensible e-tailers',
+    },
+  },
+  {
+    id: 9,
+    name: 'Glenna Reichert',
+    email: 'Chaim_McDermott@dana.io',
+    address: {
+      street: 'Dayna Park',
+      suite: 'Suite 449',
+      city: 'Bartholomebury',
+      zipcode: '76495-3109',
+      geo: [Object],
+    },
+    website: 'conrad.com',
+    company: {
+      name: 'Yost and Sons',
+      catchPhrase: 'Switchable contextually-based project',
+      bs: 'aggregate real-time technologies',
+    },
+  },
+  {
+    id: 10,
+    name: 'Clementina DuBuque',
+    email: 'Rey.Padberg@karina.biz',
+    address: {
+      street: 'Kattie Turnpike',
+      suite: 'Suite 198',
+      city: 'Lebsackbury',
+      zipcode: '31428-2261',
+      geo: [Object],
+    },
+    website: 'ambrose.net',
+    company: {
+      name: 'Hoeger LLC',
+      catchPhrase: 'Centralized empowering task-force',
+      bs: 'target end-to-end models',
+    },
+  },
+];
+export function getCompanyNames(users: IUser[]) {
+  const getCompanyName = users.map(({ company }) => company.name);
+
+  return getCompanyName;
+}
+getCompanyNames(usersArr);
+
+export function getLongerCatchPhrase(users: IUser[]) {
+  const getLongetPhrase = users.map(({ company }) => company.catchPhrase);
+  getLongetPhrase.sort((a, b) => b.length - a.length);
+
+  return getLongetPhrase[0];
+}
+getLongerCatchPhrase(usersArr);
+
+export function getWebsiteEndinOrg(users: IUser[]) {
+  const getWebsiteEndingWithOrg = users.filter(({ website }) =>
+    website.includes('.org'),
+  );
+  return getWebsiteEndingWithOrg;
+}
+
+getWebsiteEndinOrg(usersArr);
+
+export function getListCities(users: IUser[]) {
+  return users.map(({ address }) => address.city).sort();
+}
+console.log(getListCities(usersArr));
