@@ -32,7 +32,7 @@ describe('getLongerCatchPhrase', () => {
     expect(getLongerCatchPhrase).toBeDefined();
   });
   it('return longer phrase', () => {
-    const expected = 'Multi-tiered zero tolerance productivity';
+    const expected = 'Robel-Corkery : Multi-tiered zero tolerance productivity';
     expect(getLongerCatchPhrase(usersArr)).toEqual(expected);
   });
 });

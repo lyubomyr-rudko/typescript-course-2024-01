@@ -285,17 +285,15 @@ async function excerciseB() {
   function getLongerCatchPhrase(users: IUser[]) {
     let maxLength = 0;
     let companyName = '';
-    let longerCatchPhrase = '';
 
     users.forEach((company) => {
       const catchPhrase = company.company.catchPhrase;
       if (catchPhrase.length > maxLength) {
         maxLength = catchPhrase.length;
-        companyName = company.company.name;
-        longerCatchPhrase = catchPhrase;
+        companyName = `${company.company.name} : ${catchPhrase}`;
       }
     });
-    console.log(`${companyName} : ${longerCatchPhrase}`);
+
     return companyName;
   }
 
@@ -544,16 +542,25 @@ export function getCompanyNames(users: IUser[]) {
 getCompanyNames(usersArr);
 
 export function getLongerCatchPhrase(users: IUser[]) {
-  const getLongetPhrase = users.map(({ company }) => company.catchPhrase);
-  getLongetPhrase.sort((a, b) => b.length - a.length);
+  let maxLength = 0;
+  let companyName = '';
 
-  return getLongetPhrase[0];
+  users.forEach((company) => {
+    const catchPhrase = company.company.catchPhrase;
+    if (catchPhrase.length > maxLength) {
+      maxLength = catchPhrase.length;
+      companyName = `${company.company.name} : ${catchPhrase}`;
+    }
+  });
+
+  return companyName;
 }
+
 getLongerCatchPhrase(usersArr);
 
 export function getWebsiteEndinOrg(users: IUser[]) {
   const getWebsiteEndingWithOrg = users.filter(({ website }) =>
-    website.includes('.org'),
+    website.endsWith('.org'),
   );
   return getWebsiteEndingWithOrg;
 }
