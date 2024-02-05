@@ -29,7 +29,6 @@
 // exercise29();
 
 // import { number, string } from 'prop-types';
-
 function exercise29() {
   type TWidget = {
     name: string;
@@ -323,7 +322,7 @@ exercise32();
 // }
 //
 // exercise33();
-function exercise33() {
+export function exercise33() {
   type TDictionary = { [key: string]: number };
 
   const dictionary: TDictionary = {
@@ -335,6 +334,10 @@ function exercise33() {
   dictionary['c'] = 3;
 
   function getMostFrequentCharacter(str: string): string {
+    if (!str) {
+      return '';
+    }
+
     const charCount: TDictionary = {};
 
     for (const char of str.toLowerCase()) {
@@ -355,9 +358,11 @@ function exercise33() {
   }
 
   console.log(getMostFrequentCharacter('She sells seashells by the seashore.'));
+  return getMostFrequentCharacter;
 }
 
 exercise33();
+
 // TODO: export getMostFrequentCharacter function, and add a test for it in lesson7-homework.test.ts
 
 // // Use index signature and caching

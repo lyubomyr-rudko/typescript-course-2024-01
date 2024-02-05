@@ -1,5 +1,8 @@
+// lesson7-homework.test.ts
 import { describe, expect, it } from '@jest/globals';
-import { getMostFrequentCharacter } from './lesson7-ex33';
+import { exercise33 } from './lesson7-homework';
+
+const getMostFrequentCharacter = exercise33();
 
 describe('getMostFrequentCharacter', () => {
   it('returns the most frequent character in a string', () => {
