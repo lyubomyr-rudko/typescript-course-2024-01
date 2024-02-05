@@ -337,7 +337,7 @@ function exercise33() {
   function getMostFrequentCharacter(str: string): string {
     const charCount: TDictionary = {};
 
-    for (const char of str) {
+    for (const char of str.toLowerCase()) {
       charCount[char] = (charCount[char] || 0) + 1;
     }
 
