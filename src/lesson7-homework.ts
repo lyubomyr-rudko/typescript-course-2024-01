@@ -258,24 +258,19 @@ function exercise34() {
   type TGrades = {
     [key: string]: number[];
   };
-  const studentGrades = [
-    {
-      name: 'John',
-      grades: [100, 90, 80, 70, 90],
-    },
-    {
-      name: 'Jane',
-      grades: [90, 80, 70, 60, 50],
-    },
-    {
-      name: 'Jack',
-      grades: [80, 70, 60, 50, 40],
-    },
-  ];
+  type CachedResultsDictionary = {
+    [studentName: string]: number;
+  };
+  const studentGrades: TGrades = {
+    John: [100, 90, 80, 70, 90],
+    Jane: [90, 80, 70, 60, 50],
+    Jack: [80, 70, 60, 50, 40],
+  };
 
   // TODO: Define a dictionary of cached results, add type definition using index signature
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const cachedResults: TGrades = {};
+
+  const cachedResults: CachedResultsDictionary = {};
 
   // TODO: Implement function to calculate the average grade for a student
   function calculateAverageGrade(studentName: string): number | string {
@@ -283,20 +278,49 @@ function exercise34() {
 
     if (cachedResults[studentName]) {
       // TODO: return cached result
-      return 0;
+      return cachedResults[studentName];
     } else {
       // TODO: calculate average grade
       // TODO: set cached result
       // TODO: return average grade
-      return 0;
+
+      const grades = studentGrades[studentName];
+      if (grades && grades.length > 0) {
+        const averageGrade: number =
+          grades.reduce((sum, grade) => sum + grade, 0) / grades.length;
+        cachedResults[studentName] = averageGrade;
+        return averageGrade;
+      } else {
+        return 'Student not found';
+      }
     }
   }
 
-  studentGrades.forEach((student) => {
-    console.log(calculateAverageGrade(student.name));
+  // studentGrades.forEach((student) => {
+  //   console.log(calculateAverageGrade(student.name));
+  // });
+  Object.keys(studentGrades).forEach((studentName) => {
+    console.log(`${studentName}: ${calculateAverageGrade(studentName)}`);
   });
 
   // TODO: find the student with the highest average grade
+  let highestAverageStudentName = '';
+  let highestAverage = -1;
+
+  for (const studentName in studentGrades) {
+    const averageGrade = calculateAverageGrade(studentName);
+
+    if (typeof averageGrade !== 'string') {
+      if (averageGrade > highestAverage) {
+        highestAverage = averageGrade;
+        highestAverageStudentName = studentName;
+      }
+    }
+  }
+
+  console.log(
+    `Student with the highest average grade: ${highestAverageStudentName} (${highestAverage})`,
+  );
 }
 exercise34();
 
