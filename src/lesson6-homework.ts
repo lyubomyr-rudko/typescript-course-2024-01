@@ -283,23 +283,34 @@ async function excerciseB() {
 
   // TODO: define a function that returns a company name that has the longest catchPhrase
   function getLongerCatchPhrase(users: IUser[]) {
-    const getLongetPhrase = users.map(({ company }) => company.catchPhrase);
-    getLongetPhrase.sort((a, b) => b.length - a.length);
+    let maxLength = 0;
+    let companyName = '';
+    let longerCatchPhrase = '';
 
-    return getLongetPhrase[0];
+    users.forEach((company) => {
+      const catchPhrase = company.company.catchPhrase;
+      if (catchPhrase.length > maxLength) {
+        maxLength = catchPhrase.length;
+        companyName = company.company.name;
+        longerCatchPhrase = catchPhrase;
+      }
+    });
+    console.log(`${companyName} : ${longerCatchPhrase}`);
+    return companyName;
   }
+
   // console.log(getLongerCatchPhrase(users));
   getLongerCatchPhrase(users);
 
   // TODO: define a function that returns a list of users that have website ending with .org
   function getWebsiteEndinOrg(users: IUser[]) {
     const getWebsiteEndingWithOrg = users.filter(({ website }) =>
-      website.includes('.org'),
+      website.endsWith('.org'),
     );
     return getWebsiteEndingWithOrg;
   }
 
-  // console.log(getWebsiteEndinOrg(users));
+  console.log(getWebsiteEndinOrg(users));
   getWebsiteEndinOrg(users);
 
   // TODO: define a funciton that returns a list of cities where users live, sorted by city name
