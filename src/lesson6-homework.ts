@@ -310,7 +310,7 @@ async function excerciseB() {
     return getWebsiteEndingWithOrg;
   }
 
-  console.log(getWebsiteEndinOrg(users));
+  // console.log(getWebsiteEndinOrg(users));
   getWebsiteEndinOrg(users);
 
   // TODO: define a funciton that returns a list of cities where users live, sorted by city name
