@@ -339,15 +339,13 @@ function lesson8() {
     }
   }
   typeofTypeOperator();
-  // Ts usage example in react project
-
-  // React with Typescript - class components, functional components, hooks, jest dependency mocks
+  // React with Typescript
   // vite: https://vitejs.dev/guide/#scaffolding-your-first-vite-project
   // $ npm create vite@latest
-  // React hooks
-  // - useEffect
-  // - useState
-  // - useLayoutEffect
+  // jsx, React.createElement
+  // class components vs functional components
+  // state, props, setState
+  // lifecycle methods
 }
 lesson8();
 
