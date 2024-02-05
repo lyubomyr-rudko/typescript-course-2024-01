@@ -360,48 +360,105 @@ function exercise33() {
 exercise33();
 // TODO: export getMostFrequentCharacter function, and add a test for it in lesson7-homework.test.ts
 
-// Use index signature and caching
+// // Use index signature and caching
+// function exercise34() {
+//   // TODO: Define a dictionary of student grades, add type definition using index signature
+//   // key is a student name, value is an array of grades (numbers)
+//   const studentGrades = [
+//     {
+//       name: 'John',
+//       grades: [100, 90, 80, 70, 90],
+//     },
+//     {
+//       name: 'Jane',
+//       grades: [90, 80, 70, 60, 50],
+//     },
+//     {
+//       name: 'Jack',
+//       grades: [80, 70, 60, 50, 40],
+//     },
+//   ];
+//   // TODO: Define a dictionary of cached results, add type definition using index signature
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const cachedResults: any = {};
+//
+//   // TODO: Implement function to calculate the average grade for a student
+//   function calculateAverageGrade(studentName: string): number | string {
+//     // TODO: check if chached result exists, return it if it does
+//
+//     if (cachedResults[studentName]) {
+//       // TODO: return cached result
+//       return 0;
+//     } else {
+//       // TODO: calculate average grade
+//       // TODO: set cached result
+//       // TODO: return average grade
+//       return 0;
+//     }
+//   }
+//
+//   studentGrades.forEach((student) => {
+//     console.log(calculateAverageGrade(student.name));
+//   });
+//
+//   // TODO: find the student with the highest average grade
+// }
+//
+// exercise34();
 function exercise34() {
-  // TODO: Define a dictionary of student grades, add type definition using index signature
+  type TStudentGrades = { [studentName: string]: number[] };
+  type TCachedResults = { [studentName: string]: number };
+
+  // Define a dictionary of student grades, add type definition using index signature
   // key is a student name, value is an array of grades (numbers)
-  const studentGrades = [
-    {
-      name: 'John',
-      grades: [100, 90, 80, 70, 90],
-    },
-    {
-      name: 'Jane',
-      grades: [90, 80, 70, 60, 50],
-    },
-    {
-      name: 'Jack',
-      grades: [80, 70, 60, 50, 40],
-    },
-  ];
-  // TODO: Define a dictionary of cached results, add type definition using index signature
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const cachedResults: any = {};
+  const studentGrades: TStudentGrades = {
+    John: [100, 90, 80, 70, 90],
+    Jane: [90, 80, 70, 60, 50],
+    Jack: [80, 70, 60, 50, 40],
+  };
 
-  // TODO: Implement function to calculate the average grade for a student
+  // Define a dictionary of cached results, add type definition using index signature
+  const cachedResults: TCachedResults = {};
+
+  // Implement function to calculate the average grade for a student
   function calculateAverageGrade(studentName: string): number | string {
-    // TODO: check if chached result exists, return it if it does
-
+    // Check if cached result exists, return it if it does
     if (cachedResults[studentName]) {
-      // TODO: return cached result
-      return 0;
+      return cachedResults[studentName];
     } else {
-      // TODO: calculate average grade
-      // TODO: set cached result
-      // TODO: return average grade
-      return 0;
+      // Calculate average grade
+      const grades = studentGrades[studentName];
+      if (grades) {
+        const averageGrade =
+          grades.reduce((sum, grade) => sum + grade, 0) / grades.length;
+        // Set cached result
+        cachedResults[studentName] = averageGrade;
+        // Return average grade
+        return averageGrade;
+      } else {
+        // Return an error message if student name is not found
+        return `Student '${studentName}' not found.`;
+      }
     }
   }
 
-  studentGrades.forEach((student) => {
-    console.log(calculateAverageGrade(student.name));
+  // Iterate over student names and calculate average grade
+  Object.keys(studentGrades).forEach((studentName) => {
+    console.log(calculateAverageGrade(studentName));
   });
 
-  // TODO: find the student with the highest average grade
+  // Find the student with the highest average grade
+  const highestAverageStudent = Object.keys(studentGrades).reduce(
+    (highestStudent, currentStudent) => {
+      const currentAverage = calculateAverageGrade(currentStudent);
+      const highestAverage = calculateAverageGrade(highestStudent);
+      return currentAverage > highestAverage ? currentStudent : highestStudent;
+    },
+  );
+
+  console.log(
+    `Student with the highest average grade: ${highestAverageStudent}`,
+  );
 }
 
 exercise34();
