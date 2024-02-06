@@ -4,22 +4,51 @@
 // 3. https://www.typescriptlang.org/docs/handbook/2/functions.html
 // TODO: (important!) remove all // eslint-disable-next-line comments
 
-// Use double assertion
+// // Use double assertion
+// function exercise35() {
+//   // TODO:Create two types: TUser and TProduct
+//   interface TUser {
+//     /* TODO: add definition for user name, title and email */
+//   }
+//   interface TProduct {
+//     /* TODO: add definition for product title, price and quantity */
+//   }
+//
+//   // eslint-disable-next-line prefer-const
+//   let user: TUser = {};
+//   let product: TProduct = {};
+//
+//   // TODO: fix the error by adding double assertion
+//   product = user;
+//
+//   console.log(product);
+// }
+// exercise35();
+
 function exercise35() {
-  // TODO:Create two types: TUser and TProduct
   interface TUser {
-    /* TODO: add definition for user name, title and email */
+    name: string;
+    title: string;
+    email: string;
   }
+
   interface TProduct {
-    /* TODO: add definition for product title, price and quantity */
+    title: string;
+    price: number;
+    quantity: number;
   }
 
-  // eslint-disable-next-line prefer-const
-  let user: TUser = {};
-  let product: TProduct = {};
+  const user: TUser = {
+    name: 'John',
+    title: 'Developer',
+    email: 'john@example.com',
+  };
 
-  // TODO: fix the error by adding double assertion
-  product = user;
+  const product: TProduct = {
+    title: user.name,
+    price: 100,
+    quantity: 5,
+  } as TProduct;
 
   console.log(product);
 }
@@ -43,12 +72,14 @@ function exercise36() {
     // TODO: uncomment the following line, fix the error
     // return `${this.name}, ${this.age}, ${this.role}`;
   }
+
   data.toString = toString;
   // TODO: run the code and observe the error
   console.log(data + '');
   console.log(data.toString());
   // TODO: add required properties to the data object, fixing the error
 }
+
 exercise36();
 
 // Use generic constraints
@@ -81,6 +112,7 @@ function exercise37() {
   // TODO: uncomment the following line and fix the error
   // console.log(person.sayHello());
 }
+
 exercise37();
 
 // fix issues related to temporal uncertainty
@@ -152,6 +184,7 @@ function exercise38() {
     });
   }
 }
+
 exercise38();
 
 // Use typeof operator
@@ -227,6 +260,7 @@ function exercise39() {
     // TODO: iterate over the keys with foreach
     // TODO: console.log the typeof for each property
   }
+
   printAllUserPropTypes();
 
   // TODO: create function that returns address of the user object,
@@ -234,6 +268,7 @@ function exercise39() {
   function getUserAddress() {
     return null;
   }
+
   console.log(getUserAddress());
 
   // TODO: create function that returns coordinates of the user copany address
@@ -242,8 +277,10 @@ function exercise39() {
   function getCoordinates() {
     return null;
   }
+
   console.log(getCoordinates());
 }
+
 exercise39();
 
 // Write the generic function to remove the duplicates from the array
@@ -253,6 +290,7 @@ function removeDuplicates(arr: unknown[]) {
   const distinctArr = [...set];
   return distinctArr;
 }
+
 console.log(removeDuplicates([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]));
 // TODO: write unit tests for this function
 
@@ -260,6 +298,7 @@ console.log(removeDuplicates([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]));
 function getIntersection(arr1: unknown[], arr2: unknown[]) {
   return [...arr1, ...arr2];
 }
+
 console.log(getIntersection([8, 3, 2, 4, 2], [7, 3, 4, 5, 3])); // [3, 4]
 // TODO: write unit tests for this function
 
