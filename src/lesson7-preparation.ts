@@ -456,7 +456,5 @@ function indexSignatures() {
 }
 indexSignatures();
 
-// React with Typescript - class components, functional components, hooks, jest dependency mocks
-
 const test = 'test';
 export default test;
