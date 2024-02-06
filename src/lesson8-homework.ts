@@ -2,7 +2,6 @@
 // 1. https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
 // 2. https://www.typescriptlang.org/docs/handbook/2/narrowing.html
 // 3. https://www.typescriptlang.org/docs/handbook/2/functions.html
-
 // TODO: (important!) remove all // eslint-disable-next-line comments
 
 // Use double assertion
