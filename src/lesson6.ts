@@ -369,6 +369,8 @@ function implementsKeyword() {
   interface IPerson {
     name: string;
     age: number;
+
+    sayMyName: () => void;
   }
 
   type TPerson = {
@@ -377,10 +379,17 @@ function implementsKeyword() {
   };
 
   class Person implements IPerson {
-    constructor(
-      public name: string,
-      public age: number,
-    ) {}
+    name: string;
+    age: number;
+
+    constructor(name: string, age: number) {
+      this.name = name;
+      this.age = age;
+    }
+
+    sayMyName() {
+      console.log(this.name);
+    }
   }
   class Personv2 implements TPerson {
     constructor(
