@@ -8,20 +8,27 @@
 // Use double assertion
 function exercise35() {
   // TODO:Create two types: TUser and TProduct
+ 
   interface TUser {
+    name: string;
+    title: string;
+    email: string;
     /* TODO: add definition for user name, title and email */
   }
   interface TProduct {
+    title: string;
+    price: number;
+    quantity: number;
     /* TODO: add definition for product title, price and quantity */
   }
 
   // eslint-disable-next-line prefer-const
-  let user: TUser = {};
-  let product: TProduct = {};
+  let user: TUser = {name: "Ann", title: "Happy monday", email: 'ann@gmail.com'};
+  let product: TProduct = {title: "Phone", price: 100, quantity: 2};
 
   // TODO: fix the error by adding double assertion
-  product = user;
-
+  //product = user;
+  product = user as any as TProduct;
   console.log(product);
 }
 exercise35();
@@ -30,19 +37,18 @@ exercise35();
 function exercise36() {
   // Note: this object does not have a name property
   // but the toString function expects it to be there, and there is no type check
+ 
   const data = {
     firstName: 'Joe',
     lastName: 'Doe',
     age: 30,
     role: 'Developer',
   };
+ 
   // TODO: add this param annotation, to enforce that this function
   // can only be called on an object with name, age and role properties
-  function toString() {
-    // TODO: remove the following line
-    return '';
-    // TODO: uncomment the following line, fix the error
-    // return `${this.name}, ${this.age}, ${this.role}`;
+  function toString(this: {firstName: string, age: number, role: string}) {
+    return `${this.firstName}, ${this.age}, ${this.role}`;
   }
   data.toString = toString;
   // TODO: run the code and observe the error
@@ -61,8 +67,13 @@ function exercise37() {
 
   // TODO: implement method that adds addGreeting method to the object
   // TODO: add generic constraints to enforce type checking, add return type annotation
-  function addGreeting<T>(obj: T) {
-    return obj; // remove this line
+  function addGreeting<T extends IPerson>(
+    obj: T,
+  ): T & { sayHello: () => string } {
+    return {
+      ...obj,
+      sayHello: () => `'Hello' ${obj.firstName} ${obj.lastName}`,
+    };
 
     // TODO: implement the method sayHello that returns a greeting string
     // TODO: use firstName lastName props to generate a greeting string, for example: "Hello Joe Smith"
@@ -77,10 +88,10 @@ function exercise37() {
   });
 
   // TODO: remove the following line
-  console.log(person as IPerson);
+  // console.log(person as IPerson);
 
   // TODO: uncomment the following line and fix the error
-  // console.log(person.sayHello());
+  console.log(person.sayHello());
 }
 exercise37();
 
@@ -101,10 +112,10 @@ function exercise38() {
   // TODO: fix the type of fetchResult variable to be union of array of GroupDocument objects / null
 
   // TODO: uncomment the following line
-  // let fetchResult = null;
+  let fetchResult: GroupDocument[] | null = null;
 
   // TODO: remove this line
-  let fetchResult: GroupDocument[] = null as unknown as GroupDocument[];
+  //let fetchResult: GroupDocument[] = null as unknown as GroupDocument[];
 
   // TODO: keep this code as is
   fetchResult = [
@@ -144,8 +155,10 @@ function exercise38() {
     userNames.forEach((name) => {
       // TOOD: explain why type narrowing does not work here and fix the error (and remove `any` type annotations)
       // TODO: remove this line
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any, prefer-const
-      let result = fetchResult.find((obj: any) => obj.name === name);
+
+      const result = fetchResult?.find(
+        (obj: GroupDocument) => obj.name === name,
+      );
 
       if (result) {
         console.log(result.data);
@@ -223,27 +236,36 @@ function exercise39() {
   console.log(user);
 
   // TODO: for each property of the user object, print its type using js typeof operator
+  type TUser = typeof user;
   function printAllUserPropTypes() {
     // TODO: get lis of own keys of the user object
+    const arr = Object.keys(user) as (keyof TUser)[];
     // TODO: iterate over the keys with foreach
     // TODO: console.log the typeof for each property
+    arr.forEach((key) => {
+      console.log(`${key} : ${typeof user[key]}`);
+    });
   }
   printAllUserPropTypes();
 
   // TODO: create function that returns address of the user object,
-  // TODO: set the return type of that function using typeof operator
-  function getUserAddress() {
-    return null;
+  function getAddressUser(obj: TUser) {
+    return console.log(obj.address);
   }
-  console.log(getUserAddress());
+  getAddressUser(user);
+  // TODO: set the return type of that function using typeof operator
+  function getUserAddress(obj: TUser): typeof obj.address {
+    return obj.address;
+  }
+  console.log(getUserAddress(user));
 
   // TODO: create function that returns coordinates of the user copany address
   // user -> company -> address -> coordinates
   // TODO: set the return type of that function using typeof operator
-  function getCoordinates() {
-    return null;
+  function getCoordinates(obj: TUser): typeof obj.company.address.coordinates {
+    return obj.company.address.coordinates;
   }
-  console.log(getCoordinates());
+  console.log(getCoordinates(user));
 }
 exercise39();
 
