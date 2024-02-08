@@ -10,17 +10,30 @@ function exercise35() {
   // TODO:Create two types: TUser and TProduct
   interface TUser {
     /* TODO: add definition for user name, title and email */
+    name: string;
+    title: string;
+    email: string;
   }
   interface TProduct {
     /* TODO: add definition for product title, price and quantity */
+    title: string;
+    price: number;
+    quantity: number;
   }
 
-  // eslint-disable-next-line prefer-const
-  let user: TUser = {};
-  let product: TProduct = {};
+  const user: TUser = {
+    name: 'Stan',
+    title: 'freelancer',
+    email: 'bla.bla@example.com',
+  };
+  let product: TProduct = {
+    title: 'Macbook Pro',
+    price: 2_500,
+    quantity: 1,
+  };
 
   // TODO: fix the error by adding double assertion
-  product = user;
+  product = user as unknown as TProduct;
 
   console.log(product);
 }
@@ -30,6 +43,11 @@ exercise35();
 function exercise36() {
   // Note: this object does not have a name property
   // but the toString function expects it to be there, and there is no type check
+  type TData = {
+    name: string;
+    age: number;
+    role: string;
+  };
   const data = {
     firstName: 'Joe',
     lastName: 'Doe',
@@ -38,15 +56,13 @@ function exercise36() {
   };
   // TODO: add this param annotation, to enforce that this function
   // can only be called on an object with name, age and role properties
-  function toString() {
-    // TODO: remove the following line
-    return '';
+  function toString(this: TData) {
     // TODO: uncomment the following line, fix the error
-    // return `${this.name}, ${this.age}, ${this.role}`;
+    return `${this.name}, ${this.age}, ${this.role}`;
   }
   data.toString = toString;
   // TODO: run the code and observe the error
-  console.log(data + '');
+  console.log(data + ''); // ERR 'this' implicitly has type 'any' because it does not have a type annotation.ts(
   console.log(data.toString());
   // TODO: add required properties to the data object, fixing the error
 }
@@ -59,16 +75,6 @@ function exercise37() {
     lastName: string;
   }
 
-  // TODO: implement method that adds addGreeting method to the object
-  // TODO: add generic constraints to enforce type checking, add return type annotation
-  function addGreeting<T>(obj: T) {
-    return obj; // remove this line
-
-    // TODO: implement the method sayHello that returns a greeting string
-    // TODO: use firstName lastName props to generate a greeting string, for example: "Hello Joe Smith"
-    // TODO: make sure the obj is not modified, and new object is returned
-  }
-
   const person = addGreeting({
     firstName: 'Joe',
     lastName: 'Smith',
@@ -76,11 +82,26 @@ function exercise37() {
     email: 'john@sample.com',
   });
 
+  // TODO: implement method that adds addGreeting method to the object
+  addGreeting(person as IPerson);
+  // TODO: add generic constraints to enforce type checking, add return type annotation
+  function addGreeting<T extends IPerson>(
+    obj: T,
+  ): T & { sayHello: () => string } {
+    // TODO: implement the method sayHello that returns a greeting string
+    // TODO: use firstName lastName props to generate a greeting string, for example: "Hello Joe Smith"
+    function sayHello() {
+      return `Hello ${obj.firstName} ${obj.lastName}`;
+    }
+    // TODO: make sure the obj is not modified, and new object is returned
+    return { ...obj, sayHello: sayHello };
+  }
+
   // TODO: remove the following line
-  console.log(person as IPerson);
+  // console.log(person as IPerson);
 
   // TODO: uncomment the following line and fix the error
-  // console.log(person.sayHello());
+  console.log(person.sayHello());
 }
 exercise37();
 
@@ -101,10 +122,10 @@ function exercise38() {
   // TODO: fix the type of fetchResult variable to be union of array of GroupDocument objects / null
 
   // TODO: uncomment the following line
-  // let fetchResult = null;
+  let fetchResult: GroupDocument[] | null = null;
 
   // TODO: remove this line
-  let fetchResult: GroupDocument[] = null as unknown as GroupDocument[];
+  // let fetchResult: GroupDocument[] | null = null as unknown as GroupDocument[];
 
   // TODO: keep this code as is
   fetchResult = [
@@ -138,14 +159,17 @@ function exercise38() {
   const userNames = ['John', 'Ringo'];
 
   if (fetchResult !== null) {
+    // fix type narrow bug for use in cb - simple create local var
+    const res = fetchResult;
     // NOTE: observe taht type narrowing works here
-    console.log(fetchResult.length);
+    console.log(res.length);
 
     userNames.forEach((name) => {
       // TOOD: explain why type narrowing does not work here and fix the error (and remove `any` type annotations)
-      // TODO: remove this line
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any, prefer-const
-      let result = fetchResult.find((obj: any) => obj.name === name);
+
+      // result have type  :GroupDocument | undefined
+      // fix it adding to end " || null" for version with retun undefined (no any find)
+      const result = res.find((obj) => obj.name === name) || null;
 
       if (result) {
         console.log(result.data);
@@ -157,8 +181,70 @@ exercise38();
 
 // Use typeof operator
 function exercise39() {
+  // type TUser = {
+  //   id: number;
+  //   firstName: string;
+  //   lastName: string;
+  //   maidenName: string;
+  //   age: number;
+  //   gender: string;
+  //   email: string;
+  //   phone: string;
+  //   username: string;
+  //   password: string;
+  //   birthDate: string;
+  //   image: string;
+  //   bloodGroup: string;
+  //   height: number;
+  //   weight: number;
+  //   eyeColor: string;
+  //   hair: {
+  //     color: string;
+  //     type: string;
+  //   };
+  //   domain: string;
+  //   ip: string;
+  //   address: {
+  //     address: string;
+  //     city: string;
+  //     coordinates: {
+  //       lat: number;
+  //       lng: number;
+  //     };
+  //     postalCode: string;
+  //     state: string;
+  //   };
+  //   macAddress: string;
+  //   university: string;
+  //   bank: {
+  //     cardExpire: string;
+  //     cardNumbers: [string, string];
+  //     cardType: string;
+  //     currency: string;
+  //     iban: string;
+  //   };
+  //   company: {
+  //     address: {
+  //       address: string;
+  //       city: string;
+  //       coordinates: {
+  //         lat: number;
+  //         lng: number;
+  //       };
+  //       postalCode: string;
+  //       state: string;
+  //     };
+  //     department: string;
+  //     name: string;
+  //     title: string;
+  //   };
+  //   ein: string;
+  //   ssn: string;
+  //   userAgent: string;
+  // };
   // for this exercise, use the following data
   const user = {
+    // : TUser
     id: 1,
     firstName: 'Terry',
     lastName: 'Medhurst',
@@ -221,47 +307,64 @@ function exercise39() {
       'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/12.0.702.0 Safari/534.24',
   };
   console.log(user);
+  type TUser = typeof user; // not work for loop typeof
 
   // TODO: for each property of the user object, print its type using js typeof operator
   function printAllUserPropTypes() {
     // TODO: get lis of own keys of the user object
+    const propList = Object.keys(user);
     // TODO: iterate over the keys with foreach
-    // TODO: console.log the typeof for each property
+    propList.forEach((key) => {
+      // TODO: console.log the typeof for each property
+      console.log(`User.${key} \ttypeof: ${typeof user[key as keyof TUser]}`);
+    });
   }
   printAllUserPropTypes();
 
   // TODO: create function that returns address of the user object,
   // TODO: set the return type of that function using typeof operator
-  function getUserAddress() {
-    return null;
+  function getUserAddress1(user: TUser): typeof user.address {
+    return user.address;
   }
-  console.log(getUserAddress());
+  console.log(`\nUser.address v1:\n`, getUserAddress1(user));
 
   // TODO: create function that returns coordinates of the user copany address
   // user -> company -> address -> coordinates
   // TODO: set the return type of that function using typeof operator
-  function getCoordinates() {
-    return null;
+  function getCoordinates(): typeof user.company.address.coordinates {
+    return user.company.address.coordinates;
   }
-  console.log(getCoordinates());
+  console.log(`COMPANY COORDS: `, getCoordinates());
 }
 exercise39();
 
 // Write the generic function to remove the duplicates from the array
-function removeDuplicates(arr: unknown[]) {
+export function removeDuplicates<T>(arr: T[]): T[] {
   // TODO: remimplement this code, do not use Set data structure
-  const set = new Set(arr);
-  const distinctArr = [...set];
-  return distinctArr;
+  // const set = new Set(arr);
+  // const distinctArr = [...set];
+  // return distinctArr;
+  const unic: T[] = [];
+  arr.forEach((el) => {
+    if (!unic.includes(el)) unic.push(el);
+  });
+  return unic;
 }
 console.log(removeDuplicates([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]));
 // TODO: write unit tests for this function
 
 // Write a function that returns an intersection of two arrays, use generics
-function getIntersection(arr1: unknown[], arr2: unknown[]) {
-  return [...arr1, ...arr2];
+export function getIntersection<T>(arr1: T[], arr2: T[]): T[] {
+  // return [...arr1, ...arr2];
+  const intersect: T[] = [];
+  arr1.forEach((el) => {
+    if (arr2.includes(el) && !intersect.includes(el)) {
+      intersect.push(el);
+    }
+  });
+  return intersect;
 }
-console.log(getIntersection([8, 3, 2, 4, 2], [7, 3, 4, 5, 3])); // [3, 4]
+console.log(getIntersection([8, 3, 2, 4, 4, 2], [7, 3, 4, 5, 3])); // [3, 4]
 // TODO: write unit tests for this function
 
 const test = 'test';
