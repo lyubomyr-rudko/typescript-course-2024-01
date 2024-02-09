@@ -269,7 +269,7 @@ function exercise39() {
 exercise39();
 
 // Write the generic function to remove the duplicates from the array
-function removeDuplicates<T>(arr: T[]): T[] {
+export function removeDuplicates<T>(arr: T[]): T[] {
   // TODO: remimplement this code, do not use Set data structure
   const distinctArr: T[] = [];
   for (const el of arr) {
@@ -283,7 +283,7 @@ console.log(removeDuplicates([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]));
 // TODO: write unit tests for this function
 
 // Write a function that returns an intersection of two arrays, use generics
-function getIntersection<T>(arr1: T[], arr2: T[]): T[] {
+export function getIntersection<T>(arr1: T[], arr2: T[]): T[] {
   const res: T[] = [];
   for (const el of arr1) {
     if (arr2.includes(el)) {
