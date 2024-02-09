@@ -8,7 +8,7 @@
 // Use double assertion
 function exercise35() {
   // TODO:Create two types: TUser and TProduct
- 
+
   interface TUser {
     name: string;
     title: string;
@@ -22,12 +22,13 @@ function exercise35() {
     /* TODO: add definition for product title, price and quantity */
   }
 
-  // eslint-disable-next-line prefer-const
+  // eslint-disable-next-line prefer-const, prettier/prettier
   let user: TUser = {name: "Ann", title: "Happy monday", email: 'ann@gmail.com'};
-  let product: TProduct = {title: "Phone", price: 100, quantity: 2};
+  let product: TProduct = { title: 'Phone', price: 100, quantity: 2 };
 
   // TODO: fix the error by adding double assertion
   //product = user;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   product = user as any as TProduct;
   console.log(product);
 }
@@ -37,6 +38,7 @@ exercise35();
 function exercise36() {
   // Note: this object does not have a name property
   // but the toString function expects it to be there, and there is no type check
+  // eslint-disable-next-line prettier/prettier
  
   const data = {
     firstName: 'Joe',
@@ -44,9 +46,10 @@ function exercise36() {
     age: 30,
     role: 'Developer',
   };
- 
+
   // TODO: add this param annotation, to enforce that this function
   // can only be called on an object with name, age and role properties
+  // eslint-disable-next-line prettier/prettier
   function toString(this: {firstName: string, age: number, role: string}) {
     return `${this.firstName}, ${this.age}, ${this.role}`;
   }
@@ -270,18 +273,31 @@ function exercise39() {
 exercise39();
 
 // Write the generic function to remove the duplicates from the array
-function removeDuplicates(arr: unknown[]) {
+export function removeDuplicates<T>(arr: T[]): T[] {
   // TODO: remimplement this code, do not use Set data structure
-  const set = new Set(arr);
-  const distinctArr = [...set];
+  // const set = new Set(arr);
+  // const distinctArr = [...set];
+  // return distinctArr;
+  const distinctArr: T[] = [];
+  arr.forEach((el) => {
+    if (!distinctArr.includes(el)) distinctArr.push(el);
+  });
   return distinctArr;
 }
+
 console.log(removeDuplicates([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]));
 // TODO: write unit tests for this function
 
 // Write a function that returns an intersection of two arrays, use generics
-function getIntersection(arr1: unknown[], arr2: unknown[]) {
-  return [...arr1, ...arr2];
+export function getIntersection<T>(arr1: T[], arr2: T[]): T[] {
+  // return [...arr1, ...arr2];
+  const intersect: T[] = [];
+  arr1.forEach((el) => {
+    if (arr2.includes(el) && !intersect.includes(el)) {
+      intersect.push(el);
+    }
+  });
+  return intersect;
 }
 console.log(getIntersection([8, 3, 2, 4, 2], [7, 3, 4, 5, 3])); // [3, 4]
 // TODO: write unit tests for this function
