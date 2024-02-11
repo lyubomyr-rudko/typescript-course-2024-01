@@ -4,6 +4,8 @@
 // 2. https://www.typescriptlang.org/docs/handbook/2/narrowing.html
 // 3. https://www.typescriptlang.org/docs/handbook/2/functions.html
 
+// import { number } from 'prop-types';
+
 // Read the following typescript documentation on decorators:
 // Use Translate to Ukrainian
 // 1. https://www.typescriptlang.org/docs/handbook/decorators.html#handbook-content
@@ -13,9 +15,43 @@
 // Use experimental decorators
 function exercise40() {
   // TODO: 1. implement method decorator to print call count of the function
+  type TDecoration = {
+    name: string;
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function callCount(originalMethod: any, _context: TDecoration) {
+    let calls: number = 0;
+    function replacementMethod(this: unknown, ...args: number[]) {
+      calls++;
+      const result = originalMethod.call(this, ...args);
+
+      console.log(`${_context.name} = call count ${calls}`);
+      return result;
+    }
+
+    return replacementMethod;
+  }
+
   // TODO: 2. implement method decorator to print execution time of the function
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function timeCount(originalMethod: any, _context: TDecoration) {
+    function replacementMethod(this: unknown, ...args: number[]) {
+      const timeBefore = new Date().getTime();
+      const timeAfter = new Date().getTime();
+      const result = originalMethod.call(this, ...args);
+      console.log(
+        `${_context.name} = execution time ${timeAfter - timeBefore}`,
+      );
+      return result;
+    }
+
+    return replacementMethod;
+  }
+
   class Calculation {
     // TODO: add both decorators to the following method
+    @callCount
+    @timeCount
     static add(a: number, b: number) {
       return a + b;
     }
@@ -23,7 +59,10 @@ function exercise40() {
   // TODO: create instance of Calculation class and call add method
 
   // TODO: remove the following line
-  console.log(Calculation);
+  // console.log(Calculation);
+  console.log(Calculation.add(1, 2));
+  console.log(Calculation.add(3000, 4));
+  console.log(Calculation.add(5, 6));
 }
 exercise40();
 
@@ -31,6 +70,7 @@ exercise40();
 function exercise41() {
   // TODO: 1. implement method decorator to print call count of the function
   // TODO: 2. implement method decorator to print execution time of the function
+
   class Calculation {
     // TODO: add both decorators to the following method
     static add(a: number, b: number) {
