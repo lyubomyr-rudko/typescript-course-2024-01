@@ -6,44 +6,102 @@
 // Use experimental decorators
 function exercise40() {
   // TODO: implement decorator to print call count of the function
-  function count() {
+  function count(
+      target: any,
+      key: string,
+      descriptor: PropertyDescriptor,
+  ) {
     // add params here
-    let callCount = 0;
+    let originalMethod = descriptor.value;
+    let callCount: number = 0;
     // TODO: implement decorator
     // TODO: before calling the function increment callCount
     // TODO: after calling the function print callCount
+    descriptor.value = function (...args: any[]) {
+      callCount++;
+      console.log(`Call count: ${callCount}`);
+      return originalMethod.apply(this, args);
+    };
 
     // TODO: remove the following line
-    console.log(callCount++);
+    // console.log(callCount++);
+    return descriptor;
   }
   // TODO: implement decorator to print execution time of the function
-  function time() {
+  function time(
+      target: any,
+      name: string,
+      descriptor: PropertyDescriptor) {
     // add params here
     // TODO: before calling the function get current time
     // TODO: after calling the function get current time
     // TODO: print the difference between the two times after calling the function
+    let originalMethod = descriptor.value;
+    descriptor.value = function(...args: any[]) {
+      let startTime = performance.now();
+      let result = originalMethod.apply(this, args);
+      let endTime = performance.now();
+      console.log(`Execution time: ${endTime - startTime} milliseconds`);
+      return result;
+    };
+    return descriptor;
   }
 
   class Calculation {
+    // @count
+    // @time
     // TODO: add both decorators to the following method
-    static add(a: number, b: number) {
+    static add(a: number, b: number): number {
       return a + b;
     }
   }
   // TODO: create instance of Calculation class and call add method
-
+  let result = Calculation.add(3, 4);
   // TODO: remove the following line
-  console.log(count, time, Calculation);
+  // console.log(count, time, Calculation);
+  console.log("Result:", result);
 }
 exercise40();
+
 
 // Use 2023 decorators (Stage 3 decorator)
 function exercise41() {
   // TODO: implement decorator to print call count of the function
   // TODO: implement decorator to print execution time of the function
+  function countCount(
+      target: any,
+      key: string,
+      descriptor: PropertyDescriptor) {
+    let originalMethod = descriptor.value;
+    let callCount: number = 0;
+    descriptor.value = function (...args: any[]) {
+      callCount++;
+      console.log(`Call count: ${callCount}`);
+      return originalMethod.apply(this, args);
+    };
+    return descriptor;
+  }
+
+  function timeCount(
+      target: any,
+      key: string,
+      descriptor: PropertyDescriptor) {
+    let originalMethod = descriptor.value;
+    descriptor.value = function(...args: any[]) {
+      let startTime = performance.now();
+      let result = originalMethod.apply(this, args);
+      let endTime = performance.now();
+      console.log(`Execution time: ${endTime - startTime} milliseconds`);
+      return result;
+    };
+    return descriptor;
+  }
+
   class Calculation {
     // TODO: add both decorators to the following method
-    static add(a: number, b: number) {
+    // @countCount
+    // @timeCount
+    static add(a: number, b: number): number {
       return a + b;
     }
   }
