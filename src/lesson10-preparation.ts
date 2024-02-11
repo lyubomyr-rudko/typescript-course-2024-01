@@ -5,6 +5,195 @@
 // ********* Lesson 10 *********
 
 function lesson10() {
+
+  // Lookup types
+  function lookupTypes() {
+    interface Person {
+      name: string;
+      age: number;
+      address: {
+        city: string;
+        state: string;
+        location: {
+          lat: number;
+          lng: number;
+        };
+      };
+    }
+    type P1 = Person['name']; // string
+    type P2 = Person['name' | 'age']; // string | number
+
+    type PersonList = Person[];
+    type P4 = PersonList[0]['name']; // string
+
+    type P3 = string['charAt']; // (pos: number) => string
+    type P5 = string[][0]; // string
+
+    const usersList = [
+      {
+        id: 1,
+        firstName: 'Terry',
+        lastName: 'Medhurst',
+        maidenName: 'Smitham',
+        age: 50,
+        gender: 'male',
+        email: 'atuny0@sohu.com',
+        phone: '+63 791 675 8914',
+        username: 'atuny0',
+        password: '9uQFF1Lh',
+        birthDate: '2000-12-25',
+        image: 'https://robohash.org/hicveldicta.png',
+        bloodGroup: 'A−',
+        height: 189,
+        weight: 75.4,
+        eyeColor: 'Green',
+        hair: {
+          color: 'Black',
+          type: 'Strands',
+        },
+        domain: 'slashdot.org',
+        ip: '117.29.86.254',
+        address: {
+          address: '1745 T Street Southeast',
+          city: 'Washington',
+          coordinates: {
+            lat: 38.867033,
+            lng: -76.979235,
+          },
+          postalCode: '20020',
+          state: 'DC',
+        },
+        macAddress: '13:69:BA:56:A3:74',
+        university: 'Capitol University',
+        bank: {
+          cardExpire: '06/22',
+          cardNumbers: ['50380955204220685', '6762303175774717'],
+          cardType: 'maestro',
+          currency: 'Peso',
+          iban: 'NO17 0695 2754 967',
+        },
+        company: {
+          address: {
+            address: '629 Debbie Drive',
+            city: 'Nashville',
+            coordinates: {
+              lat: 36.208114,
+              lng: -86.58621199999999,
+            },
+            postalCode: '37076',
+            state: 'TN',
+          },
+          department: 'Marketing',
+          name: "Blanda-O'Keefe",
+          title: 'Help Desk Operator',
+        },
+        ein: '20-9487066',
+        ssn: '661-64-2976',
+        userAgent:
+          'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/12.0.702.0 Safari/534.24',
+      },
+    ];
+
+    interface IUser {
+      id: number;
+      firstName: string;
+      lastName: string;
+      maidenName: string;
+      age: number;
+      gender: string;
+      email: string;
+      phone: string;
+      username: string;
+      password: string;
+      birthDate: string;
+      image: string;
+      bloodGroup: string;
+      height: number;
+      weight: number;
+      eyeColor: string;
+      hair: {
+        color: string;
+        type: string;
+      };
+      domain: string;
+      ip: string;
+      address: {
+        address: string;
+        city: string;
+        coordinates: {
+          lat: number;
+          lng: number;
+        };
+        postalCode: string;
+        state: string;
+      };
+      macAddress: string;
+      university: string;
+      bank: {
+        cardExpire: string;
+        cardNumbers: string[];
+        cardType: string;
+        currency: string;
+        iban: string;
+      };
+      company: {
+        address: {
+          address: string;
+          city: string;
+          coordinates: {
+            lat: number;
+            lng: number;
+          };
+          postalCode: string;
+          state: string;
+        };
+        department: string;
+        name: string;
+        title: string;
+      };
+      ein: string;
+      ssn: string;
+      userAgent: string;
+    }
+
+    // no type safety here
+    function printUserAddress(address: any) {
+      console.log(address.address, address.city, address.state);
+    }
+
+    // for large interfaces it is possible to use lookup types
+    function printUserAddressV2(address: IUser['address']) {
+      // lookup type
+      console.log(address.address, address.city, address.state);
+    }
+
+    // lookup type requires square brackets syntax around the property name
+    // this does not work
+    // function printUserAddressV3(address: IUser.address) {
+    //   console.log(address.address, address.city, address.state);
+    // }
+
+    // lookup type allows to access nested properties
+    function navigateToCoordinates(
+      workCoordinates: IUser['company']['address']['coordinates'],
+    ) {
+      console.log(workCoordinates.lat, workCoordinates.lng);
+    }
+
+    // lookup type allows to access array elements
+    function getUserCardNumber(user: IUser): IUser['bank']['cardNumbers'][0] {
+      return user.bank.cardNumbers[0];
+    }
+    const cardNumber = getUserCardNumber(usersList[0]);
+
+    type keys = 'name' | 'age';
+    type PX = Person[keys]; // string
+    //   let x = "name"
+    // type PY = Person[x]; // error - x is not a type
+  }
+  lookupTypes();
+
+
   // keyof type operator
   function keyofTypeOperator() {
     type TPersonV1 = {
