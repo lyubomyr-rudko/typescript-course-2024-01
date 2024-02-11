@@ -5,6 +5,7 @@
 // ********* Lesson 10 *********
 
 function lesson10() {
+
   // Lookup types
   function lookupTypes() {
     interface Person {
@@ -191,6 +192,7 @@ function lesson10() {
     // type PY = Person[x]; // error - x is not a type
   }
   lookupTypes();
+
 
   // keyof type operator
   function keyofTypeOperator() {

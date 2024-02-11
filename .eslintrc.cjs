@@ -17,6 +17,9 @@ module.exports = {
   },
   ignorePatterns: ['*.js'],
   rules: {
-    'prettier/prettier': 2,
+    'prettier/prettier':[
+      'error',
+      { endOfLine: "auto"},
+    ]
   },
 };
