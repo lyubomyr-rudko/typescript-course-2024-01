@@ -68,17 +68,16 @@ function exercise40() {
   class Calculation {
     @countCalls
     @logExecutionTime
-    add(a: number, b: number) {
+    static add(a: number, b: number) {
       return a + b;
     }
   }
 
-  const calculator = new Calculation();
-  calculator.add(2, 3);
+  const result = Calculation.add(2, 3);
+  console.log(result);
 }
 
 exercise40();
-
 // // Use 2023 decorators (Stage 3 decorator)
 // function exercise41() {
 //   // TODO: 1. implement method decorator to print call count of the function
@@ -99,6 +98,8 @@ exercise40();
 // exercise41();
 
 function exercise41() {
+  // TODO: 1. implement method decorator to print call count of the function
+  // TODO: 2. implement method decorator to print execution time of the function
   function countCalls(
     target: unknown,
     key: string,
@@ -145,7 +146,7 @@ function exercise41() {
     }
   }
 
-  Calculation.add(2, 3); // Вызываем статический метод на классе, а не на экземпляре
+  Calculation.add(2, 3);
 
   console.log(Calculation);
 }
