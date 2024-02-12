@@ -70,31 +70,43 @@ function exercise31() {
   handleSaveUserSubmit('John', 'Smith');
 
   // TODO: add call signatures here. Add overrides for optional email param
-  type TSaveUserCallback = (
+  type TSaveUserCallback = {
+    (firstName: string, lastName: string): void;
+    (firstName: string, lastName: string, email?: string): void;
+  };
+
+  // TODO: implement handleSaveUserSubmit function with this type
+  const handleSaveUserSubmit2: TSaveUserCallback = (
     firstName: string,
     lastName: string,
     email?: string,
-  ) => void;
-  // TODO: implement handleSaveUserSubmit function with this type
-  const handleSaveUserSubmit2: TSaveUserCallback = (
-    firstName,
-    lastName,
-    email,
   ) => {
-    console.log(firstName, lastName, email);
+    if (!email) {
+      console.log(firstName, lastName);
+    } else {
+      console.log(firstName, lastName, email);
+    }
   };
+  handleSaveUserSubmit2('Renat', 'Chernov', 'test@gmail.com');
   // TODO: add call signatures here. Add overrides for optional email param
   interface ISaveUserCallback {
+    (firstName: string, lastName: string): void;
     (firstName: string, lastName: string, email?: string): void;
   }
+
   // TODO: implement handleSaveUserSubmit function with this type and interface
   const handleSaveUserSubmit3: ISaveUserCallback = (
-    firstName,
-    lastName,
-    email,
+    firstName: string,
+    lastName: string,
+    email?: string,
   ) => {
-    console.log(firstName, lastName, email);
+    if (!email) {
+      console.log(firstName, lastName);
+    } else {
+      console.log(firstName, lastName, email);
+    }
   };
+  handleSaveUserSubmit3('Renat', 'Chernov', 'test@gmail.com');
 
   function createForm(onSubmit: TSaveUserCallback) {
     const firstName = 'John';
