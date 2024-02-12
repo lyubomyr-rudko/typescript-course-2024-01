@@ -153,7 +153,7 @@
 // Use 2023 decorators (Stage 3 decorator)
 function exercise41() {
   // TODO: 1. implement method decorator to print call count of the function
-  // es-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function logCallsCount(origMethod: any, _context: any) {
     let counter: number = 0;
     function wrapperMethod(this: any, ...args: any[]) {
@@ -164,7 +164,7 @@ function exercise41() {
     return wrapperMethod;
   }
   // TODO: 2. implement method decorator to print execution time of the function
-  // es-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function logExecuteTime(origMethod: any, _context: any) {
     const start = Date.now();
 
