@@ -241,7 +241,6 @@ function lesson8() {
   }
   temporalUncertainty();
 
-  // typeof operator in ts
   // Typeof type operator
   function typeofTypeOperator() {
     // JavaScript already has a typeof operator you can use in an expression context:
