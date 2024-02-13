@@ -249,37 +249,72 @@ function exercise43() {
 
 exercise43();
 
-// Use conditional types
+// // Use conditional types
+// function exercise44() {
+//   // TODO: create a coditional type that will check if the type is a primitive type (unites all string, number, boolean)
+//   // TODO: if the type is primitive, return literal type 'primitive'
+//   // TODO: if the type is not primitive, return literal type 'not primitive'
+//   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/ban-types
+//   type TIsPrimitive = {};
+//
+//   // TODO uncomment the following lines
+//   //   type T1 = TIsPrimitive<number>; // hint: should be 'primitive'
+//   //   type T2 = TIsPrimitive<string>;
+//   //   type T3 = TIsPrimitive<0>;
+//   //   type T4 = TIsPrimitive<{}>;  // hint: should be 'not primitive'
+//   //   type T4 = TIsPrimitive<Function>;  // hint: should be 'not primitive'
+// }
+//
+// exercise44();
 function exercise44() {
-  // TODO: create a coditional type that will check if the type is a primitive type (unites all string, number, boolean)
-  // TODO: if the type is primitive, return literal type 'primitive'
-  // TODO: if the type is not primitive, return literal type 'not primitive'
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/ban-types
-  type TIsPrimitive = {};
+  type TIsPrimitive<T> = T extends string | number | boolean
+    ? 'primitive'
+    : 'not primitive';
 
-  // TODO uncomment the following lines
-  //   type T1 = TIsPrimitive<number>; // hint: should be 'primitive'
-  //   type T2 = TIsPrimitive<string>;
-  //   type T3 = TIsPrimitive<0>;
-  //   type T4 = TIsPrimitive<{}>;  // hint: should be 'not primitive'
-  //   type T4 = TIsPrimitive<Function>;  // hint: should be 'not primitive'
+  type T1 = TIsPrimitive<number>;
+  type T2 = TIsPrimitive<string>;
+  type T3 = TIsPrimitive<0>;
+  type T4 = TIsPrimitive<object>;
+  type T5 = TIsPrimitive<FunctionConstructor>;
+
+  return {
+    T1: 'primitive' as T1,
+    T2: 'primitive' as T2,
+    T3: 'primitive' as T3,
+    T4: 'not primitive' as T4,
+    T5: 'not primitive' as T5,
+  };
 }
 
+const result: ReturnType<typeof exercise44> = exercise44();
+console.log(result);
 exercise44();
 
 // Use conditional types with unions and never
+// function exercise45() {
+//   // TODO: create a type that excludes number from a union type
+//   type ExcludeNumberFromType<T> = T extends number ? 'number' : 'not number'; // TODO: modify this line, replace with your code
+//
+//   type TNumberOrString = number | string;
+//
+//   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//   type TExcludeNumberFromType = ExcludeNumberFromType<TNumberOrString>; // Hint - should equal to string
+//
+//   // TODO: uncomment the following lines and make sure there are no errors
+//   //   const a: TExcludeNumberFromType = "test";
+//   //   console.log(a);
+// }
+//
+// exercise45();
+
 function exercise45() {
-  // TODO: create a type that excludes number from a union type
-  type ExcludeNumberFromType<T> = T extends number ? 'number' : 'not number'; // TODO: modify this line, replace with your code
+  type ExcludeNumberFromType<T> = T extends number ? never : T;
 
   type TNumberOrString = number | string;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  type TExcludeNumberFromType = ExcludeNumberFromType<TNumberOrString>; // Hint - should equal to string
+  type TExcludeNumberFromType = ExcludeNumberFromType<TNumberOrString>;
 
-  // TODO: uncomment the following lines and make sure there are no errors
-  //   const a: TExcludeNumberFromType = "test";
-  //   console.log(a);
+  const a: TExcludeNumberFromType = 'test';
+  console.log(a);
 }
-
 exercise45();
