@@ -26,58 +26,6 @@
 //   console.log(Calculation);
 // }
 // exercise40();
-function exercise40() {
-  function countCalls(
-    target: unknown,
-    key: string,
-    descriptor: PropertyDescriptor,
-  ) {
-    const originalMethod = descriptor.value;
-    let count = 0;
-
-    descriptor.value = function (...args: unknown[]) {
-      count++;
-      console.log(`Method ${key} has been called ${count} times.`);
-      return originalMethod.apply(this, args);
-    };
-
-    return descriptor;
-  }
-
-  function logExecutionTime(
-    target: unknown,
-    key: string,
-    descriptor: PropertyDescriptor,
-  ) {
-    const originalMethod = descriptor.value;
-
-    descriptor.value = function (...args: unknown[]) {
-      const startTime = Date.now();
-      const result = originalMethod.apply(this, args);
-      const endTime = Date.now();
-      const executionTime = endTime - startTime;
-      console.log(
-        `Method ${key} took ${executionTime} milliseconds to execute.`,
-      );
-      return result;
-    };
-
-    return descriptor;
-  }
-
-  class Calculation {
-    @countCalls
-    @logExecutionTime
-    static add(a: number, b: number) {
-      return a + b;
-    }
-  }
-
-  const result = Calculation.add(2, 3);
-  console.log(result);
-}
-
-exercise40();
 // // Use 2023 decorators (Stage 3 decorator)
 // function exercise41() {
 //   // TODO: 1. implement method decorator to print call count of the function
@@ -96,59 +44,92 @@ exercise40();
 // }
 //
 // exercise41();
-
-function exercise41() {
-  // TODO: 1. implement method decorator to print call count of the function
-  // TODO: 2. implement method decorator to print execution time of the function
-  function countCalls(
+function exercise40() {
+  function callCount(
     target: unknown,
     key: string,
     descriptor: PropertyDescriptor,
   ) {
-    const originalMethod = descriptor.value;
     let count = 0;
-
+    const originalMethod = descriptor.value;
     descriptor.value = function (...args: unknown[]) {
       count++;
-      console.log(`Method ${key} has been called ${count} times.`);
+      console.log(`Method ${key} called ${count} times`);
       return originalMethod.apply(this, args);
     };
-
-    return descriptor;
   }
 
-  function logExecutionTime(
+  function executionTime(
     target: unknown,
     key: string,
     descriptor: PropertyDescriptor,
   ) {
     const originalMethod = descriptor.value;
-
     descriptor.value = function (...args: unknown[]) {
-      const startTime = Date.now();
+      const start = Date.now();
       const result = originalMethod.apply(this, args);
-      const endTime = Date.now();
-      const executionTime = endTime - startTime;
-      console.log(
-        `Method ${key} took ${executionTime} milliseconds to execute.`,
-      );
+      const end = Date.now();
+      console.log(`Method ${key} executed in ${end - start} ms`);
       return result;
     };
-
-    return descriptor;
   }
 
+  console.log(callCount);
+  console.log(executionTime);
+
   class Calculation {
-    @countCalls
-    @logExecutionTime
+    // @callCount
+    // @executionTime
     static add(a: number, b: number) {
       return a + b;
     }
   }
 
-  Calculation.add(2, 3);
+  console.log(Calculation.add(2, 3));
+}
 
-  console.log(Calculation);
+exercise40();
+
+// Use 2023 decorators (Stage 3 decorator)
+function exercise41() {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  function loggedMethod(originalMethod: Function, _context: unknown) {
+    console.log(_context);
+
+    function replacementMethod(this: unknown, ...args: unknown[]) {
+      console.log('LOG: Entering method.');
+      const result = originalMethod.call(this, ...args);
+      console.log('LOG: Exiting method.');
+      return result;
+    }
+
+    return replacementMethod;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  function executionTime(originalMethod: Function, _context: unknown) {
+    console.log(_context);
+
+    function replacementMethod(this: unknown, ...args: unknown[]) {
+      const start = Date.now();
+      const result = originalMethod.call(this, ...args);
+      const end = Date.now();
+      console.log(`Method executed in ${end - start} ms`);
+      return result;
+    }
+
+    return replacementMethod;
+  }
+
+  class Calculation {
+    @loggedMethod
+    @executionTime
+    static add(a: number, b: number) {
+      return a + b;
+    }
+  }
+
+  console.log(Calculation.add(2, 3));
 }
 
 exercise41();
