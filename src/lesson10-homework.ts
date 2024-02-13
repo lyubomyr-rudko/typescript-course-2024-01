@@ -193,21 +193,46 @@ function exercise42() {
 
 exercise42();
 
-// Use keyof type operators
+// // Use keyof type operators
+// function exercise43() {
+//   // TODO: implement functions to get and set property of an object in type safe way
+//
+//   // TODO: for type sefty use generics and keyof type operator to ensure that key is a valid property of the object
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   function getProperty(obj: any, key: string) {
+//     console.log('getProperty', obj[key]);
+//
+//     return obj[key];
+//   }
+//
+//   // TODO: use generics and lookup type, add types T, K and use T[K] for value param type
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   function setProperty(obj: any, key: string, value: any) {
+//     obj[key] = value;
+//     console.log('setProperty', obj, key, obj[key]);
+//   }
+//
+//   const user = {
+//     firstName: 'John',
+//     lastName: 'Doe',
+//     role: 'admin',
+//   };
+//   getProperty(user, 'role'); // admin
+//   setProperty(user, 'role', 'user');
+// }
+//
+// exercise43();
 function exercise43() {
-  // TODO: implement functions to get and set property of an object in type safe way
-
-  // TODO: for type sefty use generics and keyof type operator to ensure that key is a valid property of the object
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function getProperty(obj: any, key: string) {
+  function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
     console.log('getProperty', obj[key]);
-
     return obj[key];
   }
 
-  // TODO: use generics and lookup type, add types T, K and use T[K] for value param type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function setProperty(obj: any, key: string, value: any) {
+  function setProperty<T, K extends keyof T>(
+    obj: T,
+    key: K,
+    value: T[K],
+  ): void {
     obj[key] = value;
     console.log('setProperty', obj, key, obj[key]);
   }
@@ -217,6 +242,7 @@ function exercise43() {
     lastName: 'Doe',
     role: 'admin',
   };
+
   getProperty(user, 'role'); // admin
   setProperty(user, 'role', 'user');
 }
