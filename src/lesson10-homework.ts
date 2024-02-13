@@ -53,7 +53,7 @@ function exercise42() {
     // TOOD: add remaining missing properties types, list each of them explicitly
   };
 
-  // TODO: create a type TCoodinates that represents coordinates, using lookup type
+  // TODO: create a type TCoodinates that represents coordinates, using lookup type from TProduct
   //  (product->warehouse->address->coordinates)
 
   // TODO: remove this eslint-disable-next-line comment
@@ -135,7 +135,7 @@ exercise44();
 // Use conditional types with unions and never
 function exercise45() {
   // TODO: create a type that excludes number from a union type
-  type ExcludeNumberFromType<T> = T extends number ? 'number' : 'not number'; // TODO: replace with your code
+  type ExcludeNumberFromType<T> = T extends number ? 'number' : 'not number'; // TODO: modify this line, replace with your code
 
   type TNumberOrString = number | string;
 
