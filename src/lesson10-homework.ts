@@ -50,6 +50,38 @@ function exercise42() {
   type TProduct = {
     id: number;
     title: string;
+    description: string;
+    price: number;
+    discountPercentage: number;
+    rating: number;
+    stock: number;
+    brand: string;
+    category: string;
+    thumbnail: string;
+    images: [
+      {
+        url: string;
+        title: string;
+      },
+      {
+        url: string;
+        title: string;
+      },
+    ];
+    warehouse: {
+      address: {
+        address: string;
+        city: string;
+        coordinates: {
+          lat: number;
+          lng: number;
+        };
+        postalCode: string;
+        state: string;
+      };
+      name: string;
+      phoneNumbers: string[];
+    };
     // TOOD: add remaining missing properties types, list each of them explicitly
   };
 
@@ -58,12 +90,11 @@ function exercise42() {
 
   // TODO: remove this eslint-disable-next-line comment
   // eslint-disable-next-line @typescript-eslint/ban-types
-  type TCoordinates = {};
+  type TCoodinates = TProduct['warehouse']['address']['coordinates'];
 
   // TODO: fix/add type annotation for the function (remove `any` type annotation)
   // TODO: remove this eslint-disable-next-line comment
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function printProductLocationCoordinates(coordinates: TCoordinates | any) {
+  function printProductLocationCoordinates(coordinates: TCoodinates) {
     // NOTE: this could be using google map api to display the location on the map, but for now just console.log
     console.log(coordinates.lat);
     console.log(coordinates.lng);
@@ -75,14 +106,16 @@ function exercise42() {
   // TODO: add return type annotation using lookup type, instead of hardcoded string type
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function getProductWarehousePhoneNumber(product: TProduct): string {
+  type TProductPhone = TProduct['warehouse']['phoneNumbers'];
+  function getProductWarehousePhoneNumber(product: TProduct): TProductPhone {
     // TODO: fix the return value to be a type of a phone number for the product warehouse
     // HINT: use lookup types, and the result for that should equal to string type
     // TODO: make sure the function gets a phone number from product object
-    return '';
+    const res = product['warehouse']['phoneNumbers'];
+    return res;
   }
 
-  getProductWarehousePhoneNumber(products[0]);
+  console.log(getProductWarehousePhoneNumber(products[0] as TProduct));
 }
 exercise42();
 
@@ -91,8 +124,7 @@ function exercise43() {
   // TODO: implement functions to get and set property of an object in type safe way
 
   // TODO: for type sefty use generics and keyof type operator to ensure that key is a valid property of the object
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function getProperty(obj: any, key: string) {
+  function getProperty<T>(obj: T, key: keyof T) {
     console.log('getProperty', obj[key]);
 
     return obj[key];
@@ -100,10 +132,15 @@ function exercise43() {
 
   // TODO: use generics and lookup type, add types T, K and use T[K] for value param type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function setProperty(obj: any, key: string, value: any) {
+  function setProperty<T>(obj: T, key: keyof T, value: T[keyof T]) {
     obj[key] = value;
     console.log('setProperty', obj, key, obj[key]);
   }
+  // interface Person {
+  //   firstName: string;
+  //   lastName: string;
+  //   role: string;
+  // }
 
   const user = {
     firstName: 'John',
@@ -121,21 +158,38 @@ function exercise44() {
   // TODO: if the type is primitive, return literal type 'primitive'
   // TODO: if the type is not primitive, return literal type 'not primitive'
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/ban-types
-  type TIsPrimitive = {};
+  type TIsPrimitive<T> = T extends string
+    ? 'primitive'
+    : T extends number
+      ? 'primitive'
+      : T extends boolean
+        ? 'primitive'
+        : T extends undefined
+          ? 'primitive'
+          : // eslint-disable-next-line @typescript-eslint/ban-types
+            T extends Function
+            ? 'not primitive'
+            : T extends symbol
+              ? 'primitive'
+              : T extends bigint
+                ? 'primitive'
+                : T extends null
+                  ? 'primitive'
+                  : 'not primitive';
 
   // TODO uncomment the following lines
-  //   type T1 = TIsPrimitive<number>; // hint: should be 'primitive'
-  //   type T2 = TIsPrimitive<string>;
-  //   type T3 = TIsPrimitive<0>;
-  //   type T4 = TIsPrimitive<{}>;  // hint: should be 'not primitive'
-  //   type T4 = TIsPrimitive<Function>;  // hint: should be 'not primitive'
+  // type T1 = TIsPrimitive<number>; // hint: should be 'primitive'
+  // type T2 = TIsPrimitive<string>;
+  // type T3 = TIsPrimitive<0>;
+  // type T4 = TIsPrimitive<{}>; // hint: should be 'not primitive'
+  // type T4 = TIsPrimitive<Function>; // hint: should be 'not primitive'
 }
 exercise44();
 
 // Use conditional types with unions and never
 function exercise45() {
   // TODO: create a type that excludes number from a union type
-  type ExcludeNumberFromType<T> = T extends number ? 'number' : 'not number'; // TODO: modify this line, replace with your code
+  type ExcludeNumberFromType<T> = T extends number ? never : string; // TODO: modify this line, replace with your code
 
   type TNumberOrString = number | string;
 
@@ -143,7 +197,7 @@ function exercise45() {
   type TExcludeNumberFromType = ExcludeNumberFromType<TNumberOrString>; // Hint - should equal to string
 
   // TODO: uncomment the following lines and make sure there are no errors
-  //   const a: TExcludeNumberFromType = "test";
-  //   console.log(a);
+  const a: TExcludeNumberFromType = 'test';
+  console.log(a);
 }
 exercise45();
