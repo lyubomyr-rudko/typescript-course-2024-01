@@ -428,3 +428,6 @@ function lesson10() {
   // $ npm create vite@latest
 }
 lesson10();
+
+const test = 'test';
+export default test;
