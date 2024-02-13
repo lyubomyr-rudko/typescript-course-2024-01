@@ -42,6 +42,7 @@
 //   // TODO: remove the following line
 //   // console.log(Calculation);
 // }
+//
 // exercise41();
 function exercise40() {
   function callCount(
