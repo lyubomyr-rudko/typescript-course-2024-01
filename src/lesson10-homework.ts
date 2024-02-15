@@ -159,7 +159,7 @@ exercise44();
 // Use conditional types with unions and never
 function exercise45() {
   // TODO: create a type that excludes number from a union type
-  type ExcludeNumberFromType<T> = T extends number ? T : never; // TODO: modify this line, replace with your code
+  type ExcludeNumberFromType<T> = T extends string ? T : never; // TODO: modify this line, replace with your code
 
   type TNumberOrString = number | string;
 
