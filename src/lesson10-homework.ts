@@ -162,15 +162,25 @@ exercise44();
 // Use conditional types with unions and never
 function exercise45() {
   // TODO: create a type that excludes number from a union type
-  type ExcludeNumberFromType<T> = T extends number | string ? T : never; // TODO: modify this line, replace with your code
+  type ExcludeNumberFromType<T> = T extends number ? never : T; // TODO: modify this line, replace with your code
 
   type TNumberOrString = number | string;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type TExcludeNumberFromType = ExcludeNumberFromType<TNumberOrString>; // Hint - should equal to string
 
+  type TUser = string | number;
+
+  type TExcludeNumberFromUser = ExcludeNumberFromType<TUser>;
+
   // TODO: uncomment the following lines and make sure there are no errors
      const a: TExcludeNumberFromType = "test";
      console.log(a);
+
+     const b: TExcludeNumberFromUser = "test";
+     console.log(b);
 }
 exercise45();
+
+
+
