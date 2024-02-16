@@ -198,20 +198,59 @@ function exercise49() {
 
 exercise49();
 
-// This is an algorithmic problem - use your algorithmic skills and typescript knowledge to solve it
+// // This is an algorithmic problem - use your algorithmic skills and typescript knowledge to solve it
+// function exerciseA() {
+//   // TODO: create a function to determine if two strings are an anagram
+//   // HINT: A word is an anagram of another if you can rearrange its characters to produce the second word.
+//   function areAnagrams(s1: string, s2: string): boolean {
+//     console.log('areAnagrams', s1, s2);
+//     return false;
+//   }
+//
+//   console.assert(areAnagrams('listen', 'silent') === true);
+//   console.assert(areAnagrams('abc', 'cba') === true);
+//   console.assert(areAnagrams('abc', 'cbd') === false);
+//
+//   // HINT: consider exercise33 for code reuse ideas
+// }
+
 function exerciseA() {
-  // TODO: create a function to determine if two strings are an anagram
-  // HINT: A word is an anagram of another if you can rearrange its characters to produce the second word.
-  function areAnagrams(s1: string, s2: string): boolean {
-    console.log('areAnagrams', s1, s2);
-    return false;
+  function getCharacterFrequency(str: string): Record<string, number> {
+    const charCount: Record<string, number> = {};
+
+    for (const char of str.toLowerCase()) {
+      charCount[char] = (charCount[char] || 0) + 1;
+    }
+
+    return charCount;
   }
 
-  console.assert(areAnagrams('listen', 'silent') === true);
-  console.assert(areAnagrams('abc', 'cba') === true);
-  console.assert(areAnagrams('abc', 'cbd') === false);
+  function areAnagrams(s1: string, s2: string): boolean {
+    const charFrequency1 = getCharacterFrequency(s1);
+    const charFrequency2 = getCharacterFrequency(s2);
 
-  // HINT: consider exercise33 for code reuse ideas
+    const keys1 = Object.keys(charFrequency1);
+    const keys2 = Object.keys(charFrequency2);
+
+    if (keys1.length !== keys2.length) {
+      return false;
+    }
+
+    for (const key of keys1) {
+      if (charFrequency1[key] !== charFrequency2[key]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  // console.log(areAnagrams('listen', 'silent'));
+  // console.log(areAnagrams('abc', 'cba'));
+  // console.log(areAnagrams('abc', 'cbd'));
+  console.assert(areAnagrams('listen', 'silent'));
+  console.assert(areAnagrams('abc', 'cba'));
+  console.assert(!areAnagrams('abc', 'cbd'));
 }
 
 exerciseA();
