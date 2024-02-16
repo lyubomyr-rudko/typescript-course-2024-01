@@ -10,17 +10,30 @@ function exercise35() {
   // TODO:Create two types: TUser and TProduct
   interface TUser {
     /* TODO: add definition for user name, title and email */
+    name: string;
+    title: string;
+    email: string;
   }
   interface TProduct {
     /* TODO: add definition for product title, price and quantity */
+    title: string;
+    price: number;
+    quantity: number;
   }
 
-  // eslint-disable-next-line prefer-const
-  let user: TUser = {};
-  let product: TProduct = {};
+  const user: TUser = {
+    name: 'John',
+    title: 'Mr. ',
+    email: 'jh@somemail.com',
+  };
+  let product: TProduct = {
+    title: 'Book',
+    price: 250,
+    quantity: 1,
+  };
 
   // TODO: fix the error by adding double assertion
-  product = user;
+  product = user as unknown as TProduct;
 
   console.log(product);
 }
@@ -31,18 +44,18 @@ function exercise36() {
   // Note: this object does not have a name property
   // but the toString function expects it to be there, and there is no type check
   const data = {
-    firstName: 'Joe',
+    name: 'Joe',
     lastName: 'Doe',
     age: 30,
     role: 'Developer',
   };
+  type TUser = typeof data;
   // TODO: add this param annotation, to enforce that this function
   // can only be called on an object with name, age and role properties
-  function toString() {
+  function toString(this: TUser) {
     // TODO: remove the following line
-    return '';
     // TODO: uncomment the following line, fix the error
-    // return `${this.name}, ${this.age}, ${this.role}`;
+    return `${this.name}, ${this.age}, ${this.role}`;
   }
   data.toString = toString;
   // TODO: run the code and observe the error
@@ -61,12 +74,18 @@ function exercise37() {
 
   // TODO: implement method that adds addGreeting method to the object
   // TODO: add generic constraints to enforce type checking, add return type annotation
-  function addGreeting<T>(obj: T) {
-    return obj; // remove this line
-
+  function addGreeting<T extends IPerson>(
+    obj: T,
+  ): T & { sayHello: () => string } {
     // TODO: implement the method sayHello that returns a greeting string
     // TODO: use firstName lastName props to generate a greeting string, for example: "Hello Joe Smith"
+
+    const sayHello = (): string => `Hello ${obj.firstName} ${obj.lastName}`;
     // TODO: make sure the obj is not modified, and new object is returned
+    return {
+      ...obj,
+      sayHello,
+    };
   }
 
   const person = addGreeting({
@@ -77,10 +96,10 @@ function exercise37() {
   });
 
   // TODO: remove the following line
-  console.log(person as IPerson);
+  // console.log(person as IPerson);
 
   // TODO: uncomment the following line and fix the error
-  // console.log(person.sayHello());
+  console.log(person.sayHello());
 }
 exercise37();
 
@@ -101,10 +120,9 @@ function exercise38() {
   // TODO: fix the type of fetchResult variable to be union of array of GroupDocument objects / null
 
   // TODO: uncomment the following line
-  // let fetchResult = null;
+  let fetchResult: GroupDocument[] | null = null;
 
   // TODO: remove this line
-  let fetchResult: GroupDocument[] = null as unknown as GroupDocument[];
 
   // TODO: keep this code as is
   fetchResult = [
@@ -144,8 +162,8 @@ function exercise38() {
     userNames.forEach((name) => {
       // TOOD: explain why type narrowing does not work here and fix the error (and remove `any` type annotations)
       // TODO: remove this line
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any, prefer-const
-      let result = fetchResult.find((obj: any) => obj.name === name);
+
+      const result = fetchResult?.find((obj) => obj.name === name);
 
       if (result) {
         console.log(result.data);
@@ -222,44 +240,58 @@ function exercise39() {
   };
   console.log(user);
 
+  type TUser = typeof user;
+
   // TODO: for each property of the user object, print its type using js typeof operator
   function printAllUserPropTypes() {
     // TODO: get lis of own keys of the user object
+
+    const userKeys = Object.keys(user) as (keyof TUser)[];
     // TODO: iterate over the keys with foreach
+    userKeys.forEach((key) => {
+      console.log(`${key}: ${typeof user[key]}`);
+    });
     // TODO: console.log the typeof for each property
   }
   printAllUserPropTypes();
 
   // TODO: create function that returns address of the user object,
   // TODO: set the return type of that function using typeof operator
-  function getUserAddress() {
-    return null;
+  function getUserAddress(user: TUser): typeof user.address {
+    return user.address;
   }
-  console.log(getUserAddress());
+  console.log(getUserAddress(user));
 
   // TODO: create function that returns coordinates of the user copany address
   // user -> company -> address -> coordinates
   // TODO: set the return type of that function using typeof operator
-  function getCoordinates() {
-    return null;
+  function getCoordinates(
+    user: TUser,
+  ): typeof user.company.address.coordinates {
+    return user.company.address.coordinates;
   }
-  console.log(getCoordinates());
+  console.log(getCoordinates(user));
 }
 exercise39();
 
 // Write the generic function to remove the duplicates from the array
-function removeDuplicates(arr: unknown[]) {
+export function removeDuplicates<T>(arr: T[]): T[] {
   // TODO: remimplement this code, do not use Set data structure
-  const set = new Set(arr);
-  const distinctArr = [...set];
+  const distinctArr: T[] = [];
+  for (const el of arr) {
+    if (!distinctArr.includes(el)) {
+      distinctArr.push(el);
+    }
+  }
+
   return distinctArr;
 }
 console.log(removeDuplicates([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]));
 // TODO: write unit tests for this function
 
 // Write a function that returns an intersection of two arrays, use generics
-function getIntersection(arr1: unknown[], arr2: unknown[]) {
-  return [...arr1, ...arr2];
+export function getIntersection<T>(arr1: T[], arr2: T[]): T[] {
+  return arr1.filter((item) => arr2.includes(item));
 }
 console.log(getIntersection([8, 3, 2, 4, 2], [7, 3, 4, 5, 3])); // [3, 4]
 // TODO: write unit tests for this function
