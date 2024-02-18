@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Read the following typescript documentation:
 // 1. https://www.typescriptlang.org/docs/handbook/2/objects.html
@@ -32,13 +33,18 @@ function exercise46() {
   // 1. it extracts the type of the first argument of a function FirstParamType
   // 2. it also extracts the return type of the function ReturnType
   // And creates a new function type definition with the same return type, and the first param only
-  // type FirstParameterFunction<T> = ... // use infer keyword
-  // type TCreateUserFirstArgAndReturnType = FirstParameterFunction<typeof createUser>; // (firstName: string, lastName: string, age: number) => { firstName: string; lastName: string; age: number; id: string; }
+  type FirstParameterFunction<T> = T extends (...arg: infer R) => infer O
+    ? (arg0: R[0]) => O
+    : never; // use infer keyword
+  type TCreateUserFirstArgAndReturnType = FirstParameterFunction<
+    typeof createUser
+  >; // (firstName: string, lastName: string, age: number) => { firstName: string; lastName: string; age: number; id: string; }
 
   // TODO: replace the next line with the correct type definition
-  type TCreateUserFirstArgAndReturnType = (
-    arg0: TCreateUserFirstArg,
-  ) => TCreateUserReturnType;
+
+  //   type TCreateUserFirstArgAndReturnType = (
+  //     arg0: TCreateUserFirstArg,
+  //   ) => TCreateUserReturnType;
   const fn: TCreateUserFirstArgAndReturnType = (firstName: string) => {
     return {
       firstName,
