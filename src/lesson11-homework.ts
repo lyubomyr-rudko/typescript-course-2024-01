@@ -135,13 +135,18 @@ function exerciseA() {
     const arr1: string[] = s1.replace(/\s/g, '').toLowerCase().split('');
     const arr2: string[] = s2.replace(/\s/g, '').toLowerCase().split('');
 
-    const dictionary: DStrings = {};
+    const dictionary1: DStrings = {};
     for (const char of arr1) {
-      dictionary[char] = (dictionary[char] || 0) + 1;
+      dictionary1[char] = (dictionary1[char] || 0) + 1;
+    }
+    const dictionary2: DStrings = {};
+
+    for (const char of arr2) {
+      dictionary2[char] = (dictionary2[char] || 0) + 1;
     }
 
-    for (const item of arr2) {
-      if (!dictionary[item]) {
+    for (const key of Object.keys(dictionary1)) {
+      if (!dictionary2[key] || dictionary1[key] !== dictionary2[key]) {
         return false;
       }
     }
