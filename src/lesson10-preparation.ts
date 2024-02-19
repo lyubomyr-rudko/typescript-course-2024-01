@@ -416,16 +416,6 @@ function lesson10() {
     // it is removed from the union
   }
   coditionalTypesWithUnionsAndNever();
-
-  // React with Typescript - more on hooks - performance optimization
-  // - useCallback
-  // - useMemo
-  // - useRef
-  // - useImperativeHandle
-  // - useReducer
-  // - useContext
-  // vite: https://vitejs.dev/guide/#scaffolding-your-first-vite-project
-  // $ npm create vite@latest
 }
 lesson10();
 
