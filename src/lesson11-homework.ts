@@ -22,6 +22,7 @@ function exercise46() {
     ? Params[0]
     : T; // use infer keyword
   // TODO: uncomment the following line and fix the error
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   type TCreateUserFirstArg = FirstParameter<typeof createUser>; // string
 
   // TODO: create a type that extracts the return type of a function ReturnType
@@ -30,19 +31,31 @@ function exercise46() {
     ? ReturnType
     : T; // use infer keyword
   // TODO: uncomment the following line and fix the error
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   type TCreateUserReturnType = MyReturnType<typeof createUser>; // { firstName: string; lastName: string; age: number; id: string; }
 
   // TODO: create a type that is a mixture of prev two functions
   // 1. it extracts the type of the first argument of a function FirstParamType
   // 2. it also extracts the return type of the function ReturnType
   // And creates a new function type definition with the same return type, and the first param only
-  // type FirstParameterFunction<T> = ... // use infer keyword
-  // type TCreateUserFirstArgAndReturnType = FirstParameterFunction<typeof createUser>; // (firstName: string, lastName: string, age: number) => { firstName: string; lastName: string; age: number; id: string; }
+  type FirstParameterFunction<T> = T extends (
+    ...args: infer Params
+  ) => infer ReturnType
+    ? (arg: Params[0]) => ReturnType
+    : T; // use infer keyword
+  type TCreateUserFirstArgAndReturnType = FirstParameterFunction<
+    typeof createUser
+  >; // (firstName: string, lastName: string, age: number) => { firstName: string; lastName: string; age: number; id: string; }
+
+  // (firstName: string, lastName: string, age: number) => { firstName: string; lastName: string; age: number; id: string; }
 
   // TODO: replace the next line with the correct type definition
-  type TCreateUserFirstArgAndReturnType = (
-    arg: TCreateUserFirstArg,
-  ) => TCreateUserReturnType;
+  // type TCreateUserFirstArgAndReturnType = (firstName: string) => {
+  //   firstName: string;
+  //   lastName: string;
+  //   age: number;
+  //   id: string;
+  // };
 
   const fn: TCreateUserFirstArgAndReturnType = (firstName: string) => {
     return {
