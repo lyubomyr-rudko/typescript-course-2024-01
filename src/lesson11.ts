@@ -157,12 +157,20 @@ function lesson11() {
     /**
      * Extracts the type of the 'this' parameter of a function type, or 'unknown' if the function type has no 'this' parameter.
      */
+
     // type ThisParameterType<T extends (...args: any) => any> = T extends (
     //   this: infer U,
     //   ...args: never
     // ) => any
     //   ? U
     //   : unknown;
+
+    type ThisParameterType<T extends (...args: any) => any> = T extends (
+      this: infer U,
+      ...args: never
+    ) => any
+      ? U
+      : unknown;
 
     function toString(this: { name: string; age: number }) {
       return `${this.name}, ${this.age}`;
