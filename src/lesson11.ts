@@ -1,19 +1,96 @@
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // ********* Lesson 11 *********
 
+import { get } from 'lodash';
+
 function lesson11() {
+  function Q_and_A() {
+    type TType =
+      | 'string'
+      | 'number'
+      | 'boolean'
+      | 'object'
+      | 'function'
+      | 'undefined'
+      | 'symbol'
+      | 'bigint';
+    type TType2 = string | number | boolean;
+
+    type TMyUtility<T> = T extends number ? never : T;
+    // TMyUtility<string | number> => TMyUtility<string> | TMyUtility<number> => string | never => string;
+
+    // A extends B
+
+    // 1. A == B -> true
+    // 2. sub-set 1 | 2 | 3 extends number;
+    type TMyNUmber = number; // 1 2 3 10
+    type TMyNUmber2 = 1 | 2 | 3; // 1 2 3
+    // TMyNUmber2 extends TMyNUmber -> true
+
+    // class A extends B {}
+    class Point2D {
+      public x: number;
+      public y: number;
+
+      constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+      }
+    }
+
+    class Point3D extends Point2D {
+      public z: number;
+
+      constructor(x: number, y: number, z: number) {
+        super(x, y);
+        this.z = z;
+      }
+    }
+  }
+  Q_and_A();
+  // type conversion
+  type TPoint = {
+    x: number;
+    y: number;
+    z: number;
+    name: string;
+    id: string | number;
+  };
+
+  type TPointKeys = 'x' | 'y' | 'z';
+  type TPointKeys2 = keyof TPoint;
+  const key: TPointKeys2 = 'name';
+  Object.keys({ x: 1, y: 2, z: 3 }); // ['x', 'y', 'z']
+
+  //
+  // type TNameFieldType = TPoint[TPointKeys2];
+  // type TNameFieldType = string;
+
+  //
+  type TUtility<T> = T extends number ? never : T;
+  type TUtility2<T> = T extends 'x' | 'y' | 'z' ? never : T;
+
+  type TRes = TUtility2<keyof TPoint>; // never | never | never | string => string
+
   // Infer keyword and `ReturnType<T>`
   function inferKeywordAndReturnTypeUtility() {
     // types can be inferred from other types - sort of 'type variables'
 
     // a. infer keyword
     // infer keyword is used in conditional types to infer the type of a type parameter
-    type IsArray<T> = T extends Array<any> ? 'array' : 'not array';
+    type TGetArrayInnerType<T> = T extends Array<infer A> ? A : never;
+    type TInnerType = TGetArrayInnerType<string[]>; // true
+    type TUsers = {
+      id: string;
+      name: string;
+    }[];
+    type TInnerType2 = TGetArrayInnerType<TUsers>; // true
 
-    type TIsArray = IsArray<string[]>; // 'array'
-    type TIsNotArray = IsArray<string>; // 'not array'
+    // type TIsArray = IsArray<string[]>; // 'array'
+    // type TIsNotArray = IsArray<string>; // 'not array'
 
     type TGetTypeOfArray<T> = T extends Array<infer InnerType> ? InnerType : T;
 
@@ -27,8 +104,8 @@ function lesson11() {
     function getFirstElement<T>(arr: T): TGetTypeOfArray<T> {
       return Array.isArray(arr) ? arr[0] : arr;
     }
-    const example1 = getFirstElement(['abc', 'def']); // string
-    const example2 = getFirstElement('asdf'); // string
+    const example1 = getFirstElement(['abc', 'def']); // 'abs' string
+    const example2 = getFirstElement('asdf'); // 'asdf'
 
     // b. ReturnType<T>
     function createUser(firstName: string, lastName: string, age: number) {
@@ -41,9 +118,20 @@ function lesson11() {
         id,
       };
     }
+
+    type MyUser = {
+      firstName: string;
+      lastName: string;
+      age: number;
+      id: string;
+    };
+
     type MyReturnType<T> = T extends (...args: any) => infer R ? R : never;
 
-    function printUserInfo(user: MyReturnType<typeof createUser>) {
+    type ReturnType2 = ReturnType<typeof createUser>; // MyUser
+    // type TError = ReturnType<number>; // error
+
+    function printUserInfo(user: ReturnType<typeof createUser>) {
       console.log(
         `User ${user.firstName} ${user.lastName} is ${user.age} years old`,
       );
@@ -57,11 +145,11 @@ function lesson11() {
 
     type TGetFullNameReturnType = MyReturnType<typeof createUser>; // string
 
-    type ReturnType<T extends (...args: any) => any> = T extends (
-      ...args: any
-    ) => infer R
-      ? R
-      : any;
+    // type ReturnType<T extends (...args: any) => any> = T extends (
+    //   ...args: any
+    // ) => infer R
+    //   ? R
+    //   : any;
 
     // some utility types from lib.es5.d.ts
     // https://github.com/microsoft/TypeScript/blob/main/src/lib/es5.d.ts#L185
@@ -69,9 +157,18 @@ function lesson11() {
     /**
      * Extracts the type of the 'this' parameter of a function type, or 'unknown' if the function type has no 'this' parameter.
      */
-    type ThisParameterType<T> = T extends (this: infer U, ...args: never) => any
+    type ThisParameterType<T extends (...args: any) => any> = T extends (
+      this: infer U,
+      ...args: never
+    ) => any
       ? U
       : unknown;
+
+    function toString(this: { name: string; age: number }) {
+      return `${this.name}, ${this.age}`;
+    }
+
+    type TThisParamResult = ThisParameterType<typeof toString>; // { name: string; age: number }
 
     /**
      * Recursively unwraps the "awaited type" of a type. Non-promise "thenables" should resolve to `never`. This emulates the behavior of `await`.
@@ -105,6 +202,16 @@ function lesson11() {
     type InstanceType<T extends abstract new (...args: any) => any> =
       T extends abstract new (...args: any) => infer R ? R : any;
 
+    // function createUser(firstName: string, lastName: string, age: number) {
+    //   const id = (Math.random() * 100000).toString();
+
+    //   return {
+    //     firstName,
+    //     lastName,
+    //     age,
+    //     id,
+    //   };
+    // }
     type TCreateUserParams = Parameters<typeof createUser>; // [string, string, number]
     const params: TCreateUserParams = ['John', 'Doe', 30];
     const user = createUser(...params);
@@ -117,6 +224,14 @@ function lesson11() {
     // for (const key in object) {
     // mapped types are similar to for in loop but for types
 
+    // point.x = 10; // error
+
+    // type TReadOnlyPoint = {
+    //   readonly x: number;
+    //   readonly y: number;
+    //   readonly z: number;
+    // };
+
     type Point = {
       x: number;
       y: number;
@@ -124,23 +239,11 @@ function lesson11() {
       name: string;
     };
 
-    type TReadOnlyPoint = {
-      readonly x: number;
-      readonly y: number;
-      readonly z: number;
+    type TMyReadonly<T> = {
+      readonly [K in keyof T]: T[K];
     };
 
-    const point: TReadOnlyPoint = {
-      x: 1,
-      y: 2,
-      z: 3,
-    };
-
-    // point.x = 10; // error
-
-    type TPointV1 = {
-      [K in 'x' | 'y' | 'z']: number;
-    };
+    type TReadOnlyPointV1 = TMyReadonly<Point>;
 
     type TPointV2 = {
       [K in 'x' | 'y' | 'z']: Point[K];
@@ -164,12 +267,20 @@ function lesson11() {
     /**
      * Make all properties in T readonly
      */
-    type Readonly<T> = {
-      readonly [K in keyof T]: T[K];
-    };
+    // type Readonly<T> = {
+    //   readonly [K in keyof T]: T[K];
+    // };
 
     type TReadOnlyPointV4 = Readonly<Point>;
 
+    const zeroPoint: TReadOnlyPointV4 = {
+      x: 0,
+      y: 0,
+      z: 0,
+      name: 'zero',
+    };
+
+    // zeroPoint.x = 10; // error
     // Readonly<T> is a built-in mapped type
   }
   mappedTypes();
@@ -181,10 +292,10 @@ function lesson11() {
     };
 
     type TPoint3D = {
-      x: number;
+      readonly x: number;
       y: number;
       z: number;
-      name: string;
+      name?: string;
     };
 
     type TCopyPoint = TCopy<TPoint3D>;
@@ -195,9 +306,12 @@ function lesson11() {
     type Partial<T> = {
       [P in keyof T]?: T[P];
     };
+
     type Partial2<T> = {
       [P in keyof T]+?: T[P];
     };
+
+    type TPartialPoint = Partial<TPoint3D>;
 
     /**
      * Make all properties in T required
@@ -205,6 +319,7 @@ function lesson11() {
     type Required<T> = {
       [P in keyof T]-?: T[P];
     };
+    type TPointRequired = Required<TPoint3D>;
 
     /**
      * Make all properties in T readonly
@@ -218,6 +333,7 @@ function lesson11() {
     type Mutable<T> = {
       -readonly [P in keyof T]: T[P];
     };
+    type TPointMutable = Mutable<TPoint3D>;
 
     /**
      * Make all properties in T nullable
@@ -236,24 +352,24 @@ function lesson11() {
     type TNullablePoint = Nullable<TPoint>;
 
     // usage example
-    class State<T> {
+    class State<T, K extends keyof T> {
       constructor(private state: T) {}
-      updateState(newState: T) {
+      updateState(newState: Partial<T>) {
         // TODO: use Partial
         this.state = { ...this.state, ...newState };
       }
-      getStateByKey(key: keyof T) {
+      getStateByKey(key: K): T[K] {
         return this.state[key];
       }
     }
 
-    const state = new State<TPoint>({
+    const state = new State({
       x: 1,
       y: 2,
       z: 3,
       name: 'point',
-    });
-    // state.updateState({ x: 10 }); // error
+    } as TPoint);
+    state.updateState({ z: 10 }); // error
 
     // class State<T> {
     //   constructor(private state: T) {}
@@ -271,6 +387,19 @@ function lesson11() {
     type Pick<T, K extends keyof T> = {
       [P in K]: T[P];
     };
+    type TPoint2d = Pick<TPoint, 'x' | 'y'>;
+
+    type Record<K extends keyof any, T> = {
+      [P in K]: T;
+    };
+
+    type TPoint4d = Record<'x' | 'y' | 'z' | 't', number>;
+    type TPoint4d2 = {
+      x: number;
+      y: number;
+      z: number;
+      t: number;
+    };
   }
   mappedTypesModifiers();
 
@@ -278,20 +407,22 @@ function lesson11() {
   function templateLiteralType() {
     // in js we have template literals
     const name = 'John';
-    const greeting = `Hello ${name}`;
+    const greeting = `Hello ${name}!!!`;
 
     // in ts we have template literal for types
-    type Greeting = `Hello ${string}`; // it is a string type that starts with "Hello " and ends with any string
-    const greeting2: Greeting = 'Hello John';
+    type Greeting = `Hello ${string}!!!`; // it is a string type that starts with "Hello " and ends with any string
+    const greeting2: Greeting = `Hello ${name}!!!`;
     // const greeting3: Greeting = "Hello123 John";
 
     // example 1
     type CssValue = `${number}px` | `${number}em` | `${number}%`;
     const width2: CssValue = '100px';
     const width3: CssValue = '100em';
+    const width4: CssValue = '100%';
+    const width5: CssValue = '100em';
     // example 2
     type Color = 'red' | 'green' | 'blue';
-    type CssColor = Color | `#${string}`;
+    type CssColor = Color | `#${number}${number}${number}`;
     // example 3
     type Shape = 'circle' | 'square';
     type ShapeWithColor = `${Shape}-${Color}`;
@@ -303,14 +434,5 @@ function lesson11() {
     // drawShapeWithColor("circle-red123"); // error
   }
   templateLiteralType();
-  // React with Typescript - more on hooks - performance optimization
-  // - useCallback
-  // - useMemo
-  // - useRef
-  // - useImperativeHandle
-  // - useReducer
-  // - useContext
-  // vite: https://vitejs.dev/guide/#scaffolding-your-first-vite-project
-  // $ npm create vite@latest
 }
 lesson11();
