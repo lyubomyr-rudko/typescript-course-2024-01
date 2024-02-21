@@ -12,7 +12,7 @@
 function exercise50() {
   // TODO: observe the problem with autocomplete in the line createCar("BMW");
   // TODO: fix the problem by using the approach from the lesson
-  type Brands = 'BMW' | 'Mercedes' | 'Audi' | string;
+  type Brands = ('BMW' | 'Mercedes' | 'Audi') | (string & object);
 
   function createCar(brand: Brands) {
     return `${brand} car`;
@@ -27,12 +27,12 @@ exercise50();
 function exercise51() {
   // Use satisfies constraint
   // TODO: create a tuple type that represents a 3d point
-  type TPoint = [];
+  type TPoint = [x: number, y: number, z: number];
   // TODO: create a type that represents a 3d shapes (key is a string, value is an array of 3d points)
   // eslint-disable-next-line @typescript-eslint/ban-types
-  type TShapes = {};
+  type TShapes = Record<string, TPoint[]>;
 
-  const shapes: TShapes = {
+  const shapes = {
     circle: [
       [1, 2, 3],
       [4, 5, 6],
@@ -42,15 +42,15 @@ function exercise51() {
       [1, 2, 3],
       [4, 5, 6],
     ],
-  };
+  } satisfies TShapes;
   console.log(shapes);
 
   // TODO: create a function that takes a list points and prints them into console
   function drawShape(points: TPoint[]) {
-    console.log(points);
+    points.forEach((point) => console.log(point));
   }
-  console.log(drawShape);
-  // drawShape(shapes.circle123); // TOOD: uncomment and fix this to have compile check error, using satisfies constraint
+  // console.log(drawShape);
+  drawShape(shapes.circle); // TOOD: uncomment and fix this to have compile check error, using satisfies constraint
 }
 exercise51();
 
@@ -62,23 +62,40 @@ function exercise52() {
   type TObjectWitName = {
     name: string;
   };
+
   // TODO: declare utility type TGettersSettersValidators (union of TGetters, TSetters, TValidators)
   // hint: TGetters for each of the property generates getXxxx method that returns property value
   // hint: TSetters for each of the property generates setXxxx method that sets property value
   // hint: TValidators for each of the property generates validateXxxx method that returns true if property value is valid
+  type TGetters<T> = {
+    [K in keyof T & string as `get${Capitalize<K>}`]: () => T[K];
+  };
+
+  type TSetters<T> = {
+    [K in keyof T & string as `set${Capitalize<K>}`]: (newValue: T[K]) => void;
+  };
+
+  type TValidators<T> = {
+    [K in keyof T & string as `validate${Capitalize<K>}`]: () => boolean;
+  };
+
+  type TGettersSettersValidators<T> = TGetters<T> &
+    TSetters<T> &
+    TValidators<T>;
+
   const obj = {
     name: 'point',
   };
   console.log(obj);
 
   // TODO: generate this type from TGettersSettersValidators using utility type
-  // type TObjectMethods = TGettersSettersValidators<typeof obj>;
+  type TObjectMethods = TGettersSettersValidators<typeof obj>;
   // TODO: remvoe this declaration below and replac it with the one above
-  type TObjectMethods = {
-    getName(): string;
-    setName(name: string): void;
-    validateName(): boolean;
-  };
+  // type TObjectMethods = {
+  //   getName(): string;
+  //   setName(name: string): void;
+  //   validateName(): boolean;
+  // };
 
   const object: TObjectWitName & TObjectMethods = {
     name: 'point',
@@ -95,6 +112,7 @@ function exercise52() {
   console.log(object);
 
   // TODO: add property age to object and check if you get type check errors
+  // object.age = 23; // Property 'age' does not exist on type 'TObjectWitName & TObjectMethods'.
 }
 exercise52();
 
@@ -114,14 +132,14 @@ function excercise53() {
   };
 
   // TODO: use ThisType<T> utility in this code to remove explicit type annotations
-  const methods: Methods<number> = {
-    log(this: Data) {
+  const methods: Methods<number> & ThisType<Data & Methods<number>> = {
+    log() {
       console.log(this.value);
     },
-    set(this: Data, value: number) {
+    set(value: number) {
       this.value = value;
     },
-    validate(this: Data) {
+    validate() {
       this.isValid = this.value > 0;
     },
   };
@@ -145,13 +163,22 @@ function excercise54() {
   // TODO: support any number of nested arrays [1] -> number, [[1]] -> number, [[[1]]] -> number
   // TODO: update the code below
   // type TArrayInner<T> = T extends any array - if yes - infer inner type ((infer U)[]), call TArrayInner recursively on U, if not - return T
+
+  type TArrayInner<T> = T extends null | undefined
+    ? T
+    : T extends (infer U)[]
+      ? TArrayInner<U>
+      : T;
+
   const numberArr = [[[1, 2, 3]]];
   // TODO: uncomment and check if you get type number
-  // type TNumber = TArrayInner<typeof numberArr>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  type TNumber = TArrayInner<typeof numberArr>;
 
   const stringArr = [[[[['hello']]]]];
   // TODO: uncomment and check if you get type string
-  // type TString = TArrayInner<typeof stringArr>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  type TString = TArrayInner<typeof stringArr>;
 
   console.log(numberArr, stringArr);
 }
