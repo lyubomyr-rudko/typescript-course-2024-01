@@ -14,8 +14,42 @@
 function exercise40() {
   // TODO: 1. implement method decorator to print call count of the function
   // TODO: 2. implement method decorator to print execution time of the function
+  function callCount(
+    target: unknown,
+    key: string,
+    descriptor: PropertyDescriptor,
+  ) {
+    let count = 0;
+    const originalMethod = descriptor.value;
+    descriptor.value = function (...args: unknown[]) {
+      count++;
+      console.log(`Method ${key} called ${count} times`);
+      return originalMethod.apply(this, args);
+    };
+  }
+
+  function executionTime(
+    target: unknown,
+    key: string,
+    descriptor: PropertyDescriptor,
+  ) {
+    const originalMethod = descriptor.value;
+    descriptor.value = function (...args: unknown[]) {
+      const start = Date.now();
+      const result = originalMethod.apply(this, args);
+      const end = Date.now();
+      console.log(`Method ${key} executed in ${end - start} ms`);
+      return result;
+    };
+  }
+
+  console.log(callCount);
+  console.log(executionTime);
+
   class Calculation {
     // TODO: add both decorators to the following method
+    // @callCount
+    // @executionTime
     static add(a: number, b: number) {
       return a + b;
     }
@@ -23,7 +57,7 @@ function exercise40() {
   // TODO: create instance of Calculation class and call add method
 
   // TODO: remove the following line
-  console.log(Calculation);
+  console.log(Calculation.add(2, 3));
 }
 exercise40();
 
@@ -31,15 +65,37 @@ exercise40();
 function exercise41() {
   // TODO: 1. implement method decorator to print call count of the function
   // TODO: 2. implement method decorator to print execution time of the function
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  function loggedMethod(originalMethod: Function, _context: unknown) {
+    console.log(_context);
+    function replacementMethod(this: unknown, ...args: unknown[]) {
+      console.log('LOG: Entering method.');
+      const result = originalMethod.call(this, ...args);
+      console.log('LOG: Exiting method.');
+      return result;
+    }
+    return replacementMethod;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  function executionTime(originalMethod: Function, _context: unknown) {
+    console.log(_context);
+    function replacementMethod(this: unknown, ...args: unknown[]) {
+      const start = Date.now();
+      const result = originalMethod.call(this, ...args);
+      const end = Date.now();
+      console.log(`Method executed in ${end - start} ms`);
+      return result;
+    }
+    return replacementMethod;
+  }
   class Calculation {
-    // TODO: add both decorators to the following method
+    @loggedMethod
+    @executionTime
     static add(a: number, b: number) {
       return a + b;
     }
   }
-  // TODO: create instance of Calculation class and call add method
-
-  // TODO: remove the following line
-  console.log(Calculation);
+  console.log(Calculation.add(2, 3));
 }
 exercise41();
