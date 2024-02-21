@@ -303,14 +303,5 @@ function lesson11() {
     // drawShapeWithColor("circle-red123"); // error
   }
   templateLiteralType();
-  // React with Typescript - more on hooks - performance optimization
-  // - useCallback
-  // - useMemo
-  // - useRef
-  // - useImperativeHandle
-  // - useReducer
-  // - useContext
-  // vite: https://vitejs.dev/guide/#scaffolding-your-first-vite-project
-  // $ npm create vite@latest
 }
 lesson11();

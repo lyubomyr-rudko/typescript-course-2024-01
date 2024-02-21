@@ -87,6 +87,10 @@ function lesson14() {
 
   // Typescript documentation recap
   // https://www.typescriptlang.org/docs/handbook/utility-types.html
+
+  // React with Typescript - complex hooks
+  // useDebugValue
+  // Custom Hooks
 }
 lesson14();
 
