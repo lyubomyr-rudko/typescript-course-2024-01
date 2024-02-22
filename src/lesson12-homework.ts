@@ -167,13 +167,16 @@ function excercise54() {
   // TODO: support any number of nested arrays [1] -> number, [[1]] -> number, [[[1]]] -> number
   // TODO: update the code below
   // type TArrayInner<T> = T extends any array - if yes - infer inner type ((infer U)[]), call TArrayInner recursively on U, if not - return T
+  type TArrayInner<T> = T extends (infer U)[] ? TArrayInner<U> : T;
   const numberArr = [[[1, 2, 3]]];
   // TODO: uncomment and check if you get type number
-  // type TNumber = TArrayInner<typeof numberArr>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  type TNumber = TArrayInner<typeof numberArr>;
 
   const stringArr = [[[[['hello']]]]];
   // TODO: uncomment and check if you get type string
-  // type TString = TArrayInner<typeof stringArr>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  type TString = TArrayInner<typeof stringArr>;
 
   console.log(numberArr, stringArr);
 }
