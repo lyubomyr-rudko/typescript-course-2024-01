@@ -262,7 +262,6 @@ function exercise53() {
     status: string;
     isValid: boolean;
   };
-
   const data: Data & Methods<number> = {
     value: 0,
     status: 'ok',
