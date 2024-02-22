@@ -5,3 +5,6 @@
 
 function lesson15() {}
 lesson15();
+
+const test = 'test';
+export default test;
