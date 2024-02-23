@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // Read the following typescript documentation:
 // 1. https://www.typescriptlang.org/docs/handbook/2/types-from-types.html
 // a. Generics - Types which take parameters
@@ -8,17 +9,19 @@
 // f. Mapped Types - Creating types by mapping each property in an existing type
 // g. Template Literal Types - Mapped types which change properties via template literal strings
 
-// Fix autocoplete problem for literal union types
+// Fix autocomplete problem for literal union types
 function exercise50() {
   // TODO: observe the problem with autocomplete in the line createCar("BMW");
   // TODO: fix the problem by using the approach from the lesson
-  type Brands = 'BMW' | 'Mercedes' | 'Audi' | string;
+  type Brands =
+    | ('BMW' | 'Mercedes' | 'Audi')
+    | (string & Record<string, never>);
 
   function createCar(brand: Brands) {
     return `${brand} car`;
   }
   // TODO: check if autocomplete works before and after the fix
-  const car = createCar('BMW');
+  const car = createCar('Mercedes');
   console.log(car);
 }
 exercise50();
@@ -27,12 +30,12 @@ exercise50();
 function exercise51() {
   // Use satisfies constraint
   // TODO: create a tuple type that represents a 3d point
-  type TPoint = [];
+  type TPoint = [x: number, y: number, z: number];
   // TODO: create a type that represents a 3d shapes (key is a string, value is an array of 3d points)
   // eslint-disable-next-line @typescript-eslint/ban-types
-  type TShapes = {};
+  type TShapes = Record<string, TPoint[]>;
 
-  const shapes: TShapes = {
+  const shapes = {
     circle: [
       [1, 2, 3],
       [4, 5, 6],
@@ -42,15 +45,23 @@ function exercise51() {
       [1, 2, 3],
       [4, 5, 6],
     ],
-  };
+  } satisfies TShapes;
   console.log(shapes);
 
   // TODO: create a function that takes a list points and prints them into console
   function drawShape(points: TPoint[]) {
-    console.log(points);
+    points.forEach((point) => {
+      console.log(point);
+    });
   }
   console.log(drawShape);
   // drawShape(shapes.circle123); // TOOD: uncomment and fix this to have compile check error, using satisfies constraint
+  drawShape([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+  ]);
+  drawShape(shapes.square);
 }
 exercise51();
 
@@ -66,19 +77,27 @@ function exercise52() {
   // hint: TGetters for each of the property generates getXxxx method that returns property value
   // hint: TSetters for each of the property generates setXxxx method that sets property value
   // hint: TValidators for each of the property generates validateXxxx method that returns true if property value is valid
+  type TGetters<T> = {
+    [K in keyof T & string as `get${Capitalize<K>}`]: () => T[K];
+  };
+  type TSetters<T> = {
+    [K in keyof T & string as `set${Capitalize<K>}`]: (arg: string) => void;
+  };
+  type TValidators<T> = {
+    [K in keyof T & string as `validate${Capitalize<K>}`]: () => boolean;
+  };
+
+  type TGettersSettersValidators<T> = TGetters<T> &
+    TSetters<T> &
+    TValidators<T>;
   const obj = {
     name: 'point',
   };
   console.log(obj);
 
   // TODO: generate this type from TGettersSettersValidators using utility type
-  // type TObjectMethods = TGettersSettersValidators<typeof obj>;
-  // TODO: remvoe this declaration below and replac it with the one above
-  type TObjectMethods = {
-    getName(): string;
-    setName(name: string): void;
-    validateName(): boolean;
-  };
+  type TObjectMethods = TGettersSettersValidators<typeof obj>;
+  // TODO: remove this declaration below and replace it with the one above
 
   const object: TObjectWitName & TObjectMethods = {
     name: 'point',
@@ -99,7 +118,7 @@ function exercise52() {
 exercise52();
 
 // ThisType<T> Utility
-function excercise53() {
+function exercise53() {
   // TODO: review the code below and use ThisType<T> utility to remove explicit type annotations
   type Methods<T> = {
     log: () => void;
@@ -114,14 +133,14 @@ function excercise53() {
   };
 
   // TODO: use ThisType<T> utility in this code to remove explicit type annotations
-  const methods: Methods<number> = {
-    log(this: Data) {
+  const methods: Methods<number> & ThisType<Data & Methods<number>> = {
+    log() {
       console.log(this.value);
     },
-    set(this: Data, value: number) {
+    set(value) {
       this.value = value;
     },
-    validate(this: Data) {
+    validate() {
       this.isValid = this.value > 0;
     },
   };
@@ -136,24 +155,29 @@ function excercise53() {
   data.validate();
   data.log();
 }
-excercise53();
+exercise53();
 
 // Awaited<T> Utility
-function excercise54() {
+function exercise54() {
   // TODO: study the code of hte Awaited<T> utility type
   // TODO: implement similar utility type that gets a type from wrapped array type
   // TODO: support any number of nested arrays [1] -> number, [[1]] -> number, [[[1]]] -> number
   // TODO: update the code below
   // type TArrayInner<T> = T extends any[] ? T : never; array - if yes - infer inner type ((infer U)[]), call TArrayInner recursively on U, if not - return T
+  type TArrayInner<T> = T extends null | undefined
+    ? T
+    : T extends Array<infer U>
+      ? TArrayInner<U>
+      : T;
 
   const numberArr = [[[1, 2, 3]]];
   // TODO: uncomment and check if you get type number
-  // type TNumber = TArrayInner<typeof numberArr>;
+  type TNumber = TArrayInner<typeof numberArr>;
 
   const stringArr = [[[[['hello']]]]];
   // TODO: uncomment and check if you get type string
-  // type TString = TArrayInner<typeof stringArr>;
+  type TString = TArrayInner<typeof stringArr>;
 
   console.log(numberArr, stringArr);
 }
-excercise54();
+exercise54();
