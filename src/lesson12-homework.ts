@@ -55,7 +55,7 @@ function exercise51() {
     });
   }
   console.log(drawShape);
-  // drawShape(shapes.circle123); // TOOD: uncomment and fix this to have compile check error, using satisfies constraint
+  // drawShape(shapes.circle123); // TOOD: uncomment and fix this to have compiled check error, using satisfies constraint
   drawShape([
     [1, 2, 3],
     [4, 5, 6],
