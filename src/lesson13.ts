@@ -4,6 +4,64 @@
 // ********* Lesson 13 *********
 
 function lesson13() {
+  // Enums
+  function enums() {
+    enum SimpleFileAccess {
+      None, // 0
+      Read, // 1
+      Write, // 2
+      Execute, // 3
+    }
+
+    let myAccess = SimpleFileAccess.Read;
+
+    if (myAccess === SimpleFileAccess.Read) {
+      myAccess = SimpleFileAccess.Write;
+    }
+    // let name = SimpleFileAccess[myAccess];
+
+    console.log(myAccess);
+
+    enum FileAccess {
+      None, // 0000
+      Read = 1, // 0001 // 2^0
+      Write = 2, // 0010 // 2^1
+      Execute = 4, // 0100 // 2^2
+      SudoExecute = 8, // 1000
+      ReadWrite = Read | Write, // 011 // 3
+      // 001
+      // 010
+      // --- OR
+      // 011
+
+      // 0010
+      // 1010
+      // --- AND
+      // 0010
+      ReadWriteExecute = Read | Write | Execute, // 111
+    }
+
+    function checkAccess(access: number) {
+      if (access & FileAccess.Read) {
+        console.log('Read');
+      }
+      if (access & FileAccess.Write) {
+        console.log('Write');
+      }
+      if (access & FileAccess.Execute) {
+        console.log('Execute');
+      }
+    }
+    checkAccess(1);
+    checkAccess(2);
+    checkAccess(3);
+    checkAccess(4);
+    checkAccess(5);
+
+    // fs.openFile('file.txt', FileAccess.ReadWriteExecute);
+  }
+  enums();
+
   // Utility types deep dive - Partial, Required, Readonly, Record, Pick, Omit, Exclude, Extract, NonNullable, ReturnType, InstanceType
   function utilityTypesDeepDive() {
     // Partial
@@ -15,18 +73,25 @@ function lesson13() {
       x: number;
       y: number;
       z: number;
-      name: string;
+      name?: string;
     };
+    type TPointPartial = Partial<TPoint>;
+    type TPointRequired = Required<TPoint>;
+    type TPointReadonly = Readonly<TPoint>;
+    type TPointReadonlyRequired = Readonly<Required<TPoint>>;
+    type TPointRecord = Record<'x' | 'y' | 'z', number>;
+
     type TPoint2d = Pick<TPoint, 'x' | 'y'>;
     type TPoint2d2 = {
-      [P in 'x' | 'y']: TPoint[P];
+      [K in 'x' | 'y']: TPoint[K];
     };
-    type Pick<T, K extends keyof T> = {
-      [P in K]: T[P];
-    };
+    // type Pick<T, K extends keyof T> = {
+    //   [P in K]: T[P];
+    // };
 
     // Exclude - exclude from T all union pargs that are assignable to U
     //   type Exclude<T, U> = T extends U ? never : T;
+    type TPointKeys = keyof TPoint; // 'x' | 'y' | 'z' | 'name'
     type TPoint2d3Keys = Exclude<keyof TPoint, 'z' | 'name'>;
 
     // Extract
@@ -46,7 +111,13 @@ function lesson13() {
       name: string | null;
     };
 
-    type TNotNullablePoint = NonNullable<TPoint>;
+    type TNotNullablePoint = NonNullable<TPointNullable>;
+    // const point: TNotNullablePoint = {
+    //   x: null,
+    //   y: 2,
+    //   z: 3,
+    //   name: 'point',
+    // };
 
     // ReturnType
     type ReturnType<T extends (...args: any) => any> = T extends (
@@ -84,45 +155,5 @@ function lesson13() {
     type TDIct = [word: string, description: number];
   }
   utilityTypesDeepDive();
-  // Enums
-  function enums() {
-    enum FileAccess {
-      None, // 000
-      Read = 1 << 1, // 001
-      Write = 1 << 2, // 010
-      Execute = 1 << 3, // 100
-      ReadWrite = Read | Write, // 011
-    }
-
-    function checkAccess(access: number) {
-      if (access & FileAccess.Read) {
-        console.log('Read');
-      }
-      if (access & FileAccess.Write) {
-        console.log('Write');
-      }
-      if (access & FileAccess.Execute) {
-        console.log('Execute');
-      }
-    }
-    checkAccess(1);
-    checkAccess(2);
-    checkAccess(3);
-    checkAccess(4);
-    checkAccess(5);
-  }
-  enums();
-
-  // React with Typescript - more on hooks - performance optimization
-  // - useCallback
-  // - useMemo
-  // - useRef
-  // - useImperativeHandle
-  // - useReducer
-  // - useContext
-  // vite: https://vitejs.dev/guide/#scaffolding-your-first-vite-project
-  // $ npm create vite@latest
 }
 lesson13();
-
-export default lesson13;
