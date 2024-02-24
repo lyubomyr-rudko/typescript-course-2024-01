@@ -25,6 +25,7 @@ function exercise55() {
     if (color & Color.Blue) {
       result += 'Blue';
     }
+    result = result.replace(/, $/, '');
 
     // TODO: explain how bitmask works
     return result;
@@ -40,13 +41,13 @@ function exercise55() {
   // getColor(6) === "Red, Green" // bitmask   ( 1 1 0 )
   // getColor(7) === "Red, Green, Blue" // bitmask ( 1 1 1 )
 
-  console.log(getColorTest(0));
-  console.log(getColorTest(1));
-  console.log(getColorTest(2));
-  console.log(getColorTest(3)); // === "Red, Green"
-  console.log(getColorTest(4));
-  console.log(getColorTest(6)); // === "Green, Blue"
-  console.log(getColorTest(7));
+  console.log(getColor(0));
+  console.log(getColor(1));
+  console.log(getColor(2));
+  console.log(getColor(3)); // === "Red, Green"
+  console.log(getColor(4));
+  console.log(getColor(6)); // === "Green, Blue"
+  console.log(getColor(7));
 }
 exercise55();
 
@@ -120,6 +121,7 @@ enum Color {
 }
 function getColorTest(color: number): string {
   let result = '';
+
   if (color & Color.Red) {
     result += 'Red, ';
   }
@@ -129,6 +131,7 @@ function getColorTest(color: number): string {
   if (color & Color.Blue) {
     result += 'Blue';
   }
+  result = result.replace(/, $/, '');
   return result;
 }
 
