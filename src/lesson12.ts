@@ -29,7 +29,6 @@ function lesson12() {
   function satisfiesConstraint() {
     type ColorString = 'red' | 'green' | 'blue';
     type ColorRGB = [red: number, green: number, blue: number];
-    type ColorRGB2 = [number, number, number];
 
     type Color = ColorString | ColorRGB;
 
@@ -266,7 +265,7 @@ function lesson12() {
     type Getters<T> = {
       [K in keyof T & string as `get${Capitalize<K>}`]: () => T[K];
     };
-    // T & string - will convert non-string keys to never, keeping only string keys
+    // T & string - will non-string keys
     // as - will rename keys
 
     type TPoint = {
