@@ -2,30 +2,47 @@
 function exercise55() {
   // TODO: declare enum Color with values Red, Green, Blue
   // TODO: assing Red: 1, Green: 2, Blue: 4
-  // enum Color {}
+  enum Color {
+    Red = 1, // 0001
+    Green = 2, // 0010
+    Blue = 4, // 0100
+  }
 
   // TODO: declare a function that takes a color as a number and returns a string
   // TODO: use bitmask bitwise AND operator to check if color has Red, Green, Blue
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function getColor(color: number): string {
-    const result = color.toFixed();
+    let result = '';
+
     // TODO: check if red bit is set by bitwise & operator, if so - add "Red" to result
+    if (color & Color.Red) {
+      const newValue = 'Red';
+      result ? (result += `, ${newValue}`) : (result = newValue);
+    }
     // TODO: check if green bit is set by bitwise & operator, if so - add "Green" to result
+    if (color & Color.Green) {
+      const newValue = 'Green';
+      result ? (result += `, ${newValue}`) : (result = newValue);
+    }
     // TODO: check if blue bit is set by bitwise & operator, if so - add "Blue" to result
+    if (color & Color.Blue) {
+      const newValue = 'Blue';
+      result ? (result += `, ${newValue}`) : (result = newValue);
+    }
 
     // TODO: explain how bitmask works
     return result;
   }
 
   // TODO: add unit tests for getColor function
-  // getColor(0) === """ (empty string, no color), bitmask ( 0 0 0 )
-  // getColor(1) === "Red" // bitmask ( 0 0 1 )
-  // getColor(2) === "Green // bitmask ( 0 1 0 )
-  // getColor(3) === "Green, Blue" // bitmask ( 0 1 1 )
-  // getColor(4) === "Blue" bitmask ( 1 0 0 )
-  // getColor(5) === "Red, Blue" // bitmask ( 1 0 1 )
-  // getColor(6) === "Red, Green" // bitmask   ( 1 1 0 )
-  // getColor(7) === "Red, Green, Blue" // bitmask ( 1 1 1 )
+  console.log('0-->', getColor(0)); // === """ (empty string, no color), bitmask ( 0 0 0 )
+  console.log('1-->', getColor(1)); // === "Red" // bitmask ( 0 0 1 )
+  console.log('2-->', getColor(2)); // === "Green // bitmask ( 0 1 0 )
+  console.log('3-->', getColor(3)); // === "Green, Blue" // bitmask ( 0 1 1 )
+  console.log('4-->', getColor(4)); // === "Blue" bitmask ( 1 0 0 )
+  console.log('5-->', getColor(5)); // === "Red, Blue" // bitmask ( 1 0 1 )
+  console.log('6-->', getColor(6)); // === "Red, Green" // bitmask   ( 1 1 0 )
+  console.log('7-->', getColor(7)); // === "Red, Green, Blue" // bitmask ( 1 1 1 )
 }
 exercise55();
 
