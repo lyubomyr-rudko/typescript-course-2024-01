@@ -39,7 +39,7 @@ describe('sum', () => {
 // getColor(6) === "Red, Green" // bitmask   ( 1 1 0 )
 // getColor(7) === "Red, Green, Blue" // bitmask ( 1 1 1 )
 
-// it('check color', () => {
+// ('check color', () => {
 //   let value: number;
 //   let expected;
 //   if ((value = 0)) {
