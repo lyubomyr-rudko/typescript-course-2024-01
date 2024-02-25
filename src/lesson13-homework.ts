@@ -1,11 +1,12 @@
 // enums
-function exercise55() {
+export function exercise55() {
   // TODO: declare enum Color with values Red, Green, Blue
   // TODO: assing Red: 1, Green: 2, Blue: 4
   enum Color {
     Red = 1,
     Green = 2,
     Blue = 4,
+    // GreenBlue = Red | Green,  Что то типа такого надо было сделать ?
   }
 
   // TODO: declare a function that takes a color as a number and returns a string
@@ -41,6 +42,9 @@ function exercise55() {
     if (color & Color.Blue) {
       result = 'Blue';
     }
+    // if (color & Color.GreenBlue) {
+    //   result = 'Green, Blue';
+    // }
 
     // TODO: explain how bitmask works
     return result;
@@ -48,6 +52,7 @@ function exercise55() {
   console.log(getColor(1));
   console.log(getColor(2));
   console.log(getColor(4));
+  console.log(getColor(3));
 
   // TODO: add unit tests for getColor function
   // getColor(0) === """ (empty string, no color), bitmask ( 0 0 0 )
@@ -58,6 +63,7 @@ function exercise55() {
   // getColor(5) === "Red, Blue" // bitmask ( 1 0 1 )
   // getColor(6) === "Red, Green" // bitmask   ( 1 1 0 )
   // getColor(7) === "Red, Green, Blue" // bitmask ( 1 1 1 )
+  return { getColor };
 }
 exercise55();
 
