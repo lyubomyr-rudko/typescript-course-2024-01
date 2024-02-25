@@ -5,36 +5,6 @@ describe('sum', () => {
   it('should be defined', () => {
     expect(getColor).toBeDefined();
   });
-  // it('check color', () => {
-  //   let value: number;
-  //   let expected;
-  //   if ((value = 0)) {
-  //     expected = '';
-  //   }
-  //   if ((value = 1)) {
-  //     expected = 'Red';
-  //   }
-  //   if ((value = 2)) {
-  //     expected = 'Green';
-  //   }
-  //   if ((value = 3)) {
-  //     expected = 'Green, Blue';
-  //   }
-  //   if ((value = 4)) {
-  //     expected = 'Blue';
-  //   }
-  //   if ((value = 5)) {
-  //     expected = 'Red, Blue';
-  //   }
-  //   if ((value = 6)) {
-  //     expected = 'Red, Green';
-  //   }
-  //   if ((value = 7)) {
-  //     expected = 'Red, Green, Blue';
-  //   }
-
-  //   expect(getColor(value)).toBe(expected);
-  // });
   it('check color if value 0', () => {
     expect(getColor(0)).toBe('');
   });
@@ -68,3 +38,34 @@ describe('sum', () => {
 // getColor(5) === "Red, Blue" // bitmask ( 1 0 1 )
 // getColor(6) === "Red, Green" // bitmask   ( 1 1 0 )
 // getColor(7) === "Red, Green, Blue" // bitmask ( 1 1 1 )
+
+// it('check color', () => {
+//   let value: number;
+//   let expected;
+//   if ((value = 0)) {
+//     expected = '';
+//   }
+//   if ((value = 1)) {
+//     expected = 'Red';
+//   }
+//   if ((value = 2)) {
+//     expected = 'Green';
+//   }
+//   if ((value = 3)) {
+//     expected = 'Green, Blue';
+//   }
+//   if ((value = 4)) {
+//     expected = 'Blue';
+//   }
+//   if ((value = 5)) {
+//     expected = 'Red, Blue';
+//   }
+//   if ((value = 6)) {
+//     expected = 'Red, Green';
+//   }
+//   if ((value = 7)) {
+//     expected = 'Red, Green, Blue';
+//   }
+
+//   expect(getColor(value)).toBe(expected);
+// });
