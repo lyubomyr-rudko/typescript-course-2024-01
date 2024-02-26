@@ -1,14 +1,32 @@
 // enums
-function exercise55() {
+// function exercise55() {
   // TODO: declare enum Color with values Red, Green, Blue
   // TODO: assing Red: 1, Green: 2, Blue: 4
-  // enum Color {}
 
+   enum Color {
+    Red = 1, //0001
+    Green = 2, //0010
+    Blue = 4  //0100
+   }
   // TODO: declare a function that takes a color as a number and returns a string
   // TODO: use bitmask bitwise AND operator to check if color has Red, Green, Blue
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function getColor(color: number): string {
-    const result = color.toFixed();
+   export function getColor(color: number): string {
+    let result: string ="";
+
+    if (color & 1) {
+      result += "Red";
+  }
+
+  if (color & 2) {
+      if (result !== "") result += ", ";
+      result += "Green";
+  }
+
+  if (color & 4) {
+      if (result !== "") result += ", ";
+      result += "Blue";
+  }
     // TODO: check if red bit is set by bitwise & operator, if so - add "Red" to result
     // TODO: check if green bit is set by bitwise & operator, if so - add "Green" to result
     // TODO: check if blue bit is set by bitwise & operator, if so - add "Blue" to result
@@ -18,28 +36,54 @@ function exercise55() {
   }
 
   // TODO: add unit tests for getColor function
-  // getColor(0) === """ (empty string, no color), bitmask ( 0 0 0 )
-  // getColor(1) === "Red" // bitmask ( 0 0 1 )
-  // getColor(2) === "Green // bitmask ( 0 1 0 )
-  // getColor(3) === "Green, Blue" // bitmask ( 0 1 1 )
-  // getColor(4) === "Blue" bitmask ( 1 0 0 )
-  // getColor(5) === "Red, Blue" // bitmask ( 1 0 1 )
-  // getColor(6) === "Red, Green" // bitmask   ( 1 1 0 )
-  // getColor(7) === "Red, Green, Blue" // bitmask ( 1 1 1 )
-}
-exercise55();
+  console.log(getColor(0));  // Expected: "" (no color)
+  console.log(getColor(1));  // Expected: "Red"
+  console.log(getColor(2));  // Expected: "Green"
+  console.log(getColor(3));  // Expected: "Red, Green"
+  console.log(getColor(4));  // Expected: "Blue"
+  console.log(getColor(5));  // Expected: "Red, Blue"
+  console.log(getColor(6));  // Expected: "Green, Blue"
+  console.log(getColor(7));  // Expected: "Red, Green, Blue"
+//  }
+// exercise55();
 
 // This is an algorithmic problem - use your algorithmic skills and typescript knowledge to solve it
 function exerciseExtraA() {
   // TODO: write a function to  merge two sorted arrays of numbers into one sorted array
   // TODO: use generic type to support any type of arrays
-  function mergeSortedArrays(
-    arr1: number[],
-    arr2: number[],
-    comparator: (a: number, b: number) => 1 | -1 | 0,
-  ): number[] {
+  function mergeSortedArrays<T>(
+    arr1: T[],
+    arr2: T[],
+    comparator: (a: T, b: T) => number
+  ): T[] {
+    const mergedArray: T[] = [];
+  let i = 0;
+  let j = 0;
+
+  while (i < arr1.length && j < arr2.length) {
+    if (comparator(arr1[i], arr2[j]) <= 0) {
+      mergedArray.push(arr1[i]);
+      i++;
+    } else {
+      mergedArray.push(arr2[j]);
+      j++;
+    }
+  }
+
+  while (i < arr1.length) {
+    mergedArray.push(arr1[i]);
+    i++;
+  }
+
+  while (j < arr2.length) {
+    mergedArray.push(arr2[j]);
+    j++;
+  }
+
+  return mergedArray;
+
     // TODO: remove the next line, implement the function without using array sort method
-    return [...arr1, ...arr2].sort(comparator);
+
   }
   console.log(
     mergeSortedArrays([1, 2, 3], [4, 5, 6], (a, b) => (a > b ? 1 : -1)),
@@ -63,4 +107,5 @@ function exerciseExtraA() {
 }
 exerciseExtraA();
 
-export {};
+
+
