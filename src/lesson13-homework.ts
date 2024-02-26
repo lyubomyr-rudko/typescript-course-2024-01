@@ -131,4 +131,5 @@ function getColor(color: number): string {
   }
   return result;
 }
+
 export { getColor };
