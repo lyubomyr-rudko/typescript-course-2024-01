@@ -59,7 +59,7 @@ function exerciseExtraA() {
   ): T[] {
     // TODO: remove the next line, implement the function without using array sort method
     // return [...arr1, ...arr2].sort(comparator);
-    const unitedArray = [...arr1, ...arr2].map((item) => +item) as T[];
+    const unitedArray = [...arr1, ...arr2] as T[];
 
     for (let i = 0; i < unitedArray.length; i++) {
       for (let j = i + 1; j < unitedArray.length; j++) {
@@ -73,12 +73,6 @@ function exerciseExtraA() {
 
     return unitedArray;
   }
-
-  console.log(
-    mergeSortedArrays(['11', 2, '3'], [4, '5', '6'], (a, b) =>
-      a > b ? 1 : -1,
-    ),
-  );
 
   console.log(
     mergeSortedArrays([3, 4, 5, 6, 6, 10, 20], [4, 5, 6], (a, b) =>
@@ -101,6 +95,11 @@ function exerciseExtraA() {
   //   );
 
   // TODO: convert mergeSortedArrays to a generic function to support strings and numbers
+  console.log(
+    mergeSortedArrays(['a', 'g', 'f'], ['b', 'd', 'c'], (a, b) =>
+      a > b ? 1 : -1,
+    ),
+  );
 }
 exerciseExtraA();
 
