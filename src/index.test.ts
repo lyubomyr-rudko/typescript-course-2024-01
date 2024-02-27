@@ -1,6 +1,31 @@
 import { describe, expect, it } from '@jest/globals';
 import { sum, max, getRandomNumber } from './index';
 import { distance } from './lesson2-homework';
+import { exercise55 } from './lesson13-homework';
+
+const { getColor } = exercise55();
+
+describe('getColor', () => {
+  it('should be defined', () => {
+    expect(getColor).toBeDefined();
+  });
+
+  it('must be empty string', () => {
+    expect(getColor(0)).toBe('');
+  });
+
+  it('must be Red', () => {
+    expect(getColor(1)).toBe('Red');
+  });
+
+  it('must be  Green', () => {
+    expect(getColor(2)).toBe('Green');
+  });
+
+  it('must be  Blue', () => {
+    expect(getColor(4)).toBe('Blue');
+  });
+});
 
 describe('sum', () => {
   it('should be defined', () => {
