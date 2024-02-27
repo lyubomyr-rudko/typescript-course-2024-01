@@ -1,5 +1,5 @@
 // enums
-function exercise55() {
+export function exercise55() {
   // TODO: declare enum Color with values Red, Green, Blue
   // TODO: assing Red: 1, Green: 2, Blue: 4
   enum Color {
@@ -43,6 +43,8 @@ function exercise55() {
   console.log('5-->', getColor(5)); // === "Red, Blue" // bitmask ( 1 0 1 )
   console.log('6-->', getColor(6)); // === "Red, Green" // bitmask   ( 1 1 0 )
   console.log('7-->', getColor(7)); // === "Red, Green, Blue" // bitmask ( 1 1 1 )
+
+  return { getColor };
 }
 exercise55();
 
@@ -50,16 +52,38 @@ exercise55();
 function exerciseExtraA() {
   // TODO: write a function to  merge two sorted arrays of numbers into one sorted array
   // TODO: use generic type to support any type of arrays
-  function mergeSortedArrays(
-    arr1: number[],
-    arr2: number[],
-    comparator: (a: number, b: number) => 1 | -1 | 0,
-  ): number[] {
+  function mergeSortedArrays<T>(
+    arr1: T[],
+    arr2: T[],
+    comparator: (a: T, b: T) => 1 | -1,
+  ): T[] {
     // TODO: remove the next line, implement the function without using array sort method
-    return [...arr1, ...arr2].sort(comparator);
+    // return [...arr1, ...arr2].sort(comparator);
+    const unitedArray = [...arr1, ...arr2].map((item) => +item) as T[];
+
+    for (let i = 0; i < unitedArray.length; i++) {
+      for (let j = i + 1; j < unitedArray.length; j++) {
+        const currentComparation = comparator(unitedArray[i], unitedArray[j]);
+
+        if (currentComparation === 1) {
+          [unitedArray[i], unitedArray[j]] = [unitedArray[j], unitedArray[i]];
+        }
+      }
+    }
+
+    return unitedArray;
   }
+
   console.log(
-    mergeSortedArrays([1, 2, 3], [4, 5, 6], (a, b) => (a > b ? 1 : -1)),
+    mergeSortedArrays(['11', 2, '3'], [4, '5', '6'], (a, b) =>
+      a > b ? 1 : -1,
+    ),
+  );
+
+  console.log(
+    mergeSortedArrays([3, 4, 5, 6, 6, 10, 20], [4, 5, 6], (a, b) =>
+      a > b ? 1 : -1,
+    ),
   );
 
   //   console.assert(
