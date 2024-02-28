@@ -21,7 +21,7 @@ function exercise55() {
   // getColor(0) === """ (empty string, no color), bitmask ( 0 0 0 )
   // getColor(1) === "Red" // bitmask ( 0 0 1 )
   // getColor(2) === "Green // bitmask ( 0 1 0 )
-  // getColor(3) === "Green, Blue" // bitmask ( 0 1 1 )
+  // getColor(3) === "Red, Green" // bitmask ( 0 1 1 )
   // getColor(4) === "Blue" bitmask ( 1 0 0 )
   // getColor(5) === "Red, Blue" // bitmask ( 1 0 1 )
   // getColor(6) === "Red, Green" // bitmask   ( 1 1 0 )
