@@ -37,7 +37,7 @@ function exercise51() {
   // };
   type TShapes = Record<string, TPoint[]>;
 
-  const shapes: TShapes = {
+  const shapes = {
     circle: [
       [1, 2, 3],
       [4, 5, 6],
@@ -47,7 +47,7 @@ function exercise51() {
       [1, 2, 3],
       [4, 5, 6],
     ],
-  };
+  } satisfies TShapes;
   console.log(shapes);
 
   // TODO: create a function that takes a list points and prints them into console
