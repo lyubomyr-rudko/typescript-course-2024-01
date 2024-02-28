@@ -1,7 +1,7 @@
 // TODO: add unit tests for excerciseA, excerciseB, excerciseC tasks
 // TODO: read excerciseD and plan in advance which SOLID principle you will use for your homework
 
-function excerciseA() {
+export function excerciseA() {
   // Sum all the numbers of a given array ( cq. list ), except the highest and the lowest element ( by value, not by index! ).
   // The highest or lowest element respectively is a single element at each edge, even if there are more than one with the same value.
   // Mind the input validation.
@@ -13,7 +13,7 @@ function excerciseA() {
 }
 excerciseA();
 
-function excerciseB() {
+export function excerciseB() {
   // Given an array of integers.
   // Return an array, where the first element is the count of positives numbers and the second element is sum of negative numbers. 0 is neither positive nor negative.
   // If the input is an empty array or is null, return an empty array.
@@ -22,7 +22,7 @@ function excerciseB() {
 }
 excerciseB();
 
-function excerciseC() {
+export function excerciseC() {
   // Given an array/list [] of integers , Construct a product array Of same size Such That prod[i] is equal to The Product of all the elements of Arr[] except Arr[i].
   // Notes
   // Array/list size is at least 2 .
