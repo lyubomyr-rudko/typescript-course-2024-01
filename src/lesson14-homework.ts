@@ -82,6 +82,57 @@ function excerciseD() {
   // Saturday - Dependency Inversion Principle
   //
   // Plan in advance, so your homework day matches the principle you want to use as an example.
+  class Car {
+    startEngine(): void {
+      console.log('Car engine started');
+    }
+  }
+
+  class Truck {
+    startEngine(): void {
+      console.log('Truck engine started');
+    }
+  }
+
+  function startVehicleEngine(vehicle: Car | Truck): void {
+    vehicle.startEngine();
+  }
+
+  const car = new Car();
+  const truck = new Truck();
+
+  startVehicleEngine(car); // Вывод: "Car engine started"
+  startVehicleEngine(truck); // Вывод: "Truck engine started"
+
+  //
+
+  class Vehicle {
+    startEngine(): void {
+      throw new Error('Method not implemented.');
+    }
+  }
+
+  class Car1 extends Vehicle {
+    startEngine(): void {
+      console.log('Car engine started');
+    }
+  }
+
+  class Truck1 extends Vehicle {
+    startEngine(): void {
+      console.log('Truck engine started');
+    }
+  }
+
+  function startVehicleEngine1(vehicle: Vehicle): void {
+    vehicle.startEngine();
+  }
+
+  const car1 = new Car1();
+  const truck1 = new Truck1();
+
+  startVehicleEngine1(car1); // Вывод: "Car engine started"
+  startVehicleEngine1(truck1); // Вывод: "Truck engine started"
 }
 excerciseD();
 
