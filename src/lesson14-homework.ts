@@ -1,8 +1,5 @@
 // TODO: add unit tests for excerciseA, excerciseB, excerciseC tasks
 // TODO: read excerciseD and plan in advance which SOLID principle you will use for your homework
-
-import {before} from "lodash";
-
 export function excerciseA(arr: number[]): number  {
   // Sum all the numbers of a given array ( cq. list ), except the highest and the lowest element ( by value, not by index! ).
   // The highest or lowest element respectively is a single element at each edge, even if there are more than one with the same value.
