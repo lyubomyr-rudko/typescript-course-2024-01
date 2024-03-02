@@ -14,10 +14,6 @@ describe('sumArray', () => {
     expect(sumArray([6, 2, 1, 8, 10])).toBe(16);
   });
 });
-// it('Sum all the numbers of a given array ( cq. list ), except the highest and the lowest element ( by value, not by index! ).', () => {
-//   expect(sumArray([1, 1, 11, 2, 3])).toBe(6);
-// });
-
 describe('countPositivesSumNegatives', () => {
   it('should be defined', () => {
     expect(countPositivesSumNegatives).toBeDefined();
@@ -41,14 +37,3 @@ describe('arrayIntegers', () => {
     expect(arrayIntegers([10, 20])).toStrictEqual([20, 10]);
   });
 });
-// it('prod[i] is equal to The Product of all the elements of Arr[] except Arr[i]', () => {
-//   expect(arrayIntegers([1, 2, 3, 4])).toStrictEqual([24, 12, 8, 6]);
-// });
-// it('prod[i] is equal to The Product of all the elements of Arr[] except Arr[i]', () => {
-//   expect(arrayIntegers([1, 5, 2])).toStrictEqual([10, 2, 5]);
-// });
-// it('prod[i] is equal to The Product of all the elements of Arr[] except Arr[i]', () => {
-//   expect(arrayIntegers([10, 3, 5, 6, 2])).toStrictEqual([
-//     180, 600, 360, 300, 900,
-//   ]);
-// });
