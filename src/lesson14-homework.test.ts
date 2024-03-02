@@ -35,5 +35,6 @@ describe('arrayIntegers', () => {
 
   it('prod[i] is equal to The Product of all the elements of Arr[] except Arr[i]', () => {
     expect(arrayIntegers([10, 20])).toStrictEqual([20, 10]);
+    expect(arrayIntegers([1, 2, 3, 4])).toStrictEqual([24, 12, 8, 6]);
   });
 });
