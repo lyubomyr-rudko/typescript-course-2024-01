@@ -112,7 +112,7 @@ function excerciseD() {
   // ++Friday - Interface Segregation Principle
   // цей принцип заключається у розділенні інтерфейсу на менші та більш специфічні інтерфейси, ніж один великий, в якому буде намішане усе підряд
 
-  // Приклад:
+  // Приклад 1:
   // without Interface Segregation Principle
   interface IIncorrectUser {
     name: string;
@@ -169,6 +169,71 @@ function excerciseD() {
 
   console.log('user1-->', user1);
   console.log('user2-->', user2);
+
+  // Приклад 2:
+  interface IAnimal {
+    walk(): void;
+    fly(): void;
+  }
+
+  class Dog implements IAnimal {
+    walk() {
+      console.log('dog walking');
+    }
+
+    // мінус в тому, що в цьому місці нам треба прописувати цей метод, бо він є в IAnimal.
+    // вирішити це можна таким чином, що в нас буде окремо інтерфейс з методом walk, і окремо з fly
+    fly() {
+      throw new Error('dogs can not fly');
+    }
+  }
+
+  const dog1 = new Dog();
+  dog1.walk();
+
+  class Bird implements IAnimal {
+    walk() {
+      console.log('bird walking');
+    }
+
+    fly() {
+      console.log('bird flying');
+    }
+  }
+
+  const bird1 = new Bird();
+  bird1.fly();
+
+  // Рішення:
+  interface IWalk {
+    walk(): void;
+  }
+
+  interface IFly {
+    fly(): void;
+  }
+
+  class Dog2 implements IWalk {
+    walk() {
+      console.log('dog walking');
+    }
+  }
+
+  const dog2 = new Dog2();
+  dog2.walk();
+
+  class Bird2 implements IWalk, IFly {
+    walk() {
+      console.log('bird walking');
+    }
+
+    fly() {
+      console.log('bird flying');
+    }
+  }
+
+  const bird2 = new Bird2();
+  bird2.fly();
 
   // Saturday - Dependency Inversion Principle
   //
