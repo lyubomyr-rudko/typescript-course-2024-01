@@ -217,10 +217,10 @@ exerciseA();
 // Example: fizzBuzz(5) => [1, 2, 'Fizz', 4, 'Buzz']
 // Example: fizzBuzz(15) => [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']
 // TODO: write unit-tests for this function
-function excerciseB(n: number) {
-  return n; // fix/update the code here
-}
-excerciseB(5);
+// function excerciseB(n: number) {
+//   return n; // fix/update the code here
+// }
+// excerciseB(5);
 
 // create react app with typescript
 function excerciseZ() {
