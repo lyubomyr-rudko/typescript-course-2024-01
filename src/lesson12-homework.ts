@@ -107,7 +107,7 @@ exercise50();
 function exercise51() {
   // TODO: create a tuple type that represents a 3d point
   type TPoint = [number, number, number];
-  // TODO: create a type that represents a 3d shapes (key is a string, value is an array of 3d points)
+  // TODO: create a type that represents 3d shapes (key is a string, value is an array of 3d points)
   type TShapes = Record<string, TPoint[]>;
 
   const shapes: TShapes = {
@@ -123,26 +123,22 @@ function exercise51() {
   };
   console.log(shapes);
 
-  // TODO: create a function that takes a list points and prints them into console
+  // TODO: create a function that takes a list of points and prints them into the console
   function drawShape(points: TPoint[]) {
     console.log(points);
   }
 
   console.log(drawShape);
 
-  type TDrawShape = (points: TPoint[]) => void;
-  const drawShapeSatisfies = drawShape as TDrawShape & {
-    satisfies: (test: TShapes) => void;
+  const drawShapeSatisfies = drawShape as {
+    satisfies?: (test: TShapes) => void;
   };
 
-  // Uncommenting the line below will result in a compile-time error, thanks to satisfies constraint
-  // drawShapeSatisfies.satisfies(shapes.circle123);
-
-  drawShapeSatisfies.satisfies(shapes); // No compile-time error
+  if ('satisfies' in drawShapeSatisfies) {
+    // drawShapeSatisfies.satisfies(shapes);
+  }
 }
-
 exercise51();
-
 // // string manipulation utilities type
 // function exercise52() {
 //   // TODO: write a utility type that for given object type T
@@ -275,12 +271,11 @@ exercise52();
 // }
 //
 // excercise53();
-
 function exercise53() {
   type Methods<T> = {
-    log: () => void;
-    set: (n: T) => void;
-    validate: () => void;
+    log: (this: Data) => void;
+    set: (this: Data, n: T) => void;
+    validate: (this: Data) => void;
   };
 
   type Data = {
@@ -290,13 +285,13 @@ function exercise53() {
   };
 
   const methods: Methods<number> = {
-    log(this: Data) {
+    log() {
       console.log(this.value);
     },
-    set(this: Data, value: number) {
+    set(value) {
       this.value = value;
     },
-    validate(this: Data) {
+    validate() {
       this.isValid = this.value > 0;
     },
   };
@@ -307,6 +302,7 @@ function exercise53() {
     isValid: false,
     ...methods,
   };
+
   data.set(10);
   data.validate();
   data.log();
