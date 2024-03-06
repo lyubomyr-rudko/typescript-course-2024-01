@@ -4,88 +4,233 @@
 // ********* Lesson 14 *********
 
 function lesson14() {
-  // Utility types deep dive - Partial, Required, Readonly, Record, Pick, Omit, Exclude, Extract, NonNullable, ReturnType, InstanceType
-  function utilityTypesDeepDive() {
-    // Partial
-    // Required
-    // Readonly
-    // Record
-    // Pick
-    type TPoint = {
-      x: number;
-      y: number;
-      z: number;
-      name: string;
-    };
-    type TPoint2d = Pick<TPoint, 'x' | 'y'>;
-    type TPoint2d2 = {
-      [P in 'x' | 'y']: TPoint[P];
-    };
-    type Pick<T, K extends keyof T> = {
-      [P in K]: T[P];
-    };
-
-    // Exclude - exclude from T all union pargs that are assignable to U
-    //   type Exclude<T, U> = T extends U ? never : T;
-    type TPoint2d3Keys = Exclude<keyof TPoint, 'z' | 'name'>;
-
-    // Extract
-    type Extract<T, U> = T extends U ? T : never;
-    type TPoint2d4Keys = Extract<keyof TPoint, 'x' | 'y'>;
-    type TIntersection = Extract<'q' | 'w' | 'x' | 'a', 'x' | 'y' | 'a' | 'b'>;
-
-    // Omit
-    //   type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
-    type TPoint2d5 = Omit<TPoint, 'z' | 'name'>;
-
-    // NonNullable
-    type TPointNullable = {
-      x?: number | null;
-      y?: number | null;
-      z: number | null;
-      name: string | null;
-    };
-
-    type TNotNullablePoint = NonNullable<TPoint>;
-
-    // ReturnType
-    type ReturnType<T extends (...args: any) => any> = T extends (
-      ...args: any
-    ) => infer R
-      ? R
-      : any;
-    function sum(a: number, b: number) {
-      return a + b;
-    }
-    type TSumReturnType = ReturnType<typeof sum>;
-
-    // InstanceType
-    //   type InstanceType<T extends abstract new (...args: any) => any> =
-    //     T extends abstract new (...args: any) => infer R ? R : any;
-    abstract class Point {
-      constructor(
-        public x: number,
-        public y: number,
-      ) {}
-      abstract getDistance(): number;
-    }
-    type TPointInstanceType = InstanceType<typeof Point>;
-    //   type TPpintAlias = Point;
-
-    // PropertyKey type is a union of string | number | symbol
-    // type PropertyKey = string | number | symbol;
-    type PropertyKey = keyof any;
-    // type Pro
-
-    type PParam = Parameters<typeof sum>;
-    type TPointTupple = [x: number, y: number]; // [number, number]
-    const pointTupple: PParam = [1, 2];
-    const point: TPointTupple = pointTupple;
-    type TDIct = [word: string, description: number];
-  }
-  utilityTypesDeepDive();
-
-  // Typescript documentation recap
-  // https://www.typescriptlang.org/docs/handbook/utility-types.html
+  // // OOP
+  // // Objects - group of properties and methods
+  // // Classes - blueprint for objects
+  // //
+  // // Inheritance - code reuse method. Parent class and child class. Extends other class
+  // // Polymorphism - many forms - mayny implementations of the same interface. Extends abstract class. Implement interface
+  // interface IActor {
+  //   doit(): void;
+  // }
+  // class User implements IActor {
+  //   doit() {
+  //     console.log('User doit');
+  //   }
+  // }
+  // class Admin extends User {}
+  // class Dialog extends React.Component {
+  //   private user = new User();
+  //   doit() {
+  //     this.user.doit();
+  //   }
+  //   render() {
+  //     return (<div><Header/><Body/><Footer/></div>)
+  //   }
+  // }
+  // function Dialog2({header, foolter, body}) {
+  //   // header.doit();
+  //   return (<div>{header}{body}{footer}</div>)
+  // }
+  // function HomePage() {
+  //   return (
+  //     <Dialog2 header={<Header/>} footer={<Footer/>} body={<Body/>} />
+  //   )
+  // }
+  // class SuperWidget extends Widget {}
+  // class ApiRole implements IActor {
+  //   doit() {
+  //     console.log('ApiRole doit');
+  //   }
+  // }
+  // const user: IActor = {
+  //   doit() {
+  //     console.log('User doit');
+  //   },
+  // };
+  // // Encapsulation - hiding complexity -
+  // // Abstraction - data hiding
+  // // Composition - has-a
+  // //
+  // // DRY vs WET
+  // // KISS
+  // // YAGNI
+  // //
+  // // SOLID principles - clean code, uncle Bob, Robert C. Martin
+  // // Single Responsibility Principle - one class should have one responsibility, one reason to change
+  // // should do one thing and do it well
+  // // Open-Closed Principle
+  // // Liskov Substitution Principle - derived class should be able to replace its base class
+  // class Rectangle {
+  //   width: number;
+  //   height: number;
+  //   constructor(width: number, height: number) {
+  //     this.width = width;
+  //     this.height = height;
+  //   }
+  //   getArea() {
+  //     return this.width * this.height;
+  //   }
+  //   getPerimeter() {
+  //     return 2 * (this.width + this.height);
+  //   }
+  //   setWidth(width: number) {
+  //     this.width = width;
+  //   }
+  //   setHeight(height: number) {
+  //     this.height = height;
+  //   }
+  // }
+  // class Square extends Rectangle {
+  //   constructor(size: number) {
+  //     super(size, size);
+  //   }
+  //   setWidth(width: number) {
+  //     this.width = width;
+  //     this.height = width;
+  //   }
+  //   setHeight(height: number) {
+  //     this.width = height;
+  //     this.height = height;
+  //   }
+  // }
+  // abstract class Shape {
+  //   abstract getArea(): number;
+  //   abstract getPerimeter(): number;
+  // }
+  // class Rectangle2 extends Shape {
+  //   width: number;
+  //   height: number;
+  //   constructor(width: number, height: number) {
+  //     super();
+  //     this.width = width;
+  //     this.height = height;
+  //   }
+  //   getArea() {
+  //     return this.width * this.height;
+  //   }
+  //   getPerimeter() {
+  //     return 2 * (this.width + this.height);
+  //   }
+  // }
+  // class Square2 extends Shape {
+  //   size: number;
+  //   constructor(size: number) {
+  //     super();
+  //     this.size = size;
+  //   }
+  //   getArea() {
+  //     return this.size * this.size;
+  //   }
+  //   getPerimeter() {
+  //     return 4 * this.size;
+  //   }
+  // }
+  // // Interface Segregation Principle - many client-specific interfaces are better than one general-purpose interface
+  // interface IUser {
+  //   id: number;
+  //   firstName: string;
+  //   lastName: string;
+  //   maidenName: string;
+  //   age: number;
+  //   gender: string;
+  //   email: string;
+  //   phone: string;
+  //   username: string;
+  //   password: string;
+  //   birthDate: string;
+  //   image: string;
+  //   bloodGroup: string;
+  //   height: number;
+  //   weight: number;
+  //   eyeColor: string;
+  //   hair: {
+  //     color: string;
+  //     type: string;
+  //   };
+  //   domain: string;
+  //   ip: string;
+  //   address: {
+  //     address: string;
+  //     city: string;
+  //     coordinates: {
+  //       lat: number;
+  //       lng: number;
+  //     };
+  //     postalCode: string;
+  //     state: string;
+  //   };
+  //   macAddress: string;
+  //   university: string;
+  //   bank: {
+  //     cardExpire: string;
+  //     cardNumbers: string[];
+  //     cardType: string;
+  //     currency: string;
+  //     iban: string;
+  //   };
+  //   company: {
+  //     address: {
+  //       address: string;
+  //       city: string;
+  //       coordinates: {
+  //         lat: number;
+  //         lng: number;
+  //       };
+  //       postalCode: string;
+  //       state: string;
+  //     };
+  //     department: string;
+  //     name: string;
+  //     title: string;
+  //   };
+  //   ein: string;
+  //   ssn: string;
+  //   userAgent: string;
+  // }
+  // interface ISimpleUser {
+  //   id: number;
+  //   firstName: string;
+  //   lastName: string;
+  //   age: number;
+  //   image: string;
+  // }
+  // interface IUserListProps {
+  //   users: {
+  //     id: number;
+  //     firstName: string;
+  //     lastName: string;
+  //     age: number;
+  //     image: string;
+  //   }[];
+  // }
+  // function UserList({users}: IUserListProps) {
+  //   return (
+  //     <div>
+  //       {users.map((user) => (
+  //         <User user={user} />
+  //       ))}
+  //     </div>
+  //   );
+  // }
+  // function User({user}: {user: IUser}) {
+  //   return (
+  //     <div>
+  //       <div>{user.firstName}</div>
+  //       <div>{user.lastName}</div>
+  //       <div>{user.age}</div>
+  //       <div>{user.image}</div>
+  //     </div>
+  //   );
+  // }
+  // //
+  // // Dependency Inversion Principle
+  // //
+  // // React with Typescript - complex hooks
+  // // useDebugValue
+  // // Custom Hooks
 }
 lesson14();
+
+const test = 'test';
+export default test;
