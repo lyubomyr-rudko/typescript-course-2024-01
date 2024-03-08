@@ -3,9 +3,13 @@ export {};
 // Read all articlas from https://refactoring.guru/uk/design-patterns/creational-patterns
 // Answer the following questions:
 // 1. Which creational pattern to use when we have family of different kind of objects that created according to some condition, for example - different databases maybe supported: Oracle, SQLServer, H2
+let answer1 = 'AbstractFactory';
 // 2. Which creational pattern to use when we want to create only one instance of a class?
+let answer2 = 'Singleton';
 // 3. Which creational pattern to use when creation of the object is very time consuming, and we want to be able to duplicate the object?
+let answer3 = 'Prototype';
 // 4. Which creational pattern to use when we need to pass a lot of parameters to the constructor and some of these parameters are completely irrelevant for the specific configuration of the object?
+let answer4 = 'Builder';
 
 function excerciseA() {
   // Observe this implementation class ConfigurationManager, which is responsible for reading and writing configuration data.
@@ -38,3 +42,32 @@ function excerciseA() {
   console.log(configManager.getConfig('name'));
 }
 excerciseA();
+
+class ConfigManager {
+  private static instance: ConfigManager;
+  private config: { [key: string]: string | number };
+
+  private constructor() {
+    this.config = {};
+  }
+
+  public static getInstance(): ConfigManager {
+    if (!ConfigManager.instance) {
+      ConfigManager.instance = new ConfigManager();
+    }
+    return ConfigManager.instance;
+  }
+
+  getConfig(key: string) {
+    return this.config[key];
+  }
+
+  setConfig(key: string, value: string | number) {
+    this.config[key] = value;
+  }
+}
+
+// Теперь используем getInstance() для получения единственного экземпляра ConfigManager
+const configManager = ConfigManager.getInstance();
+configManager.setConfig('name', 'John');
+console.log(configManager.getConfig('name'));
