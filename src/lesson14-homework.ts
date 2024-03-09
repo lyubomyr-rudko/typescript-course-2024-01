@@ -92,5 +92,59 @@ function excerciseD() {
   // Plan in advance, so your homework day matches the principle you want to use as an example.
 }
 excerciseD();
+// Saturday - Dependency Inversion Principle
+//before
+
+class ProductService {
+  private productRepository: ProductRepository;
+
+  constructor() {
+    this.productRepository = new ProductRepository();
+  }
+
+  getProducts() {
+    return this.productRepository.getAllProducts();
+  }
+}
+
+class ProductRepository {
+  getAllProducts() {
+    return [
+      {
+        name: 'apple',
+        price: 25,
+      },
+    ];
+  }
+}
+const productService = new ProductService();
+console.log(productService.getProducts());
+
+//after applying the Dependency Inversion Principle:
+
+class ProductService2 {
+  constructor(private productRepository2: ProductRepository2) {
+    this.productRepository2 = productRepository2;
+  }
+
+  getProducts() {
+    return this.productRepository2.getAllProducts();
+  }
+}
+
+class ProductRepository2 {
+  getAllProducts() {
+    return [
+      {
+        name: 'apple',
+        price: 25,
+      },
+    ];
+  }
+}
+
+const productRepository2 = new ProductRepository2();
+const productService2 = new ProductService2(productRepository2);
+console.log(productService2.getProducts());
 
 export {};
