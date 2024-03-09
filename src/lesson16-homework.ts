@@ -3,10 +3,15 @@ export {};
 // Read all articlas from https://refactoring.guru/uk/design-patterns/structural-patterns
 // From the list of the structural patterns: Composite, Decorator, Bridge, Adapter, Facade, Proxy select:
 // 1. Which  structural pattern to use when we want to convert one interface to another?
+//let answer1 ='Adapter';
 // 2. Which  structural pattern to use when we want to represent a complex object as a tree-like structure?
+//let answer2 ='Composite';
 // 3. Which  structural pattern to use when we want to add new functionality to an object without altering its structure, create multiple mixtures of options?
+//let answer3 ='Decorator';
 // 4. Which  structural pattern to use to create a simplified interface to a complex system?
+//let answer4 ='Facade';
 // 5. Which  structural pattern allows create object-replacement of original object, that would adding access check or caching before calling original method?
+//let answer5 ='Proxy';
 
 function excerciseA() {
   // Imagine you have a class for a Computer, and you would want user to be able to add additional functionality to it.
@@ -82,3 +87,56 @@ function excerciseA() {
   console.log(computerWithProcessorAndMemoryAndHardDrive.printConfiguration());
 }
 excerciseA();
+
+//use the Facade pattern
+
+function patternFacade() {
+  class Computer {
+    protected baseConfiguration: string;
+
+    constructor() {
+      this.baseConfiguration = 'Computer base';
+    }
+
+    public printConfiguration(): string {
+      return this.baseConfiguration;
+    }
+
+    public updateConfiguration(config: string): void {
+      this.baseConfiguration += config;
+    }
+  }
+
+  class ComputerFacade {
+    private computer: Computer;
+
+    constructor(computer: Computer) {
+      this.computer = computer;
+    }
+
+    public addProcessor(): void {
+      this.computer.updateConfiguration(', with processor');
+    }
+
+    public addMemory(): void {
+      this.computer.updateConfiguration(', with memory');
+    }
+
+    public addHardDrive(): void {
+      this.computer.updateConfiguration(', with hard drive');
+    }
+
+    public printConfiguration(): string {
+      return this.computer.printConfiguration();
+    }
+  }
+
+  const computer = new Computer();
+  const computerFacade = new ComputerFacade(computer);
+
+  computerFacade.addProcessor();
+  computerFacade.addMemory();
+  computerFacade.addHardDrive();
+  console.log(computerFacade.printConfiguration());
+}
+patternFacade();
