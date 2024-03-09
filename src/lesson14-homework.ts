@@ -1,6 +1,8 @@
 // TODO: add unit tests for excerciseA, excerciseB, excerciseC tasks
 // TODO: read excerciseD and plan in advance which SOLID principle you will use for your homework
 
+// import { number } from 'prop-types';
+
 function excerciseA() {
   // Sum all the numbers of a given array ( cq. list ), except the highest and the lowest element ( by value, not by index! ).
   // The highest or lowest element respectively is a single element at each edge, even if there are more than one with the same value.
@@ -12,6 +14,26 @@ function excerciseA() {
   // If an empty value ( null, None, Nothing etc. ) is given instead of an array, or the given array is an empty list or a list with only 1 element, return 0.
 }
 excerciseA();
+export function sumArray(array: number[]) {
+  if (array == null) {
+    return 0;
+  } else if (array.length < 2) {
+    return 0;
+  } else {
+    array = array.sort(function (a: number, b: number) {
+      return a - b;
+    });
+
+    let total = 0;
+
+    for (let i = 1; i < array.length - 1; i++) {
+      total += array[i];
+    }
+    return total;
+  }
+}
+console.log(sumArray([6, 2, 1, 8, 10]));
+console.log(sumArray([1, 1, 11, 2, 3]));
 
 function excerciseB() {
   // Given an array of integers.
@@ -21,6 +43,21 @@ function excerciseB() {
   // For input [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15], you should return [10, -65].
 }
 excerciseB();
+export function countPositivesSumNegatives(input: number[]) {
+  let positiveNum = 0;
+  let negativeNum = 0;
+  if (input === null || input.length === 0) {
+    return [];
+  } else {
+    input.forEach((num) => (num > 0 ? positiveNum++ : (negativeNum += num)));
+  }
+  return [positiveNum, negativeNum];
+}
+console.log(
+  countPositivesSumNegatives([
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15,
+  ]),
+);
 
 function excerciseC() {
   // Given an array/list [] of integers , Construct a product array Of same size Such That prod[i] is equal to The Product of all the elements of Arr[] except Arr[i].
@@ -35,6 +72,12 @@ function excerciseC() {
   // implement the funciton avoiding nested loops, with O(N)
 }
 excerciseC();
+export function arrayIntegers(arr: number[]): number[] {
+  const multiplication = arr.reduce((acum, curr) => acum * curr);
+  const result = arr.map((el) => multiplication / el);
+  return result;
+}
+console.log(arrayIntegers([10, 3, 5, 6, 2]));
 
 function excerciseD() {
   // Describe one of the SOLID principles. Provide an example of before and after the principle was applied.
@@ -49,5 +92,59 @@ function excerciseD() {
   // Plan in advance, so your homework day matches the principle you want to use as an example.
 }
 excerciseD();
+// Saturday - Dependency Inversion Principle
+//before
+
+class ProductService {
+  private productRepository: ProductRepository;
+
+  constructor() {
+    this.productRepository = new ProductRepository();
+  }
+
+  getProducts() {
+    return this.productRepository.getAllProducts();
+  }
+}
+
+class ProductRepository {
+  getAllProducts() {
+    return [
+      {
+        name: 'apple',
+        price: 25,
+      },
+    ];
+  }
+}
+const productService = new ProductService();
+console.log(productService.getProducts());
+
+//after applying the Dependency Inversion Principle:
+
+class ProductService2 {
+  constructor(private productRepository2: ProductRepository2) {
+    this.productRepository2 = productRepository2;
+  }
+
+  getProducts() {
+    return this.productRepository2.getAllProducts();
+  }
+}
+
+class ProductRepository2 {
+  getAllProducts() {
+    return [
+      {
+        name: 'apple',
+        price: 25,
+      },
+    ];
+  }
+}
+
+const productRepository2 = new ProductRepository2();
+const productService2 = new ProductService2(productRepository2);
+console.log(productService2.getProducts());
 
 export {};
