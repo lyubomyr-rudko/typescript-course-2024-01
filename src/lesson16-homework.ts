@@ -88,55 +88,49 @@ function excerciseA() {
 }
 excerciseA();
 
-//use the Facade pattern
+//use the Decorator pattern
 
-function patternFacade() {
-  class Computer {
-    protected baseConfiguration: string;
-
-    constructor() {
-      this.baseConfiguration = 'Computer base';
-    }
-
-    public printConfiguration(): string {
-      return this.baseConfiguration;
-    }
-
-    public updateConfiguration(config: string): void {
-      this.baseConfiguration += config;
+function patternDecorator() {
+  class ComputerBase {
+    printConfiguration() {
+      return 'Computer base';
     }
   }
 
-  class ComputerFacade {
-    private computer: Computer;
+  class ComputerDecorator {
+    protected computer: ComputerBase;
 
-    constructor(computer: Computer) {
+    constructor(computer: ComputerBase) {
       this.computer = computer;
     }
 
-    public addProcessor(): void {
-      this.computer.updateConfiguration(', with processor');
-    }
-
-    public addMemory(): void {
-      this.computer.updateConfiguration(', with memory');
-    }
-
-    public addHardDrive(): void {
-      this.computer.updateConfiguration(', with hard drive');
-    }
-
-    public printConfiguration(): string {
+    printConfiguration() {
       return this.computer.printConfiguration();
     }
   }
 
-  const computer = new Computer();
-  const computerFacade = new ComputerFacade(computer);
+  class ProcessorDecorator extends ComputerDecorator {
+    printConfiguration() {
+      return `${super.printConfiguration()}, with processor`;
+    }
+  }
 
-  computerFacade.addProcessor();
-  computerFacade.addMemory();
-  computerFacade.addHardDrive();
-  console.log(computerFacade.printConfiguration());
+  class MemoryDecorator extends ComputerDecorator {
+    printConfiguration() {
+      return `${super.printConfiguration()}, with memory`;
+    }
+  }
+
+  class HardDriveDecorator extends ComputerDecorator {
+    printConfiguration() {
+      return `${super.printConfiguration()}, with hard drive`;
+    }
+  }
+
+  let computer = new ComputerBase();
+  computer = new ProcessorDecorator(computer);
+  computer = new MemoryDecorator(computer);
+  computer = new HardDriveDecorator(computer);
+  console.log(computer.printConfiguration());
 }
-patternFacade();
+patternDecorator();
