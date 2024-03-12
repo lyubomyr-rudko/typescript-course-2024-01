@@ -1,36 +1,57 @@
 // Read the following typescript documentation:
-// 1. https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
+// 1.
 // 2. https://www.typescriptlang.org/docs/handbook/2/narrowing.html
 // 3. https://www.typescriptlang.org/docs/handbook/2/functions.html
 
-// TODO: (important!) remove all // eslint-disable-next-line comments
-
 // Use double assertion
+console.log('exercise35');
 function exercise35() {
   // TODO:Create two types: TUser and TProduct
   interface TUser {
     /* TODO: add definition for user name, title and email */
+    userName: string;
+    title: string;
+    email: string;
   }
   interface TProduct {
     /* TODO: add definition for product title, price and quantity */
+    title: string;
+    price: number;
+    quantity: number;
   }
 
   // eslint-disable-next-line prefer-const
-  let user: TUser = {};
-  let product: TProduct = {};
+  let user: TUser = {
+    userName: 'Nikita',
+    title: 'I am a Frontend developer',
+    email: 'nikita@gmail.com',
+  };
+  let product: TProduct = {
+    title: 'T-shirt',
+    price: 59.99,
+    quantity: 100,
+  };
 
   // TODO: fix the error by adding double assertion
-  product = user;
+  product = user as unknown as TProduct;
 
   console.log(product);
 }
 exercise35();
 
+console.log('exercise36');
 // Use this parameter type annotation to fix the error in this code
 function exercise36() {
   // Note: this object does not have a name property
   // but the toString function expects it to be there, and there is no type check
-  const data = {
+  type TPerson = {
+    name?: string;
+    firstName?: string;
+    lastName?: string;
+    age?: number;
+    role?: string;
+  };
+  const data: TPerson = {
     firstName: 'Joe',
     lastName: 'Doe',
     age: 30,
@@ -38,20 +59,21 @@ function exercise36() {
   };
   // TODO: add this param annotation, to enforce that this function
   // can only be called on an object with name, age and role properties
-  function toString() {
-    // TODO: remove the following line
-    return '';
+  function toString(this: TPerson) {
     // TODO: uncomment the following line, fix the error
-    // return `${this.name}, ${this.age}, ${this.role}`;
+    return `${this.name || ''} ${this.age} ${this.role}`;
   }
   data.toString = toString;
   // TODO: run the code and observe the error
   console.log(data + '');
   console.log(data.toString());
   // TODO: add required properties to the data object, fixing the error
+  console.log(toString.call(data));
+  console.log(toString.call({ name: 'Nikita', age: 21, role: 'Frontend Dev' }));
 }
 exercise36();
 
+console.log('exercise37');
 // Use generic constraints
 function exercise37() {
   interface IPerson {
@@ -61,12 +83,18 @@ function exercise37() {
 
   // TODO: implement method that adds addGreeting method to the object
   // TODO: add generic constraints to enforce type checking, add return type annotation
-  function addGreeting<T>(obj: T) {
-    return obj; // remove this line
-
+  function addGreeting<T extends IPerson>(
+    obj: T,
+  ): T & { sayHello: () => string } {
     // TODO: implement the method sayHello that returns a greeting string
     // TODO: use firstName lastName props to generate a greeting string, for example: "Hello Joe Smith"
     // TODO: make sure the obj is not modified, and new object is returned
+    return {
+      ...obj,
+      sayHello() {
+        return `Hello ${this.firstName} ${this.lastName}`;
+      },
+    };
   }
 
   const person = addGreeting({
@@ -75,15 +103,15 @@ function exercise37() {
     age: 30,
     email: 'john@sample.com',
   });
-
   // TODO: remove the following line
-  console.log(person as IPerson);
+  console.log(person.sayHello());
 
   // TODO: uncomment the following line and fix the error
   // console.log(person.sayHello());
 }
 exercise37();
 
+console.log('exercise38');
 // fix issues related to temporal uncertainty
 function exercise38() {
   interface FetchDocument {
@@ -101,10 +129,7 @@ function exercise38() {
   // TODO: fix the type of fetchResult variable to be union of array of GroupDocument objects / null
 
   // TODO: uncomment the following line
-  // let fetchResult = null;
-
-  // TODO: remove this line
-  let fetchResult: GroupDocument[] = null as unknown as GroupDocument[];
+  let fetchResult: GroupDocument[] | null = null;
 
   // TODO: keep this code as is
   fetchResult = [
@@ -139,13 +164,15 @@ function exercise38() {
 
   if (fetchResult !== null) {
     // NOTE: observe taht type narrowing works here
-    console.log(fetchResult.length);
+    const fetchedResults = fetchResult;
 
     userNames.forEach((name) => {
       // TOOD: explain why type narrowing does not work here and fix the error (and remove `any` type annotations)
       // TODO: remove this line
       // eslint-disable-next-line @typescript-eslint/no-explicit-any, prefer-const
-      let result = fetchResult.find((obj: any) => obj.name === name);
+      const result = fetchedResults.find(
+        (obj: GroupDocument) => obj.name === name,
+      );
 
       if (result) {
         console.log(result.data);
@@ -155,6 +182,7 @@ function exercise38() {
 }
 exercise38();
 
+console.log('exercise39');
 // Use typeof operator
 function exercise39() {
   // for this exercise, use the following data
@@ -227,42 +255,79 @@ function exercise39() {
     // TODO: get lis of own keys of the user object
     // TODO: iterate over the keys with foreach
     // TODO: console.log the typeof for each property
+    const userKeys = Object.keys(user);
+
+    userKeys.forEach((key) => {
+      console.log(`${key}: ${typeof user[key as keyof typeof user]}`);
+    });
   }
   printAllUserPropTypes();
 
   // TODO: create function that returns address of the user object,
   // TODO: set the return type of that function using typeof operator
-  function getUserAddress() {
-    return null;
+  type TUser = typeof user;
+  function getUserAddress(user: TUser): typeof user.address {
+    return user.address;
   }
-  console.log(getUserAddress());
+  console.log(getUserAddress(user));
 
   // TODO: create function that returns coordinates of the user copany address
   // user -> company -> address -> coordinates
   // TODO: set the return type of that function using typeof operator
-  function getCoordinates() {
-    return null;
+  function getCoordinates(
+    user: TUser,
+  ): typeof user.company.address.coordinates {
+    return user.company.address.coordinates;
   }
-  console.log(getCoordinates());
+  console.log(getCoordinates(user));
 }
 exercise39();
 
 // Write the generic function to remove the duplicates from the array
-function removeDuplicates(arr: unknown[]) {
+export function removeDuplicates<T>(arr: T[]): T[] | undefined {
   // TODO: remimplement this code, do not use Set data structure
-  const set = new Set(arr);
-  const distinctArr = [...set];
-  return distinctArr;
+  if (!arr || arr.length === 0) {
+    return undefined;
+  }
+
+  const resultArr: T[] = [];
+
+  for (const elem of arr) {
+    if (!resultArr.includes(elem)) {
+      resultArr.push(elem);
+    }
+  }
+
+  return resultArr;
 }
-console.log(removeDuplicates([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]));
+console.log(
+  'removeDublicates',
+  removeDuplicates([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]),
+);
+
 // TODO: write unit tests for this function
 
 // Write a function that returns an intersection of two arrays, use generics
-function getIntersection(arr1: unknown[], arr2: unknown[]) {
-  return [...arr1, ...arr2];
+export function getIntersection<T>(arr1: T[], arr2: T[]): T[] | undefined {
+  if (!Array.isArray(arr1) || !Array.isArray(arr2)) {
+    return undefined;
+  }
+
+  const intersectionResult: T[] = [];
+
+  for (const item of arr1) {
+    if (arr2.includes(item) && !intersectionResult.includes(item)) {
+      intersectionResult.push(item);
+    }
+  }
+
+  return intersectionResult;
 }
-console.log(getIntersection([8, 3, 2, 4, 2], [7, 3, 4, 5, 3])); // [3, 4]
+console.log(
+  'getIntersection',
+  getIntersection([8, 3, 2, 4, 2], [7, 3, 4, 5, 3]),
+); // [3, 4]
 // TODO: write unit tests for this function
 
-const test = 'test';
-export default test;
+// const test = 'test';
+// export default test;
