@@ -1,12 +1,17 @@
-export {};
+// export {};
 
 // Read all articlas from https://refactoring.guru/uk/design-patterns/structural-patterns
 // From the list of the structural patterns: Composite, Decorator, Bridge, Adapter, Facade, Proxy select:
 // 1. Which  structural pattern to use when we want to convert one interface to another?
+// Adapter
 // 2. Which  structural pattern to use when we want to represent a complex object as a tree-like structure?
+// Composite
 // 3. Which  structural pattern to use when we want to add new functionality to an object without altering its structure, create multiple mixtures of options?
+//Decorator
 // 4. Which  structural pattern to use to create a simplified interface to a complex system?
+//Facade
 // 5. Which  structural pattern allows create object-replacement of original object, that would adding access check or caching before calling original method?
+//Proxy
 
 function excerciseA() {
   // Imagine you have a class for a Computer, and you would want user to be able to add additional functionality to it.
@@ -19,66 +24,37 @@ function excerciseA() {
       return 'Computer base';
     }
   }
+  class ComputerDecorator {
+    protected computer: ComputerBase;
 
-  class ComputerWithProcessor extends ComputerBase {
+    constructor(computer: ComputerBase) {
+      this.computer = computer;
+    }
+
     printConfiguration() {
-      return 'Computer base, with processor';
+      return this.computer.printConfiguration();
+    }
+  }
+  class CompWithProcessorDecorator extends ComputerDecorator {
+    printConfiguration() {
+      return `${super.printConfiguration()}, with processor`;
+    }
+  }
+  class CompWithMemoryDecorator extends ComputerDecorator {
+    printConfiguration() {
+      return `${super.printConfiguration()}, with memory`;
     }
   }
 
-  class ComputerWithMemory extends ComputerBase {
+  class CompWithHardDriveDecorator extends ComputerDecorator {
     printConfiguration() {
-      return 'Computer base, with memory';
+      return `${super.printConfiguration()}, with hard drive`;
     }
   }
-
-  class ComputerWithHardDrive extends ComputerBase {
-    printConfiguration() {
-      return 'Computer base, with hard drive';
-    }
-  }
-
-  class ComputerWithProcessorAndMemory extends ComputerBase {
-    printConfiguration() {
-      return 'Computer base, with processor and memory';
-    }
-  }
-
-  class ComputerWithProcessorAndHardDrive extends ComputerBase {
-    printConfiguration() {
-      return 'Computer base, with processor and hard drive';
-    }
-  }
-
-  class ComputerWithMemoryAndHardDrive extends ComputerBase {
-    printConfiguration() {
-      return 'Computer base, with memory and hard drive';
-    }
-  }
-
-  class ComputerWithProcessorAndMemoryAndHardDrive extends ComputerBase {
-    printConfiguration() {
-      return 'Computer base, with processor, memory and hard drive';
-    }
-  }
-
-  const computer = new ComputerBase();
+  let computer = new ComputerBase();
+  computer = new CompWithProcessorDecorator(computer);
+  computer = new CompWithMemoryDecorator(computer);
+  computer = new CompWithHardDriveDecorator(computer);
   console.log(computer.printConfiguration());
-  const computerWithProcessor = new ComputerWithProcessor();
-  console.log(computerWithProcessor.printConfiguration());
-  const computerWithMemory = new ComputerWithMemory();
-  console.log(computerWithMemory.printConfiguration());
-  const computerWithHardDrive = new ComputerWithHardDrive();
-  console.log(computerWithHardDrive.printConfiguration());
-  const computerWithProcessorAndMemory = new ComputerWithProcessorAndMemory();
-  console.log(computerWithProcessorAndMemory.printConfiguration());
-  const computerWithProcessorAndHardDrive =
-    new ComputerWithProcessorAndHardDrive();
-  console.log(computerWithProcessorAndHardDrive.printConfiguration());
-  const computerWithMemoryAndHardDrive = new ComputerWithMemoryAndHardDrive();
-  console.log(computerWithMemoryAndHardDrive.printConfiguration());
-  const computerWithProcessorAndMemoryAndHardDrive =
-    new ComputerWithProcessorAndMemoryAndHardDrive();
-  console.log(computerWithProcessorAndMemoryAndHardDrive.printConfiguration());
 }
 excerciseA();
