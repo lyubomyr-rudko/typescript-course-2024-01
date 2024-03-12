@@ -16,6 +16,82 @@ function excerciseA() {
   // create a class for the local bank manager
   // create a class for the regional bank manager
   // connect them using one of the Behavioral patterns, and call with several different loan requests
+  class LoanRequest {
+    constructor(
+      public customerName: string,
+      public requestedAmount: number,
+      public creditScore: number,
+    ) {}
+  }
+
+  abstract class Bank {
+    private nextBank?: Bank;
+
+    constructor(
+      private name: string,
+      private maxRequestedAmount: number,
+      private minCreditScore: number,
+    ) {}
+
+    setNextBank(bank: Bank) {
+      this.nextBank = bank;
+
+      return bank;
+    }
+
+    handleRequest(request: LoanRequest) {
+      const { creditScore, requestedAmount, customerName } = request;
+      const { maxRequestedAmount, minCreditScore, nextBank, name } = this;
+      const canHandle =
+        creditScore >= minCreditScore && requestedAmount <= maxRequestedAmount;
+
+      canHandle
+        ? console.log(
+            `Dear ${customerName}, Your loan request for ${requestedAmount} was approved by ${name} bank.`,
+          )
+        : nextBank
+          ? nextBank.handleRequest(request)
+          : console.log(
+              `Dear ${customerName}, Your loan request was rejected.`,
+            );
+    }
+  }
+
+  class LocalBank extends Bank {
+    constructor() {
+      super('Local', 10000, 700);
+    }
+  }
+
+  class RegionalBank extends Bank {
+    constructor() {
+      super('Regional', 50000, 750);
+    }
+  }
+
+  class HeadQuartersBank extends Bank {
+    constructor() {
+      super('HeadQuarters', 100000, 800);
+    }
+  }
+
+  const request1 = new LoanRequest('Donald', 5000, 600);
+  const request2 = new LoanRequest('Teresa', 15000, 750);
+  const request3 = new LoanRequest('Wesley', 60000, 750);
+  const request4 = new LoanRequest('Joe', 75000, 850);
+  const request5 = new LoanRequest('Jill', 7000, 700);
+
+  const localBank = new LocalBank();
+  const regionalBank = new RegionalBank();
+  const headQuartersBank = new HeadQuartersBank();
+
+  localBank.setNextBank(regionalBank).setNextBank(headQuartersBank);
+
+  localBank.handleRequest(request1);
+  localBank.handleRequest(request2);
+  localBank.handleRequest(request3);
+  localBank.handleRequest(request4);
+  localBank.handleRequest(request5);
 }
 
 excerciseA();
