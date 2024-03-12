@@ -1,22 +1,69 @@
 // create a generic function which takes an array of items of type T and returns the random item from the array
+console.log('Task 13A');
 function excercise13A() {
   // TODO: create a function that takes an array of numbers and returns a random number from the array
   // TODO: create a function that takes an array of strings and returns a random string from the array
   // TODO: create a function that takes an array of objects and returns a random object from the array
   // TODO: observe the same structure of the functions above, and create a generic function which takes an array of items of type T and returns the random item from the array
+  //realization TODO in one function
 }
+excercise13A();
+
+export function getRandomNumber<T>(arr: T[]): T | undefined {
+  if (arr.length === 0) {
+    return undefined;
+  }
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
+// const result = getRandomNumber<number>([1, 2, 3]);
+// console.log(result);
+// const result2 = getRandomNumber<string>(['1', '2', '3']);
+// console.log(result2);
+// const persons: TPerson | undefined = getRandomNumber([
+//   { name: 'Nikita', age: 21 },
+//   { name: 'Ostap', age: 23 },
+//   { name: 'Oksana', age: 19 },
+// ]);
+// console.log(persons);
 // TODO: compile and run the code
 // TODO: write unit-tests for the function above, passing different types of arrays to it
-excercise13A();
+
+//type TPerson = { name: string; age: number };
+
+// const result = getRandomNumber<number>([1, 2, 3]);
+// console.log(result);
+// const result2 = getRandomNumber<string>(['1', '2', '3']);
+// console.log(result2);
+// const persons: TPerson | undefined = getRandomNumber([
+//   { name: 'Nikita', age: 21 },
+//   { name: 'Ostap', age: 23 },
+//   { name: 'Oksana', age: 19 },
+// ]);
+// console.log(persons);
+// TODO: compile and run the code
+// TODO: write unit-tests for the function above, passing different types of arrays to it
 
 // TODO: create a generic function that takes an array of items, and number of items, and generates a chunked array
 // TODO: for example, if the input array is [1, 2, 3, 4, 5] and the number of items is 2, the output should be [[1, 2], [3, 4], [5]]
 // [1, 2, 3, 4, 5, 6, 7, 8, 9], 3 => [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+console.log('Task 13B');
 function excercise13B() {}
-// TODO: compile and run the code
-// TODO: write unit-tests for the function above, passing different types of arrays to it, and different number of items
 excercise13B();
 
+export function chunkArray(items: number[], n: number): number[][] {
+  const result: number[][] = [];
+
+  for (let i = 0; i < items.length; i += n) {
+    result.push(items.slice(i, i + n));
+  }
+  return result;
+}
+
+// TODO: compile and run the code
+// TODO: write unit-tests for the function above, passing different types of arrays to it, and different number of items
+
+console.log('Task 14');
 // use type assertions to fix the error in the code
 function excercise14() {
   // NOTE: do not change this function
@@ -26,12 +73,12 @@ function excercise14() {
   }
   const userAge = fetchUserAge();
   // TODO: uncomment the following code and add type assertion to fix the error
-  // console.log(userAge + 1);
-  console.log(userAge); // TODO remove this line
+  console.log((userAge as number) + 1);
 }
 // TODO: compile and run the code
 excercise14();
 
+console.log('Task 15');
 // use type casting to fix the mistake in the code
 // run the code before and after adding type casting to see the difference
 function excercise15() {
@@ -58,11 +105,14 @@ excercise15();
 function excercise16() {
   // TODO: add code which uses process.env.NODE_ENV variable,
   // TODO: try to compile and see the error
+  //console.log(process.env.NODE_ENV);
   // TODO: add type declaration for process.env.NODE_ENV variable in global.d.ts file
   // TODO: try to compile and see the error fixed
   // TODO: rename global.d.ts to global.d.ts.disabled file, copile and see the error again
   // TODO: install type declarations from error message -  @types/node
   // NOTE: Remember - most of the times type declaration packages should always have the same name as the package name on npm, but prefixed with @types/
+  const env = process.env.NODE_ENV;
+  console.log(env);
 }
 // TODO: compile and run the code
 excercise16();
@@ -100,5 +150,7 @@ function exercise17() {
   // TODO: use add function call in the code > console.log(add(1, 2));
   // TODO: compile and run the code
   // https://www.youtube.com/watch?v=J4b_T-qH3BY - how to publish npm package, in case you are stuck
+  //console.log(add(1, 2));
+  //console.log(sum(1, 2));
 }
 exercise17();
