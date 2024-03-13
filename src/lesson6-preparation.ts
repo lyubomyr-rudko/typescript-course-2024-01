@@ -1,6 +1,8 @@
 // ********* Lesson 6 *********
+
 import React from 'react';
 import PropTypes from 'prop-types';
+
 
 // Q/A
 // Type Narrowing
@@ -212,7 +214,10 @@ function nonnullAssertionOperator() {
 
   let point2: TPoint;
   function initPoint2() {
+
+
     // point = { x: 0, y: 0 };
+
     return { x: 0, y: 0 };
   }
   point2 = initPoint2();
@@ -222,7 +227,11 @@ function nonnullAssertionOperator() {
   // example 2
   type TPerson = {
     name: string;
+
+    email?: string | null | undefined;
+
     email?: string | null;
+
   };
 
   function sendEmail(email: string) {
@@ -497,6 +506,7 @@ interfacesVsTypeAliases();
 
 // React with Typescript - component props
 
+
 function reactComponentProps() {
   class Message {
     constructor(public text: string) {}
@@ -572,3 +582,4 @@ reactComponentProps();
 
 const test = 'test';
 export default test;
+
