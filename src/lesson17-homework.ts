@@ -96,6 +96,7 @@ function excerciseA() {
         console.log(`Processing loan request for ${request.customerName}`);
         localManager.processRequest(request);
     });
+
 }
 
 excerciseA();
