@@ -46,7 +46,6 @@ exercise40();
 
 // Use 2023 decorators (Stage 3 decorator)
 function exercise41() {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   function loggedMethod(originalMethod: Function, _context: unknown) {
     console.log(_context);
     function replacementMethod(this: unknown, ...args: unknown[]) {
@@ -58,7 +57,6 @@ function exercise41() {
     return replacementMethod;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
   function executionTime(originalMethod: Function, _context: unknown) {
     console.log(_context);
     function replacementMethod(this: unknown, ...args: unknown[]) {
