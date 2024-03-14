@@ -75,7 +75,7 @@ function exerciseA() {
         );
       } else {
         console.log(
-          `Sorry, the loan request for ${loanRequest.customerName} cannot be approved`,
+          `Sorry the loan request for ${loanRequest.customerName} cannot be approved`,
         );
       }
     }
