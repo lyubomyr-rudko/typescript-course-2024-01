@@ -19,3 +19,97 @@ function excerciseA() {
 }
 
 excerciseA();
+
+class LoanRequest {
+  constructor(
+    public customerName: string,
+    public creditScore: number,
+    public requestedAmount: number,
+  ) {}
+}
+
+abstract class BankManager {
+  protected someBank?: BankManager;
+
+  setSomeBank(someBank: BankManager) {
+    this.someBank = someBank;
+  }
+
+  abstract processLoanRequest(loanRequest: LoanRequest): void;
+}
+
+class LocalBankManager extends BankManager {
+  processLoanRequest(loanRequest: LoanRequest): void {
+    if (
+      loanRequest.creditScore >= 700 &&
+      loanRequest.requestedAmount <= 10000
+    ) {
+      console.log(
+        `Local Bank Manager approved the loan for ${loanRequest.customerName}`,
+      );
+    } else if (this.someBank) {
+      this.someBank.processLoanRequest(loanRequest);
+    }
+  }
+}
+
+class RegionalBankManager extends BankManager {
+  processLoanRequest(loanRequest: LoanRequest): void {
+    if (
+      loanRequest.creditScore >= 750 &&
+      loanRequest.requestedAmount <= 50000
+    ) {
+      console.log(
+        `Regional Bank Manager approved the loan for ${loanRequest.customerName}`,
+      );
+    } else if (this.someBank) {
+      this.someBank.processLoanRequest(loanRequest);
+    }
+  }
+}
+
+class HeadQuartersBankManager extends BankManager {
+  processLoanRequest(loanRequest: LoanRequest): void {
+    if (
+      loanRequest.creditScore >= 800 &&
+      loanRequest.requestedAmount <= 100000
+    ) {
+      console.log(
+        `HeadQuarters Bank Manager approved the loan for ${loanRequest.customerName}`,
+      );
+    } else {
+      console.log(
+        `Sorry, the loan request for ${loanRequest.customerName} cannot be approved`,
+      );
+    }
+  }
+}
+
+const localManager = new LocalBankManager();
+const regionalManager = new RegionalBankManager();
+const headquartersManager = new HeadQuartersBankManager();
+
+localManager.setSomeBank(regionalManager);
+regionalManager.setSomeBank(headquartersManager);
+
+const loanRequest1: LoanRequest = {
+  customerName: 'Yulia',
+  creditScore: 710,
+  requestedAmount: 9500,
+};
+
+const loanRequest2: LoanRequest = {
+  customerName: 'Jack',
+  creditScore: 755,
+  requestedAmount: 55000,
+};
+
+const loanRequest3: LoanRequest = {
+  customerName: 'Sofia',
+  creditScore: 800,
+  requestedAmount: 80000,
+};
+
+localManager.processLoanRequest(loanRequest1);
+localManager.processLoanRequest(loanRequest2);
+localManager.processLoanRequest(loanRequest3);
