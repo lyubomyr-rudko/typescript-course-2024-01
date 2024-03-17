@@ -5,6 +5,7 @@ export {};
 // Read about remaining behavioral patterns - Memento, State, Strategy, Visitor
 
 function excerciseA() {
+  // hw18
   // Imagine you are writing an application that will help users to gather documents for a visa application.
   // Usually the visa application requires many steps to complete, but the steps can have differnt details depending on the visa type
   // Use one of the Behavioral patterns to implement this requirement.
