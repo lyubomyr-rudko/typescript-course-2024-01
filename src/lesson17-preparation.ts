@@ -5,10 +5,9 @@ import * as path from 'path';
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // ********* Lesson 17 *********
+// Behavioral Design Patterns
 
 function lesson17() {
-  // ********* Lesson 20 *********
-  // Behavioral Design Patterns
   // - Chain of Responsibility
   function chainOfResponsibilityDemo() {
     function before() {
