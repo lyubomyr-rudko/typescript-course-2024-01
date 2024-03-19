@@ -67,7 +67,7 @@ function excercise16() {
 // TODO: compile and run the code
 excercise16();
 
-// create an npm package of your own
+// create n npm package of your own
 function exercise17() {
   // TODO: register on npmjs.com
   // TODO: check email and confirm npm account email
