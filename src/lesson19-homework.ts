@@ -31,7 +31,6 @@ export {};
 // }
 //
 // excerciseA();
-
 function exerciseA() {
   class Todo {
     private title: string;
