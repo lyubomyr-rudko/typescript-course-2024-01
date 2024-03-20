@@ -42,6 +42,10 @@ function excerciseB() {
   // https://www.youtube.com/watch?v=Rh3tobg7hEo&t=26s
   // https://www.youtube.com/watch?v=4uuKQyeYfqI
   // https://www.youtube.com/watch?v=v8i-cv9NUV0
+  
+  let myHomeWorkReact = "https://github.com/AnastasiaPletser/Todo";
 }
 
 excerciseB();
+
+
