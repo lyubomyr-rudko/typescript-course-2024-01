@@ -16,6 +16,87 @@ function excerciseA() {
   // create a class for the local bank manager
   // create a class for the regional bank manager
   // connect them using one of the Behavioral patterns, and call with several different loan requests
+
+    class LoanRequest{
+        constructor(
+            public customerName: string,
+            public creditScore: number,
+            public requestedAmount: number,
+        ) {}
+    }
+
+    interface BankManager {
+        setNextManager(manager: BankManager): void;
+        processRequest(request: LoanRequest): void;
+    }
+
+    class LocalBankManager implements BankManager {
+        private nextManager?: BankManager;
+
+        setNextManager(manager: BankManager): void {
+            this.nextManager = manager;
+        }
+
+        processRequest(request: LoanRequest): void {
+            if (request.requestedAmount <= 10000 && request.creditScore >= 700) {
+                console.log(`Local bank manager approved loan for ${request.customerName}`);
+            } else {
+                this.nextManager?.processRequest(request);
+            }
+        }
+    }
+
+    class RegionalBankManager implements BankManager {
+        private nextManager?: BankManager;
+
+            setNextManager(manager: BankManager): void {
+                this.nextManager = manager;
+            }
+
+            processRequest(request: LoanRequest): void {
+                if (request.requestedAmount <= 50000 && request.creditScore >= 750) {
+                console.log(`Regional bank manager approved loan for ${request.customerName}`);
+            } else {
+                this.nextManager?.processRequest(request);
+            }
+        }
+    }
+
+    class HeadquartersBankManager implements BankManager {
+        private nextManager?: BankManager;
+
+        setNextManager(manager: BankManager): void {
+            this.nextManager = manager;
+        }
+
+        processRequest(request: LoanRequest): void {
+            if (request.requestedAmount <= 100000 && request.creditScore >= 800) {
+                console.log(`Headquarters bank manager approved loan for ${request.customerName}`);
+            } else {
+                this.nextManager?.processRequest(request);
+            }
+        }
+    }
+
+    const localManager = new LocalBankManager();
+    const regionalManager = new RegionalBankManager();
+    const headquartersManager = new HeadquartersBankManager();
+
+    localManager.setNextManager(regionalManager);
+    regionalManager.setNextManager(headquartersManager);
+
+
+    const requests: LoanRequest[] = [
+        new LoanRequest("Alice", 720, 8000),
+        new LoanRequest("Bob", 780, 25000),
+        new LoanRequest("Charlie", 810, 120000)
+    ];
+
+    requests.forEach(request => {
+        console.log(`Processing loan request for ${request.customerName}`);
+        localManager.processRequest(request);
+    });
+
 }
 
 excerciseA();
