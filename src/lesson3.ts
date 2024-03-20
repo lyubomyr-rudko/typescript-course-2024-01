@@ -102,7 +102,7 @@ function lesson3() {
 
   const q2 = new NumberQueue();
   q2.push(0);
-  //   q2.push('1'); // error
+  // q2.push('1'); // error
   class StringQueue extends Queue {
     push(item: string) {
       this.data.push(item);
