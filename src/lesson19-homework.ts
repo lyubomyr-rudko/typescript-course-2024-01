@@ -1,10 +1,8 @@
-export {};
+// Read the articles from https://refactoring.guru/uk/design-patterns/behavioral-patterns
 
-// Read the articlas from https://refactoring.guru/uk/design-patterns/behavioral-patterns
+// select exerciseA or exerciseB task as a homework
 
-// select excerciseA or excerciseB task as a homework
-
-function excerciseA() {
+export function exerciseA() {
   // Imagine you are writing an application that stores list of todos
   // each todo has private title and public description and methods to get and set the title and description
   // imagine you need to provide undo button to revert/undo the last change
@@ -28,20 +26,87 @@ function excerciseA() {
   // app.restore(history.pop())
   // expect(app.todos.length).toBe(3)
   // write more unit-tests to cover all the methods
+  class Todo {
+    constructor(
+      private id: number,
+      public description: string,
+    ) {}
+
+    getId() {
+      return this.id;
+    }
+
+    getDescription() {
+      return this.description;
+    }
+  }
+
+  class TodoList {
+    private state: Todo[] = [];
+
+    addTodo(todo: Todo) {
+      this.state.push(todo);
+    }
+
+    showTodo() {
+      this.state.forEach((todo) => {
+        console.log(`${todo.getId()} ${todo.getDescription()}`);
+      });
+    }
+
+    getState() {
+      return this.state;
+    }
+
+    createSnapshot() {
+      return new SnapShot(this.state.slice());
+    }
+
+    restore(snapShot: SnapShot) {
+      this.state = snapShot.getState();
+    }
+  }
+
+  class SnapShot {
+    constructor(private state: Todo[]) {}
+
+    getState() {
+      return this.state.sort();
+    }
+  }
+
+  class TodoHistory {
+    private snapshots: SnapShot[] = [];
+    constructor(private todoList: TodoList) {}
+
+    backUp() {
+      this.snapshots.push(this.todoList.createSnapshot());
+    }
+  }
+
+  const app = new TodoList();
+  const appHistory = new TodoHistory(app);
+
+  app.addTodo(new Todo(1, 'First'));
+
+  appHistory.backUp();
+
+  app.addTodo(new Todo(2, 'Second'));
+  app.addTodo(new Todo(3, 'Third'));
+
+  appHistory.backUp();
+  const snapShot = app.createSnapshot();
+
+  app.addTodo(new Todo(4, 'Fourth'));
+  app.showTodo();
+
+  app.restore(snapShot);
+  app.showTodo();
+
+  return {
+    Todo,
+    TodoList,
+  };
 }
 
-excerciseA();
-
-function excerciseB() {
-  // implement react typescript application that will have todo list application
-  // the application should have the following components
-  // - TodoList
-  // - TodoItem
-  // - TodoAddForm
-  // Use any of this videos if you get stuck (or any other video you find useful)
-  // https://www.youtube.com/watch?v=Rh3tobg7hEo&t=26s
-  // https://www.youtube.com/watch?v=4uuKQyeYfqI
-  // https://www.youtube.com/watch?v=v8i-cv9NUV0
-}
-
-excerciseB();
+exerciseA();
