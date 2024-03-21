@@ -4,7 +4,7 @@ export {};
 
 // select excerciseA or excerciseB task as a homework
 
-function excerciseA() {
+export function excerciseA() {
   // Imagine you are writing an application that stores list of todos
   // each todo has private title and public description and methods to get and set the title and description
   // imagine you need to provide undo button to revert/undo the last change
@@ -28,6 +28,84 @@ function excerciseA() {
   // app.restore(history.pop())
   // expect(app.todos.length).toBe(3)
   // write more unit-tests to cover all the methods
+  class Todo {
+    private title: string;
+    public description: string;
+
+    constructor(title: string, description: string) {
+      this.title = title;
+      this.description = description;
+    }
+
+    getTitle(): string {
+      return this.title;
+    }
+  }
+
+  class TodoList {
+    private todos: Todo[] = [];
+
+    addTodo(todo: Todo): void {
+      this.todos.push(todo);
+    }
+
+    getTodos(): Todo[] {
+      return this.todos;
+    }
+
+    createSnapshot(): Todo[] {
+      return [...this.todos];
+    }
+
+    restore(snapshot: Todo[]): void {
+      this.todos = snapshot;
+    }
+  }
+
+  class TodoHistory {
+    private history: Todo[][] = [];
+
+    push(snapshot: Todo[]): void {
+      this.history.push(snapshot);
+    }
+
+    pop(): Todo[] | undefined {
+      return this.history.pop();
+    }
+  }
+
+  const todoList = new TodoList();
+  const todoHistory = new TodoHistory();
+
+  const todo1 = new Todo('Task 1', 'Description 1');
+  const todo2 = new Todo('Task 2', 'Description 2');
+  const todo3 = new Todo('Task 3', 'Description 3');
+
+  todoList.addTodo(todo1);
+  todoList.addTodo(todo2);
+  todoList.addTodo(todo3);
+
+  console.log('Initial Todo List:');
+  console.log(todoList.getTodos());
+
+  const momentSnapshot = todoList.createSnapshot();
+  todoHistory.push(momentSnapshot);
+
+  todoList.addTodo(new Todo('Task 4', 'Description 4'));
+
+  console.log('Todo List after adding Task 4:');
+  console.log(todoList.getTodos());
+
+  todoList.restore(todoHistory.pop() || []);
+
+  console.log('Todo List after restoring previous state:');
+  console.log(todoList.getTodos());
+
+  return {
+    Todo,
+    TodoList,
+    TodoHistory,
+  };
 }
 
 excerciseA();
