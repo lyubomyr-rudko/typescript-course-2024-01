@@ -1,5 +1,3 @@
-export {};
-
 // Read the articles from https://refactoring.guru/uk/design-patterns/behavioral-patterns
 
 // select exerciseA or exerciseB task as a homework
