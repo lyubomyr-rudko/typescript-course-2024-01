@@ -4,31 +4,98 @@ export {};
 
 // select excerciseA or excerciseB task as a homework
 
-function excerciseA() {
-  // Imagine you are writing an application that stores list of todos
-  // each todo has private title and public description and methods to get and set the title and description
-  // imagine you need to provide undo button to revert/undo the last change
-  // Use one of the Behavioral patterns to implement this requirement.
-  // Note - implement it with classical approach, read https://refactoring.guru/uk/design-patterns/behavioral-patterns for more details
-  // 1. Declare the class for
-  // - Todo
-  // - TodoList
-  // - TodoHistory
-  // 2. Write unit-tests for the classes
-  // app = new TodoList
-  // history = new TodoHistory()
-  // app.addTodo(new Todo(...)
-  // app.addTodo(new Todo(...)
-  // app.addTodo(new Todo(...)
-  // expect(app.todos.length).toBe(3)
-  // momentSnapshot = app.createSnapshot()
-  // history.push(momentSnapshot)
-  // app.addTodo(new Todo(...)
-  // expect(app.todos.length).toBe(4)
-  // app.restore(history.pop())
-  // expect(app.todos.length).toBe(3)
-  // write more unit-tests to cover all the methods
+export function excerciseA() {
+    // Imagine you are writing an application that stores list of todos
+    // each todo has private title and public description and methods to get and set the title and description
+    // imagine you need to provide undo button to revert/undo the last change
+    // Use one of the Behavioral patterns to implement this requirement.
+    // Note - implement it with classical approach, read https://refactoring.guru/uk/design-patterns/behavioral-patterns for more details
+    // 1. Declare the class for
+    // - Todo
+    // - TodoList
+    // - TodoHistory
+    // 2. Write unit-tests for the classes
+    // app = new TodoList
+    // history = new TodoHistory()
+    // app.addTodo(new Todo(...)
+    // app.addTodo(new Todo(...)
+    // app.addTodo(new Todo(...)
+    // expect(app.todos.length).toBe(3)
+    // momentSnapshot = app.createSnapshot()
+    // history.push(momentSnapshot)
+    // app.addTodo(new Todo(...)
+    // expect(app.todos.length).toBe(4)
+    // app.restore(history.pop())
+    // expect(app.todos.length).toBe(3)
+    // write more unit-tests to cover all the methods
+
+    //Momento paterns
+    class Todo {
+        private title: string;
+        public description: string;
+
+        constructor(title: string, description: string) {
+            this.title = title;
+            this.description = description;
+        }
+
+        getTitle(): string {
+            return this.title;
+        }
+    }
+
+    class TodoList {
+        private todos: Todo[] = [];
+
+        getTodos(): Todo[] {
+            return this.todos;
+        }
+
+        public addTodo(todo: Todo): void {
+            this.todos.push(todo);
+        }
+
+        public createSnapshot(): Todo[] {
+            return [...this.todos];
+        }
+
+        public restore(snapshot: Todo[]): void {
+            this.todos = snapshot;
+        }
+    }
+
+    class TodoHistory {
+        private history: Todo[][] = [];
+
+        push(snapshot: Todo[]): void {
+            this.history.push(snapshot);
+        }
+
+        pop(): Todo[] | undefined {
+            return this.history.pop();
+        }
+    }
+
+    const app = new TodoList();
+    app.addTodo(new Todo('1', 'first todo'));
+    app.addTodo(new Todo('2', 'second todo'));
+    app.addTodo(new Todo('3', 'third todo'));
+
+    const momentSnapshot = app.createSnapshot();
+    const history = new TodoHistory();
+    history.push(momentSnapshot);
+    app.addTodo(new Todo('4', 'fourth todo'));
+
+    app.restore(history.pop() || ([] as Todo[]));
+
+    return {
+        Todo,
+        TodoList,
+        TodoHistory,
+    };
 }
+
+
 
 excerciseA();
 
