@@ -1,4 +1,4 @@
-export {};
+// export {};
 
 // Read all articlas from https://refactoring.guru/uk/design-patterns/creational-patterns
 // Answer the following questions:
@@ -13,6 +13,7 @@ function excerciseA() {
     private config: {
       [key: string]: string | number;
     };
+    static config: ConfigManager;
 
     constructor() {
       this.config = {};
@@ -27,13 +28,21 @@ function excerciseA() {
     setConfig(key: string, value: string | number) {
       this.config[key] = value;
     }
+    public static getInstance(): ConfigManager {
+      if (!ConfigManager.config) {
+        ConfigManager.config = new ConfigManager();
+      }
+
+      return ConfigManager.config;
+    }
   }
+
   // It should be possible to create only one instance of this class.
   // Use one of the GoF patterns to implement this requirement.
   // Rewrite the class to use the standard implementation of that pattern.
   //
   // Update the way of creating the instance of the class ConfigurationManager
-  const configManager = new ConfigManager();
+  const configManager = ConfigManager.getInstance();
   configManager.setConfig('name', 'John');
   console.log(configManager.getConfig('name'));
 }
